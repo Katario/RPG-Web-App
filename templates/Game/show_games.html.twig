@@ -1,0 +1,13 @@
+{% extends '/base.html.twig' %}
+{% block title %}Display all games{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Retour</a>
+    <h2>List all games</h2>
+
+    {% for game in games %}
+        <li>{{ game.name }} <a href="{{ path('show_game', {'id': game.id}) }}"> >>>>> </a> </li>
+    {% endfor %}
+
+    <a href="{{ path('create_game') }}">Créer une nouvelle partie</a>
+{% endblock %}

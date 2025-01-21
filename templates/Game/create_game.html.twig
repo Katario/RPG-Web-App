@@ -1,0 +1,16 @@
+{% extends '/base.html.twig' %}
+{% block title %}Créez une nouvelle partie{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Création d'une nouvelle partie</h2>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.ruleset) }}
+
+    {{ form_row(form.submit, { 'label': 'Créer' }) }}
+    {{ form_end(form) }}
+
+{% endblock %}

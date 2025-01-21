@@ -1,0 +1,15 @@
+{% extends '/base.html.twig' %}
+{% block title %}Home Page{% endblock %}
+
+{% block main %}
+    Bonjour {{ user.username }}
+    Quelle aventure vous attend aujourd'hui ?
+
+    <ul>
+    {% for game in games %}
+        <li>{{ game.name}} <a href="{{ path('show_game', {'id': game.id}) }}"> >>> </a></li>
+    {% endfor %}
+    </ul>
+
+    Créer une nouvelle partie: <a href="{{ path('create_game') }}"> >>> </a>
+{% endblock %}

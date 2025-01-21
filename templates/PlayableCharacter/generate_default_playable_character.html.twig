@@ -1,0 +1,15 @@
+{% extends '/base.html.twig' %}
+{% block title %}Créez un nouveau personnage{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Génération d'un modèle de personnage</h2>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.user) }}
+
+    {{ form_row(form.submit, { 'label': 'Générer' }) }}
+    {{ form_end(form) }}
+
+{% endblock %}
