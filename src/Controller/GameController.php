@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Entity\PlayableCharacter;
+use App\Entity\User;
 use App\Factory\PlayableCharacterFactory;
 use App\FormType\DefaultPlayableCharacterType;
 use App\FormType\GameType;
@@ -33,23 +34,23 @@ class GameController
         public Security $security
     ) {}
 
-    #[Route('/games/{id}', name: 'show_game', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function showGame(
-        GameRepository $gameRepository,
-        PlayableCharacterRepository $playableCharacterRepository,
-        int $id
-    ): Response
-    {
-        $game = $gameRepository->find($id);
-        $playableCharacters = $playableCharacterRepository->findBy(['game' => $game]);
-
-        return new Response(
-            $this->twig->render('Game/show_game.html.twig', [
-                'game' => $game,
-                'playableCharacters' => $playableCharacters,
-            ])
-        );
-    }
+//    #[Route('/games/{id}', name: 'show_game', requirements: ['id' => '\d+'], methods: ['GET'])]
+//    public function showGame(
+//        GameRepository $gameRepository,
+//        PlayableCharacterRepository $playableCharacterRepository,
+//        int $id
+//    ): Response
+//    {
+//        $game = $gameRepository->find($id);
+//        $playableCharacters = $playableCharacterRepository->findBy(['game' => $game]);
+//
+//        return new Response(
+//            $this->twig->render('Game/show_game.html.twig', [
+//                'game' => $game,
+//                'playableCharacters' => $playableCharacters,
+//            ])
+//        );
+//    }
 
     #[Route('/games/create', name: 'create_game', methods: ['GET', 'POST'])]
     public function createGame(
@@ -65,8 +66,9 @@ class GameController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Game $game */
             $game = $form->getData();
-
-            $game->setGameMaster($this->security->getUser());
+            /** @var User $user */
+            $user = $this->security->getUser();
+            $game->setGameMaster($user);
 
             $gameRepository->save($game);
 
@@ -77,45 +79,6 @@ class GameController
 
         return new Response(
             $this->twig->render('Game/create_game.html.twig', [
-                'form' => $form->createView(),
-            ])
-        );
-    }
-
-    #[Route('/games/{id}/generate-playable-character', name: 'generate_default_playable_character', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function createPlayableCharacter(
-        Request $request,
-        PlayableCharacterRepository $playableCharacterRepository,
-        PlayableCharacterFactory $playableCharacterFactory,
-        RouterInterface $router,
-        int $id
-    ): Response|RedirectResponse
-    {
-        $newPlayableCharacter = $playableCharacterFactory->createNew();
-        $form = $this->formFactory->create(
-            DefaultPlayableCharacterType::class,
-            $newPlayableCharacter
-        );
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PlayableCharacter $playableCharacter */
-            $playableCharacter = $form->getData();
-
-            $playableCharacter->setGame(
-                $this->gameRepository->find($id)
-            );
-
-            $playableCharacterRepository->save($playableCharacter);
-
-            return new RedirectResponse($router->generate('show_game',
-                ['id' => $id]
-            ));
-        }
-
-        return new Response(
-            $this->twig->render('PlayableCharacter/generate_default_playable_character.html.twig', [
                 'form' => $form->createView(),
             ])
         );

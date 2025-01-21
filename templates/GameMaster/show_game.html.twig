@@ -1,4 +1,4 @@
-{% extends '/base.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block title %}Partie {{ game.name }}{% endblock %}
 
 {% block main %}
@@ -14,12 +14,12 @@
             <ul>
                 {% for playableCharacter in game.playableCharacters %}
                     <li>{{ playableCharacter.name }} {{ playableCharacter.lastName }}, {{ playableCharacter.title }}
-                        <a href="{{ path('show_playable_character', {'id': playableCharacter.id}) }}"> >>> </a>
-                        <a href="{{ path('edit_playable_character', {'playableCharacterId': playableCharacter.id, 'gameId': game.id}) }}"> +++ </a>
-                        <a href="{{ path('delete_playable_characters', {'id': playableCharacter.id}) }}"> XXX </a>
+                        <a href="{{ path('game_master_show_playable_character', {'id': playableCharacter.id}) }}"> >>> </a>
+                        <a href="{{ path('game_master_edit_playable_character', {'playableCharacterId': playableCharacter.id, 'gameId': game.id}) }}"> +++ </a>
+                        <a href="{{ path('game_master_delete_playable_characters', {'id': playableCharacter.id}) }}"> XXX </a>
                     </li>
                 {% endfor %}
             </ul>
-        Ajouter un nouveau personnage <a href="{{ path('generate_default_playable_character', {'id': game.id}) }}"> >>> </a>
+        Ajouter un nouveau personnage <a href="{{ path('game_master_generate_default_playable_character', {'id': game.id}) }}"> >>> </a>
     </div>
 {% endblock %}

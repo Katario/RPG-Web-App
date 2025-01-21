@@ -1,4 +1,4 @@
-{% extends '/base.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block title %}Home Page{% endblock %}
 
 {% block main %}
@@ -7,7 +7,11 @@
 
     <ul>
     {% for game in games %}
-        <li>{{ game.name}} <a href="{{ path('show_game', {'id': game.id}) }}"> >>> </a></li>
+        {% if game.gamemaster.id == app.user.id %}
+            <li>{{ game.name}} <a href="{{ path('game_master_show_game', {'id': game.id}) }}"> >>> </a></li>
+        {% else %}
+            <li>You're a player!</li>
+        {% endif %}
     {% endfor %}
     </ul>
 

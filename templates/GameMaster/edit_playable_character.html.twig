@@ -1,8 +1,8 @@
-{% extends '/base.html.twig' %}
-{% block title %}Créez un nouveau personnage{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}Modifier le personnage de {Nom de l'user} {% endblock %}
 
 {% block main %}
-    <a href="{{ path('show_playable_characters') }}">Back</a>
+    <a href="{{ path('home') }}">Back</a>
     <h2>Création de personnage</h2>
     {{ form_start(form) }}
     {{ form_errors(form) }}
