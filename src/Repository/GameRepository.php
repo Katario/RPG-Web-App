@@ -26,10 +26,10 @@ class GameRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getGamesWithPlayableCharacterByUser(User $user): array
+    public function getGamesWithCharacterByUser(User $user): array
     {
         $toto = $this->createQueryBuilder('g')
-            ->innerJoin('g.playableCharacters', 'pc')
+            ->innerJoin('g.characters', 'pc')
             ->innerJoin('pc.user', 'u')
             ->where('u.id = :userId')
             ->setParameter('userId', $user->getId())

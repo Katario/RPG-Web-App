@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}Fiche de {{ character.name }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Retour</a>
+    <h2>Voici votre personnage</h2>
+
+    <ul>
+        <li>Nom : {{ character.lastName }}</li>
+        <li>Prénom : {{ character.name }}</li>
+        <li>Classe : {{ character.title }}</li>
+        <li>Niveau : {{ character.currentLevel }}</li>
+        <li>Points de vie : {{ character.healthPoints }} / {{ character.maxHealthPoints }}</li>
+    </ul>
+{% endblock %}

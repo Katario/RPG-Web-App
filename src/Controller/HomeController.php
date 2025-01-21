@@ -51,7 +51,7 @@ class HomeController
         }
 
         # Retrieve games where user is a playable Character
-        foreach ($this->gameRepository->getGamesWithPlayableCharacterByUser($this->security->getUser()) as $game)
+        foreach ($this->gameRepository->getGamesWithCharacterByUser($this->security->getUser()) as $game)
         {
             if (!in_array($game, $games)) {
                 $games[] = $game;

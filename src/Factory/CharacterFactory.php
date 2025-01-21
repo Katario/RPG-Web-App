@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Entity\PlayableCharacter;
+use App\Entity\Character;
 
-class PlayableCharacterFactory
+class CharacterFactory
 {
-    public function createNew(): PlayableCharacter
+    public function createNew(): Character
     {
-        $newPlayableCharacter = new PlayableCharacter();
+        $newlyGeneratedCharacter = new Character();
 
-        return $newPlayableCharacter
+        return $newlyGeneratedCharacter
             ->setName('Default')
             ->setLastName('Default')
             ->setTitle('Wanderer')

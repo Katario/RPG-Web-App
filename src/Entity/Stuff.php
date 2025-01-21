@@ -30,8 +30,6 @@ class Stuff
     #[ORM\Column(type: 'integer')]
     private int $maxDurability;
 
-
-
     public function getId(): ?int
     {
         return $this->id;

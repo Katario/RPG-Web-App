@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\PlayableCharacterRepository;
+use App\Repository\CharacterRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PlayableCharacterRepository::class)]
-class PlayableCharacter
+#[ORM\Table(name: 'playable_character')]
+#[ORM\Entity(repositoryClass: CharacterRepository::class)]
+class Character
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,11 +34,11 @@ class PlayableCharacter
     private int $maxHealthPoints;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'playableCharacters')]
-    #[ORM\JoinColumn(name: 'userId', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private User $user;
 
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'playableCharacters')]
-    #[ORM\JoinColumn(name: 'gameId', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
 
     public function getId(): ?int
@@ -57,7 +58,7 @@ class PlayableCharacter
         return $this->name;
     }
 
-    public function setName(string $name): PlayableCharacter
+    public function setName(string $name): Character
     {
         $this->name = $name;
         return $this;
@@ -68,7 +69,7 @@ class PlayableCharacter
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): PlayableCharacter
+    public function setLastName(string $lastName): Character
     {
         $this->lastName = $lastName;
         return $this;
@@ -79,7 +80,7 @@ class PlayableCharacter
         return $this->title;
     }
 
-    public function setTitle(string $title): PlayableCharacter
+    public function setTitle(string $title): Character
     {
         $this->title = $title;
         return $this;
@@ -90,7 +91,7 @@ class PlayableCharacter
         return $this->currentLevel;
     }
 
-    public function setCurrentLevel(int $currentLevel): PlayableCharacter
+    public function setCurrentLevel(int $currentLevel): Character
     {
         $this->currentLevel = $currentLevel;
         return $this;
@@ -101,7 +102,7 @@ class PlayableCharacter
         return $this->healthPoints;
     }
 
-    public function setHealthPoints(int $healthPoints): PlayableCharacter
+    public function setHealthPoints(int $healthPoints): Character
     {
         $this->healthPoints = $healthPoints;
         return $this;
@@ -112,7 +113,7 @@ class PlayableCharacter
         return $this->maxHealthPoints;
     }
 
-    public function setMaxHealthPoints(int $maxHealthPoints): PlayableCharacter
+    public function setMaxHealthPoints(int $maxHealthPoints): Character
     {
         $this->maxHealthPoints = $maxHealthPoints;
         return $this;
@@ -123,7 +124,7 @@ class PlayableCharacter
         return $this->user;
     }
 
-    public function setUser(User $user): PlayableCharacter
+    public function setUser(User $user): Character
     {
         $this->user = $user;
         return $this;
@@ -134,7 +135,7 @@ class PlayableCharacter
         return $this->game;
     }
 
-    public function setGame(Game $game): PlayableCharacter
+    public function setGame(Game $game): Character
     {
         $this->game = $game;
         return $this;

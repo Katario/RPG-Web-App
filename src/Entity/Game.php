@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
-use App\Controller\PlayableCharacterController;
+use App\Controller\CharacterController;
 use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,12 +28,12 @@ class Game
     #[JoinColumn(name: 'game_master', referencedColumnName: 'id')]
     private User $gameMaster;
 
-    #[ORM\OneToMany(targetEntity: PlayableCharacter::class, mappedBy: 'game')]
-    private Collection|array $playableCharacters;
+    #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'game')]
+    private Collection|array $characters;
 
     public function __construct()
     {
-        $this->playableCharacters = new ArrayCollection();
+        $this->characters = new ArrayCollection();
     }
 
     public function getId(): int
@@ -81,29 +81,29 @@ class Game
         return $this;
     }
 
-    public function getPlayableCharacters(): Collection|array
+    public function getCharacters(): Collection|array
     {
-        return $this->playableCharacters;
+        return $this->characters;
     }
 
-    public function setPlayableCharacters(Collection|array $playableCharacters): Game
+    public function setCharacters(Collection|array $characters): Game
     {
-        $this->playableCharacters = $playableCharacters;
+        $this->characters = $characters;
         return $this;
     }
 
-    public function addPlayableCharacter(PlayableCharacter $playableCharacter): Game
+    public function addCharacter(Character $character): Game
     {
-        if (!$this->getPlayableCharacters($playableCharacter)) {
-            $this->playableCharacters->add($playableCharacter);
+        if (!$this->getCharacters($character)) {
+            $this->characters->add($character);
         }
         return $this;
     }
 
-    public function removePlayableCharacter(PlayableCharacter $playableCharacter): Game
+    public function removeCharacter(Character $character): Game
     {
-        if ($this->getPlayableCharacters()->contains($playableCharacter)) {
-            $this->playableCharacters->removeElement($playableCharacter);
+        if ($this->getCharacters()->contains($character)) {
+            $this->characters->removeElement($character);
         }
         return $this;
     }

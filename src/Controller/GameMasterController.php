@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 
-use App\Entity\PlayableCharacter;
-use App\Factory\PlayableCharacterFactory;
-use App\FormType\DefaultPlayableCharacterType;
-use App\FormType\PlayableCharacterType;
+use App\Entity\Character;
+use App\Factory\CharacterFactory;
+use App\FormType\GenerateCharacterType;
+use App\FormType\CharacterType;
 use App\Repository\GameRepository;
-use App\Repository\PlayableCharacterRepository;
+use App\Repository\CharacterRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,67 +36,67 @@ class GameMasterController
 
     #[Route('/game-master/games/{id}', name: 'game_master_show_game', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showGameMasterGame(
-        GameRepository $gameRepository,
-        PlayableCharacterRepository $playableCharacterRepository,
-        int $id
+        GameRepository      $gameRepository,
+        CharacterRepository $characterRepository,
+        int                 $id
     ): Response
     {
         $game = $gameRepository->find($id);
-        $playableCharacters = $playableCharacterRepository->findBy(['game' => $game]);
+        $characters = $characterRepository->findBy(['game' => $game]);
 
         return new Response(
             $this->twig->render('GameMaster/show_game.html.twig', [
                 'game' => $game,
-                'playableCharacters' => $playableCharacters,
+                'characters' => $characters,
             ])
         );
     }
 
-    #[Route('/game-master/playable-characters/{id}', name: 'game_master_show_playable_character', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function showGameMasterPlayableCharacter(
-        PlayableCharacterRepository $playableCharacterRepository,
-        int $id
+    #[Route('/game-master/characters/{id}', name: 'game_master_show_character', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showGameMasterCharacter(
+        CharacterRepository $characterRepository,
+        int                 $id
     ): Response
     {
-        $playableCharacter = $playableCharacterRepository->find($id);
+        $character = $characterRepository->find($id);
 
         return new Response(
-            $this->twig->render('GameMaster/show_playable_character.html.twig', [
-                'playableCharacter' => $playableCharacter,
+            $this->twig->render('GameMaster/show_character.html.twig', [
+                'character' => $character,
             ])
         );
     }
 
-    #[Route('/game-master/games/{id}/generate-playable-character',
-        name: 'game_master_generate_default_playable_character',
+    #[Route('/game-master/games/{id}/generate-character',
+        name: 'game_master_generate_default_character',
         requirements: ['id' => '\d+'],
         methods: ['GET', 'POST']
     )]
-    public function generateDefaultPlayableCharacter(
-        Request $request,
-        PlayableCharacterRepository $playableCharacterRepository,
-        PlayableCharacterFactory $playableCharacterFactory,
-        RouterInterface $router,
-        int $id
+    public function generateDefaultCharacter(
+        Request             $request,
+        CharacterRepository $characterRepository,
+        CharacterFactory    $characterFactory,
+        RouterInterface     $router,
+        int                 $id
     ): Response|RedirectResponse
     {
-        $newPlayableCharacter = $playableCharacterFactory->createNew();
+        $newCharacter = $characterFactory->createNew();
         $form = $this->formFactory->create(
-            DefaultPlayableCharacterType::class,
-            $newPlayableCharacter
+            GenerateCharacterType::class,
+            $newCharacter
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PlayableCharacter $playableCharacter */
-            $playableCharacter = $form->getData();
+            /** @var Character $character */
+            $character = $form->getData();
 
-            $playableCharacter->setGame(
+            $character->setGame(
                 $this->gameRepository->find($id)
             );
 
-            $playableCharacterRepository->save($playableCharacter);
+            $characterRepository->save($character);
 
             return new RedirectResponse($router->generate('game_master_show_game',
                 ['id' => $id]
@@ -104,45 +104,45 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/generate_default_playable_character.html.twig', [
+            $this->twig->render('GameMaster/generate_default_character.html.twig', [
                 'form' => $form->createView(),
             ])
         );
     }
 
-    #[Route('/game-master/games/{gameId}/playable-characters/{playableCharacterId}/edit',
-        name: 'game_master_edit_playable_character',
+    #[Route('/game-master/games/{gameId}/characters/{characterId}/edit',
+        name: 'game_master_edit_character',
         methods: ['GET', 'POST']
     )]
-    public function editGameMasterPlayableCharacter(
-        Request               $request,
-        GameRepository $gameRepository,
-        PlayableCharacterRepository $playableCharacterRepository,
-        UrlGeneratorInterface $router,
-        #[MapQueryParameter] ?int $playableCharacterId,
+    public function editGameMasterCharacter(
+        Request                   $request,
+        GameRepository            $gameRepository,
+        CharacterRepository       $characterRepository,
+        UrlGeneratorInterface     $router,
+        #[MapQueryParameter] ?int $characterId,
         #[MapQueryParameter] ?int $gameId,
     ): Response|RedirectResponse
     {
-        $playableCharacter = $playableCharacterRepository->find($playableCharacterId);
-        if (!$playableCharacter) {
+        $character = $characterRepository->find($characterId);
+        if (!$character) {
             throw new NotFoundHttpException();
         }
 
         $form = $this->formFactory->create(
-            PlayableCharacterType::class,
-            $playableCharacter
+            CharacterType::class,
+            $character
         );
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PlayableCharacter $playableCharacter */
-            $playableCharacter = $form->getData();
+            /** @var Character $character */
+            $character = $form->getData();
 
             $game = $gameRepository->find($gameId);
-            $playableCharacter->setGame($game);
+            $character->setGame($game);
 
-            $playableCharacterRepository->save($playableCharacter);
+            $characterRepository->save($character);
 
             return new RedirectResponse($router->generate('game_master_show_game',
                 ['id' => $gameId]
@@ -150,28 +150,28 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/edit_playable_character.html.twig', [
+            $this->twig->render('GameMaster/edit_character.html.twig', [
                 'form' => $form->createView(),
             ])
         );
     }
 
     // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
-    #[Route('/game-master/playable-characters/{id}/delete',
-        name: 'game_master_delete_playable_characters',
+    #[Route('/game-master/characters/{id}/delete',
+        name: 'game_master_delete_characters',
         requirements: ['id' => '\d+'],
         methods: ['GET']
     )]
-    public function deletePlayableCharacter(
+    public function deleteCharacter(
         int                   $id,
         UrlGeneratorInterface $router,
-        PlayableCharacterRepository $playableCharacterRepository,
+        CharacterRepository   $characterRepository,
     ): Response
     {
-        $playableCharacter = $playableCharacterRepository->find($id);
+        $character = $characterRepository->find($id);
 
-        if ($playableCharacter) {
-            $playableCharacterRepository->delete($playableCharacter);
+        if ($character) {
+            $characterRepository->delete($character);
         }
 
         return new RedirectResponse($router->generate('home'));

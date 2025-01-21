@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\FormType;
 
-use App\Entity\PlayableCharacter;
+use App\Entity\Character;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DefaultPlayableCharacterType extends AbstractType
+class GenerateCharacterType extends AbstractType
 {
     public function __construct(
         public Security $security
@@ -33,6 +33,7 @@ class DefaultPlayableCharacterType extends AbstractType
                 'choice_label' => 'username',
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) use ($userId): QueryBuilder {
+                    // @TODO: Add condition to exclude any player that already have a character - maybe move in repository?
                     return $er->createQueryBuilder('u')
                         ->where('u.id != :userId')
                         ->setParameter('userId', $userId);
@@ -45,7 +46,7 @@ class DefaultPlayableCharacterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => PlayableCharacter::class,
+            'data_class' => Character::class,
         ]);
     }
 }

@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Game;
-use App\Entity\PlayableCharacter;
+use App\Entity\Character;
 use App\Entity\User;
-use App\Factory\PlayableCharacterFactory;
-use App\FormType\DefaultPlayableCharacterType;
+use App\Factory\CharacterFactory;
+use App\FormType\GenerateCharacterType;
 use App\FormType\GameType;
-use App\FormType\PlayableCharacterType;
+use App\FormType\CharacterType;
 use App\Repository\GameRepository;
-use App\Repository\PlayableCharacterRepository;
+use App\Repository\CharacterRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -33,24 +33,6 @@ class GameController
         public GameRepository $gameRepository,
         public Security $security
     ) {}
-
-//    #[Route('/games/{id}', name: 'show_game', requirements: ['id' => '\d+'], methods: ['GET'])]
-//    public function showGame(
-//        GameRepository $gameRepository,
-//        PlayableCharacterRepository $playableCharacterRepository,
-//        int $id
-//    ): Response
-//    {
-//        $game = $gameRepository->find($id);
-//        $playableCharacters = $playableCharacterRepository->findBy(['game' => $game]);
-//
-//        return new Response(
-//            $this->twig->render('Game/show_game.html.twig', [
-//                'game' => $game,
-//                'playableCharacters' => $playableCharacters,
-//            ])
-//        );
-//    }
 
     #[Route('/games/create', name: 'create_game', methods: ['GET', 'POST'])]
     public function createGame(
