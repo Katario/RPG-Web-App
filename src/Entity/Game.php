@@ -86,7 +86,7 @@ class Game
 
     public function addCharacter(Character $character): Game
     {
-        if (!$this->getCharacters($character)) {
+        if (!$this->getCharacters()->contains($character)) {
             $this->characters->add($character);
         }
         return $this;

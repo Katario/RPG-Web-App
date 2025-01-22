@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\WeaponryEncyclopedia;
+use App\Entity\ArmamentEncyclopedia;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<WeaponryEncyclopedia>
+ * @extends ServiceEntityRepository<ArmamentEncyclopedia>
  */
-class WeaponryEncyclopediaRepository extends ServiceEntityRepository
+class ArmamentEncyclopediaRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, WeaponryEncyclopedia::class);
+        parent::__construct($registry, ArmamentEncyclopedia::class);
     }
 
     //    /**
-    //     * @return WeaponryEncyclopedia[] Returns an array of WeaponryEncyclopedia objects
+    //     * @return ArmamentEncyclopedia[] Returns an array of ArmamentEncyclopedia objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class WeaponryEncyclopediaRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?WeaponryEncyclopedia
+    //    public function findOneBySomeField($value): ?ArmamentEncyclopedia
     //    {
     //        return $this->createQueryBuilder('w')
     //            ->andWhere('w.exampleField = :val')

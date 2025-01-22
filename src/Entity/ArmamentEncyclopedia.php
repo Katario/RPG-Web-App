@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\WeaponryRepository;
+use App\Repository\ArmamentEncyclopediaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: WeaponryRepository::class)]
-class Weaponry
+#[ORM\Entity(repositoryClass: ArmamentEncyclopediaRepository::class)]
+class ArmamentEncyclopedia extends Encyclopedia
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

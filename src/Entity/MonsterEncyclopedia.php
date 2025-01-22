@@ -38,6 +38,14 @@ class MonsterEncyclopedia extends Encyclopedia
     private int $charismaMin;
     #[ORM\Column(type: 'integer')]
     private int $charismaMax;
+    #[ORM\Column(type: 'integer')]
+    private int $healthPointMin;
+    #[ORM\Column(type: 'integer')]
+    private int $healthPointMax;
+    #[ORM\Column(type: 'integer')]
+    private int $manaMin;
+    #[ORM\Column(type: 'integer')]
+    private int $manaMax;
 
     public function getId(): ?int
     {
@@ -175,4 +183,50 @@ class MonsterEncyclopedia extends Encyclopedia
         $this->charismaMax = $charismaMax;
         return $this;
     }
+
+    public function getHealthPointMin(): int
+    {
+        return $this->healthPointMin;
+    }
+
+    public function setHealthPointMin(int $healthPointMin): MonsterEncyclopedia
+    {
+        $this->healthPointMin = $healthPointMin;
+        return $this;
+    }
+
+    public function getHealthPointMax(): int
+    {
+        return $this->healthPointMax;
+    }
+
+    public function setHealthPointMax(int $healthPointMax): MonsterEncyclopedia
+    {
+        $this->healthPointMax = $healthPointMax;
+        return $this;
+    }
+
+    public function getManaMin(): int
+    {
+        return $this->manaMin;
+    }
+
+    public function setManaMin(int $manaMin): MonsterEncyclopedia
+    {
+        $this->manaMin = $manaMin;
+        return $this;
+    }
+
+    public function getManaMax(): int
+    {
+        return $this->manaMax;
+    }
+
+    public function setManaMax(int $manaMax): MonsterEncyclopedia
+    {
+        $this->manaMax = $manaMax;
+        return $this;
+    }
+
+
 }

@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\Weaponry;
+use App\Entity\Armament;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Weaponry>
+ * @extends ServiceEntityRepository<Armament>
  */
-class WeaponryRepository extends ServiceEntityRepository
+class ArmamentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Weaponry::class);
+        parent::__construct($registry, Armament::class);
     }
 
     //    /**
