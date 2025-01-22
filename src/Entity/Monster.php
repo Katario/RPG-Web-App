@@ -44,9 +44,6 @@ class Monster
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
-    private Collection|array $armaments;
-
     #[ORM\JoinTable(name: 'monsters_items')]
     #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
@@ -58,6 +55,9 @@ class Monster
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
+    private Collection|array $armaments;
 
     public function __construct()
     {
