@@ -14,7 +14,7 @@ class Character
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string')]
     private string $name;
@@ -44,13 +44,6 @@ class Character
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getName(): string

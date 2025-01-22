@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SkillEncyclopediaRepository;
+use App\Repository\CharacterEncyclopediaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SkillEncyclopediaRepository::class)]
-class SkillEncyclopedia extends Encyclopedia
+#[ORM\Entity(repositoryClass: CharacterEncyclopediaRepository::class)]
+class CharacterEncyclopedia
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

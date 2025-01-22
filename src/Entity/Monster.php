@@ -13,7 +13,7 @@ class Monster
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
     #[ORM\Column(type: 'string')]
@@ -34,4 +34,9 @@ class Monster
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 }

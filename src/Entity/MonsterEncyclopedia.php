@@ -13,7 +13,7 @@ class MonsterEncyclopedia extends Encyclopedia
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
     #[ORM\Column(type: 'string')]
@@ -38,6 +38,11 @@ class MonsterEncyclopedia extends Encyclopedia
     private int $charismaMin;
     #[ORM\Column(type: 'integer')]
     private int $charismaMax;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getName(): string
     {
