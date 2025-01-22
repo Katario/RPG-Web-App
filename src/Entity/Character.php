@@ -33,11 +33,11 @@ class Character
     #[ORM\Column(type: 'integer')]
     private int $maxHealthPoints;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'playableCharacters')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private User $user;
 
-    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'playableCharacters')]
+    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'characters')]
     #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
 

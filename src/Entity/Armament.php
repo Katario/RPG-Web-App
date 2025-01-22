@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArmamentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArmamentRepository::class)]
@@ -12,9 +14,172 @@ class Armament
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
+    #[ORM\Column(type: 'string')]
+    private string $name;
+    #[ORM\Column(type: 'string')]
+    private string $type;
+    #[ORM\Column(type: 'integer')]
+    private string $value;
+    #[ORM\Column(type: 'integer')]
+    private string $durability;
+    #[ORM\Column(type: 'text')]
+    private string $description;
+    #[ORM\OneToMany(targetEntity: Monster::class, mappedBy: 'armament')]
+    private ?Monster $ownerMonster = null;
+    #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'armament')]
+    private ?Character $ownerCharacter = null;
+    #[ORM\OneToMany(targetEntity: NonPlayableCharacter::class, mappedBy: 'armament')]
+    private ?NonPlayableCharacter $ownerNonPlayableCharacter = null;
+    #[ORM\JoinTable(name: 'armaments_skills')]
+    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: Skill::class)]
+    private Collection|array $skills;
+    #[ORM\JoinTable(name: 'armaments_spells')]
+    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: Spell::class)]
+    private Collection|array $spells;
+
+    public function __construct()
+    {
+        $this->skills = new ArrayCollection();
+        $this->spells = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): Armament
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): Armament
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public function setValue(string $value): Armament
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    public function getDurability(): string
+    {
+        return $this->durability;
+    }
+
+    public function setDurability(string $durability): Armament
+    {
+        $this->durability = $durability;
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): Armament
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getOwnerMonster(): ?Monster
+    {
+        return $this->ownerMonster;
+    }
+
+    public function setOwnerMonster(?Monster $ownerMonster): Armament
+    {
+        $this->ownerMonster = $ownerMonster;
+        return $this;
+    }
+
+    public function getOwnerCharacter(): ?Character
+    {
+        return $this->ownerCharacter;
+    }
+
+    public function setOwnerCharacter(?Character $ownerCharacter): Armament
+    {
+        $this->ownerCharacter = $ownerCharacter;
+        return $this;
+    }
+
+    public function getOwnerNonPlayableCharacter(): ?NonPlayableCharacter
+    {
+        return $this->ownerNonPlayableCharacter;
+    }
+
+    public function setOwnerNonPlayableCharacter(?NonPlayableCharacter $ownerNonPlayableCharacter): Armament
+    {
+        $this->ownerNonPlayableCharacter = $ownerNonPlayableCharacter;
+        return $this;
+    }
+
+    public function getSkills(): Collection|array
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): Armament
+    {
+        if (!$this->getSkills()->contains($skill)) {
+            $this->skills->add($skill);
+        }
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): Armament
+    {
+        if ($this->getSkills()->contains($skill)) {
+            $this->skills->removeElement($skill);
+        }
+        return $this;
+    }
+
+    public function getSpells(): Collection|array
+    {
+        return $this->spells;
+    }
+
+    public function addSpell(Spell $spell): Armament
+    {
+        if (!$this->getSpells()->contains($spell)) {
+            $this->spells->add($spell);
+        }
+        return $this;
+    }
+
+    public function removeSpell(Spell $spell): Armament
+    {
+        if ($this->getSpells()->contains($spell)) {
+            $this->spells->removeElement($spell);
+        }
+        return $this;
+    }
+
 }
