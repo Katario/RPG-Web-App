@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 namespace App\Entity;
-use App\Controller\CharacterController;
 use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
