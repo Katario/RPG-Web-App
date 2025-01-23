@@ -6,9 +6,6 @@ use App\Entity\Mastery;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Mastery>
- */
 class MasteryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +13,15 @@ class MasteryRepository extends ServiceEntityRepository
         parent::__construct($registry, Mastery::class);
     }
 
-    //    /**
-    //     * @return Mastery[] Returns an array of Mastery objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function delete(Mastery $mastery): void
+    {
+        $this->getEntityManager()->remove($mastery);
+        $this->getEntityManager()->flush();
+    }
 
-    //    public function findOneBySomeField($value): ?Mastery
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function save(Mastery $mastery): void
+    {
+        $this->getEntityManager()->persist($mastery);
+        $this->getEntityManager()->flush();
+    }
 }

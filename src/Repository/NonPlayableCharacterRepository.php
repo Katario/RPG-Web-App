@@ -6,9 +6,6 @@ use App\Entity\NonPlayableCharacter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<NonPlayableCharacter>
- */
 class NonPlayableCharacterRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +13,15 @@ class NonPlayableCharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, NonPlayableCharacter::class);
     }
 
-    //    /**
-    //     * @return NonPlayableCharacter[] Returns an array of NonPlayableCharacter objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('n.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function delete(NonPlayableCharacter $nonPlayableCharacter): void
+    {
+        $this->getEntityManager()->remove($nonPlayableCharacter);
+        $this->getEntityManager()->flush();
+    }
 
-    //    public function findOneBySomeField($value): ?NonPlayableCharacter
-    //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function save(NonPlayableCharacter $nonPlayableCharacter): void
+    {
+        $this->getEntityManager()->persist($nonPlayableCharacter);
+        $this->getEntityManager()->flush();
+    }
 }

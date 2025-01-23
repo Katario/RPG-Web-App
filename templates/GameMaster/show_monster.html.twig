@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}Fiche de {{ monster.name }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Retour</a>
+    <h2>Voici votre monstre</h2>
+
+    <ul>
+        <li>Nom : {{ monster.name }}</li>
+        <li>Prénom : {{ monster.firstName }}</li>
+        <li>Nom de famille : {{ monster.lastName }}</li>
+        <li>Type : {{ monster.type }}</li>
+        <li>Points de vie : {{ monster.healthPoint }}</li>
+    </ul>
+    <div>
+        Equipement :
+        <ul>
+        {% for armament in monster.armaments %}
+            <li>{{ armament.name }}, {{ armament.type }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Compétences :
+        <ul>
+        {% for skill in monster.skills %}
+            <li>{{ skill.name }}, {{ skill.description }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Sorts :
+        <ul>
+        {% for spell in monster.spells %}
+            <li>{{ spell.name }}, {{ spell.manaCost }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

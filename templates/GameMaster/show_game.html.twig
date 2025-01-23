@@ -11,15 +11,58 @@
     </ul>
     <div>
         Les Personnages Joueurs :
-            <ul>
-                {% for character in game.characters %}
-                    <li>{{ character.name }} {{ character.lastName }}, {{ character.title }}
-                        <a href="{{ path('game_master_show_character', {'id': character.id}) }}"> >>> </a>
-                        <a href="{{ path('game_master_edit_character', {'characterId': character.id, 'gameId': game.id}) }}"> +++ </a>
-                        <a href="{{ path('game_master_delete_characters', {'id': character.id}) }}"> XXX </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        Ajouter un nouveau personnage <a href="{{ path('game_master_generate_default_character', {'id': game.id}) }}"> >>> </a>
+        <ul>
+            {% for character in game.characters %}
+                <li>{{ character.name }} {{ character.lastName }}, {{ character.title }}
+                    <a href="{{ path('game_master_show_character', {'id': character.id}) }}"> >>> </a>
+                    <a href="{{ path('game_master_edit_character', {'characterId': character.id, 'gameId': game.id}) }}"> +++ </a>
+                    <a href="{{ path('game_master_delete_characters', {'id': character.id}) }}"> XXX </a>
+                </li>
+            {% endfor %}
+        </ul>
+        Ajouter un nouveau personnage <a href="{{ path('game_master_generate_character', {'id': game.id}) }}"> >>> </a>
     </div>
+    <hr/>
+    <div>
+        Les Monstres :
+        <ul>
+            {% for monster in game.monsters %}
+                <li>{{ monster.name }} {{ monster.type }}
+                    <a href="{{ path('game_master_show_monster', {'id': monster.id}) }}"> >>> </a>
+{#                    <a href="{{ path('game_master_edit_monster', {'monsterId': monster.id, 'gameId': game.id}) }}"> +++ </a>#}
+{#                    <a href="{{ path('game_master_delete_monster', {'id': monster.id}) }}"> XXX </a>#}
+                </li>
+            {% endfor %}
+        </ul>
+        Ajouter un nouveau monstre <a href="{{ path('game_master_generate_monster', {'id': game.id}) }}"> >>> </a>
+    </div>
+{#    <hr/>#}
+{#    <div>#}
+{#        Les Personnages non-joueurs :#}
+{#        <ul>#}
+{#            {% for character in game.characters %}#}
+{#                <li>{{ character.name }} {{ character.lastName }}, {{ character.title }}#}
+{#                    <a href="{{ path('game_master_show_character', {'id': character.id}) }}"> >>> </a>#}
+{#                    <a href="{{ path('game_master_edit_character', {'characterId': character.id, 'gameId': game.id}) }}"> +++ </a>#}
+{#                    <a href="{{ path('game_master_delete_characters', {'id': character.id}) }}"> XXX </a>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#        Ajouter un nouveau personnage <a href="{{ path('game_master_generate_character', {'id': game.id}) }}"> >>> </a>#}
+{#    </div>#}
+    <hr/>
+    <div>
+        Ajouter un nouvel équipement <a href="{{ path('game_master_generate_armament', {'id': game.id}) }}"> >>> </a>
+    </div>
+    <div>
+        Ajouter un nouveau sort <a href="{{ path('game_master_create_spell', {'id': game.id}) }}"> >>> </a>
+    </div>
+    <div>
+        Ajouter un nouvel objet <a href="{{ path('game_master_create_item', {'id': game.id}) }}"> >>> </a>
+    </div>
+    <div>
+        Ajouter une nouvelle compétence <a href="{{ path('game_master_create_skill', {'id': game.id}) }}"> >>> </a>
+    </div>
+    <hr/>
+    <button disabled title="A venir">Encyclopédie</button>
 {% endblock %}

@@ -7,6 +7,7 @@ use App\Repository\MonsterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Cascade;
 
 #[ORM\Entity(repositoryClass: MonsterRepository::class)]
 class Monster
@@ -38,6 +39,11 @@ class Monster
     #[ORM\Column(type: 'integer')]
     private int $mana;
 
+    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'monster', cascade: ['persist'])]
+    private Collection|array $armaments;
+    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'monsters')]
+    private Game $game;
+
     #[ORM\JoinTable(name: 'monsters_spells')]
     #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
@@ -56,14 +62,12 @@ class Monster
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
-    private Collection|array $armaments;
 
     public function __construct()
     {
         $this->spells = new ArrayCollection();
-        $this->armaments = new ArrayCollection();
         $this->items = new ArrayCollection();
+        $this->armaments = new ArrayCollection();
         $this->skills = new ArrayCollection();
     }
 
@@ -219,6 +223,12 @@ class Monster
         return $this->armaments;
     }
 
+    public function setArmaments(Collection|array $armaments): Monster
+    {
+        $this->armaments = $armaments;
+        return $this;
+    }
+
     public function addArmament(Armament $armament): Monster
     {
         if (!$this->getArmaments()->contains($armament)) {
@@ -274,6 +284,17 @@ class Monster
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+        return $this;
+    }
+
+    public function getGame(): Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(Game $game): Monster
+    {
+        $this->game = $game;
         return $this;
     }
 }

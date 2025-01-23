@@ -29,6 +29,10 @@ class Game
 
     #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'game')]
     private Collection|array $characters;
+    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'game')]
+    private Collection|array $armaments;
+    #[ORM\OneToMany(targetEntity: Monster::class, mappedBy: 'game')]
+    private Collection|array $monsters;
 
     public function __construct()
     {
@@ -96,6 +100,60 @@ class Game
     {
         if ($this->getCharacters()->contains($character)) {
             $this->characters->removeElement($character);
+        }
+        return $this;
+    }
+
+    public function getArmaments(): Collection|array
+    {
+        return $this->armaments;
+    }
+
+    public function setArmaments(Collection|array $armaments): Game
+    {
+        $this->armaments = $armaments;
+        return $this;
+    }
+
+    public function addArmament(Armament $armament): Game
+    {
+        if (!$this->getArmaments()->contains($armament)) {
+            $this->armaments->add($armament);
+        }
+        return $this;
+    }
+
+    public function removeArmament(Armament $armament): Game
+    {
+        if ($this->getArmaments()->contains($armament)) {
+            $this->armaments->removeElement($armament);
+        }
+        return $this;
+    }
+
+    public function getMonsters(): Collection|array
+    {
+        return $this->monsters;
+    }
+
+    public function setMonsters(Collection|array $monsters): Game
+    {
+        $this->monsters = $monsters;
+        return $this;
+    }
+
+    public function addMonster(Monster $monster): Game
+    {
+        if (!$this->getMonsters()->contains($monster)) {
+            $this->monsters->add($monster);
+        }
+        return $this;
+    }
+
+    public function removeMonster(Monster $monster): Game
+    {
+        if ($this->getMonsters()->contains($monster)) {
+            $this->monsters->removeElement($monster);
         }
         return $this;
     }

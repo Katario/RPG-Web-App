@@ -6,9 +6,6 @@ use App\Entity\Armament;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Armament>
- */
 class ArmamentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +13,15 @@ class ArmamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Armament::class);
     }
 
-    //    /**
-    //     * @return Weaponry[] Returns an array of Weaponry objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('w')
-    //            ->andWhere('w.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('w.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function delete(Armament $armament): void
+    {
+        $this->getEntityManager()->remove($armament);
+        $this->getEntityManager()->flush();
+    }
 
-    //    public function findOneBySomeField($value): ?Weaponry
-    //    {
-    //        return $this->createQueryBuilder('w')
-    //            ->andWhere('w.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function save(Armament $armament): void
+    {
+        $this->getEntityManager()->persist($armament);
+        $this->getEntityManager()->flush();
+    }
 }

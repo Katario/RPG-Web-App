@@ -32,7 +32,7 @@ class Spell
         return $this->name;
     }
 
-    public function setName(string $name): SpellEncyclopedia
+    public function setName(string $name): Spell
     {
         $this->name = $name;
         return $this;
@@ -43,7 +43,7 @@ class Spell
         return $this->description;
     }
 
-    public function setDescription(string $description): SpellEncyclopedia
+    public function setDescription(string $description): Spell
     {
         $this->description = $description;
         return $this;
@@ -54,7 +54,7 @@ class Spell
         return $this->manaCost;
     }
 
-    public function setManaCost(int $manaCost): SpellEncyclopedia
+    public function setManaCost(int $manaCost): Spell
     {
         $this->manaCost = $manaCost;
         return $this;

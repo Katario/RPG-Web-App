@@ -24,12 +24,10 @@ class Armament
     private string $durability;
     #[ORM\Column(type: 'text')]
     private string $description;
-    #[ORM\OneToMany(targetEntity: Monster::class, mappedBy: 'armament')]
-    private ?Monster $ownerMonster = null;
-    #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'armament')]
-    private ?Character $ownerCharacter = null;
-    #[ORM\OneToMany(targetEntity: NonPlayableCharacter::class, mappedBy: 'armament')]
-    private ?NonPlayableCharacter $ownerNonPlayableCharacter = null;
+    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'armaments')]
+    private Game $game;
+    #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
+    private Monster $monster;
     #[ORM\JoinTable(name: 'armaments_skills')]
     #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
@@ -107,39 +105,6 @@ class Armament
         return $this;
     }
 
-    public function getOwnerMonster(): ?Monster
-    {
-        return $this->ownerMonster;
-    }
-
-    public function setOwnerMonster(?Monster $ownerMonster): Armament
-    {
-        $this->ownerMonster = $ownerMonster;
-        return $this;
-    }
-
-    public function getOwnerCharacter(): ?Character
-    {
-        return $this->ownerCharacter;
-    }
-
-    public function setOwnerCharacter(?Character $ownerCharacter): Armament
-    {
-        $this->ownerCharacter = $ownerCharacter;
-        return $this;
-    }
-
-    public function getOwnerNonPlayableCharacter(): ?NonPlayableCharacter
-    {
-        return $this->ownerNonPlayableCharacter;
-    }
-
-    public function setOwnerNonPlayableCharacter(?NonPlayableCharacter $ownerNonPlayableCharacter): Armament
-    {
-        $this->ownerNonPlayableCharacter = $ownerNonPlayableCharacter;
-        return $this;
-    }
-
     public function getSkills(): Collection|array
     {
         return $this->skills;
@@ -179,6 +144,28 @@ class Armament
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+        return $this;
+    }
+
+    public function getGame(): Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(Game $game): Armament
+    {
+        $this->game = $game;
+        return $this;
+    }
+
+    public function getMonster(): Monster
+    {
+        return $this->monster;
+    }
+
+    public function setMonster(Monster $monster): Armament
+    {
+        $this->monster = $monster;
         return $this;
     }
 
