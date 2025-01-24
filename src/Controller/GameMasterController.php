@@ -9,6 +9,7 @@ use App\Entity\Armament;
 use App\Entity\Character;
 use App\Entity\Item;
 use App\Entity\Monster;
+use App\Entity\NonPlayableCharacter;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use App\Factory\CharacterFactory;
@@ -16,6 +17,7 @@ use App\FormType\GenerateArmamentType;
 use App\FormType\GenerateCharacterType;
 use App\FormType\CharacterType;
 use App\FormType\GenerateMonsterType;
+use App\FormType\GenerateNonPlayableCharacterType;
 use App\FormType\ItemType;
 use App\FormType\SkillType;
 use App\FormType\SpellType;
@@ -24,6 +26,7 @@ use App\Repository\GameRepository;
 use App\Repository\CharacterRepository;
 use App\Repository\ItemRepository;
 use App\Repository\MonsterRepository;
+use App\Repository\NonPlayableCharacterRepository;
 use App\Repository\SkillRepository;
 use App\Repository\SpellRepository;
 use Doctrine\ORM\PersistentCollection;
@@ -384,6 +387,58 @@ class GameMasterController
         return new Response(
             $this->twig->render('GameMaster/show_monster.html.twig', [
                 'monster' => $monster,
+            ])
+        );
+    }
+
+    // @TODO need to generate from the Encyclopedia API and not from scratch
+    #[Route('/game-master/games/{id}/generate-non-playable-character',
+        name: 'game_master_generate_non_playable_character',
+        requirements: ['id' => '\d+'],
+        methods: ['GET', 'POST']
+    )]
+    public function generateNonPlayableCharacter(
+        Request             $request,
+        NonPlayableCharacterRepository $nonPlayableCharacterRepository,
+        RouterInterface     $router,
+        int                 $id
+    ): Response|RedirectResponse
+    {
+        $form = $this->formFactory->create(GenerateNonPlayableCharacterType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var NonPlayableCharacter $nonPlayableCharacter */
+            $nonPlayableCharacter = $form->getData();
+
+            $nonPlayableCharacter->setGame($this->gameRepository->find($id));
+
+            $nonPlayableCharacterRepository->save($nonPlayableCharacter);
+
+            return new RedirectResponse($router->generate('game_master_show_game',
+                ['id' => $id]
+            ));
+        }
+
+        return new Response(
+            $this->twig->render('GameMaster/generate_non_playable_character.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    #[Route('/game-master/non-playable-characters/{id}', name: 'game_master_show_non_playable_character', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showGameMasterNonPlayableCharacter(
+        NonPlayableCharacterRepository $nonPlayableCharacterRepository,
+        int                 $id
+    ): Response
+    {
+        $nonPlayableCharacter = $nonPlayableCharacterRepository->find($id);
+
+        return new Response(
+            $this->twig->render('GameMaster/show_non_playable_character.html.twig', [
+                'nonPlayableCharacter' => $nonPlayableCharacter,
             ])
         );
     }

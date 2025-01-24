@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créer un Personnage non-joueur {% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Génération d'un Personnage non-joueur</h2>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.strength) }}
+    {{ form_row(form.intelligence) }}
+    {{ form_row(form.stamina) }}
+    {{ form_row(form.agility) }}
+    {{ form_row(form.charisma) }}
+    {{ form_row(form.healthPoint) }}
+    {{ form_row(form.mana) }}
+    {{ form_row(form.spells) }}
+    {{ form_row(form.skills) }}
+    {{ form_row(form.items) }}
+    {{ form_row(form.armaments) }}
+
+    {{ form_row(form.submit, { 'label': 'Générer' }) }}
+    {{ form_end(form) }}
+
+{% endblock %}

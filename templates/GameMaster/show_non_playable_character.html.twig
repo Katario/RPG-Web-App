@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}Fiche de {{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Retour</a>
+    <h2>Voici {{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}</h2>
+
+    <ul>
+        <li>Prénom : {{ nonPlayableCharacter.firstName }}</li>
+        <li>Nom de famille : {{ nonPlayableCharacter.lastName }}</li>
+        <li>Titre : {{ nonPlayableCharacter.title }}</li>
+        <li>Points de vie : {{ nonPlayableCharacter.healthPoint }}</li>
+    </ul>
+    <div>
+        Equipement :
+        <ul>
+            {% for armament in nonPlayableCharacter.armaments %}
+                <li>{{ armament.name }}, {{ armament.type }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Compétences :
+        <ul>
+            {% for skill in nonPlayableCharacter.skills %}
+                <li>{{ skill.name }}, {{ skill.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Sorts :
+        <ul>
+            {% for spell in nonPlayableCharacter.spells %}
+                <li>{{ spell.name }}, {{ spell.manaCost }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

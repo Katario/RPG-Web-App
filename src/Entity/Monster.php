@@ -40,7 +40,9 @@ class Monster
     private int $mana;
 
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'monster')]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection|array $armaments;
+
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'monsters')]
     private Game $game;
 

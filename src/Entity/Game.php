@@ -33,10 +33,15 @@ class Game
     private Collection|array $armaments;
     #[ORM\OneToMany(targetEntity: Monster::class, mappedBy: 'game')]
     private Collection|array $monsters;
+    #[ORM\OneToMany(targetEntity: NonPlayableCharacter::class, mappedBy: 'game')]
+    private Collection|array $nonPlayableCharacters;
 
     public function __construct()
     {
         $this->characters = new ArrayCollection();
+        $this->armaments = new ArrayCollection();
+        $this->monsters = new ArrayCollection();
+        $this->nonPlayableCharacters = new ArrayCollection();
     }
 
     public function getId(): int
@@ -136,12 +141,6 @@ class Game
         return $this->monsters;
     }
 
-    public function setMonsters(Collection|array $monsters): Game
-    {
-        $this->monsters = $monsters;
-        return $this;
-    }
-
     public function addMonster(Monster $monster): Game
     {
         if (!$this->getMonsters()->contains($monster)) {
@@ -154,6 +153,27 @@ class Game
     {
         if ($this->getMonsters()->contains($monster)) {
             $this->monsters->removeElement($monster);
+        }
+        return $this;
+    }
+
+    public function getNonPlayableCharacters(): Collection|array
+    {
+        return $this->nonPlayableCharacters;
+    }
+
+    public function addNonPlayableCharacter(NonPlayableCharacter $nonPlayableCharacter): Game
+    {
+        if (!$this->getNonPlayableCharacters()->contains($nonPlayableCharacter)) {
+            $this->nonPlayableCharacters->add($nonPlayableCharacter);
+        }
+        return $this;
+    }
+
+    public function removeNonPlayableCharacter(NonPlayableCharacter $nonPlayableCharacter): Game
+    {
+        if ($this->getNonPlayableCharacters()->contains($nonPlayableCharacter)) {
+            $this->nonPlayableCharacters->removeElement($nonPlayableCharacter);
         }
         return $this;
     }
