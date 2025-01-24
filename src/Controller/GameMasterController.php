@@ -380,7 +380,7 @@ class GameMasterController
     ): Response
     {
         $monster = $monsterRepository->find($id);
-        
+
         return new Response(
             $this->twig->render('GameMaster/show_monster.html.twig', [
                 'monster' => $monster,

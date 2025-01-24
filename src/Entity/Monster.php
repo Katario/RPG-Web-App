@@ -39,7 +39,7 @@ class Monster
     #[ORM\Column(type: 'integer')]
     private int $mana;
 
-    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'monster', cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'monster')]
     private Collection|array $armaments;
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'monsters')]
     private Game $game;
@@ -232,6 +232,7 @@ class Monster
     public function addArmament(Armament $armament): Monster
     {
         if (!$this->getArmaments()->contains($armament)) {
+            $armament->setMonster($this);
             $this->armaments->add($armament);
         }
         return $this;
@@ -240,6 +241,7 @@ class Monster
     public function removeArmament(Armament $armament): Monster
     {
         if ($this->getArmaments()->contains($armament)) {
+            $armament->setMonster(null);
             $this->armaments->removeElement($armament);
         }
         return $this;

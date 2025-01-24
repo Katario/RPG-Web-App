@@ -23,7 +23,7 @@ class Game
     #[ORM\Column(type: 'string')]
     private string $ruleset;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'games')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'gameMasters')]
     #[JoinColumn(name: 'game_master', referencedColumnName: 'id')]
     private User $gameMaster;
 

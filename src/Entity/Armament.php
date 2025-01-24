@@ -19,9 +19,9 @@ class Armament
     #[ORM\Column(type: 'string')]
     private string $type;
     #[ORM\Column(type: 'integer')]
-    private string $value;
+    private int $value;
     #[ORM\Column(type: 'integer')]
-    private string $durability;
+    private int $durability;
     #[ORM\Column(type: 'text')]
     private string $description;
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'armaments')]
@@ -72,23 +72,23 @@ class Armament
         return $this;
     }
 
-    public function getValue(): string
+    public function getValue(): int
     {
         return $this->value;
     }
 
-    public function setValue(string $value): Armament
+    public function setValue(int $value): Armament
     {
         $this->value = $value;
         return $this;
     }
 
-    public function getDurability(): string
+    public function getDurability(): int
     {
         return $this->durability;
     }
 
-    public function setDurability(string $durability): Armament
+    public function setDurability(int $durability): Armament
     {
         $this->durability = $durability;
         return $this;

@@ -32,14 +32,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'gameMaster')]
-    private Collection|array $gameMastering;
+    private Collection|array $gameMasters;
 
     #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'user')]
     private Collection|array $characters;
 
     public function __construct()
     {
-        $this->gameMastering = new ArrayCollection();
+        $this->gameMasters = new ArrayCollection();
         $this->characters = new ArrayCollection();
     }
 
@@ -112,31 +112,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-
-
-    public function getGame(): ArrayCollection
+    public function getGameMasters(): ArrayCollection
     {
-        return $this->gameMastering;
+        return $this->gameMasters;
     }
 
-    public function setGameMastering(ArrayCollection $gameMastering): User
+    public function setGameMasters(ArrayCollection $gameMasters): User
     {
-        $this->gameMastering = $gameMastering;
+        $this->gameMasters = $gameMasters;
         return $this;
     }
 
-    public function addGame(Game $game): User
+    public function addGameMaster(Game $game): User
     {
-        if (!$this->getGame($game)) {
-            $this->gameMastering->add($game);
+        if (!$this->getGameMasters()->contains($game)) {
+            $this->gameMasters->add($game);
         }
         return $this;
     }
 
     public function removeGame(Game $game): User
     {
-        if ($this->getGame()->contains($game)) {
-            $this->gameMastering->removeElement($game);
+        if ($this->getGameMasters()->contains($game)) {
+            $this->gameMasters->removeElement($game);
         }
         return $this;
     }
@@ -154,7 +152,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addCharacter(Character $character): User
     {
-        if (!$this->getCharacters($character)) {
+        if (!$this->getCharacters()->contains($character)) {
             $this->characters->add($character);
         }
         return $this;
