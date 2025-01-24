@@ -3,7 +3,7 @@
 
 {% block main %}
     <a href="{{ path('home') }}">Back</a>
-    <h2>Création de personnage</h2>
+    <h2>Mise à jour de personnage</h2>
     {{ form_start(form) }}
     {{ form_errors(form) }}
 
@@ -14,7 +14,7 @@
     {{ form_row(form.healthPoints) }}
     {{ form_row(form.maxHealthPoints) }}
 
-    {{ form_row(form.submit, { 'label': 'Créer' }) }}
+    {{ form_row(form.submit, { 'label': 'Mettre à jour' }) }}
     {{ form_end(form) }}
 
 {% endblock %}

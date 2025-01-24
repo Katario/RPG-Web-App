@@ -243,7 +243,7 @@ class Monster
     public function removeArmament(Armament $armament): Monster
     {
         if ($this->getArmaments()->contains($armament)) {
-            $armament->setMonster(null);
+            $armament->setMonster(NULL);
             $this->armaments->removeElement($armament);
         }
         return $this;

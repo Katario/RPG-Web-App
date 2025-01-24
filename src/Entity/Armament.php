@@ -27,8 +27,10 @@ class Armament
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'armaments')]
     private Game $game;
     #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
+    #[ORM\JoinColumn(onDelete:'SET NULL')]
     private ?Monster $monster;
     #[ORM\ManyToOne(targetEntity: NonPlayableCharacter::class, inversedBy: 'armaments')]
+    #[ORM\JoinColumn(onDelete:'SET NULL')]
     private ?NonPlayableCharacter $nonPlayableCharacter;
     #[ORM\JoinTable(name: 'armaments_skills')]
     #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id')]
@@ -160,7 +162,7 @@ class Armament
         return $this;
     }
 
-    public function getMonster(): Monster
+    public function getMonster(): ?Monster
     {
         return $this->monster;
     }
@@ -171,7 +173,7 @@ class Armament
         return $this;
     }
 
-    public function getNonPlayableCharacter(): NonPlayableCharacter
+    public function getNonPlayableCharacter(): ?NonPlayableCharacter
     {
         return $this->nonPlayableCharacter;
     }

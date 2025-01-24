@@ -391,6 +391,74 @@ class GameMasterController
         );
     }
 
+
+    #[Route('/game-master/monsters/{id}/edit',
+        name: 'game_master_edit_monster',
+        methods: ['GET', 'POST']
+    )]
+    public function editGameMasterMonster(
+        Request                   $request,
+        MonsterRepository       $monsterRepository,
+        UrlGeneratorInterface     $router,
+        #[MapQueryParameter] ?int $id,
+    ): Response|RedirectResponse
+    {
+        $monster = $monsterRepository->find($id);
+
+        if (!$monster) {
+            throw new NotFoundHttpException();
+        }
+
+        $form = $this->formFactory->create(
+            GenerateNonPlayableCharacterType::class,
+            $monster
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Monster $monster */
+            $monster = $form->getData();
+
+            $monsterRepository->save($monster);
+
+            return new RedirectResponse($router->generate('home'));
+        }
+
+        return new Response(
+            $this->twig->render('GameMaster/edit_monster.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/game-master/monsters/{id}/delete',
+        name: 'game_master_delete_monster',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteMonster(
+        int                   $id,
+        UrlGeneratorInterface $router,
+        MonsterRepository   $monsterRepository,
+    ): Response
+    {
+        /** @var PersistentCollection $monster */
+        $monster = $monsterRepository->find($id);
+        dump($monster, $monster->getArmaments()->initialize(), $id);
+
+        if ($monster) {
+            $monsterRepository->delete($monster);
+        }
+
+        return new RedirectResponse($router->generate('home'));
+    }
+
+
+
+
+
     // @TODO need to generate from the Encyclopedia API and not from scratch
     #[Route('/game-master/games/{id}/generate-non-playable-character',
         name: 'game_master_generate_non_playable_character',
@@ -441,5 +509,66 @@ class GameMasterController
                 'nonPlayableCharacter' => $nonPlayableCharacter,
             ])
         );
+    }
+
+    #[Route('/game-master/non-playable-characters/{id}/edit',
+        name: 'game_master_edit_non_playable_character',
+        methods: ['GET', 'POST']
+    )]
+    public function editGameMasterNonPlayableCharacter(
+        Request                   $request,
+        NonPlayableCharacterRepository       $nonPlayableCharacterRepository,
+        UrlGeneratorInterface     $router,
+        #[MapQueryParameter] ?int $id,
+    ): Response|RedirectResponse
+    {
+        $nonPlayableCharacter = $nonPlayableCharacterRepository->find($id);
+        if (!$nonPlayableCharacter) {
+            throw new NotFoundHttpException();
+        }
+
+        $form = $this->formFactory->create(
+             GenerateNonPlayableCharacterType::class,
+            $nonPlayableCharacter
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var NonPlayableCharacter $nonPlayableCharacter */
+            $nonPlayableCharacter = $form->getData();
+
+            $nonPlayableCharacterRepository->save($nonPlayableCharacter);
+
+            return new RedirectResponse($router->generate('home'));
+        }
+
+        return new Response(
+            $this->twig->render('GameMaster/edit_non_playable_character.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/game-master/non-playable-characters/{id}/delete',
+        name: 'game_master_delete_non_playable_character',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteNonPlayableCharacter(
+        int                   $id,
+        UrlGeneratorInterface $router,
+        NonPlayableCharacterRepository   $nonPlayableCharacterRepository,
+    ): Response
+    {
+        $nonPlayableCharacter = $nonPlayableCharacterRepository->find($id);
+        dump($nonPlayableCharacter, $nonPlayableCharacter->getArmaments()->initialize(), $id);
+
+        if ($nonPlayableCharacter) {
+            $nonPlayableCharacterRepository->delete($nonPlayableCharacter);
+        }
+
+        return new RedirectResponse($router->generate('home'));
     }
 }

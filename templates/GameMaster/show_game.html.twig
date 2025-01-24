@@ -29,8 +29,8 @@
             {% for monster in game.monsters %}
                 <li>{{ monster.name }} {{ monster.type }}
                     <a href="{{ path('game_master_show_monster', {'id': monster.id}) }}"> >>> </a>
-{#                    <a href="{{ path('game_master_edit_monster', {'monsterId': monster.id, 'gameId': game.id}) }}"> +++ </a>#}
-{#                    <a href="{{ path('game_master_delete_monster', {'id': monster.id}) }}"> XXX </a>#}
+                    <a href="{{ path('game_master_edit_monster', {'id': monster.id}) }}"> +++ </a>
+                    <a href="{{ path('game_master_delete_monster', {'id': monster.id}) }}"> XXX </a>
                 </li>
             {% endfor %}
         </ul>
@@ -43,8 +43,8 @@
             {% for nonPlayableCharacter in game.nonPlayableCharacters %}
                 <li>{{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}, {{ nonPlayableCharacter.title }}
                     <a href="{{ path('game_master_show_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> >>> </a>
-{#                    <a href="{{ path('game_master_edit_character', {'characterId': character.id, 'gameId': game.id}) }}"> +++ </a>#}
-{#                    <a href="{{ path('game_master_delete_characters', {'id': character.id}) }}"> XXX </a>#}
+                    <a href="{{ path('game_master_edit_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> +++ </a>
+                    <a href="{{ path('game_master_delete_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> XXX </a>
                 </li>
             {% endfor %}
         </ul>
