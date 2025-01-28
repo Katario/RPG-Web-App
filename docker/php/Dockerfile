@@ -1,9 +1,14 @@
 # Start with PHP 8.3 FPM (FastCGI Process Manager)
 FROM php:8.3-fpm
 
+# Define a proper user to avoid permission issues
+RUN addgroup --gid 1000 user
+RUN adduser --disabled-password --gecos '' --uid 1000 --gid 1000 user
+RUN usermod -aG www-data user
+
 # Update package list and install dependencies
 RUN apt-get update && apt-get install -y \
-    curl \
+    curl vim ssh apt-utils build-essential wget bash \
     # Required for GD extension (images)
     libpng-dev \
     # Required for mbstring
@@ -25,6 +30,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 # Each one serves specific purpose:
 RUN docker-php-ext-install \
+    pgsql \
     pdo_pgsql \
     mbstring \
     # Image metadata
@@ -51,6 +57,9 @@ COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Set working directory
 WORKDIR /var/www/app
+
+# Use the user created earlier
+USER user
 
 # What command to run
 CMD ["php-fpm"]

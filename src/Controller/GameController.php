@@ -54,9 +54,7 @@ class GameController
 
             $gameRepository->save($game);
 
-            return new RedirectResponse($router->generate('show_game',
-                ['id' => $game->getId()]
-            ));
+            return new RedirectResponse($router->generate('home'));
         }
 
         return new Response(
