@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}Encyclopedie{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Voici l'encyclopédie</h2>
+
+    <div>
+        <h4>Consulter les Sorts:</h4>
+        <div>
+            Les 5 derniers:
+            <ul>
+                {% for spell in lastSpells %}
+                    <li>{{ spell.name }}, {{ spell.description }}, {{ spell.manaCost }} - <a href="{{ path('encyclopedia_show_spell', {'id': spell.id}) }}"> more >>> </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        Afficher tous les sorts <a href="{{ path('encyclopedia_show_spells') }}"> >>> </a> <br />
+        Ajouter un nouveau sort <a href="{{ path('encyclopedia_create_spell') }}"> >>> </a>
+    </div>
+    <div>
+        <h4>Consulter les Objets:</h4>
+{#        Ajouter un nouvel objet <a href="{{ path('game_master_create_item', {'id': game.id}) }}"> >>> </a>#}
+        Ajouter un nouvel objet <a href="{{ path('encyclopedia_create_item') }}"> >>> </a>
+    </div>
+    <div>
+        <h4>Consulter les Skills:</h4>
+{#        Ajouter une nouvelle compétence <a href="{{ path('game_master_create_skill', {'id': game.id}) }}"> >>> </a>#}
+        Ajouter une nouvelle compétence <a href="{{ path('encyclopedia_create_skill') }}"> >>> </a>
+    </div>
+
+{% endblock %}

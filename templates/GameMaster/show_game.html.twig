@@ -54,15 +54,6 @@
     <div>
         Ajouter un nouvel équipement <a href="{{ path('game_master_generate_armament', {'id': game.id}) }}"> >>> </a>
     </div>
-    <div>
-        Ajouter un nouveau sort <a href="{{ path('game_master_create_spell', {'id': game.id}) }}"> >>> </a>
-    </div>
-    <div>
-        Ajouter un nouvel objet <a href="{{ path('game_master_create_item', {'id': game.id}) }}"> >>> </a>
-    </div>
-    <div>
-        Ajouter une nouvelle compétence <a href="{{ path('game_master_create_skill', {'id': game.id}) }}"> >>> </a>
-    </div>
     <hr/>
-    <button disabled title="A venir">Encyclopédie</button>
+    <a href="{{ path('show_encyclopedia') }}"> Go to the Encyclopedia </a>
 {% endblock %}

@@ -15,6 +15,12 @@ class SpellRepository extends ServiceEntityRepository
         parent::__construct($registry, Spell::class);
     }
 
+    /** @Return Spell[] */
+    public function getLastFiveSpells(): ?array
+    {
+        return $this->findBy([], ['name' => 'DESC'], 5);
+    }
+
 
     public function delete(Spell $spell): void
     {
