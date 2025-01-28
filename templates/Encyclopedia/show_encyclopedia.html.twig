@@ -16,7 +16,7 @@
             </ul>
         </div>
         Afficher tous les sorts <a href="{{ path('encyclopedia_show_spells') }}"> >>> </a> <br />
-        Ajouter un nouveau sort <a href="{{ path('encyclopedia_create_spell') }}"> >>> </a>
+        Ajouter un nouveau sort <a href="{{ path('encyclopedia_create_spell') }}"> +++ </a>
     </div>
     <div>
         <h4>Consulter les Objets:</h4>
@@ -29,7 +29,7 @@
             </ul>
         </div>
         Afficher tous les objets <a href="{{ path('encyclopedia_show_items') }}"> >>> </a> <br />
-        Ajouter un nouvel objet <a href="{{ path('encyclopedia_create_item') }}"> >>> </a>
+        Ajouter un nouvel objet <a href="{{ path('encyclopedia_create_item') }}"> +++ </a>
     </div>
     <div>
         <h4>Consulter les Skills:</h4>
@@ -42,7 +42,20 @@
             </ul>
         </div>
         Afficher toutes les compétences <a href="{{ path('encyclopedia_show_skills') }}"> >>> </a> <br />
-        Ajouter une nouvelle compétence <a href="{{ path('encyclopedia_create_skill') }}"> >>> </a>
+        Ajouter une nouvelle compétence <a href="{{ path('encyclopedia_create_skill') }}"> +++ </a>
+    </div>
+    <div>
+        <h4>Consulter les templates d'équipements:</h4>
+        <div>
+            Les 5 derniers:
+            <ul>
+                {% for armamentTemplate in lastArmamentTemplates %}
+                    <li>{{ armamentTemplate.name }}, {{ armamentTemplate.description }} - <a href="{{ path('encyclopedia_show_armament_template', {'id': armamentTemplate.id}) }}"> more >>> </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        Afficher toutes les templates d'équipements <a href="{{ path('encyclopedia_show_armament_templates') }}"> >>> </a> <br />
+        Ajouter un nouveau template d'équipement <a href="{{ path('encyclopedia_create_armament_template') }}"> +++ </a>
     </div>
 
 {% endblock %}

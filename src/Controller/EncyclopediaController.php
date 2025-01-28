@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Armament;
+use App\Entity\ArmamentTemplate;
 use App\Entity\Item;
 use App\Entity\Skill;
 use App\Entity\Spell;
+use App\FormType\ArmamentTemplateType;
 use App\FormType\ItemType;
 use App\FormType\SkillType;
 use App\FormType\SpellType;
+use App\Repository\ArmamentRepository;
+use App\Repository\ArmamentTemplateRepository;
 use App\Repository\ItemRepository;
 use App\Repository\SkillRepository;
 use App\Repository\SpellRepository;
@@ -36,17 +41,20 @@ class EncyclopediaController
         SpellRepository $spellRepository,
         ItemRepository $itemRepository,
         SkillRepository $skillRepository,
+        ArmamentTemplateRepository $armamentTemplateRepository,
     ): Response
     {
         $lastSpells = $spellRepository->getLastFiveSpells();
         $lastItems = $itemRepository->getLastFiveItems();
         $lastSkills = $skillRepository->getLastFiveSkills();
+        $lastArmamentTemplates = $armamentTemplateRepository->getLastFiveArmamentTemplates();
 
         return new Response(
             $this->twig->render('Encyclopedia/show_encyclopedia.html.twig', [
                 'lastSpells' => $lastSpells,
                 'lastItems' => $lastItems,
                 'lastSkills' => $lastSkills,
+                'lastArmamentTemplates' => $lastArmamentTemplates,
             ])
         );
     }
@@ -232,7 +240,6 @@ class EncyclopediaController
         );
     }
 
-
     #[Route('/encyclopedia/skills', name: 'encyclopedia_show_skills', methods: ['GET'])]
     public function showSkills(SkillRepository $skillRepository): Response
     {
@@ -278,5 +285,81 @@ class EncyclopediaController
         }
 
         return new RedirectResponse($this->router->generate('encyclopedia_show_skills'));
+    }
+
+    #[Route('/encyclopedia/create-armament',
+        name: 'encyclopedia_create_armament_template',
+        methods: ['GET', 'POST']
+    )]
+    public function createArmamentTemplate(
+        Request             $request,
+        ArmamentTemplateRepository $armamentTemplateRepository,
+    ): Response|RedirectResponse
+    {
+        $form = $this->formFactory->create(ArmamentTemplateType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var ArmamentTemplate $armamentTemplate */
+            $armamentTemplate = $form->getData();
+
+            $armamentTemplateRepository->save($armamentTemplate);
+
+            return new RedirectResponse($this->router->generate('show_encyclopedia'));
+        }
+
+        return new Response(
+            $this->twig->render('Encyclopedia/create_armament_template.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/armaments', name: 'encyclopedia_show_armament_templates', methods: ['GET'])]
+    public function showArmamentTemplates(ArmamentTemplateRepository $armamentTemplateRepository): Response
+    {
+        $armamentTemplates = $armamentTemplateRepository->findAll();
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_armament_templates.html.twig', [
+                'armamentTemplates' => $armamentTemplates
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/armaments/{id}', name: 'encyclopedia_show_armament_template', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showArmamentTemplate(
+        ArmamentTemplateRepository $armamentTemplateRepository,
+        int                 $id
+    ): Response
+    {
+        $armamentTemplate = $armamentTemplateRepository->find($id);
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_armament_template.html.twig', [
+                'armamentTemplate' => $armamentTemplate
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/encyclopedia/armament/{id}/delete',
+        name: 'encyclopedia_delete_armament_template',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteArmamentTemplate(
+        int                   $id,
+        ArmamentTemplateRepository $armamentTemplateRepository,
+    ): Response
+    {
+        $armamentTemplate = $armamentTemplateRepository->find($id);
+
+        if ($armamentTemplate) {
+            $armamentTemplateRepository->delete($armamentTemplate);
+        }
+
+        return new RedirectResponse($this->router->generate('encyclopedia_show_armament_templates'));
     }
 }

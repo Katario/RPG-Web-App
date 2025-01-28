@@ -183,5 +183,4 @@ class Armament
         $this->nonPlayableCharacter = $nonPlayableCharacter;
         return $this;
     }
-
 }
