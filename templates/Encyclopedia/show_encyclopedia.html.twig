@@ -28,12 +28,20 @@
                 {% endfor %}
             </ul>
         </div>
-        Afficher tous les objetss <a href="{{ path('encyclopedia_show_items') }}"> >>> </a> <br />
+        Afficher tous les objets <a href="{{ path('encyclopedia_show_items') }}"> >>> </a> <br />
         Ajouter un nouvel objet <a href="{{ path('encyclopedia_create_item') }}"> >>> </a>
     </div>
     <div>
         <h4>Consulter les Skills:</h4>
-{#        Ajouter une nouvelle compétence <a href="{{ path('game_master_create_skill', {'id': game.id}) }}"> >>> </a>#}
+        <div>
+            Les 5 derniers:
+            <ul>
+                {% for skill in lastSkills %}
+                    <li>{{ skill.name }}, {{ skill.description }} - <a href="{{ path('encyclopedia_show_skill', {'id': skill.id}) }}"> more >>> </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        Afficher toutes les compétences <a href="{{ path('encyclopedia_show_skills') }}"> >>> </a> <br />
         Ajouter une nouvelle compétence <a href="{{ path('encyclopedia_create_skill') }}"> >>> </a>
     </div>
 

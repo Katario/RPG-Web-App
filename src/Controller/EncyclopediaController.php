@@ -35,15 +35,18 @@ class EncyclopediaController
     public function showEncyclopedia(
         SpellRepository $spellRepository,
         ItemRepository $itemRepository,
+        SkillRepository $skillRepository,
     ): Response
     {
         $lastSpells = $spellRepository->getLastFiveSpells();
         $lastItems = $itemRepository->getLastFiveItems();
+        $lastSkills = $skillRepository->getLastFiveSkills();
 
         return new Response(
             $this->twig->render('Encyclopedia/show_encyclopedia.html.twig', [
                 'lastSpells' => $lastSpells,
                 'lastItems' => $lastItems,
+                'lastSkills' => $lastSkills,
             ])
         );
     }
@@ -153,8 +156,6 @@ class EncyclopediaController
         );
     }
 
-
-
     #[Route('/encyclopedia/items', name: 'encyclopedia_show_items', methods: ['GET'])]
     public function showItems(ItemRepository $itemRepository): Response
     {
@@ -229,5 +230,53 @@ class EncyclopediaController
                 'form' => $form->createView(),
             ])
         );
+    }
+
+
+    #[Route('/encyclopedia/skills', name: 'encyclopedia_show_skills', methods: ['GET'])]
+    public function showSkills(SkillRepository $skillRepository): Response
+    {
+        $skills = $skillRepository->findAll();
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_skills.html.twig', [
+                'skills' => $skills
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/skills/{id}', name: 'encyclopedia_show_skill', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showSkill(
+        SkillRepository $skillRepository,
+        int                 $id
+    ): Response
+    {
+        $skill = $skillRepository->find($id);
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_skill.html.twig', [
+                'skill' => $skill
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/encyclopedia/skills/{id}/delete',
+        name: 'encyclopedia_delete_skill',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteSkill(
+        int                   $id,
+        SkillRepository $skillRepository,
+    ): Response
+    {
+        $skill = $skillRepository->find($id);
+
+        if ($skill) {
+            $skillRepository->delete($skill);
+        }
+
+        return new RedirectResponse($this->router->generate('encyclopedia_show_skills'));
     }
 }

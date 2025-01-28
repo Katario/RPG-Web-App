@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Compétence {{ skill.name }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Compétence {{ skill.name }}</h2>
+
+    <ul>
+        <li>Name : {{ skill.name }}</li>
+        <li>Description : {{ skill.description }}</li>
+    </ul>
+{% endblock %}

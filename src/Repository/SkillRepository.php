@@ -13,6 +13,12 @@ class SkillRepository extends ServiceEntityRepository
         parent::__construct($registry, Skill::class);
     }
 
+    /** @Return Skill[] */
+    public function getLastFiveSkills(): ?array
+    {
+        return $this->findBy([], ['name' => 'DESC'], 5);
+    }
+
     public function delete(Skill $skill): void
     {
         $this->getEntityManager()->remove($skill);
