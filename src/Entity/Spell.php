@@ -8,8 +8,10 @@ use App\Repository\SpellRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpellRepository::class)]
-class Spell
+#[ORM\HasLifecycleCallbacks]
+class Spell extends AbstractEncyclopedia
 {
+    use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

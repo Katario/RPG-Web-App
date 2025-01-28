@@ -6,8 +6,11 @@ use App\Repository\ItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
-class Item
+#[ORM\HasLifecycleCallbacks]
+class Item extends AbstractEncyclopedia
 {
+    use DateTimeTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

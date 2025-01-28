@@ -18,7 +18,7 @@ class SpellRepository extends ServiceEntityRepository
     /** @Return Spell[] */
     public function getLastFiveSpells(): ?array
     {
-        return $this->findBy([], ['name' => 'DESC'], 5);
+        return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
 

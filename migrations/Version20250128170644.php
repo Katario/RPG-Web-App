@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250128141953 extends AbstractMigration
+final class Version20250128170644 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -35,7 +35,7 @@ final class Version20250128141953 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_6429084479EC90D ON armaments_spells (spell_id)');
         $this->addSql('CREATE TABLE game (id SERIAL NOT NULL, game_master INT DEFAULT NULL, name VARCHAR(255) NOT NULL, ruleset VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_232B318C503C0E1E ON game (game_master)');
-        $this->addSql('CREATE TABLE item (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, cost VARCHAR(255) NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE item (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, cost VARCHAR(255) NOT NULL, description TEXT NOT NULL, is_ready BOOLEAN NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE mastery (id SERIAL NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE monster (id SERIAL NOT NULL, game_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, type VARCHAR(255) NOT NULL, strength INT NOT NULL, intelligence INT NOT NULL, stamina INT NOT NULL, agility INT NOT NULL, charisma INT NOT NULL, health_point INT NOT NULL, mana INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_245EC6F4E48FD905 ON monster (game_id)');
@@ -62,8 +62,8 @@ final class Version20250128141953 extends AbstractMigration
         $this->addSql('CREATE TABLE playable_character (id SERIAL NOT NULL, user_id INT DEFAULT NULL, game_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, title VARCHAR(255) NOT NULL, current_level INT NOT NULL, health_points INT NOT NULL, max_health_points INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_E143D669A76ED395 ON playable_character (user_id)');
         $this->addSql('CREATE INDEX IDX_E143D669E48FD905 ON playable_character (game_id)');
-        $this->addSql('CREATE TABLE skill (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT DEFAULT NULL, physical_cost INT DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE spell (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE skill (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT DEFAULT NULL, physical_cost INT DEFAULT NULL, is_ready BOOLEAN NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE spell (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT NOT NULL, is_ready BOOLEAN NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE talent (id SERIAL NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE messenger_messages (id BIGSERIAL NOT NULL, body TEXT NOT NULL, headers TEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, available_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, delivered_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');

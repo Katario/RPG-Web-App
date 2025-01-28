@@ -6,6 +6,7 @@ namespace App\FormType;
 
 use App\Entity\Item;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,6 +21,9 @@ class ItemType extends AbstractType
             ->add('name', TextType::class)
             ->add('description', TextType::class)
             ->add('cost', IntegerType::class)
+            ->add('isReady', CheckboxType::class, [
+                'data' => true
+            ])
             ->add('submit', SubmitType::class)
         ;
     }

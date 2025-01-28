@@ -6,8 +6,10 @@ use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
-class Skill
+#[ORM\HasLifecycleCallbacks]
+class Skill extends AbstractEncyclopedia
 {
+    use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
