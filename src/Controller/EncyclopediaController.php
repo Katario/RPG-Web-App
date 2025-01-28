@@ -33,14 +33,17 @@ class EncyclopediaController
 
     #[Route('/encyclopedia', name: 'show_encyclopedia', methods: ['GET'])]
     public function showEncyclopedia(
-        SpellRepository $spellRepository
+        SpellRepository $spellRepository,
+        ItemRepository $itemRepository,
     ): Response
     {
         $lastSpells = $spellRepository->getLastFiveSpells();
+        $lastItems = $itemRepository->getLastFiveItems();
 
         return new Response(
             $this->twig->render('Encyclopedia/show_encyclopedia.html.twig', [
                 'lastSpells' => $lastSpells,
+                'lastItems' => $lastItems,
             ])
         );
     }
@@ -118,7 +121,7 @@ class EncyclopediaController
             $spellRepository->delete($spell);
         }
 
-        return new RedirectResponse($this->router->generate('show_spells'));
+        return new RedirectResponse($this->router->generate('encyclopedia_show_spells'));
     }
 
     #[Route('/encyclopedia/create-item',
@@ -148,6 +151,55 @@ class EncyclopediaController
                 'form' => $form->createView(),
             ])
         );
+    }
+
+
+
+    #[Route('/encyclopedia/items', name: 'encyclopedia_show_items', methods: ['GET'])]
+    public function showItems(ItemRepository $itemRepository): Response
+    {
+        $items = $itemRepository->findAll();
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_items.html.twig', [
+                'items' => $items
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/items/{id}', name: 'encyclopedia_show_item', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showItem(
+        ItemRepository $itemRepository,
+        int                 $id
+    ): Response
+    {
+        $item = $itemRepository->find($id);
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_item.html.twig', [
+                'item' => $item
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/encyclopedia/items/{id}/delete',
+        name: 'encyclopedia_delete_item',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteItem(
+        int                   $id,
+        ItemRepository $itemRepository,
+    ): Response
+    {
+        $item = $itemRepository->find($id);
+
+        if ($item) {
+            $itemRepository->delete($item);
+        }
+
+        return new RedirectResponse($this->router->generate('encyclopedia_show_items'));
     }
 
     #[Route('/encyclopedia/create-skill',

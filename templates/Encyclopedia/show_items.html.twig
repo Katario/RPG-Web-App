@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des objets{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>liste des objets</h2>
+
+    <ul>
+        {% for item in items %}
+            <li>{{ item.name }}, {{ item.description }}
+                <a href="{{ path('encyclopedia_show_item', {'id': item.id}) }}"> >>> </a>
+                {#                <a href="{{ path('encyclopedia_edit_item', {'id': item.id}) }}"> +++ </a>#}
+                <a href="{{ path('encyclopedia_delete_item', {'id': item.id}) }}"> xxx </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

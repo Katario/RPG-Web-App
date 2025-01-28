@@ -20,7 +20,15 @@
     </div>
     <div>
         <h4>Consulter les Objets:</h4>
-{#        Ajouter un nouvel objet <a href="{{ path('game_master_create_item', {'id': game.id}) }}"> >>> </a>#}
+        <div>
+            Les 5 derniers:
+            <ul>
+                {% for item in lastItems %}
+                    <li>{{ item.name }}, {{ item.description }} - <a href="{{ path('encyclopedia_show_item', {'id': item.id}) }}"> more >>> </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        Afficher tous les objetss <a href="{{ path('encyclopedia_show_items') }}"> >>> </a> <br />
         Ajouter un nouvel objet <a href="{{ path('encyclopedia_create_item') }}"> >>> </a>
     </div>
     <div>

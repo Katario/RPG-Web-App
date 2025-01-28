@@ -13,6 +13,12 @@ class ItemRepository extends ServiceEntityRepository
         parent::__construct($registry, Item::class);
     }
 
+    /** @Return Item[] */
+    public function getLastFiveItems(): ?array
+    {
+        return $this->findBy([], ['name' => 'DESC'], 5);
+    }
+
     public function delete(Item $item): void
     {
         $this->getEntityManager()->remove($item);
