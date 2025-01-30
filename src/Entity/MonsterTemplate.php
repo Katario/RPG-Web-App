@@ -51,20 +51,20 @@ class MonsterTemplate extends AbstractEncyclopedia
     private int $manaMax;
 
     #[ORM\JoinTable(name: 'monster_templates_spells')]
-    #[ORM\JoinColumn(name: 'monster_template_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'monster_template_id', referencedColumnName: 'id', onDelete: 'cascade')]
+    #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
 
     #[ORM\JoinTable(name: 'monster_templates_items')]
-    #[ORM\JoinColumn(name: 'monste_templater_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'monste_templater_id', referencedColumnName: 'id', onDelete: 'cascade')]
+    #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
 
     #[ORM\JoinTable(name: 'monster_templates_skills')]
-    #[ORM\JoinColumn(name: 'monster_template_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'monster_template_id', referencedColumnName: 'id', onDelete: 'cascade')]
+    #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
 

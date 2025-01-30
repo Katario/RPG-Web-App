@@ -7,7 +7,7 @@
 
     <ul>
         {% for monsterTemplate in monsterTemplates %}
-            <li>{{ monsterTemplate.name }}
+            <li>{{ monsterTemplate.family }}
                 <a href="{{ path('encyclopedia_show_monster_template', {'id': monsterTemplate.id}) }}"> >>> </a>
                 {#                <a href="{{ path('encyclopedia_edit_monsterTemplate', {'id': monsterTemplate.id}) }}"> +++ </a>#}
                 <a href="{{ path('encyclopedia_delete_monster_template', {'id': monsterTemplate.id}) }}"> xxx </a>
