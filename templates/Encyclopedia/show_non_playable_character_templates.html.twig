@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des PNJ{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Liste des Templates de PNJ</h2>
+
+    <ul>
+        {% for nonPlayableCharacterTemplate in nonPlayableCharacterTemplates %}
+            <li>{{ nonPlayableCharacterTemplate.name }}, {{ nonPlayableCharacterTemplate.title }}
+                <a href="{{ path('encyclopedia_show_non_playable_character_template', {'id': nonPlayableCharacterTemplate.id}) }}"> >>> </a>
+                {#                <a href="{{ path('encyclopedia_edit_non_playable_characterTemplate', {'id': nonPlayableCharacterTemplate.id}) }}"> +++ </a>#}
+                <a href="{{ path('encyclopedia_delete_non_playable_character_template', {'id': nonPlayableCharacterTemplate.id}) }}"> xxx </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -172,26 +172,4 @@ class ArmamentTemplate extends AbstractEncyclopedia
         }
         return $this;
     }
-
-//    public function getMonster(): ?Monster
-//    {
-//        return $this->monster;
-//    }
-//
-//    public function setMonster(?Monster $monster): ArmamentTemplate
-//    {
-//        $this->monster = $monster;
-//        return $this;
-//    }
-//
-//    public function getNonPlayableCharacter(): ?NonPlayableCharacter
-//    {
-//        return $this->nonPlayableCharacter;
-//    }
-//
-//    public function setNonPlayableCharacter(?NonPlayableCharacter $nonPlayableCharacter): ArmamentTemplate
-//    {
-//        $this->nonPlayableCharacter = $nonPlayableCharacter;
-//        return $this;
-//    }
 }

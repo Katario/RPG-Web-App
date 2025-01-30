@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créer un template de PNJ {% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Créer un template de PNJ</h2>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.strengthMin) }}
+    {{ form_row(form.strengthMax) }}
+    {{ form_row(form.intelligenceMin) }}
+    {{ form_row(form.intelligenceMax) }}
+    {{ form_row(form.staminaMin) }}
+    {{ form_row(form.staminaMax) }}
+    {{ form_row(form.agilityMin) }}
+    {{ form_row(form.agilityMax) }}
+    {{ form_row(form.charismaMin) }}
+    {{ form_row(form.charismaMax) }}
+    {{ form_row(form.healthPointMin) }}
+    {{ form_row(form.healthPointMax) }}
+    {{ form_row(form.manaMin) }}
+    {{ form_row(form.manaMax) }}
+    {{ form_row(form.spells) }}
+    {{ form_row(form.skills) }}
+    {{ form_row(form.items) }}
+
+    {{ form_row(form.submit, { 'label': 'Créer' }) }}
+    {{ form_end(form) }}
+
+{% endblock %}

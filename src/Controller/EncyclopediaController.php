@@ -8,17 +8,20 @@ use App\Entity\Armament;
 use App\Entity\ArmamentTemplate;
 use App\Entity\Item;
 use App\Entity\MonsterTemplate;
+use App\Entity\NonPlayableCharacterTemplate;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use App\FormType\ArmamentTemplateType;
 use App\FormType\ItemType;
 use App\FormType\MonsterTemplateType;
+use App\FormType\NonPlayableCharacterTemplateType;
 use App\FormType\SkillType;
 use App\FormType\SpellType;
 use App\Repository\ArmamentRepository;
 use App\Repository\ArmamentTemplateRepository;
 use App\Repository\ItemRepository;
 use App\Repository\MonsterTemplateRepository;
+use App\Repository\NonPlayableCharacterTemplateRepository;
 use App\Repository\SkillRepository;
 use App\Repository\SpellRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -46,6 +49,7 @@ class EncyclopediaController
         SkillRepository $skillRepository,
         ArmamentTemplateRepository $armamentTemplateRepository,
         MonsterTemplateRepository $monsterTemplateRepository,
+        NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
     ): Response
     {
         $lastSpells = $spellRepository->getLastFiveSpells();
@@ -53,6 +57,7 @@ class EncyclopediaController
         $lastSkills = $skillRepository->getLastFiveSkills();
         $lastArmamentTemplates = $armamentTemplateRepository->getLastFiveArmamentTemplates();
         $lastMonsterTemplates = $monsterTemplateRepository->getLastFiveMonsterTemplates();
+        $lastNonPlayableCharacterTemplates = $nonPlayableCharacterTemplateRepository->getLastFiveNonPlayableCharacterTemplates();
 
         return new Response(
             $this->twig->render('Encyclopedia/show_encyclopedia.html.twig', [
@@ -61,6 +66,7 @@ class EncyclopediaController
                 'lastSkills' => $lastSkills,
                 'lastArmamentTemplates' => $lastArmamentTemplates,
                 'lastMonsterTemplates' => $lastMonsterTemplates,
+                'lastNonPlayableCharacterTemplates' => $lastNonPlayableCharacterTemplates,
             ])
         );
     }
@@ -369,14 +375,6 @@ class EncyclopediaController
         return new RedirectResponse($this->router->generate('encyclopedia_show_armament_templates'));
     }
 
-
-
-
-
-
-
-
-
     #[Route('/encyclopedia/create-monster',
         name: 'encyclopedia_create_monster_template',
         methods: ['GET', 'POST']
@@ -451,5 +449,83 @@ class EncyclopediaController
         }
 
         return new RedirectResponse($this->router->generate('encyclopedia_show_monster_templates'));
+    }
+
+
+
+    #[Route('/encyclopedia/create-non-playable-character',
+        name: 'encyclopedia_create_non_playable_character_template',
+        methods: ['GET', 'POST']
+    )]
+    public function createNonPlayableCharacterTemplate(
+        Request             $request,
+        NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
+    ): Response|RedirectResponse
+    {
+        $form = $this->formFactory->create(NonPlayableCharacterTemplateType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var NonPlayableCharacterTemplate $nonPlayableCharacterTemplate */
+            $nonPlayableCharacterTemplate = $form->getData();
+
+            $nonPlayableCharacterTemplateRepository->save($nonPlayableCharacterTemplate);
+
+            return new RedirectResponse($this->router->generate('show_encyclopedia'));
+        }
+
+        return new Response(
+            $this->twig->render('Encyclopedia/create_non_playable_character_template.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/nonPlayableCharacters', name: 'encyclopedia_show_non_playable_character_templates', methods: ['GET'])]
+    public function showNonPlayableCharacterTemplates(NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository): Response
+    {
+        $nonPlayableCharacterTemplates = $nonPlayableCharacterTemplateRepository->findAll();
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_non_playable_character_templates.html.twig', [
+                'nonPlayableCharacterTemplates' => $nonPlayableCharacterTemplates
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/nonPlayableCharacters/{id}', name: 'encyclopedia_show_non_playable_character_template', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showNonPlayableCharacterTemplate(
+        NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
+        int                 $id
+    ): Response
+    {
+        $nonPlayableCharacterTemplate = $nonPlayableCharacterTemplateRepository->find($id);
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_non_playable_character_template.html.twig', [
+                'nonPlayableCharacterTemplate' => $nonPlayableCharacterTemplate
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/encyclopedia/nonPlayableCharacter/{id}/delete',
+        name: 'encyclopedia_delete_non_playable_character_template',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteNonPlayableCharacterTemplate(
+        int                   $id,
+        NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
+    ): Response
+    {
+        $nonPlayableCharacterTemplate = $nonPlayableCharacterTemplateRepository->find($id);
+
+        if ($nonPlayableCharacterTemplate) {
+            $nonPlayableCharacterTemplateRepository->delete($nonPlayableCharacterTemplate);
+        }
+
+        return new RedirectResponse($this->router->generate('encyclopedia_show_non_playable_character_templates'));
     }
 }
