@@ -6,12 +6,14 @@ namespace App\Controller;
 
 use App\Entity\Armament;
 use App\Entity\ArmamentTemplate;
+use App\Entity\CharacterTemplate;
 use App\Entity\Item;
 use App\Entity\MonsterTemplate;
 use App\Entity\NonPlayableCharacterTemplate;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use App\FormType\ArmamentTemplateType;
+use App\FormType\CharacterTemplateType;
 use App\FormType\ItemType;
 use App\FormType\MonsterTemplateType;
 use App\FormType\NonPlayableCharacterTemplateType;
@@ -19,6 +21,7 @@ use App\FormType\SkillType;
 use App\FormType\SpellType;
 use App\Repository\ArmamentRepository;
 use App\Repository\ArmamentTemplateRepository;
+use App\Repository\CharacterTemplateRepository;
 use App\Repository\ItemRepository;
 use App\Repository\MonsterTemplateRepository;
 use App\Repository\NonPlayableCharacterTemplateRepository;
@@ -50,6 +53,7 @@ class EncyclopediaController
         ArmamentTemplateRepository $armamentTemplateRepository,
         MonsterTemplateRepository $monsterTemplateRepository,
         NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
+        CharacterTemplateRepository $characterTemplateRepository,
     ): Response
     {
         $lastSpells = $spellRepository->getLastFiveSpells();
@@ -58,6 +62,7 @@ class EncyclopediaController
         $lastArmamentTemplates = $armamentTemplateRepository->getLastFiveArmamentTemplates();
         $lastMonsterTemplates = $monsterTemplateRepository->getLastFiveMonsterTemplates();
         $lastNonPlayableCharacterTemplates = $nonPlayableCharacterTemplateRepository->getLastFiveNonPlayableCharacterTemplates();
+        $lastCharacterTemplates = $characterTemplateRepository->getLastFiveCharacterTemplates();
 
         return new Response(
             $this->twig->render('Encyclopedia/show_encyclopedia.html.twig', [
@@ -67,6 +72,7 @@ class EncyclopediaController
                 'lastArmamentTemplates' => $lastArmamentTemplates,
                 'lastMonsterTemplates' => $lastMonsterTemplates,
                 'lastNonPlayableCharacterTemplates' => $lastNonPlayableCharacterTemplates,
+                'lastCharacterTemplates' => $lastCharacterTemplates,
             ])
         );
     }
@@ -527,5 +533,92 @@ class EncyclopediaController
         }
 
         return new RedirectResponse($this->router->generate('encyclopedia_show_non_playable_character_templates'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    #[Route('/encyclopedia/create-character',
+        name: 'encyclopedia_create_character_template',
+        methods: ['GET', 'POST']
+    )]
+    public function createCharacterTemplate(
+        Request             $request,
+        CharacterTemplateRepository $characterTemplateRepository,
+    ): Response|RedirectResponse
+    {
+        $form = $this->formFactory->create(CharacterTemplateType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var CharacterTemplate $characterTemplate */
+            $characterTemplate = $form->getData();
+
+            $characterTemplateRepository->save($characterTemplate);
+
+            return new RedirectResponse($this->router->generate('show_encyclopedia'));
+        }
+
+        return new Response(
+            $this->twig->render('Encyclopedia/create_character_template.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/characters', name: 'encyclopedia_show_character_templates', methods: ['GET'])]
+    public function showCharacterTemplates(CharacterTemplateRepository $characterTemplateRepository): Response
+    {
+        $characterTemplates = $characterTemplateRepository->findAll();
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_character_templates.html.twig', [
+                'characterTemplates' => $characterTemplates
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/characters/{id}', name: 'encyclopedia_show_character_template', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showCharacterTemplate(
+        CharacterTemplateRepository $characterTemplateRepository,
+        int                 $id
+    ): Response
+    {
+        $characterTemplate = $characterTemplateRepository->find($id);
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_character_template.html.twig', [
+                'characterTemplate' => $characterTemplate
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/encyclopedia/character/{id}/delete',
+        name: 'encyclopedia_delete_character_template',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteCharacterTemplate(
+        int                   $id,
+        CharacterTemplateRepository $characterTemplateRepository,
+    ): Response
+    {
+        $characterTemplate = $characterTemplateRepository->find($id);
+
+        if ($characterTemplate) {
+            $characterTemplateRepository->delete($characterTemplate);
+        }
+
+        return new RedirectResponse($this->router->generate('encyclopedia_show_character_templates'));
     }
 }
