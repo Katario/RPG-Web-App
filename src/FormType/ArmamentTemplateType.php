@@ -9,6 +9,7 @@ use App\Entity\Skill;
 use App\Entity\Spell;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,6 +39,9 @@ class ArmamentTemplateType extends AbstractType
                 'class' => Spell::class,
                 'multiple' => true,
                 'expanded' => true,
+            ])
+            ->add('isReady', CheckboxType::class, [
+                'data' => true
             ])
             ->add('submit', SubmitType::class)
         ;

@@ -16,7 +16,7 @@ class ItemRepository extends ServiceEntityRepository
     /** @Return Item[] */
     public function getLastFiveItems(): ?array
     {
-        return $this->findBy([], ['name' => 'DESC'], 5);
+        return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
     public function delete(Item $item): void

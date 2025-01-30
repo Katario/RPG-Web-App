@@ -8,9 +8,9 @@
     <ul>
         {% for armamentTemplate in armamentTemplates %}
             <li>{{ armamentTemplate.name }}, {{ armamentTemplate.description }}
-                <a href="{{ path('encyclopedia_show_armamentTemplate', {'id': armamentTemplate.id}) }}"> >>> </a>
+                <a href="{{ path('encyclopedia_show_armament_template', {'id': armamentTemplate.id}) }}"> >>> </a>
                 {#                <a href="{{ path('encyclopedia_edit_armamentTemplate', {'id': armamentTemplate.id}) }}"> +++ </a>#}
-                <a href="{{ path('encyclopedia_delete_armamentTemplate', {'id': armamentTemplate.id}) }}"> xxx </a>
+                <a href="{{ path('encyclopedia_delete_armament_template', {'id': armamentTemplate.id}) }}"> xxx </a>
             </li>
         {% endfor %}
     </ul>

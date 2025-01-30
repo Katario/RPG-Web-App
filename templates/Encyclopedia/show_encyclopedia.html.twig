@@ -57,5 +57,18 @@
         Afficher toutes les templates d'équipements <a href="{{ path('encyclopedia_show_armament_templates') }}"> >>> </a> <br />
         Ajouter un nouveau template d'équipement <a href="{{ path('encyclopedia_create_armament_template') }}"> +++ </a>
     </div>
+    <div>
+        <h4>Consulter les templates de monstres:</h4>
+        <div>
+            Les 5 derniers:
+            <ul>
+                {% for monsterTemplate in lastMonsterTemplates %}
+                    <li>{{ monsterTemplate.family }} - <a href="{{ path('encyclopedia_show_monster_template', {'id': monsterTemplate.id}) }}"> more >>> </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        Afficher toutes les templates de monstres <a href="{{ path('encyclopedia_show_monster_templates') }}"> >>> </a> <br />
+        Ajouter un nouveau template de monstre <a href="{{ path('encyclopedia_create_monster_template') }}"> +++ </a>
+    </div>
 
 {% endblock %}

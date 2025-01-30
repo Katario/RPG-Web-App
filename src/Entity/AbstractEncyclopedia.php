@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 abstract class AbstractEncyclopedia
 {
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', options: ['default' => 1])]
     protected bool $isReady;
 
     public function isReady(): bool

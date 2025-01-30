@@ -7,15 +7,18 @@ namespace App\Controller;
 use App\Entity\Armament;
 use App\Entity\ArmamentTemplate;
 use App\Entity\Item;
+use App\Entity\MonsterTemplate;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use App\FormType\ArmamentTemplateType;
 use App\FormType\ItemType;
+use App\FormType\MonsterTemplateType;
 use App\FormType\SkillType;
 use App\FormType\SpellType;
 use App\Repository\ArmamentRepository;
 use App\Repository\ArmamentTemplateRepository;
 use App\Repository\ItemRepository;
+use App\Repository\MonsterTemplateRepository;
 use App\Repository\SkillRepository;
 use App\Repository\SpellRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -42,12 +45,14 @@ class EncyclopediaController
         ItemRepository $itemRepository,
         SkillRepository $skillRepository,
         ArmamentTemplateRepository $armamentTemplateRepository,
+        MonsterTemplateRepository $monsterTemplateRepository,
     ): Response
     {
         $lastSpells = $spellRepository->getLastFiveSpells();
         $lastItems = $itemRepository->getLastFiveItems();
         $lastSkills = $skillRepository->getLastFiveSkills();
         $lastArmamentTemplates = $armamentTemplateRepository->getLastFiveArmamentTemplates();
+        $lastMonsterTemplates = $monsterTemplateRepository->getLastFiveMonsterTemplates();
 
         return new Response(
             $this->twig->render('Encyclopedia/show_encyclopedia.html.twig', [
@@ -55,6 +60,7 @@ class EncyclopediaController
                 'lastItems' => $lastItems,
                 'lastSkills' => $lastSkills,
                 'lastArmamentTemplates' => $lastArmamentTemplates,
+                'lastMonsterTemplates' => $lastMonsterTemplates,
             ])
         );
     }
@@ -361,5 +367,89 @@ class EncyclopediaController
         }
 
         return new RedirectResponse($this->router->generate('encyclopedia_show_armament_templates'));
+    }
+
+
+
+
+
+
+
+
+
+    #[Route('/encyclopedia/create-monster',
+        name: 'encyclopedia_create_monster_template',
+        methods: ['GET', 'POST']
+    )]
+    public function createMonsterTemplate(
+        Request             $request,
+        MonsterTemplateRepository $monsterTemplateRepository,
+    ): Response|RedirectResponse
+    {
+        $form = $this->formFactory->create(MonsterTemplateType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var MonsterTemplate $monsterTemplate */
+            $monsterTemplate = $form->getData();
+
+            $monsterTemplateRepository->save($monsterTemplate);
+
+            return new RedirectResponse($this->router->generate('show_encyclopedia'));
+        }
+
+        return new Response(
+            $this->twig->render('Encyclopedia/create_monster_template.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/monsters', name: 'encyclopedia_show_monster_templates', methods: ['GET'])]
+    public function showMonsterTemplates(MonsterTemplateRepository $monsterTemplateRepository): Response
+    {
+        $monsterTemplates = $monsterTemplateRepository->findAll();
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_monster_templates.html.twig', [
+                'monsterTemplates' => $monsterTemplates
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/monsters/{id}', name: 'encyclopedia_show_monster_template', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showMonsterTemplate(
+        MonsterTemplateRepository $monsterTemplateRepository,
+        int                 $id
+    ): Response
+    {
+        $monsterTemplate = $monsterTemplateRepository->find($id);
+
+        return new Response(
+            $this->twig->render('Encyclopedia/show_monster_template.html.twig', [
+                'monsterTemplate' => $monsterTemplate
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/encyclopedia/monster/{id}/delete',
+        name: 'encyclopedia_delete_monster_template',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteMonsterTemplate(
+        int                   $id,
+        MonsterTemplateRepository $monsterTemplateRepository,
+    ): Response
+    {
+        $monsterTemplate = $monsterTemplateRepository->find($id);
+
+        if ($monsterTemplate) {
+            $monsterTemplateRepository->delete($monsterTemplate);
+        }
+
+        return new RedirectResponse($this->router->generate('encyclopedia_show_monster_templates'));
     }
 }

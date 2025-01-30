@@ -10,8 +10,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArmamentTemplateRepository::class)]
-class ArmamentTemplate
+#[ORM\HasLifecycleCallbacks]
+class ArmamentTemplate extends AbstractEncyclopedia
 {
+    use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

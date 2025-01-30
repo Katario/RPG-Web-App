@@ -17,7 +17,7 @@ class ArmamentTemplateRepository extends ServiceEntityRepository
     /** @Return ArmamentTemplate[] */
     public function getLastFiveArmamentTemplates(): ?array
     {
-        return $this->findBy([], ['name' => 'DESC'], 5);
+        return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
 

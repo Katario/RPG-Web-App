@@ -16,7 +16,7 @@ class SkillRepository extends ServiceEntityRepository
     /** @Return Skill[] */
     public function getLastFiveSkills(): ?array
     {
-        return $this->findBy([], ['name' => 'DESC'], 5);
+        return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
     public function delete(Skill $skill): void
