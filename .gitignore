@@ -31,5 +31,6 @@ compose.yaml
 ###> Other ###
 .idea
 .idea/*
+docker/db
 TODO.md
 ###< Other ###

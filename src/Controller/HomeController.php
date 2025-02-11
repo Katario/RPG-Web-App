@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Repository\GameRepository;
-use App\Repository\UserRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
