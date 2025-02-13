@@ -10,18 +10,28 @@
     </ul>
     <div>
         Compétences :
+
+        {% if nonPlayableCharacterTemplate.skills|length == 0 %}
+        -
+        {% else %}
         <ul>
             {% for skill in nonPlayableCharacterTemplate.skills %}
                 <li>{{ skill.name }}, {{ skill.description }}</li>
             {% endfor %}
         </ul>
+        {% endif %}
     </div>
     <div>
         Sorts :
+
+        {% if nonPlayableCharacterTemplate.spells|length == 0 %}
+        -
+        {% else %}
         <ul>
             {% for spell in nonPlayableCharacterTemplate.spells %}
                 <li>{{ spell.name }}, {{ spell.manaCost }}</li>
             {% endfor %}
         </ul>
+        {% endif %}
     </div>
 {% endblock %}

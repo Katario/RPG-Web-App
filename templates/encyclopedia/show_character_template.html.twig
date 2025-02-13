@@ -10,18 +10,28 @@
     </ul>
     <div>
         Compétences :
-        <ul>
-            {% for skill in characterTemplate.skills %}
-                <li>{{ skill.name }}, {{ skill.description }}</li>
-            {% endfor %}
-        </ul>
+
+        {% if characterTemplate.skills|length == 0 %}
+            -
+        {% else %}
+            <ul>
+                {% for skill in characterTemplate.skills %}
+                    <li>{{ skill.name }}, {{ skill.description }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
     <div>
         Sorts :
+
+        {% if characterTemplate.spells|length == 0 %}
+            -
+        {% else %}
         <ul>
             {% for spell in characterTemplate.spells %}
                 <li>{{ spell.name }}, {{ spell.manaCost }}</li>
             {% endfor %}
         </ul>
+        {% endif %}
     </div>
 {% endblock %}

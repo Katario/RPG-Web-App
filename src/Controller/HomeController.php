@@ -28,7 +28,7 @@ class HomeController
         $allGames = $this->getGamesByUser($user);
 
         return new Response(
-            $this->twig->render('Home/home.html.twig', [
+            $this->twig->render('main/main.html.twig', [
                 'user' => $this->security->getUser(),
                 'games' => $allGames,
             ])
@@ -43,13 +43,13 @@ class HomeController
         # Retrieve games where user is GM
         $games = [];
         /** @var Game $game */
-//        foreach ($this->gameRepository->findBy(['gameMaster' => $this->security->getUser()->getId()]) as $game)
+//        foreach ($this->gameRepository->findBy(['game_master' => $this->security->getUser()->getId()]) as $game)
         foreach ($this->gameRepository->getGamesByUser($this->security->getUser()) as $game)
         {
             $games[] = $game;
         }
 
-        # Retrieve games where user is a playable Character
+        # Retrieve games where user is a playable character
         foreach ($this->gameRepository->getGamesWithCharacterByUser($this->security->getUser()) as $game)
         {
             if (!in_array($game, $games)) {

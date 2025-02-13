@@ -39,7 +39,7 @@ class CharacterController
         $character = $characterRepository->find($id);
 
         return new Response(
-            $this->twig->render('Character/show_character.html.twig', [
+            $this->twig->render('character/show_character.html.twig', [
                 'character' => $character,
             ])
         );

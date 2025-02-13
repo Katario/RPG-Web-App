@@ -58,7 +58,7 @@ class GameController
         }
 
         return new Response(
-            $this->twig->render('Game/create_game.html.twig', [
+            $this->twig->render('game/create_game.html.twig', [
                 'form' => $form->createView(),
             ])
         );

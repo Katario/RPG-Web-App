@@ -28,7 +28,7 @@ class UserController extends AbstractController
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('User/sign_in.html.twig', [
+        return $this->render('user/sign_in.html.twig', [
             'controller_name' => 'UserController',
             'last_username' => $lastUsername,
             'error' => $error,
@@ -60,7 +60,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('sign_in');
         }
 
-        return $this->render('User/sign_up.html.twig', [
+        return $this->render('user/sign_up.html.twig', [
             'form' => $form->createView(),
         ]);
     }

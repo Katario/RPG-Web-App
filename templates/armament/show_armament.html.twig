@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}Armament {{ armament.name }}{% endblock %}
+
+{% block main %}
+    <h2>Armament {{ armament.name }} - {{ armanent.type }}</h2>
+
+    <ul>
+        <li>Nom : {{ armament.name }}</li>
+        <li>Type : {{ armament.type }}</li>
+        <li>Value : {{ armament.value }}</li>
+        <li>Durability : {{ armament.durability }}</li>
+    </ul>
+{% endblock %}

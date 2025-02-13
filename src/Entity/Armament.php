@@ -114,6 +114,12 @@ class Armament
         return $this->skills;
     }
 
+    public function setSkills(Collection|array $skills): Armament
+    {
+        $this->skills = $skills;
+        return $this;
+    }
+
     public function addSkill(Skill $skill): Armament
     {
         if (!$this->getSkills()->contains($skill)) {
@@ -133,6 +139,12 @@ class Armament
     public function getSpells(): Collection|array
     {
         return $this->spells;
+    }
+
+    public function setSpells(Collection|array $spells): Armament
+    {
+        $this->spells = $spells;
+        return $this;
     }
 
     public function addSpell(Spell $spell): Armament

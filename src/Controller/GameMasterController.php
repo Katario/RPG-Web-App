@@ -64,7 +64,7 @@ class GameMasterController
         $characters = $characterRepository->findBy(['game' => $game]);
 
         return new Response(
-            $this->twig->render('GameMaster/show_game.html.twig', [
+            $this->twig->render('game_master/show_game.html.twig', [
                 'game' => $game,
                 'characters' => $characters,
             ])
@@ -80,13 +80,13 @@ class GameMasterController
         $character = $characterRepository->find($id);
 
         return new Response(
-            $this->twig->render('GameMaster/show_character.html.twig', [
+            $this->twig->render('game_master/show_character.html.twig', [
                 'character' => $character,
             ])
         );
     }
 
-    // @TODO need to generate from the Encyclopedia API and not from scratch
+    // @TODO need to generate from the encyclopedia API and not from scratch
     #[Route('/game-master/games/{id}/generate-character',
         name: 'game_master_generate_character',
         requirements: ['id' => '\d+'],
@@ -124,7 +124,7 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/generate_default_character.html.twig', [
+            $this->twig->render('game_master/generate_default_character.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -170,7 +170,7 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/edit_character.html.twig', [
+            $this->twig->render('game_master/edit_character.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -197,7 +197,7 @@ class GameMasterController
         return new RedirectResponse($router->generate('home'));
     }
 
-    // @TODO need to generate from the Encyclopedia API and not from scratch
+    // @TODO need to generate from the encyclopedia API and not from scratch
     #[Route('/game-master/games/{id}/generate-armament',
         name: 'game_master_generate_armament',
         requirements: ['id' => '\d+'],
@@ -228,13 +228,13 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/generate_armament.html.twig', [
+            $this->twig->render('game_master/generate_armament.html.twig', [
                 'form' => $form->createView(),
             ])
         );
     }
 
-    // @TODO need to generate from the Encyclopedia API and not from scratch
+    // @TODO need to generate from the encyclopedia API and not from scratch
     #[Route('/game-master/games/{id}/generate-monster',
         name: 'game_master_generate_monster',
         requirements: ['id' => '\d+'],
@@ -265,7 +265,7 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/generate_monster.html.twig', [
+            $this->twig->render('game_master/generate_monster.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -280,7 +280,7 @@ class GameMasterController
         $monster = $monsterRepository->find($id);
 
         return new Response(
-            $this->twig->render('GameMaster/show_monster.html.twig', [
+            $this->twig->render('game_master/show_monster.html.twig', [
                 'monster' => $monster,
             ])
         );
@@ -321,7 +321,7 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/edit_monster.html.twig', [
+            $this->twig->render('game_master/edit_monster.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -354,7 +354,7 @@ class GameMasterController
 
 
 
-    // @TODO need to generate from the Encyclopedia API and not from scratch
+    // @TODO need to generate from the encyclopedia API and not from scratch
     #[Route('/game-master/games/{id}/generate-non-playable-character',
         name: 'game_master_generate_non_playable_character',
         requirements: ['id' => '\d+'],
@@ -385,7 +385,7 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/generate_non_playable_character.html.twig', [
+            $this->twig->render('game_master/generate_non_playable_character.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -400,7 +400,7 @@ class GameMasterController
         $nonPlayableCharacter = $nonPlayableCharacterRepository->find($id);
 
         return new Response(
-            $this->twig->render('GameMaster/show_non_playable_character.html.twig', [
+            $this->twig->render('game_master/show_non_playable_character.html.twig', [
                 'nonPlayableCharacter' => $nonPlayableCharacter,
             ])
         );
@@ -439,7 +439,7 @@ class GameMasterController
         }
 
         return new Response(
-            $this->twig->render('GameMaster/edit_non_playable_character.html.twig', [
+            $this->twig->render('game_master/edit_non_playable_character.html.twig', [
                 'form' => $form->createView(),
             ])
         );
