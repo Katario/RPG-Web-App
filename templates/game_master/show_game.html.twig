@@ -2,64 +2,73 @@
 {% block title %}Partie {{ game.name }}{% endblock %}
 
 {% block main %}
-    <a href="{{ path('home') }}">Retour</a>
-    <h2>Partie {{ game.name }}</h2>
+    <div class="">
+        <a href="{{ path('home') }}">Retour</a>
+        <h2>Partie {{ game.name }}</h2>
 
-    <ul>
-        <li>Nom : {{ game.name }}</li>
-        <li>Règles de jeu : {{ game.ruleset }}</li>
-    </ul>
-    <div>
-        Les Personnages Joueurs :
         <ul>
-            {% for character in game.characters %}
-                <li>{{ character.name }} {{ character.lastName }}, {{ character.title }}
-                    <a href="{{ path('game_master_show_character', {'id': character.id}) }}"> >>> </a>
-                    <a href="{{ path('game_master_edit_character', {'characterId': character.id, 'gameId': game.id}) }}"> +++ </a>
-                    <a href="{{ path('game_master_delete_characters', {'id': character.id}) }}"> XXX </a>
-                </li>
-            {% endfor %}
+            <li>Nom : {{ game.name }}</li>
+            <li>Règles de jeu : {{ game.ruleset }}</li>
         </ul>
-        Ajouter un nouveau personnage <a href="{{ path('game_master_generate_character', {'id': game.id}) }}"> >>> </a>
-    </div>
-    <hr/>
-    <div>
-        Les Monstres :
-        <ul>
-            {% for monster in game.monsters %}
-                <li>{{ monster.name }} {{ monster.type }}
-                    <a href="{{ path('game_master_show_monster', {'id': monster.id}) }}"> >>> </a>
-                    <a href="{{ path('game_master_edit_monster', {'id': monster.id}) }}"> +++ </a>
-                    <a href="{{ path('game_master_delete_monster', {'id': monster.id}) }}"> XXX </a>
-                </li>
-            {% endfor %}
-        </ul>
-        Ajouter un nouveau monstre <a href="{{ path('game_master_generate_monster', {'id': game.id}) }}"> >>> </a>
-    </div>
-    <hr/>
-    <div>
-        Les Personnages non-joueurs :
-        <ul>
-            {% for nonPlayableCharacter in game.nonPlayableCharacters %}
-                <li>{{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}, {{ nonPlayableCharacter.title }}
-                    <a href="{{ path('game_master_show_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> >>> </a>
-                    <a href="{{ path('game_master_edit_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> +++ </a>
-                    <a href="{{ path('game_master_delete_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> XXX </a>
-                </li>
-            {% endfor %}
-        </ul>
-        Ajouter un nouveau Personnage non-joueur <a href="{{ path('game_master_generate_non_playable_character', {'id': game.id}) }}"> >>> </a>
-    </div>
-    <hr/>
-    <div>
-        <twig:Button
-            tag="a"
-            href="#"
-            class=""
+        <div>
+            Les Personnages Joueurs :
+            <ul>
+                {% for character in game.characters %}
+                    <li>{{ character.name }} {{ character.lastName }}, {{ character.title }}
+                        <a href="{{ path('game_master_show_character', {'id': character.id}) }}"> >>> </a>
+                        <a href="{{ path('game_master_edit_character', {'characterId': character.id, 'gameId': game.id}) }}"> +++ </a>
+                        <a href="{{ path('game_master_delete_characters', {'id': character.id}) }}"> XXX </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            Ajouter un nouveau personnage <a href="{{ path('game_master_generate_character', {'id': game.id}) }}"> >>> </a>
+        </div>
+        <hr/>
+        <div>
+            Les Monstres :
+            <ul>
+                {% for monster in game.monsters %}
+                    <li>{{ monster.name }} {{ monster.type }}
+                        <a href="{{ path('game_master_show_monster', {'id': monster.id}) }}"> >>> </a>
+                        <a href="{{ path('game_master_edit_monster', {'id': monster.id}) }}"> +++ </a>
+                        <a href="{{ path('game_master_delete_monster', {'id': monster.id}) }}"> XXX </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            Ajouter un nouveau monstre <a href="{{ path('game_master_generate_monster', {'id': game.id}) }}"> >>> </a>
+        </div>
+        <hr/>
+        <div>
+            Les Personnages non-joueurs :
+            <ul>
+                {% for nonPlayableCharacter in game.nonPlayableCharacters %}
+                    <li>{{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}, {{ nonPlayableCharacter.title }}
+                        <a href="{{ path('game_master_show_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> >>> </a>
+                        <a href="{{ path('game_master_edit_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> +++ </a>
+                        <a href="{{ path('game_master_delete_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> XXX </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            Ajouter un nouveau Personnage non-joueur <a href="{{ path('game_master_generate_non_playable_character', {'id': game.id}) }}"> >>> </a>
+        </div>
+        <hr/>
+        <twig:Modal
+            :closeButton="true"
+            :fixedTop="true"
+            id="armament-search-modal"
         >
-            Ajouter un nouvel équipement >>>
-        </twig:Button>
+            <twig:block name="trigger">
+                <twig:Button
+                        variant="link"
+                        type="button"
+                        data-action="modal#open"
+                >
+                    Ajouter un nouvel équipement >>>
+                </twig:Button>
+            </twig:block>
+            <twig:GenerateFromTemplate />
+        </twig:Modal>
+        <hr/>
+        <a href="{{ path('show_encyclopedia') }}"> Go to the Encyclopedia </a>
     </div>
-    <hr/>
-    <a href="{{ path('show_encyclopedia') }}"> Go to the Encyclopedia </a>
 {% endblock %}

@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
-use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
@@ -30,12 +29,11 @@ class ArmamentController
         private readonly RouterInterface $router,
         public ArmamentTemplateRepository $armamentTemplateRepository,
         public ArmamentRepository $armamentRepository,
-
     ) {}
 
     #[Route('/armaments/{id}', name: 'show_armament', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showArmament(
-        #[MapQueryParameter] int $id,
+        int $id,
     ): Response
     {
         $armament = $this->armamentRepository->find($id);
@@ -47,10 +45,22 @@ class ArmamentController
         );
     }
 
-    #[Route('/armaments/new', name: 'generate_armament', methods: ['GET', 'POST'])]
-    public function generateArmament(Request $request): Response|RedirectResponse
+    #[Route('/armaments/generate', name: 'generate_armament', methods: ['GET', 'POST'])]
+    public function generateArmament(
+        Request $request,
+        ArmamentFactory $armamentFactory,
+    ): Response|RedirectResponse
     {
-        $form = $this->formFactory->create(ArmamentType::class);
+        if ($request->get('armamentTemplateId')) {
+            // Look for the Armament
+            $armamentTemplate = $this->armamentTemplateRepository->find($request->get('armamentTemplateId'));
+            // Generate Armament
+            $armament = $armamentFactory->createOneFromArmamentTemplate($armamentTemplate);
+        } else {
+            $armament = new Armament();
+        }
+
+        $form = $this->formFactory->create(ArmamentType::class, $armament);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +78,7 @@ class ArmamentController
         return new Response(
             $this->twig->render('armament/generate_armament.html.twig', [
                 'form' => $form->createView(),
-            ])
+            ]),
         );
     }
 

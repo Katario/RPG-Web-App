@@ -20,6 +20,11 @@ class ArmamentTemplateRepository extends ServiceEntityRepository
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
+    public function findBySearch(): ?array
+    {
+        return $this->findAll();
+    }
+
 
     public function delete(ArmamentTemplate $armamentTemplate): void
     {

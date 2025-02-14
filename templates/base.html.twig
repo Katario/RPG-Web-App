@@ -9,7 +9,7 @@
     {% endblock %}
 
     {% block javascripts %}
-        {% block importmap %}{% endblock %}
+        {{ importmap('app') }}
     {% endblock %}
 </head>
 <body>
