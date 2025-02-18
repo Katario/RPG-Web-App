@@ -13,9 +13,11 @@
     {% endblock %}
 </head>
 <body>
-    {% block navbar %}
-        {% include 'layout/navbar.html.twig' %}
-    {% endblock %}
-    {% block main %}{% endblock %}
+    <div class="min-h-screen flex flex-col">
+        {% block navbar %}
+            {% include 'layout/navbar.html.twig' %}
+        {% endblock %}
+        {% block main %}{% endblock %}
+    </div>
 </body>
 </html>

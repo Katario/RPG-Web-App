@@ -2,18 +2,47 @@
 {% block title %}Home Page{% endblock %}
 
 {% block main %}
-    Bonjour {{ user.username }}
-    Quelle aventure vous attend aujourd'hui ?
+    <main class="flex flex-col bg-emerald-100">
+        <div class="self-center text-center">
+            <h1 class="text-3xl">Bonjour {{ user.username }}</h1>
+            <span>
+                Quelle aventure vous attend aujourd'hui ?
+            </span>
+        </div>
 
-    <ul>
-    {% for game in games %}
-        {% if game.gamemaster.id == app.user.id %}
-            <li>{{ game.name}} <a href="{{ path('game_master_show_game', {'id': game.id}) }}"> >>> </a></li>
-        {% else %}
-            <li>You're a player!</li>
-        {% endif %}
-    {% endfor %}
-    </ul>
-
-    Créer une nouvelle partie: <a href="{{ path('create_game') }}"> >>> </a>
+        <ul class="flex flex-wrap flex-col gap-8 md:flex-row">
+            {% for game in games %}
+                {% if game.gamemaster.id == app.user.id %}
+                    <li>
+                        <twig:Button
+                            tag="a"
+                            href="{{ path('game_master_show_game', {'id': game.id}) }}"
+                            variant="card"
+                            class="flex-col px-0 py-0"
+                        >
+                            <div class="w-full bg-gray-300">
+                                {{ game.name}}
+                            </div>
+                            <div>
+                                MJ<br />
+                                Number of players
+                            </div>
+                        </twig:Button>
+                    </li>
+                {% else %}
+                    <li>You're a player!</li>
+                {% endif %}
+            {% endfor %}
+            <li class="">
+                <twig:Button
+                    tag="a"
+                    href="{{ path('create_game') }}"
+                    variant="card"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M9 12h6" /><path d="M12 9v6" /></svg>
+                    <span class="self-center">Créer une nouvelle partie</span>
+                </twig:Button>
+            </li>
+        </ul>
+    </main>
 {% endblock %}

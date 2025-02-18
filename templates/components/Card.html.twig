@@ -1,0 +1,30 @@
+<div {{ attributes.defaults({
+    class: 'flex flex-col w-72 h-36 bg-white relative '~this.variantClasses,
+}) }}
+>
+    <img class="w-20 h-20 mb-3 rounded-full shadow-lg absolute -top-4 -left-10 object-cover " src="{{ asset('images/sword.jpg') }}" alt="Bonnie image"/>
+    <div class="flex flex-col w-72 h-16 bg-orange-600 p-2">
+        <span class="basis-full text-center">
+            {{ title }}
+        </span>
+        <span class="italic text-right text-xs">
+            {{ subtitle }}
+        </span>
+    </div>
+    <div class="flex flex-row h-full p-4 text-sm">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="flex flex-row justify-center">
+        {% if actions %}
+            {% if show is not empty %}
+                <a class="basis-full text-center border" href="{{ show }}"> show </a>
+            {% endif %}
+            {% if edit is not empty %}
+                <a class="basis-full text-center border" href="{{ edit }}"> edit </a>
+            {% endif %}
+            {% if delete is not empty %}
+                <a class="basis-full text-center border" href="{{ delete }}"> delete </a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

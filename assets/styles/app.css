@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background-color: #01172F;
-    color: #F2E3BC;
+input {
+    border: 1px solid black;
 }

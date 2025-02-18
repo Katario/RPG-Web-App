@@ -5,16 +5,52 @@
 {% block navbar %}{% endblock %}
 
 {% block main %}
-    <main class='grid grid-cols-3 gap-4'>
-        <h2 class="col-span-3 bg-slate-600 px-4 py-12">Sign Up</h2>
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
+    <main class="m-auto bg-emerald-100">
+        <h1 class="text-center text-3xl">Inscription</h1>
 
-        {{ form_row(form.username) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
+        <form
+            data-turbo="false"
+            action="{{ path('sign_up') }}"
+            method="post"
+            class="flex flex-col md:flex-row flex-wrap"
+        >
+            <div class="md:basis-1/2">
+                <label class="required" for="user_email">Email:</label>
+                <input type="email" id="user_email" name="user[email]" required />
+{#                <input type="email" id="user_email" name="_email" required />#}
+            </div>
 
-        {{ form_row(form.submit, { 'label': 'Submit me' }) }}
-        {{ form_end(form) }}
+            <div class="md:basis-1/2">
+                <label class="required" for="user_username">Username:</label>
+                <input type="text" id="user_username" name="user[username]" required />
+{#                <input type="text" id="user_username" name="_username" required />#}
+            </div>
+
+            <div class="md:basis-1/2">
+                <label class="required" for="user_password">Password:</label>
+                <input type="password" id="user_password" name="user[password]" required />
+{#                <input type="password" id="user_password" name="_password" required />#}
+            </div>
+
+            <twig:Button
+                class="md:basis-1/2"
+                type="submit"
+            >
+                Sign In
+            </twig:Button>
+
+            {{ form_row(form._token) }}
+        </form>
+
+        <div>
+            Already have an account?
+            <twig:Button
+                    tag="a"
+                    variant="link"
+                    href="{{ path('sign_in') }}"
+            >
+                Sign In here
+            </twig:Button>
+        </div>
     </main>
 {% endblock %}
