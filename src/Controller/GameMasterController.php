@@ -341,7 +341,6 @@ class GameMasterController
     {
         /** @var PersistentCollection $monster */
         $monster = $monsterRepository->find($id);
-        dump($monster, $monster->getArmaments()->initialize(), $id);
 
         if ($monster) {
             $monsterRepository->delete($monster);

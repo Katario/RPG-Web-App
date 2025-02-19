@@ -16,7 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
@@ -43,6 +45,66 @@ class ArmamentController
                 'armament' => $armament,
             ])
         );
+    }
+
+    #[Route('/armaments/{id}/edit',
+        name: 'edit_armament',
+        methods: ['GET', 'POST']
+    )]
+    public function editArmament(
+        Request $request,
+        ArmamentRepository $armamentRepository,
+        int $id,
+    ): Response|RedirectResponse
+    {
+        $armament = $armamentRepository->find($id);
+
+        if (!$armament) {
+            throw new NotFoundHttpException();
+        }
+
+        $form = $this->formFactory->create(
+            ArmamentType::class,
+            $armament
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Armament $armament */
+            $armament = $form->getData();
+
+            $armamentRepository->save($armament);
+
+            return new RedirectResponse($this->router->generate('home'));
+        }
+
+        return new Response(
+            $this->twig->render('armament/edit_armament.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/armaments/{id}/delete',
+        name: 'delete_armament',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteArmament(
+        int $id,
+        ArmamentRepository $armamentRepository,
+    ): Response
+    {
+        /** @var Armament $armament */
+        $armament = $armamentRepository->find($id);
+
+        if ($armament) {
+            $armamentRepository->delete($armament);
+        }
+
+        return new RedirectResponse($this->router->generate('home'));
     }
 
     #[Route('/armaments/generate', name: 'generate_armament', methods: ['GET', 'POST'])]

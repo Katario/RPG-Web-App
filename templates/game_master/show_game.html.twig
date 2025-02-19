@@ -2,7 +2,7 @@
 {% block title %}Partie {{ game.name }}{% endblock %}
 
 {% block main %}
-    <main class="flex flex-col bg-emerald-100 gap-8">
+    <main class="p-12 flex flex-col bg-emerald-100 gap-8">
         <h1 class="text-3xl self-center text-center">Partie {{ game.name }}</h1>
 
         <div class="bg-orange-300">
@@ -77,11 +77,6 @@
             Ajouter un nouveau Personnage non-joueur <a href="{{ path('game_master_generate_non_playable_character', {'id': game.id}) }}"> >>> </a>
         </div>
         <div class="bg-teal-300">
-            Mes Equipements
-
-            {% if game.armaments is empty %}
-                Nothing to see here!
-            {% endif %}
 {#            {% for armament in game.armaments %}#}
 {#                <twig:Card#}
 {#                    show="{{ path('game_master_show_armaments', {'id': armaments.id}) }}"#}
@@ -96,22 +91,26 @@
 {#                    <span class="basis-1/4">{{ armaments.healthPoints }}/{{ armaments.maxHealthPoints }} PV</span>#}
 {#                </twig:Card>#}
 {#            {% endfor %}#}
-            <twig:Modal
-                :closeButton="true"
-                :fixedTop="true"
-                id="armament-search-modal"
-            >
-                <twig:block name="trigger">
-                    <twig:Button
-                        variant="link"
-                        type="button"
-                        data-action="modal#open"
-                    >
-                        Ajouter un nouvel équipement >>>
-                    </twig:Button>
-                </twig:block>
-                <twig:GenerateFromTemplate />
-            </twig:Modal>
+{#            <twig:Modal#}
+{#                :closeButton="true"#}
+{#                :fixedTop="true"#}
+{#                id="armament-search-modal"#}
+{#            >#}
+{#                <twig:block name="trigger">#}
+{#                    <twig:Button#}
+{#                        variant="link"#}
+{#                        type="button"#}
+{#                        data-action="modal#open"#}
+{#                    >#}
+{#                        Ajouter un nouvel équipement >>>#}
+{#                    </twig:Button>#}
+{#                </twig:block>#}
+{#                <twig:GenerateFromTemplate />#}
+{#            </twig:Modal>#}
+
+            <twig:Molecule:ArmamentBlock
+                game="{{ game }}"
+            />
         </div>
 
         <twig:Button
