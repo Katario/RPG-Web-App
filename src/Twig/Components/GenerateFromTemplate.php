@@ -29,6 +29,8 @@ class GenerateFromTemplate
             return [];
         }
 
-        return $this->armamentTemplateRepository->findBySearch($this->query, [], 10);
+        return $this->armamentTemplateRepository->findBySearch(
+            $this->query, 12
+        );
     }
 }

@@ -1,0 +1,6 @@
+<form method="POST" action="{{ path('delete_armament', {'id': armament.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ armament.id) }}">
+    <twig:Button variant="danger">
+        Delete
+    </twig:Button>
+</form>

@@ -20,11 +20,23 @@ class ArmamentTemplateRepository extends ServiceEntityRepository
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-    public function findBySearch(): ?array
+    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
     {
-        return $this->findAll();
-    }
+        $queryBuilder =  $this->createQueryBuilder('a');
+        $queryBuilder->where('a.name LIKE :query')
+            ->orWhere('a.type LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('a.name', $orderBy)
+        ;
 
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
 
     public function delete(ArmamentTemplate $armamentTemplate): void
     {

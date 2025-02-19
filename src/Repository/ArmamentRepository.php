@@ -13,6 +13,24 @@ class ArmamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Armament::class);
     }
 
+    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    {
+        $queryBuilder =  $this->createQueryBuilder('a');
+        $queryBuilder->where('a.name LIKE :query')
+            ->orWhere('a.type LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('a.name', $orderBy)
+        ;
+
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+
     public function delete(Armament $armament): void
     {
         $this->getEntityManager()->remove($armament);

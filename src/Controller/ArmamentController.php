@@ -76,12 +76,15 @@ class ArmamentController
 
             $armamentRepository->save($armament);
 
-            return new RedirectResponse($this->router->generate('home'));
+            return new RedirectResponse($this->router->generate('game_master_show_game', [
+                'id' => $armament->getGame()->getId()
+            ]));
         }
 
         return new Response(
-            $this->twig->render('armament/edit_armament.html.twig', [
+            $this->twig->render('armament/edit.html.twig', [
                 'form' => $form->createView(),
+                'armament' => $armament,
             ])
         );
     }
@@ -101,10 +104,13 @@ class ArmamentController
         $armament = $armamentRepository->find($id);
 
         if ($armament) {
+            $gameId = $armament->getGame()->getId();
             $armamentRepository->delete($armament);
-        }
 
-        return new RedirectResponse($this->router->generate('home'));
+            return new RedirectResponse($this->router->generate('game_master_show_game', [
+                'id' => $gameId
+            ]));
+        }
     }
 
     #[Route('/armaments/generate', name: 'generate_armament', methods: ['GET', 'POST'])]
