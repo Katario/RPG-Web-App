@@ -9,16 +9,13 @@ use App\Factory\ArmamentFactory;
 use App\FormType\ArmamentType;
 use App\Repository\ArmamentRepository;
 use App\Repository\ArmamentTemplateRepository;
-use App\Repository\GameRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
@@ -29,7 +26,6 @@ class ArmamentController
         public Environment $twig,
         public readonly FormFactoryInterface $formFactory,
         private readonly RouterInterface $router,
-        public ArmamentTemplateRepository $armamentTemplateRepository,
         public ArmamentRepository $armamentRepository,
     ) {}
 
@@ -49,15 +45,15 @@ class ArmamentController
 
     #[Route('/armaments/{id}/edit',
         name: 'edit_armament',
+        requirements: ['id' => '\d+'],
         methods: ['GET', 'POST']
     )]
     public function editArmament(
         Request $request,
-        ArmamentRepository $armamentRepository,
         int $id,
     ): Response|RedirectResponse
     {
-        $armament = $armamentRepository->find($id);
+        $armament = $this->armamentRepository->find($id);
 
         if (!$armament) {
             throw new NotFoundHttpException();
@@ -74,9 +70,9 @@ class ArmamentController
             /** @var Armament $armament */
             $armament = $form->getData();
 
-            $armamentRepository->save($armament);
+            $this->armamentRepository->save($armament);
 
-            return new RedirectResponse($this->router->generate('game_master_show_game', [
+            return new RedirectResponse($this->router->generate('show_game', [
                 'id' => $armament->getGame()->getId()
             ]));
         }
@@ -97,32 +93,32 @@ class ArmamentController
     )]
     public function deleteArmament(
         int $id,
-        ArmamentRepository $armamentRepository,
     ): Response
     {
         /** @var Armament $armament */
-        $armament = $armamentRepository->find($id);
+        $armament = $this->armamentRepository->find($id);
 
-        if ($armament) {
-            $gameId = $armament->getGame()->getId();
-            $armamentRepository->delete($armament);
-
-            return new RedirectResponse($this->router->generate('game_master_show_game', [
-                'id' => $gameId
-            ]));
+        if (!$armament) {
+            throw new NotFoundHttpException();
         }
+
+        $gameId = $armament->getGame()->getId();
+        $this->armamentRepository->delete($armament);
+
+        return new RedirectResponse($this->router->generate('show_game', [
+            'id' => $gameId
+        ]));
     }
 
     #[Route('/armaments/generate', name: 'generate_armament', methods: ['GET', 'POST'])]
     public function generateArmament(
         Request $request,
         ArmamentFactory $armamentFactory,
+        ArmamentTemplateRepository $armamentTemplateRepository,
     ): Response|RedirectResponse
     {
         if ($request->get('armamentTemplateId')) {
-            // Look for the Armament
-            $armamentTemplate = $this->armamentTemplateRepository->find($request->get('armamentTemplateId'));
-            // Generate Armament
+            $armamentTemplate = $armamentTemplateRepository->find($request->get('armamentTemplateId'));
             $armament = $armamentFactory->createOneFromArmamentTemplate($armamentTemplate);
         } else {
             $armament = new Armament();
@@ -149,65 +145,4 @@ class ArmamentController
             ]),
         );
     }
-
-//    #[Route('/game/{id}/generate-armament/select', name: 'generate_armament_select')]
-//    public function generateArmamentSelector(
-//        #[MapQueryParameter] ?int $id
-//    ): Response
-//    {
-//        $armamentTemplates = $this->armamentTemplateRepository->findAll();
-//
-//        return new Response(
-//            $this->twig->render('armament/generate_armament_select.html.twig', [
-//                'armamentTemplates' => $armamentTemplates,
-//                'gameId' => $id
-//            ])
-//        );
-//    }
-
-//    #[Route('/generate-armament/confirm', name: 'generate_armament_confirm')]
-//    public function generateArmamentConfirm(
-//        Request $request,
-//        Armament $armament,
-//        ArmamentFactory $armamentFactory,
-//        GameRepository $gameRepository,
-//    ): Response|RedirectResponse
-//    {
-//        if ($request->get('armamentTemplateId')) {
-//            $armamentTemplateId = $request->get('armamentTemplateId');
-//            // Retrieve ArmamentTemplate
-//            $armamentTemplate = $this->armamentTemplateRepository->find($armamentTemplateId);
-//            // convert to Armament via Factory
-//            $armament = $armamentFactory->createOneFromArmamentTemplate($armamentTemplate);
-//            // Get ids from request
-//            $game = $gameRepository->find($request->get('gameId'));
-//            // Add Game to it
-//            $armament->setGame($game);
-//        } else {
-//            dd($armament);
-//        }
-//
-//
-//        $form = $this->formFactory->create(ArmamentType::class, $armament);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            /** @var Armament $armament */
-//            $armament = $form->getData();
-//
-//            $this->armamentRepository->save($armament);
-//
-//            return new RedirectResponse($this->router->generate(
-//                'show_armament', [
-//                    'id' => $armament->getId()
-//                ]
-//            ));
-//        }
-//
-//        return new Response(
-//            $this->twig->render('armament/generate_armament_confirm.html.twig', [
-//                'form' => $form->createView(),
-//            ])
-//        );
-//    }
 }

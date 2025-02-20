@@ -12,9 +12,9 @@
             <ul class="flex flex-row gap-8 flex-wrap">
                 {% for character in game.characters %}
                     <twig:Card
-                        show="{{ path('game_master_show_character', {'id': character.id}) }}"
-                        edit="{{ path('game_master_edit_character', {'characterId': character.id, 'gameId': game.id}) }}"
-                        delete="{{ path('game_master_delete_characters', {'id': character.id}) }}"
+                        show="{{ path('show_character', {'id': character.id}) }}"
+                        edit="{{ path('edit_character', {'id': character.id}) }}"
+                        delete="{{ path('delete_characters', {'id': character.id}) }}"
                         title="{{ character.name }} {{ character.lastName }} - {{ character.title }}"
                         subtitle="{{ character.user.username }}"
                     >
@@ -25,7 +25,7 @@
                     </twig:Card>
                 {% endfor %}
             </ul>
-            Ajouter un nouveau personnage <a href="{{ path('game_master_generate_character', {'id': game.id}) }}"> >>> </a>
+            Ajouter un nouveau personnage <a href="{{ path('generate_character', {'id': game.id}) }}"> >>> </a>
         </div>
         <div class="bg-lime-300">
             <span class="text-2xl">
@@ -34,9 +34,9 @@
             <ul class="flex flex-row gap-8 flex-wrap">
                 {% for monster in game.monsters %}
                     <twig:Card
-                        show="{{ path('game_master_show_monster', {'id': monster.id}) }}"
-                        edit="{{ path('game_master_edit_monster', {'id': monster.id}) }}"
-                        delete="{{ path('game_master_delete_monster', {'id': monster.id}) }}"
+                        show="{{ path('show_monster', {'id': monster.id}) }}"
+                        edit="{{ path('edit_monster', {'id': monster.id}) }}"
+                        delete="{{ path('delete_monster', {'id': monster.id}) }}"
                         title="{{ monster.name }} - {{ monster.type }}"
                     >
                         <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>
@@ -46,7 +46,7 @@
                     </twig:Card>
                 {% endfor %}
             </ul>
-            Ajouter un nouveau monstre <a href="{{ path('game_master_generate_monster', {'id': game.id}) }}"> >>> </a>
+            Ajouter un nouveau monstre <a href="{{ path('generate_monster', {'id': game.id}) }}"> >>> </a>
         </div>
         <div class="bg-pink-300">
             Mes Personnages Non-Joueurs :
@@ -74,7 +74,7 @@
 {#                    </twig:Card>#}
 {#                {% endfor %}#}
             </ul>
-            Ajouter un nouveau Personnage non-joueur <a href="{{ path('game_master_generate_non_playable_character', {'id': game.id}) }}"> >>> </a>
+            Ajouter un nouveau Personnage non-joueur <a href="{{ path('generate_non_playable_character', {'id': game.id}) }}"> >>> </a>
         </div>
         <div class="bg-teal-300">
 {#            {% for armament in game.armaments %}#}

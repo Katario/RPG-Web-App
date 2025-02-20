@@ -5,14 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Game;
-use App\Entity\Character;
 use App\Entity\User;
-use App\Factory\CharacterFactory;
-use App\FormType\GenerateCharacterType;
 use App\FormType\GameType;
-use App\FormType\CharacterType;
 use App\Repository\GameRepository;
-use App\Repository\CharacterRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 #[AsController]
@@ -30,15 +24,28 @@ class GameController
     public function __construct(
         public Environment $twig,
         public FormFactoryInterface $formFactory,
+        public UrlGeneratorInterface $router,
         public GameRepository $gameRepository,
         public Security $security
     ) {}
 
+    #[Route('/games/{id}', name: 'show_game', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showGame(
+        int $id
+    ): Response
+    {
+        $game = $this->gameRepository->find($id);
+
+        return new Response(
+            $this->twig->render('game_master/show_game.html.twig', [
+                'game' => $game,
+            ])
+        );
+    }
+
     #[Route('/games/create', name: 'create_game', methods: ['GET', 'POST'])]
     public function createGame(
         Request               $request,
-        GameRepository $gameRepository,
-        UrlGeneratorInterface $router,
     ): Response|RedirectResponse
     {
         $form = $this->formFactory->create(GameType::class);
@@ -52,9 +59,9 @@ class GameController
             $user = $this->security->getUser();
             $game->setGameMaster($user);
 
-            $gameRepository->save($game);
+            $this->gameRepository->save($game);
 
-            return new RedirectResponse($router->generate('home'));
+            return new RedirectResponse($this->router->generate('show_game', ['id' => $game->getId()]));
         }
 
         return new Response(

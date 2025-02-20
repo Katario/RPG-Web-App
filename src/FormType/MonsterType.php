@@ -6,7 +6,7 @@ namespace App\FormType;
 
 use App\Entity\Armament;
 use App\Entity\Item;
-use App\Entity\NonPlayableCharacter;
+use App\Entity\Monster;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,14 +17,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GenerateNonPlayableCharacterType extends AbstractType
+class MonsterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('title', TextType::class)
+            ->add('family', TextType::class)
+            ->add('kind', TextType::class)
             ->add('strength', IntegerType::class)
             ->add('intelligence', IntegerType::class)
             ->add('stamina', IntegerType::class)
@@ -63,7 +62,7 @@ class GenerateNonPlayableCharacterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => NonPlayableCharacter::class,
+            'data_class' => Monster::class,
         ]);
     }
 }
