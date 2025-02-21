@@ -14,10 +14,7 @@ class CharacterFactory
         $character = new Character();
         $character
             ->setName($characterTemplate->getName())
-            ->setFirstName($characterTemplate->getFirstName())
-            ->setDescription($characterTemplate->getDescription())
-            ->setSkills($characterTemplate->getSkills())
-            ->setSpells($characterTemplate->getSpells())
+            ->setTitle($characterTemplate->getTitle())
         ;
 
         return $character;

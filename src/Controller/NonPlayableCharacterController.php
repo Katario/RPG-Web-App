@@ -37,7 +37,7 @@ class NonPlayableCharacterController
         $nonPlayableCharacter = $this->nonPlayableCharacterRepository->find($id);
 
         return new Response(
-            $this->twig->render('game_master/show_non_playable_character.html.twig', [
+            $this->twig->render('game_master/show.html.twig', [
                 'nonPlayableCharacter' => $nonPlayableCharacter,
             ])
         );
@@ -77,7 +77,7 @@ class NonPlayableCharacterController
         }
 
         return new Response(
-            $this->twig->render('game_master/edit_non_playable_character.html.twig', [
+            $this->twig->render('game_master/edit.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -140,7 +140,7 @@ class NonPlayableCharacterController
         }
 
         return new Response(
-            $this->twig->render('game_master/generate_non_playable_character.html.twig', [
+            $this->twig->render('game_master/generate.html.twig', [
                 'form' => $form->createView(),
             ])
         );

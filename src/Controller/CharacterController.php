@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Character;
+use App\Entity\Game;
 use App\Factory\CharacterFactory;
 use App\FormType\CharacterType;
 use App\FormType\GenerateCharacterType;
 use App\Repository\CharacterTemplateRepository;
 use App\Repository\GameRepository;
 use App\Repository\CharacterRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -35,23 +38,23 @@ class CharacterController
         public CharacterRepository $characterRepository,
     ) {}
 
-    #[Route('/characters/{id}', name: 'show_character', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/games/{gameId}/characters/{id}', name: 'show_character', requirements: ['gameId' => '\d+', 'id' => '\d+'], methods: ['GET'])]
     public function showCharacter(
-        int $id
+        int $id,
     ): Response
     {
         $character = $this->characterRepository->find($id);
 
         return new Response(
-            $this->twig->render('character/show_character.html.twig', [
+            $this->twig->render('character/show.html.twig', [
                 'character' => $character,
             ])
         );
     }
 
-    #[Route('/characters/{id}/edit',
+    #[Route('/games/{gameId}/characters/{id}/edit',
         name: 'edit_character',
-        requirements: ['id' => '\d+'],
+        requirements: ['gameId' => '\d+', 'id' => '\d+'],
         methods: ['GET', 'POST']
     )]
     public function editCharacter(
@@ -84,15 +87,15 @@ class CharacterController
         }
 
         return new Response(
-            $this->twig->render('game_master/edit_character.html.twig', [
+            $this->twig->render('character/edit.html.twig', [
                 'form' => $form->createView(),
             ])
         );
     }
 
-    #[Route('/characters/{id}/delete',
-        name: 'delete_characters',
-        requirements: ['id' => '\d+'],
+    #[Route('/games/{gameId}/characters/{id}/delete',
+        name: 'delete_character',
+        requirements: ['gameId' => '\d+', 'id' => '\d+'],
         methods: ['GET']
     )]
     public function deleteCharacter(
@@ -111,12 +114,14 @@ class CharacterController
         return new RedirectResponse($this->router->generate('show_game', ['id' => $gameId]));
     }
 
-    #[Route('/characters/generate',
+    #[Route('/games/{gameId}/characters/generate',
         name: 'generate_character',
+        requirements: ['gameId' => '\d+'],
         methods: ['GET', 'POST']
     )]
     public function generateCharacter(
         Request $request,
+        #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
         CharacterFactory $characterFactory,
         CharacterTemplateRepository $characterTemplateRepository,
     ): Response|RedirectResponse
@@ -124,9 +129,12 @@ class CharacterController
         if ($request->get('characterTemplateId')) {
             $characterTemplate = $characterTemplateRepository->find($request->get('characterTemplateId'));
             $character = $characterFactory->createOneFromCharacterTemplate($characterTemplate);
+            $character->setGame($game);
         } else {
             $character = new Character();
+            $character->setGame($game);
         }
+
         $form = $this->formFactory->create(
             CharacterType::class,
             $character
@@ -146,7 +154,7 @@ class CharacterController
         }
 
         return new Response(
-            $this->twig->render('game_master/generate_default_character.html.twig', [
+            $this->twig->render('character/generate.html.twig', [
                 'form' => $form->createView(),
             ])
         );

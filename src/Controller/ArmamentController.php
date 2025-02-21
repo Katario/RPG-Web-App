@@ -37,7 +37,7 @@ class ArmamentController
         $armament = $this->armamentRepository->find($id);
 
         return new Response(
-            $this->twig->render('armament/show_armament.html.twig', [
+            $this->twig->render('armament/show.html.twig', [
                 'armament' => $armament,
             ])
         );
@@ -140,7 +140,7 @@ class ArmamentController
         }
 
         return new Response(
-            $this->twig->render('armament/generate_armament.html.twig', [
+            $this->twig->render('armament/generate.html.twig', [
                 'form' => $form->createView(),
             ]),
         );

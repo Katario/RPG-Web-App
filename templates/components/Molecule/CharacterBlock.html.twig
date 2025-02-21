@@ -1,0 +1,95 @@
+<div class="bg-orange-300 p-4" {{ attributes }}>
+    <h2 class="text-2xl ">Mes Personnages</h2>
+
+    {% if this.characters is empty %}
+        Nothing to see here!
+    {% endif %}
+
+    <ul class="p-8 flex flex-row gap-16 flex-wrap justify-start">
+        {% for character in this.characters %}
+            <li>
+                <twig:Card
+                    show="{{ path('show_character', {'gameId': game.id,'id': character.id}) }}"
+                    edit="{{ path('edit_character', {'gameId': game.id, 'id': character.id}) }}"
+                    delete="{{ path('delete_character', {'gameId': game.id,'id': character.id}) }}"
+                    title="{{ character.name }}"
+                    subtitle="{{ character.title }}"
+                    imagePath="{{ asset('images/warrior.png') }}"
+                >
+                    <span class="basis-1/4">Test</span>
+                </twig:Card>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <twig:Modal
+        :closeButton="true"
+        :fixedTop="true"
+        id="character-search-modal"
+    >
+        <twig:block name="trigger">
+            <twig:Button
+                variant="link"
+                type="button"
+                data-action="modal#open"
+            >
+                Ajouter un nouveau personnage >>>
+            </twig:Button>
+        </twig:block>
+
+        <twig:block name="content">
+            <p class="">
+                Select the Character Template you want to use:
+            </p>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+                </div>
+                <input
+                    type="search"
+                    data-model="query"
+                    aria-label="Search site"
+                    placeholder="Search for anything"
+                    class="px-4 py-2 pl-10 rounded placeholder-gray-400 w-full outline-none"
+                />
+            </div>
+            <form
+                method='POST'
+                data-turbo="false"
+            >
+                <input type="hidden" name="game" value="{{ game.id }}"/>
+                {% if outerScope.this.characterTemplates is not empty %}
+                    <div class="flex flex-row flex-wrap gap-4 m-4">
+                        {% for characterTemplate in outerScope.this.characterTemplates %}
+                            <twig:Button
+                                variant="link"
+                                name="characterTemplateId"
+                                value="{{ characterTemplate.id }}"
+                                formaction="{{ path('generate_character', {'gameId': game.id}) }}"
+                                class="px-0 py-0"
+                            >
+                                <twig:Badge
+                                    name="{{ characterTemplate.name }}"
+                                    type="{{ characterTemplate.title }}"
+                                    imagePath="{{ asset('images/warrior.png') }}"
+                                />
+                            </twig:Button>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    Nothing to see here
+                {% endif %}
+                <hr class="h-px my-8 w-72 mx-auto bg-gray-200 border-0 dark:bg-gray-700">
+                <div>
+                    Click here to go without Template:
+                    <twig:Button
+                        variant="link"
+                        formaction="{{ path('generate_character', {'gameId': game.id}) }}"
+                    >
+                        Don't use template
+                    </twig:Button>
+                </div>
+            </form>
+        </twig:block>
+    </twig:Modal>
+</div>

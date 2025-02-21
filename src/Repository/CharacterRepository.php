@@ -15,6 +15,24 @@ class CharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, Character::class);
     }
 
+    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    {
+        $queryBuilder =  $this->createQueryBuilder('c');
+        $queryBuilder->where('c.name LIKE :query')
+            ->orWhere('c.lastName LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('c.name', $orderBy)
+        ;
+
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+
     public function delete(Character $character): void
     {
         $this->getEntityManager()->remove($character);

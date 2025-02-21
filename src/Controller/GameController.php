@@ -37,7 +37,7 @@ class GameController
         $game = $this->gameRepository->find($id);
 
         return new Response(
-            $this->twig->render('game_master/show_game.html.twig', [
+            $this->twig->render('game/show_game.html.twig', [
                 'game' => $game,
             ])
         );

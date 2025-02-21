@@ -5,28 +5,10 @@
     <main class="p-12 flex flex-col bg-emerald-100 gap-8">
         <h1 class="text-3xl self-center text-center">Partie {{ game.name }}</h1>
 
-        <div class="bg-orange-300">
-            <span class="text-2xl">
-                Les Joueurs :
-            </span>
-            <ul class="flex flex-row gap-8 flex-wrap">
-                {% for character in game.characters %}
-                    <twig:Card
-                        show="{{ path('show_character', {'id': character.id}) }}"
-                        edit="{{ path('edit_character', {'id': character.id}) }}"
-                        delete="{{ path('delete_characters', {'id': character.id}) }}"
-                        title="{{ character.name }} {{ character.lastName }} - {{ character.title }}"
-                        subtitle="{{ character.user.username }}"
-                    >
-                        <span class="basis-1/4">{{ character.healthPoints }}/{{ character.maxHealthPoints }} PV</span>
-                        <span class="basis-1/4">{{ character.healthPoints }}/{{ character.maxHealthPoints }} PV</span>
-                        <span class="basis-1/4">{{ character.healthPoints }}/{{ character.maxHealthPoints }} PV</span>
-                        <span class="basis-1/4">{{ character.healthPoints }}/{{ character.maxHealthPoints }} PV</span>
-                    </twig:Card>
-                {% endfor %}
-            </ul>
-            Ajouter un nouveau personnage <a href="{{ path('generate_character', {'id': game.id}) }}"> >>> </a>
-        </div>
+        <twig:Molecule:CharacterBlock
+            game="{{ game }}"
+        />
+
         <div class="bg-lime-300">
             <span class="text-2xl">
                 Mes Monstres :

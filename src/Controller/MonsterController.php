@@ -38,7 +38,7 @@ class MonsterController
         $monster = $this->monsterRepository->find($id);
 
         return new Response(
-            $this->twig->render('game_master/show_monster.html.twig', [
+            $this->twig->render('game_master/show.html.twig', [
                 'monster' => $monster,
             ])
         );
@@ -78,7 +78,7 @@ class MonsterController
         }
 
         return new Response(
-            $this->twig->render('game_master/edit_monster.html.twig', [
+            $this->twig->render('game_master/edit.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -135,7 +135,7 @@ class MonsterController
         }
 
         return new Response(
-            $this->twig->render('game_master/generate_monster.html.twig', [
+            $this->twig->render('game_master/generate.html.twig', [
                 'form' => $form->createView(),
             ])
         );

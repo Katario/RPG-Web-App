@@ -13,6 +13,7 @@ final class Card
     public string $delete = '';
     public string $title = '';
     public string $subtitle = '';
+    public string $imagePath = 'default';
     public bool $actions = true;
 
     public function getVariantClasses(): string

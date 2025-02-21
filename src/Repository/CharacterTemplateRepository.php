@@ -15,12 +15,28 @@ class CharacterTemplateRepository extends ServiceEntityRepository
         parent::__construct($registry, CharacterTemplate::class);
     }
 
+    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    {
+        $queryBuilder =  $this->createQueryBuilder('ct');
+        $queryBuilder->where('ct.name LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('ct.name', $orderBy)
+        ;
+
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+
     /** @Return CharacterTemplate[] */
     public function getLastFiveCharacterTemplates(): ?array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
-
 
     public function delete(CharacterTemplate $character): void
     {

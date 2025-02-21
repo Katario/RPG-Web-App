@@ -43,7 +43,6 @@ class HomeController
         # Retrieve games where user is GM
         $games = [];
         /** @var Game $game */
-//        foreach ($this->gameRepository->findBy(['game_master' => $this->security->getUser()->getId()]) as $game)
         foreach ($this->gameRepository->getGamesByUser($this->security->getUser()) as $game)
         {
             $games[] = $game;

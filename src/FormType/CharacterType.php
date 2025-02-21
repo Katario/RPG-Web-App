@@ -29,6 +29,11 @@ class CharacterType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'username',
             ])
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'username',
+            ])
+            ->add('game', EntityHiddenType::class)
             ->add('submit', SubmitType::class)
         ;
     }
