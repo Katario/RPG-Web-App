@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Item extends AbstractEncyclopedia
+class Item extends Encyclopedia
 {
-    use DateTimeTrait;
+    use HasDateTimeTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,8 +17,8 @@ class Item extends AbstractEncyclopedia
     private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
-    #[ORM\Column(type: 'string')]
-    private string $cost;
+    #[ORM\Column(type: 'integer')]
+    private int $value;
     #[ORM\Column(type: 'text')]
     private string $description;
 
@@ -38,14 +38,14 @@ class Item extends AbstractEncyclopedia
         return $this;
     }
 
-    public function getCost(): string
+    public function getValue(): int
     {
-        return $this->cost;
+        return $this->value;
     }
 
-    public function setCost(string $cost): Item
+    public function setValue(int $value): Item
     {
-        $this->cost = $cost;
+        $this->value = $value;
         return $this;
     }
 

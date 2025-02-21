@@ -10,41 +10,26 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Cascade;
 
 #[ORM\Entity(repositoryClass: MonsterRepository::class)]
-class Monster
+class Monster extends AbstractCharacter
 {
+    use HasDateTimeTrait;
+    use HasStatsTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $firstName = null;
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $lastName = null;
-    #[ORM\Column(type: 'string')]
-    private string $type;
-    #[ORM\Column(type: 'integer')]
-    private int $strength;
-    #[ORM\Column(type: 'integer')]
-    private int $intelligence;
-    #[ORM\Column(type: 'integer')]
-    private int $stamina;
-    #[ORM\Column(type: 'integer')]
-    private int $agility;
-    #[ORM\Column(type: 'integer')]
-    private int $charisma;
-    #[ORM\Column(type: 'integer')]
-    private int $healthPoint;
-    #[ORM\Column(type: 'integer')]
-    private int $mana;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isBoss = false;
+
+    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'monsters')]
+    private Game $game;
 
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'monster')]
     #[ORM\JoinColumn(nullable: true)]
     private Collection|array $armaments;
-
-    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'monsters')]
-    private Game $game;
 
     #[ORM\JoinTable(name: 'monsters_spells')]
     #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
@@ -78,6 +63,13 @@ class Monster
         return $this->id;
     }
 
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -89,119 +81,26 @@ class Monster
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function isBoss(): bool
     {
-        return $this->firstName;
+        return $this->isBoss;
     }
 
-    public function setFirstName(?string $firstName): Monster
+    public function setIsBoss(bool $isBoss): Monster
     {
-        $this->firstName = $firstName;
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(?string $lastName): Monster
-    {
-        $this->lastName = $lastName;
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): Monster
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    public function getStrength(): int
-    {
-        return $this->strength;
-    }
-
-    public function setStrength(int $strength): Monster
-    {
-        $this->strength = $strength;
-        return $this;
-    }
-
-    public function getIntelligence(): int
-    {
-        return $this->intelligence;
-    }
-
-    public function setIntelligence(int $intelligence): Monster
-    {
-        $this->intelligence = $intelligence;
-        return $this;
-    }
-
-    public function getStamina(): int
-    {
-        return $this->stamina;
-    }
-
-    public function setStamina(int $stamina): Monster
-    {
-        $this->stamina = $stamina;
-        return $this;
-    }
-
-    public function getAgility(): int
-    {
-        return $this->agility;
-    }
-
-    public function setAgility(int $agility): Monster
-    {
-        $this->agility = $agility;
-        return $this;
-    }
-
-    public function getCharisma(): int
-    {
-        return $this->charisma;
-    }
-
-    public function setCharisma(int $charisma): Monster
-    {
-        $this->charisma = $charisma;
-        return $this;
-    }
-
-    public function getHealthPoint(): int
-    {
-        return $this->healthPoint;
-    }
-
-    public function setHealthPoint(int $healthPoint): Monster
-    {
-        $this->healthPoint = $healthPoint;
-        return $this;
-    }
-
-    public function getMana(): int
-    {
-        return $this->mana;
-    }
-
-    public function setMana(int $mana): Monster
-    {
-        $this->mana = $mana;
+        $this->isBoss = $isBoss;
         return $this;
     }
 
     public function getSpells(): Collection|array
     {
         return $this->spells;
+    }
+
+    public function setSpells(Collection|array $spells): Monster
+    {
+        $this->spells = $spells;
+        return $this;
     }
 
     public function addSpell(Spell $spell): Monster
@@ -254,6 +153,12 @@ class Monster
         return $this->items;
     }
 
+    public function setItems(Collection|array $items): Monster
+    {
+        $this->items = $items;
+        return $this;
+    }
+
     public function addItem(Item $item): Monster
     {
         if (!$this->getItems()->contains($item)) {
@@ -273,6 +178,12 @@ class Monster
     public function getSkills(): Collection|array
     {
         return $this->skills;
+    }
+
+    public function setSkills(Collection|array $skills): Monster
+    {
+        $this->skills = $skills;
+        return $this;
     }
 
     public function addSkill(Skill $skill): Monster

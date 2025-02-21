@@ -11,9 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArmamentTemplateRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class ArmamentTemplate extends AbstractEncyclopedia
+class ArmamentTemplate extends Encyclopedia
 {
-    use DateTimeTrait;
+    use HasDateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -21,17 +21,17 @@ class ArmamentTemplate extends AbstractEncyclopedia
     #[ORM\Column(type: 'string')]
     private string $name;
     #[ORM\Column(type: 'string')]
-    private string $type;
+    private string $category;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $value;
     #[ORM\Column(type: 'integer')]
-    private int $valueMin;
+    private int $minDurability;
     #[ORM\Column(type: 'integer')]
-    private int $valueMax;
+    private int $maxDurability;
     #[ORM\Column(type: 'integer')]
-    private int $durabilityMin;
-    #[ORM\Column(type: 'integer')]
-    private int $durabilityMax;
+    private int $weight;
     #[ORM\Column(type: 'text')]
-    private string $description;
+    private string $description = '';
     #[ORM\JoinTable(name: 'armament_templates_skills')]
     #[ORM\JoinColumn(name: 'armament_template_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
@@ -65,58 +65,58 @@ class ArmamentTemplate extends AbstractEncyclopedia
         return $this;
     }
 
-    public function getType(): string
+    public function getCategory(): string
     {
-        return $this->type;
+        return $this->category;
     }
 
-    public function setType(string $type): ArmamentTemplate
+    public function setCategory(string $category): ArmamentTemplate
     {
-        $this->type = $type;
+        $this->category = $category;
         return $this;
     }
 
-    public function getValueMin(): int
+    public function getValue(): ?int
     {
-        return $this->valueMin;
+        return $this->value;
     }
 
-    public function setValueMin(int $valueMin): ArmamentTemplate
+    public function setValue(?int $value): ArmamentTemplate
     {
-        $this->valueMin = $valueMin;
+        $this->value = $value;
         return $this;
     }
 
-    public function getValueMax(): int
+    public function getMinDurability(): int
     {
-        return $this->valueMax;
+        return $this->minDurability;
     }
 
-    public function setValueMax(int $valueMax): ArmamentTemplate
+    public function setMinDurability(int $minDurability): ArmamentTemplate
     {
-        $this->valueMax = $valueMax;
+        $this->minDurability = $minDurability;
         return $this;
     }
 
-    public function getDurabilityMin(): int
+    public function getMaxDurability(): int
     {
-        return $this->durabilityMin;
+        return $this->maxDurability;
     }
 
-    public function setDurabilityMin(int $durabilityMin): ArmamentTemplate
+    public function setMaxDurability(int $maxDurability): ArmamentTemplate
     {
-        $this->durabilityMin = $durabilityMin;
+        $this->maxDurability = $maxDurability;
         return $this;
     }
 
-    public function getDurabilityMax(): int
+    public function getWeight(): int
     {
-        return $this->durabilityMax;
+        return $this->weight;
     }
 
-    public function setDurabilityMax(int $durabilityMax): ArmamentTemplate
+    public function setWeight(int $weight): ArmamentTemplate
     {
-        $this->durabilityMax = $durabilityMax;
+        $this->weight = $weight;
         return $this;
     }
 
@@ -134,6 +134,13 @@ class ArmamentTemplate extends AbstractEncyclopedia
     public function getSkills(): Collection|array
     {
         return $this->skills;
+    }
+
+    /** @param Skill[] $skills */
+    public function setSkills(Collection|array $skills): ArmamentTemplate
+    {
+        $this->skills = $skills;
+        return $this;
     }
 
     public function addSkill(Skill $skill): ArmamentTemplate
@@ -155,6 +162,13 @@ class ArmamentTemplate extends AbstractEncyclopedia
     public function getSpells(): Collection|array
     {
         return $this->spells;
+    }
+
+    /** @param Spell[] $spells */
+    public function setSpells(Collection|array $spells): ArmamentTemplate
+    {
+        $this->spells = $spells;
+        return $this;
     }
 
     public function addSpell(Spell $spell): ArmamentTemplate

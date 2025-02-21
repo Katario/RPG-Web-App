@@ -16,17 +16,11 @@ class Game
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
-
     #[ORM\Column(type: 'string')]
     private string $name;
-
-    #[ORM\Column(type: 'string')]
-    private string $ruleset;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'gameMasters')]
     #[JoinColumn(name: 'game_master', referencedColumnName: 'id')]
     private User $gameMaster;
-
     #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'game')]
     private Collection|array $characters;
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'game')]
@@ -57,17 +51,6 @@ class Game
     public function setName(string $name): Game
     {
         $this->name = $name;
-        return $this;
-    }
-
-    public function getRuleset(): string
-    {
-        return $this->ruleset;
-    }
-
-    public function setRuleset(string $ruleset): Game
-    {
-        $this->ruleset = $ruleset;
         return $this;
     }
 

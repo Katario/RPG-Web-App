@@ -9,9 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpellRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Spell extends AbstractEncyclopedia
+class Spell extends Encyclopedia
 {
-    use DateTimeTrait;
+    use HasDateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

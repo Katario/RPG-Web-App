@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Skill extends AbstractEncyclopedia
+class Skill extends Encyclopedia
 {
-    use DateTimeTrait;
+    use HasDateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -18,10 +18,10 @@ class Skill extends AbstractEncyclopedia
     private string $name;
     #[ORM\Column(type: 'text')]
     private string $description;
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $manaCost = null;
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $physicalCost = null;
+    #[ORM\Column(type: 'integer')]
+    private int $manaCost;
+    #[ORM\Column(type: 'integer')]
+    private int $physicalCost;
 
     public function getId(): ?int
     {
@@ -50,23 +50,23 @@ class Skill extends AbstractEncyclopedia
         return $this;
     }
 
-    public function getManaCost(): ?int
+    public function getManaCost(): int
     {
         return $this->manaCost;
     }
 
-    public function setManaCost(?int $manaCost): Skill
+    public function setManaCost(int $manaCost): Skill
     {
         $this->manaCost = $manaCost;
         return $this;
     }
 
-    public function getPhysicalCost(): ?int
+    public function getPhysicalCost(): int
     {
         return $this->physicalCost;
     }
 
-    public function setPhysicalCost(?int $physicalCost): Skill
+    public function setPhysicalCost(int $physicalCost): Skill
     {
         $this->physicalCost = $physicalCost;
         return $this;

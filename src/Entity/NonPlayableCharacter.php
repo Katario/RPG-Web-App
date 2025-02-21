@@ -8,37 +8,27 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NonPlayableCharacterRepository::class)]
-class NonPlayableCharacter
+class NonPlayableCharacter extends AbstractCharacter
 {
+    use HasDateTimeTrait;
+    use HasStatsTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    #[ORM\Column(type: 'string')]
+    private string $name;
     #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $firstName = null;
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $lastName = null;
+    private ?string $lastName;
     #[ORM\Column(type: 'string')]
     private string $title;
-    #[ORM\Column(type: 'integer')]
-    private int $strength;
-    #[ORM\Column(type: 'integer')]
-    private int $intelligence;
-    #[ORM\Column(type: 'integer')]
-    private int $stamina;
-    #[ORM\Column(type: 'integer')]
-    private int $agility;
-    #[ORM\Column(type: 'integer')]
-    private int $charisma;
-    #[ORM\Column(type: 'integer')]
-    private int $healthPoint;
-    #[ORM\Column(type: 'integer')]
-    private int $mana;
+    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'nonPlayableCharacters')]
+    #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
+    private Game $game;
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'nonPlayableCharacter')]
     #[ORM\JoinColumn(nullable: true, onDelete:'SET NULL')]
     private Collection|array $armaments;
-    #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'nonPlayableCharacters')]
-    private Game $game;
     #[ORM\JoinTable(name: 'non_playable_characters_spells')]
     #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
@@ -75,17 +65,6 @@ class NonPlayableCharacter
         return $this;
     }
 
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(?string $firstName): NonPlayableCharacter
-    {
-        $this->firstName = $firstName;
-        return $this;
-    }
-
     public function getLastName(): ?string
     {
         return $this->lastName;
@@ -108,86 +87,26 @@ class NonPlayableCharacter
         return $this;
     }
 
-    public function getStrength(): int
+    public function getGame(): Game
     {
-        return $this->strength;
+        return $this->game;
     }
 
-    public function setStrength(int $strength): NonPlayableCharacter
+    public function setGame(Game $game): NonPlayableCharacter
     {
-        $this->strength = $strength;
-        return $this;
-    }
-
-    public function getIntelligence(): int
-    {
-        return $this->intelligence;
-    }
-
-    public function setIntelligence(int $intelligence): NonPlayableCharacter
-    {
-        $this->intelligence = $intelligence;
-        return $this;
-    }
-
-    public function getStamina(): int
-    {
-        return $this->stamina;
-    }
-
-    public function setStamina(int $stamina): NonPlayableCharacter
-    {
-        $this->stamina = $stamina;
-        return $this;
-    }
-
-    public function getAgility(): int
-    {
-        return $this->agility;
-    }
-
-    public function setAgility(int $agility): NonPlayableCharacter
-    {
-        $this->agility = $agility;
-        return $this;
-    }
-
-    public function getCharisma(): int
-    {
-        return $this->charisma;
-    }
-
-    public function setCharisma(int $charisma): NonPlayableCharacter
-    {
-        $this->charisma = $charisma;
-        return $this;
-    }
-
-    public function getHealthPoint(): int
-    {
-        return $this->healthPoint;
-    }
-
-    public function setHealthPoint(int $healthPoint): NonPlayableCharacter
-    {
-        $this->healthPoint = $healthPoint;
-        return $this;
-    }
-
-    public function getMana(): int
-    {
-        return $this->mana;
-    }
-
-    public function setMana(int $mana): NonPlayableCharacter
-    {
-        $this->mana = $mana;
+        $this->game = $game;
         return $this;
     }
 
     public function getArmaments(): Collection|array
     {
         return $this->armaments;
+    }
+
+    public function setArmaments(Collection|array $armaments): NonPlayableCharacter
+    {
+        $this->armaments = $armaments;
+        return $this;
     }
 
     public function addArmament(Armament $armament): NonPlayableCharacter
@@ -208,20 +127,15 @@ class NonPlayableCharacter
         return $this;
     }
 
-    public function getGame(): Game
-    {
-        return $this->game;
-    }
-
-    public function setGame(Game $game): NonPlayableCharacter
-    {
-        $this->game = $game;
-        return $this;
-    }
-
     public function getSpells(): Collection|array
     {
         return $this->spells;
+    }
+
+    public function setSpells(Collection|array $spells): NonPlayableCharacter
+    {
+        $this->spells = $spells;
+        return $this;
     }
 
     public function addSpell(Spell $spell): NonPlayableCharacter
@@ -245,6 +159,12 @@ class NonPlayableCharacter
         return $this->items;
     }
 
+    public function setItems(Collection|array $items): NonPlayableCharacter
+    {
+        $this->items = $items;
+        return $this;
+    }
+
     public function addItem(Item $item): NonPlayableCharacter
     {
         if (!$this->getItems()->contains($item)) {
@@ -264,6 +184,12 @@ class NonPlayableCharacter
     public function getSkills(): Collection|array
     {
         return $this->skills;
+    }
+
+    public function setSkills(Collection|array $skills): NonPlayableCharacter
+    {
+        $this->skills = $skills;
+        return $this;
     }
 
     public function addSkill(Skill $skill): NonPlayableCharacter

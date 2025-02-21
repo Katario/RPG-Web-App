@@ -10,46 +10,17 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NonPlayableCharacterTemplateRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class NonPlayableCharacterTemplate extends AbstractEncyclopedia
+class NonPlayableCharacterTemplate extends AbstractCharacterTemplate
 {
-    use DateTimeTrait;
+    use HasDateTimeTrait;
+    use HasGenerableStatsTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
     #[ORM\Column(type: 'string')]
-    private string $name;
-    #[ORM\Column(type: 'string')]
     private string $title;
-    #[ORM\Column(type: 'integer')]
-    private int $strengthMin;
-    #[ORM\Column(type: 'integer')]
-    private int $strengthMax;
-    #[ORM\Column(type: 'integer')]
-    private int $intelligenceMin;
-    #[ORM\Column(type: 'integer')]
-    private int $intelligenceMax;
-    #[ORM\Column(type: 'integer')]
-    private int $staminaMin;
-    #[ORM\Column(type: 'integer')]
-    private int $staminaMax;
-    #[ORM\Column(type: 'integer')]
-    private int $agilityMin;
-    #[ORM\Column(type: 'integer')]
-    private int $agilityMax;
-    #[ORM\Column(type: 'integer')]
-    private int $charismaMin;
-    #[ORM\Column(type: 'integer')]
-    private int $charismaMax;
-    #[ORM\Column(type: 'integer')]
-    private int $healthPointMin;
-    #[ORM\Column(type: 'integer')]
-    private int $healthPointMax;
-    #[ORM\Column(type: 'integer')]
-    private int $manaMin;
-    #[ORM\Column(type: 'integer')]
-    private int $manaMax;
     #[ORM\JoinTable(name: 'non_playable_character_templates_spells')]
     #[ORM\JoinColumn(name: 'non_playable_character_template_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id', onDelete: 'cascade')]
@@ -84,17 +55,6 @@ class NonPlayableCharacterTemplate extends AbstractEncyclopedia
         return $this;
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): NonPlayableCharacterTemplate
-    {
-        $this->name = $name;
-        return $this;
-    }
-
     public function getTitle(): string
     {
         return $this->title;
@@ -106,163 +66,16 @@ class NonPlayableCharacterTemplate extends AbstractEncyclopedia
         return $this;
     }
 
-    public function getStrengthMin(): int
-    {
-        return $this->strengthMin;
-    }
-
-    public function setStrengthMin(int $strengthMin): NonPlayableCharacterTemplate
-    {
-        $this->strengthMin = $strengthMin;
-        return $this;
-    }
-
-    public function getStrengthMax(): int
-    {
-        return $this->strengthMax;
-    }
-
-    public function setStrengthMax(int $strengthMax): NonPlayableCharacterTemplate
-    {
-        $this->strengthMax = $strengthMax;
-        return $this;
-    }
-
-    public function getIntelligenceMin(): int
-    {
-        return $this->intelligenceMin;
-    }
-
-    public function setIntelligenceMin(int $intelligenceMin): NonPlayableCharacterTemplate
-    {
-        $this->intelligenceMin = $intelligenceMin;
-        return $this;
-    }
-
-    public function getIntelligenceMax(): int
-    {
-        return $this->intelligenceMax;
-    }
-
-    public function setIntelligenceMax(int $intelligenceMax): NonPlayableCharacterTemplate
-    {
-        $this->intelligenceMax = $intelligenceMax;
-        return $this;
-    }
-
-    public function getStaminaMin(): int
-    {
-        return $this->staminaMin;
-    }
-
-    public function setStaminaMin(int $staminaMin): NonPlayableCharacterTemplate
-    {
-        $this->staminaMin = $staminaMin;
-        return $this;
-    }
-
-    public function getStaminaMax(): int
-    {
-        return $this->staminaMax;
-    }
-
-    public function setStaminaMax(int $staminaMax): NonPlayableCharacterTemplate
-    {
-        $this->staminaMax = $staminaMax;
-        return $this;
-    }
-
-    public function getAgilityMin(): int
-    {
-        return $this->agilityMin;
-    }
-
-    public function setAgilityMin(int $agilityMin): NonPlayableCharacterTemplate
-    {
-        $this->agilityMin = $agilityMin;
-        return $this;
-    }
-
-    public function getAgilityMax(): int
-    {
-        return $this->agilityMax;
-    }
-
-    public function setAgilityMax(int $agilityMax): NonPlayableCharacterTemplate
-    {
-        $this->agilityMax = $agilityMax;
-        return $this;
-    }
-
-    public function getCharismaMin(): int
-    {
-        return $this->charismaMin;
-    }
-
-    public function setCharismaMin(int $charismaMin): NonPlayableCharacterTemplate
-    {
-        $this->charismaMin = $charismaMin;
-        return $this;
-    }
-
-    public function getCharismaMax(): int
-    {
-        return $this->charismaMax;
-    }
-
-    public function setCharismaMax(int $charismaMax): NonPlayableCharacterTemplate
-    {
-        $this->charismaMax = $charismaMax;
-        return $this;
-    }
-
-    public function getHealthPointMin(): int
-    {
-        return $this->healthPointMin;
-    }
-
-    public function setHealthPointMin(int $healthPointMin): NonPlayableCharacterTemplate
-    {
-        $this->healthPointMin = $healthPointMin;
-        return $this;
-    }
-
-    public function getHealthPointMax(): int
-    {
-        return $this->healthPointMax;
-    }
-
-    public function setHealthPointMax(int $healthPointMax): NonPlayableCharacterTemplate
-    {
-        $this->healthPointMax = $healthPointMax;
-        return $this;
-    }
-
-    public function getManaMin(): int
-    {
-        return $this->manaMin;
-    }
-
-    public function setManaMin(int $manaMin): NonPlayableCharacterTemplate
-    {
-        $this->manaMin = $manaMin;
-        return $this;
-    }
-
-    public function getManaMax(): int
-    {
-        return $this->manaMax;
-    }
-
-    public function setManaMax(int $manaMax): NonPlayableCharacterTemplate
-    {
-        $this->manaMax = $manaMax;
-        return $this;
-    }
-
     public function getSpells(): Collection|array
     {
         return $this->spells;
+    }
+
+    /** @param Spell[] $spells */
+    public function setSpells(Collection|array $spells): NonPlayableCharacterTemplate
+    {
+        $this->spells = $spells;
+        return $this;
     }
 
     public function addSpell(Spell $spell): NonPlayableCharacterTemplate
@@ -286,6 +99,13 @@ class NonPlayableCharacterTemplate extends AbstractEncyclopedia
         return $this->items;
     }
 
+    /** @param Item[] $items */
+    public function setItems(Collection|array $items): NonPlayableCharacterTemplate
+    {
+        $this->items = $items;
+        return $this;
+    }
+
     public function addItem(Item $item): NonPlayableCharacterTemplate
     {
         if (!$this->getItems()->contains($item)) {
@@ -305,6 +125,13 @@ class NonPlayableCharacterTemplate extends AbstractEncyclopedia
     public function getSkills(): Collection|array
     {
         return $this->skills;
+    }
+
+    /** @param Skill[] $skills */
+    public function setSkills(Collection|array $skills): NonPlayableCharacterTemplate
+    {
+        $this->skills = $skills;
+        return $this;
     }
 
     public function addSkill(Skill $skill): NonPlayableCharacterTemplate

@@ -17,13 +17,15 @@ class Armament
     #[ORM\Column(type: 'string')]
     private string $name;
     #[ORM\Column(type: 'string')]
-    private string $type;
+    private string $category;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $value;
     #[ORM\Column(type: 'integer')]
-    private int $value;
+    private int $maxDurability;
     #[ORM\Column(type: 'integer')]
-    private int $durability;
+    private int $currentDurability;
     #[ORM\Column(type: 'text')]
-    private string $description;
+    private string $description = '';
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'armaments')]
     private Game $game;
     #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
@@ -65,36 +67,47 @@ class Armament
         return $this;
     }
 
-    public function getType(): string
+    public function getCategory(): string
     {
-        return $this->type;
+        return $this->category;
     }
 
-    public function setType(string $type): Armament
+    public function setCategory(string $category): Armament
     {
-        $this->type = $type;
+        $this->category = $category;
         return $this;
     }
 
-    public function getValue(): int
+    public function getValue(): ?int
     {
         return $this->value;
     }
 
-    public function setValue(int $value): Armament
+    public function setValue(?int $value): Armament
     {
         $this->value = $value;
         return $this;
     }
 
-    public function getDurability(): int
+    public function getMaxDurability(): int
     {
-        return $this->durability;
+        return $this->maxDurability;
     }
 
-    public function setDurability(int $durability): Armament
+    public function setMaxDurability(int $maxDurability): Armament
     {
-        $this->durability = $durability;
+        $this->maxDurability = $maxDurability;
+        return $this;
+    }
+
+    public function getCurrentDurability(): int
+    {
+        return $this->currentDurability;
+    }
+
+    public function setCurrentDurability(int $currentDurability): Armament
+    {
+        $this->currentDurability = $currentDurability;
         return $this;
     }
 
