@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250130150618 extends AbstractMigration
+final class Version20250222111126 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -23,7 +23,7 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('CREATE TABLE "user" (id SERIAL NOT NULL, email VARCHAR(180) NOT NULL, username VARCHAR(255) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON "user" (email)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649F85E0677 ON "user" (username)');
-        $this->addSql('CREATE TABLE armament (id SERIAL NOT NULL, game_id INT DEFAULT NULL, monster_id INT DEFAULT NULL, non_playable_character_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, value INT NOT NULL, durability INT NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE armament (id SERIAL NOT NULL, game_id INT DEFAULT NULL, monster_id INT DEFAULT NULL, non_playable_character_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, category VARCHAR(255) NOT NULL, value INT DEFAULT NULL, max_durability INT NOT NULL, current_durability INT NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_39EA292EE48FD905 ON armament (game_id)');
         $this->addSql('CREATE INDEX IDX_39EA292EC5FF1223 ON armament (monster_id)');
         $this->addSql('CREATE INDEX IDX_39EA292E9388FCC9 ON armament (non_playable_character_id)');
@@ -33,7 +33,7 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('CREATE TABLE armaments_spells (armament_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(armament_id, spell_id))');
         $this->addSql('CREATE INDEX IDX_6429084500B3A6E ON armaments_spells (armament_id)');
         $this->addSql('CREATE INDEX IDX_6429084479EC90D ON armaments_spells (spell_id)');
-        $this->addSql('CREATE TABLE armament_template (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, value_min INT NOT NULL, value_max INT NOT NULL, durability_min INT NOT NULL, durability_max INT NOT NULL, description TEXT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE armament_template (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, category VARCHAR(255) NOT NULL, value INT DEFAULT NULL, min_durability INT NOT NULL, max_durability INT NOT NULL, weight INT NOT NULL, description TEXT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, is_private BOOLEAN DEFAULT false NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN armament_template.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN armament_template.updated_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE armament_templates_skills (armament_template_id INT NOT NULL, skill_id INT NOT NULL, PRIMARY KEY(armament_template_id, skill_id))');
@@ -42,14 +42,28 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('CREATE TABLE armament_templates_spells (armament_template_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(armament_template_id, spell_id))');
         $this->addSql('CREATE INDEX IDX_EEB15D39F5E4EFC3 ON armament_templates_spells (armament_template_id)');
         $this->addSql('CREATE INDEX IDX_EEB15D39479EC90D ON armament_templates_spells (spell_id)');
-        $this->addSql('CREATE TABLE game (id SERIAL NOT NULL, game_master INT DEFAULT NULL, name VARCHAR(255) NOT NULL, ruleset VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE character_template (id SERIAL NOT NULL, title VARCHAR(255) NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, is_private BOOLEAN DEFAULT false NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, min_strength INT NOT NULL, max_strength INT NOT NULL, min_intelligence INT NOT NULL, max_intelligence INT NOT NULL, min_stamina INT NOT NULL, max_stamina INT NOT NULL, min_agility INT NOT NULL, max_agility INT NOT NULL, min_charisma INT NOT NULL, max_charisma INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('COMMENT ON COLUMN character_template.created_at IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('COMMENT ON COLUMN character_template.updated_at IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('CREATE TABLE character_templates_spells (character_template_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(character_template_id, spell_id))');
+        $this->addSql('CREATE INDEX IDX_3AA8E4FC1B0A514 ON character_templates_spells (character_template_id)');
+        $this->addSql('CREATE INDEX IDX_3AA8E4FC479EC90D ON character_templates_spells (spell_id)');
+        $this->addSql('CREATE TABLE character_templates_skills (character_template_id INT NOT NULL, skill_id INT NOT NULL, PRIMARY KEY(character_template_id, skill_id))');
+        $this->addSql('CREATE INDEX IDX_674EFDD71B0A514 ON character_templates_skills (character_template_id)');
+        $this->addSql('CREATE INDEX IDX_674EFDD75585C142 ON character_templates_skills (skill_id)');
+        $this->addSql('CREATE TABLE character_templates_items (character_template_id INT NOT NULL, item_id INT NOT NULL, PRIMARY KEY(character_template_id, item_id))');
+        $this->addSql('CREATE INDEX IDX_23FE66F41B0A514 ON character_templates_items (character_template_id)');
+        $this->addSql('CREATE INDEX IDX_23FE66F4126F525E ON character_templates_items (item_id)');
+        $this->addSql('CREATE TABLE game (id SERIAL NOT NULL, game_master INT DEFAULT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_232B318C503C0E1E ON game (game_master)');
-        $this->addSql('CREATE TABLE item (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, cost VARCHAR(255) NOT NULL, description TEXT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE item (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, value INT NOT NULL, description TEXT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, is_private BOOLEAN DEFAULT false NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN item.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN item.updated_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE mastery (id SERIAL NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE monster (id SERIAL NOT NULL, game_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, type VARCHAR(255) NOT NULL, strength INT NOT NULL, intelligence INT NOT NULL, stamina INT NOT NULL, agility INT NOT NULL, charisma INT NOT NULL, health_point INT NOT NULL, mana INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE monster (id SERIAL NOT NULL, game_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, is_boss BOOLEAN NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, current_strength INT NOT NULL, max_strength INT NOT NULL, current_intelligence INT NOT NULL, max_intelligence INT NOT NULL, current_stamina INT NOT NULL, max_stamina INT NOT NULL, current_agility INT NOT NULL, max_agility INT NOT NULL, current_charisma INT NOT NULL, max_charisma INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_245EC6F4E48FD905 ON monster (game_id)');
+        $this->addSql('COMMENT ON COLUMN monster.created_at IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('COMMENT ON COLUMN monster.updated_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE monsters_spells (monster_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(monster_id, spell_id))');
         $this->addSql('CREATE INDEX IDX_7D5C2EFEC5FF1223 ON monsters_spells (monster_id)');
         $this->addSql('CREATE INDEX IDX_7D5C2EFE479EC90D ON monsters_spells (spell_id)');
@@ -59,7 +73,7 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('CREATE TABLE monsters_skills (monster_id INT NOT NULL, skill_id INT NOT NULL, PRIMARY KEY(monster_id, skill_id))');
         $this->addSql('CREATE INDEX IDX_20BA37D5C5FF1223 ON monsters_skills (monster_id)');
         $this->addSql('CREATE INDEX IDX_20BA37D55585C142 ON monsters_skills (skill_id)');
-        $this->addSql('CREATE TABLE monster_template (id SERIAL NOT NULL, family VARCHAR(255) NOT NULL, kind VARCHAR(255) NOT NULL, strength_min INT NOT NULL, strength_max INT NOT NULL, intelligence_min INT NOT NULL, intelligence_max INT NOT NULL, stamina_min INT NOT NULL, stamina_max INT NOT NULL, agility_min INT NOT NULL, agility_max INT NOT NULL, charisma_min INT NOT NULL, charisma_max INT NOT NULL, health_point_min INT NOT NULL, health_point_max INT NOT NULL, mana_min INT NOT NULL, mana_max INT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE monster_template (id SERIAL NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, is_private BOOLEAN DEFAULT false NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, min_strength INT NOT NULL, max_strength INT NOT NULL, min_intelligence INT NOT NULL, max_intelligence INT NOT NULL, min_stamina INT NOT NULL, max_stamina INT NOT NULL, min_agility INT NOT NULL, max_agility INT NOT NULL, min_charisma INT NOT NULL, max_charisma INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN monster_template.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN monster_template.updated_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE monster_templates_spells (monster_template_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(monster_template_id, spell_id))');
@@ -71,8 +85,10 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('CREATE TABLE monster_templates_skills (monster_template_id INT NOT NULL, skill_id INT NOT NULL, PRIMARY KEY(monster_template_id, skill_id))');
         $this->addSql('CREATE INDEX IDX_43A2D35D2D30EB4A ON monster_templates_skills (monster_template_id)');
         $this->addSql('CREATE INDEX IDX_43A2D35D5585C142 ON monster_templates_skills (skill_id)');
-        $this->addSql('CREATE TABLE non_playable_character (id SERIAL NOT NULL, game_id INT DEFAULT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, title VARCHAR(255) NOT NULL, strength INT NOT NULL, intelligence INT NOT NULL, stamina INT NOT NULL, agility INT NOT NULL, charisma INT NOT NULL, health_point INT NOT NULL, mana INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE non_playable_character (id SERIAL NOT NULL, game_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, last_name VARCHAR(255) DEFAULT NULL, title VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, current_strength INT NOT NULL, max_strength INT NOT NULL, current_intelligence INT NOT NULL, max_intelligence INT NOT NULL, current_stamina INT NOT NULL, max_stamina INT NOT NULL, current_agility INT NOT NULL, max_agility INT NOT NULL, current_charisma INT NOT NULL, max_charisma INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_A30778D1E48FD905 ON non_playable_character (game_id)');
+        $this->addSql('COMMENT ON COLUMN non_playable_character.created_at IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('COMMENT ON COLUMN non_playable_character.updated_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE non_playable_characters_spells (non_playable_character_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(non_playable_character_id, spell_id))');
         $this->addSql('CREATE INDEX IDX_94C7438C9388FCC9 ON non_playable_characters_spells (non_playable_character_id)');
         $this->addSql('CREATE INDEX IDX_94C7438C479EC90D ON non_playable_characters_spells (spell_id)');
@@ -82,8 +98,7 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('CREATE TABLE non_playable_characters_skills (non_playable_character_id INT NOT NULL, skill_id INT NOT NULL, PRIMARY KEY(non_playable_character_id, skill_id))');
         $this->addSql('CREATE INDEX IDX_C9215AA79388FCC9 ON non_playable_characters_skills (non_playable_character_id)');
         $this->addSql('CREATE INDEX IDX_C9215AA75585C142 ON non_playable_characters_skills (skill_id)');
-        $this->addSql('CREATE TABLE non_playable_character_template (id SERIAL NOT NULL, game_id INT DEFAULT NULL, kind VARCHAR(255) NOT NULL, title VARCHAR(255) NOT NULL, strength_min INT NOT NULL, strength_max INT NOT NULL, intelligence_min INT NOT NULL, intelligence_max INT NOT NULL, stamina_min INT NOT NULL, stamina_max INT NOT NULL, agility_min INT NOT NULL, agility_max INT NOT NULL, charisma_min INT NOT NULL, charisma_max INT NOT NULL, health_point_min INT NOT NULL, health_point_max INT NOT NULL, mana_min INT NOT NULL, mana_max INT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE INDEX IDX_9F46D872E48FD905 ON non_playable_character_template (game_id)');
+        $this->addSql('CREATE TABLE non_playable_character_template (id SERIAL NOT NULL, title VARCHAR(255) NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, is_private BOOLEAN DEFAULT false NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, min_strength INT NOT NULL, max_strength INT NOT NULL, min_intelligence INT NOT NULL, max_intelligence INT NOT NULL, min_stamina INT NOT NULL, max_stamina INT NOT NULL, min_agility INT NOT NULL, max_agility INT NOT NULL, min_charisma INT NOT NULL, max_charisma INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN non_playable_character_template.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN non_playable_character_template.updated_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE non_playable_character_templates_spells (non_playable_character_template_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(non_playable_character_template_id, spell_id))');
@@ -95,13 +110,24 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('CREATE TABLE non_playable_character_templates_skills (non_playable_character_template_id INT NOT NULL, skill_id INT NOT NULL, PRIMARY KEY(non_playable_character_template_id, skill_id))');
         $this->addSql('CREATE INDEX IDX_A9DE5E8E76AD223 ON non_playable_character_templates_skills (non_playable_character_template_id)');
         $this->addSql('CREATE INDEX IDX_A9DE5E85585C142 ON non_playable_character_templates_skills (skill_id)');
-        $this->addSql('CREATE TABLE playable_character (id SERIAL NOT NULL, user_id INT DEFAULT NULL, game_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, title VARCHAR(255) NOT NULL, current_level INT NOT NULL, health_points INT NOT NULL, max_health_points INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE playable_character (id SERIAL NOT NULL, user_id INT DEFAULT NULL, game_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, last_name VARCHAR(255) DEFAULT NULL, title VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, current_strength INT NOT NULL, max_strength INT NOT NULL, current_intelligence INT NOT NULL, max_intelligence INT NOT NULL, current_stamina INT NOT NULL, max_stamina INT NOT NULL, current_agility INT NOT NULL, max_agility INT NOT NULL, current_charisma INT NOT NULL, max_charisma INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_E143D669A76ED395 ON playable_character (user_id)');
         $this->addSql('CREATE INDEX IDX_E143D669E48FD905 ON playable_character (game_id)');
-        $this->addSql('CREATE TABLE skill (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT DEFAULT NULL, physical_cost INT DEFAULT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('COMMENT ON COLUMN playable_character.created_at IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('COMMENT ON COLUMN playable_character.updated_at IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('CREATE TABLE characters_spells (character_id INT NOT NULL, spell_id INT NOT NULL, PRIMARY KEY(character_id, spell_id))');
+        $this->addSql('CREATE INDEX IDX_B6981FFC1136BE75 ON characters_spells (character_id)');
+        $this->addSql('CREATE INDEX IDX_B6981FFC479EC90D ON characters_spells (spell_id)');
+        $this->addSql('CREATE TABLE characters_items (character_id INT NOT NULL, item_id INT NOT NULL, PRIMARY KEY(character_id, item_id))');
+        $this->addSql('CREATE INDEX IDX_C07995AA1136BE75 ON characters_items (character_id)');
+        $this->addSql('CREATE INDEX IDX_C07995AA126F525E ON characters_items (item_id)');
+        $this->addSql('CREATE TABLE characters_skills (character_id INT NOT NULL, skill_id INT NOT NULL, PRIMARY KEY(character_id, skill_id))');
+        $this->addSql('CREATE INDEX IDX_EB7E06D71136BE75 ON characters_skills (character_id)');
+        $this->addSql('CREATE INDEX IDX_EB7E06D75585C142 ON characters_skills (skill_id)');
+        $this->addSql('CREATE TABLE skill (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT NOT NULL, physical_cost INT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, is_private BOOLEAN DEFAULT false NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN skill.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN skill.updated_at IS \'(DC2Type:datetime_immutable)\'');
-        $this->addSql('CREATE TABLE spell (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE spell (id SERIAL NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, mana_cost INT NOT NULL, is_ready BOOLEAN DEFAULT true NOT NULL, is_private BOOLEAN DEFAULT false NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN spell.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN spell.updated_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE talent (id SERIAL NOT NULL, PRIMARY KEY(id))');
@@ -131,6 +157,12 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('ALTER TABLE armament_templates_skills ADD CONSTRAINT FK_B35744125585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE armament_templates_spells ADD CONSTRAINT FK_EEB15D39F5E4EFC3 FOREIGN KEY (armament_template_id) REFERENCES armament_template (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE armament_templates_spells ADD CONSTRAINT FK_EEB15D39479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE character_templates_spells ADD CONSTRAINT FK_3AA8E4FC1B0A514 FOREIGN KEY (character_template_id) REFERENCES character_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE character_templates_spells ADD CONSTRAINT FK_3AA8E4FC479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE character_templates_skills ADD CONSTRAINT FK_674EFDD71B0A514 FOREIGN KEY (character_template_id) REFERENCES character_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE character_templates_skills ADD CONSTRAINT FK_674EFDD75585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE character_templates_items ADD CONSTRAINT FK_23FE66F41B0A514 FOREIGN KEY (character_template_id) REFERENCES character_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE character_templates_items ADD CONSTRAINT FK_23FE66F4126F525E FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE game ADD CONSTRAINT FK_232B318C503C0E1E FOREIGN KEY (game_master) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE monster ADD CONSTRAINT FK_245EC6F4E48FD905 FOREIGN KEY (game_id) REFERENCES game (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE monsters_spells ADD CONSTRAINT FK_7D5C2EFEC5FF1223 FOREIGN KEY (monster_id) REFERENCES monster (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -139,12 +171,12 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('ALTER TABLE monsters_items ADD CONSTRAINT FK_65FB1B1A126F525E FOREIGN KEY (item_id) REFERENCES item (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE monsters_skills ADD CONSTRAINT FK_20BA37D5C5FF1223 FOREIGN KEY (monster_id) REFERENCES monster (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE monsters_skills ADD CONSTRAINT FK_20BA37D55585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE monster_templates_spells ADD CONSTRAINT FK_1E44CA762D30EB4A FOREIGN KEY (monster_template_id) REFERENCES monster_template (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE monster_templates_spells ADD CONSTRAINT FK_1E44CA76479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE monster_templates_items ADD CONSTRAINT FK_7B734A0718774676 FOREIGN KEY (monste_templater_id) REFERENCES monster_template (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE monster_templates_items ADD CONSTRAINT FK_7B734A07126F525E FOREIGN KEY (item_id) REFERENCES item (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE monster_templates_skills ADD CONSTRAINT FK_43A2D35D2D30EB4A FOREIGN KEY (monster_template_id) REFERENCES monster_template (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE monster_templates_skills ADD CONSTRAINT FK_43A2D35D5585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE monster_templates_spells ADD CONSTRAINT FK_1E44CA762D30EB4A FOREIGN KEY (monster_template_id) REFERENCES monster_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE monster_templates_spells ADD CONSTRAINT FK_1E44CA76479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE monster_templates_items ADD CONSTRAINT FK_7B734A0718774676 FOREIGN KEY (monste_templater_id) REFERENCES monster_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE monster_templates_items ADD CONSTRAINT FK_7B734A07126F525E FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE monster_templates_skills ADD CONSTRAINT FK_43A2D35D2D30EB4A FOREIGN KEY (monster_template_id) REFERENCES monster_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE monster_templates_skills ADD CONSTRAINT FK_43A2D35D5585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE non_playable_character ADD CONSTRAINT FK_A30778D1E48FD905 FOREIGN KEY (game_id) REFERENCES game (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE non_playable_characters_spells ADD CONSTRAINT FK_94C7438C9388FCC9 FOREIGN KEY (non_playable_character_id) REFERENCES non_playable_character (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE non_playable_characters_spells ADD CONSTRAINT FK_94C7438C479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -152,20 +184,26 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('ALTER TABLE non_playable_characters_items ADD CONSTRAINT FK_9D335C1C126F525E FOREIGN KEY (item_id) REFERENCES item (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE non_playable_characters_skills ADD CONSTRAINT FK_C9215AA79388FCC9 FOREIGN KEY (non_playable_character_id) REFERENCES non_playable_character (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE non_playable_characters_skills ADD CONSTRAINT FK_C9215AA75585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE non_playable_character_template ADD CONSTRAINT FK_9F46D872E48FD905 FOREIGN KEY (game_id) REFERENCES game (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE non_playable_character_templates_spells ADD CONSTRAINT FK_577BFCC3E76AD223 FOREIGN KEY (non_playable_character_template_id) REFERENCES non_playable_character_template (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE non_playable_character_templates_spells ADD CONSTRAINT FK_577BFCC3479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE non_playable_character_templates_items ADD CONSTRAINT FK_2D02B2E1E76AD223 FOREIGN KEY (non_playable_character_template_id) REFERENCES non_playable_character_template (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE non_playable_character_templates_items ADD CONSTRAINT FK_2D02B2E1126F525E FOREIGN KEY (item_id) REFERENCES item (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE non_playable_character_templates_skills ADD CONSTRAINT FK_A9DE5E8E76AD223 FOREIGN KEY (non_playable_character_template_id) REFERENCES non_playable_character_template (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE non_playable_character_templates_skills ADD CONSTRAINT FK_A9DE5E85585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE non_playable_character_templates_spells ADD CONSTRAINT FK_577BFCC3E76AD223 FOREIGN KEY (non_playable_character_template_id) REFERENCES non_playable_character_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE non_playable_character_templates_spells ADD CONSTRAINT FK_577BFCC3479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE non_playable_character_templates_items ADD CONSTRAINT FK_2D02B2E1E76AD223 FOREIGN KEY (non_playable_character_template_id) REFERENCES non_playable_character_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE non_playable_character_templates_items ADD CONSTRAINT FK_2D02B2E1126F525E FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE non_playable_character_templates_skills ADD CONSTRAINT FK_A9DE5E8E76AD223 FOREIGN KEY (non_playable_character_template_id) REFERENCES non_playable_character_template (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE non_playable_character_templates_skills ADD CONSTRAINT FK_A9DE5E85585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE playable_character ADD CONSTRAINT FK_E143D669A76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE playable_character ADD CONSTRAINT FK_E143D669E48FD905 FOREIGN KEY (game_id) REFERENCES game (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE characters_spells ADD CONSTRAINT FK_B6981FFC1136BE75 FOREIGN KEY (character_id) REFERENCES playable_character (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE characters_spells ADD CONSTRAINT FK_B6981FFC479EC90D FOREIGN KEY (spell_id) REFERENCES spell (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE characters_items ADD CONSTRAINT FK_C07995AA1136BE75 FOREIGN KEY (character_id) REFERENCES playable_character (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE characters_items ADD CONSTRAINT FK_C07995AA126F525E FOREIGN KEY (item_id) REFERENCES item (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE characters_skills ADD CONSTRAINT FK_EB7E06D71136BE75 FOREIGN KEY (character_id) REFERENCES playable_character (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE characters_skills ADD CONSTRAINT FK_EB7E06D75585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE armament DROP CONSTRAINT FK_39EA292EE48FD905');
         $this->addSql('ALTER TABLE armament DROP CONSTRAINT FK_39EA292EC5FF1223');
         $this->addSql('ALTER TABLE armament DROP CONSTRAINT FK_39EA292E9388FCC9');
@@ -177,6 +215,12 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('ALTER TABLE armament_templates_skills DROP CONSTRAINT FK_B35744125585C142');
         $this->addSql('ALTER TABLE armament_templates_spells DROP CONSTRAINT FK_EEB15D39F5E4EFC3');
         $this->addSql('ALTER TABLE armament_templates_spells DROP CONSTRAINT FK_EEB15D39479EC90D');
+        $this->addSql('ALTER TABLE character_templates_spells DROP CONSTRAINT FK_3AA8E4FC1B0A514');
+        $this->addSql('ALTER TABLE character_templates_spells DROP CONSTRAINT FK_3AA8E4FC479EC90D');
+        $this->addSql('ALTER TABLE character_templates_skills DROP CONSTRAINT FK_674EFDD71B0A514');
+        $this->addSql('ALTER TABLE character_templates_skills DROP CONSTRAINT FK_674EFDD75585C142');
+        $this->addSql('ALTER TABLE character_templates_items DROP CONSTRAINT FK_23FE66F41B0A514');
+        $this->addSql('ALTER TABLE character_templates_items DROP CONSTRAINT FK_23FE66F4126F525E');
         $this->addSql('ALTER TABLE game DROP CONSTRAINT FK_232B318C503C0E1E');
         $this->addSql('ALTER TABLE monster DROP CONSTRAINT FK_245EC6F4E48FD905');
         $this->addSql('ALTER TABLE monsters_spells DROP CONSTRAINT FK_7D5C2EFEC5FF1223');
@@ -198,7 +242,6 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('ALTER TABLE non_playable_characters_items DROP CONSTRAINT FK_9D335C1C126F525E');
         $this->addSql('ALTER TABLE non_playable_characters_skills DROP CONSTRAINT FK_C9215AA79388FCC9');
         $this->addSql('ALTER TABLE non_playable_characters_skills DROP CONSTRAINT FK_C9215AA75585C142');
-        $this->addSql('ALTER TABLE non_playable_character_template DROP CONSTRAINT FK_9F46D872E48FD905');
         $this->addSql('ALTER TABLE non_playable_character_templates_spells DROP CONSTRAINT FK_577BFCC3E76AD223');
         $this->addSql('ALTER TABLE non_playable_character_templates_spells DROP CONSTRAINT FK_577BFCC3479EC90D');
         $this->addSql('ALTER TABLE non_playable_character_templates_items DROP CONSTRAINT FK_2D02B2E1E76AD223');
@@ -207,6 +250,12 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('ALTER TABLE non_playable_character_templates_skills DROP CONSTRAINT FK_A9DE5E85585C142');
         $this->addSql('ALTER TABLE playable_character DROP CONSTRAINT FK_E143D669A76ED395');
         $this->addSql('ALTER TABLE playable_character DROP CONSTRAINT FK_E143D669E48FD905');
+        $this->addSql('ALTER TABLE characters_spells DROP CONSTRAINT FK_B6981FFC1136BE75');
+        $this->addSql('ALTER TABLE characters_spells DROP CONSTRAINT FK_B6981FFC479EC90D');
+        $this->addSql('ALTER TABLE characters_items DROP CONSTRAINT FK_C07995AA1136BE75');
+        $this->addSql('ALTER TABLE characters_items DROP CONSTRAINT FK_C07995AA126F525E');
+        $this->addSql('ALTER TABLE characters_skills DROP CONSTRAINT FK_EB7E06D71136BE75');
+        $this->addSql('ALTER TABLE characters_skills DROP CONSTRAINT FK_EB7E06D75585C142');
         $this->addSql('DROP TABLE "user"');
         $this->addSql('DROP TABLE armament');
         $this->addSql('DROP TABLE armaments_skills');
@@ -214,6 +263,10 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('DROP TABLE armament_template');
         $this->addSql('DROP TABLE armament_templates_skills');
         $this->addSql('DROP TABLE armament_templates_spells');
+        $this->addSql('DROP TABLE character_template');
+        $this->addSql('DROP TABLE character_templates_spells');
+        $this->addSql('DROP TABLE character_templates_skills');
+        $this->addSql('DROP TABLE character_templates_items');
         $this->addSql('DROP TABLE game');
         $this->addSql('DROP TABLE item');
         $this->addSql('DROP TABLE mastery');
@@ -234,6 +287,9 @@ final class Version20250130150618 extends AbstractMigration
         $this->addSql('DROP TABLE non_playable_character_templates_items');
         $this->addSql('DROP TABLE non_playable_character_templates_skills');
         $this->addSql('DROP TABLE playable_character');
+        $this->addSql('DROP TABLE characters_spells');
+        $this->addSql('DROP TABLE characters_items');
+        $this->addSql('DROP TABLE characters_skills');
         $this->addSql('DROP TABLE skill');
         $this->addSql('DROP TABLE spell');
         $this->addSql('DROP TABLE talent');

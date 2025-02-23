@@ -9,6 +9,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class GameRepository extends ServiceEntityRepository
 {
@@ -17,7 +18,7 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
-    public function getGamesByUser(User $user): array
+    public function getGamesByUser(UserInterface $user): array
     {
         return $this->createQueryBuilder('g')
             ->where('g.gameMaster = :gameMaster')
@@ -26,7 +27,7 @@ class GameRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getGamesWithCharacterByUser(User $user): array
+    public function getGamesWithCharacterByUser(UserInterface $user): array
     {
         $toto = $this->createQueryBuilder('g')
             ->innerJoin('g.characters', 'pc')

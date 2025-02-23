@@ -31,6 +31,9 @@ class Armament
     #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
     #[ORM\JoinColumn(onDelete:'SET NULL')]
     private ?Monster $monster;
+    #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'armaments')]
+    #[ORM\JoinColumn(onDelete:'SET NULL')]
+    private ?Character $character;
     #[ORM\ManyToOne(targetEntity: NonPlayableCharacter::class, inversedBy: 'armaments')]
     #[ORM\JoinColumn(onDelete:'SET NULL')]
     private ?NonPlayableCharacter $nonPlayableCharacter;
@@ -195,6 +198,17 @@ class Armament
     public function setMonster(?Monster $monster): Armament
     {
         $this->monster = $monster;
+        return $this;
+    }
+
+    public function getCharacter(): ?Character
+    {
+        return $this->character;
+    }
+
+    public function setCharacter(?Character $character): Armament
+    {
+        $this->character = $character;
         return $this;
     }
 

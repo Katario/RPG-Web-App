@@ -14,19 +14,19 @@
                 Mes Monstres :
             </span>
             <ul class="flex flex-row gap-8 flex-wrap">
-                {% for monster in game.monsters %}
-                    <twig:Card
-                        show="{{ path('show_monster', {'id': monster.id}) }}"
-                        edit="{{ path('edit_monster', {'id': monster.id}) }}"
-                        delete="{{ path('delete_monster', {'id': monster.id}) }}"
-                        title="{{ monster.name }} - {{ monster.type }}"
-                    >
-                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>
-                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>
-                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>
-                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>
-                    </twig:Card>
-                {% endfor %}
+{#                {% for monster in game.monsters %}#}
+{#                    <twig:Card#}
+{#                        show="{{ path('show_monster', {'id': monster.id}) }}"#}
+{#                        edit="{{ path('edit_monster', {'id': monster.id}) }}"#}
+{#                        delete="{{ path('delete_monster', {'id': monster.id}) }}"#}
+{#                        title="{{ monster.name }} - {{ monster.type }}"#}
+{#                    >#}
+{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
+{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
+{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
+{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
+{#                    </twig:Card>#}
+{#                {% endfor %}#}
             </ul>
             Ajouter un nouveau monstre <a href="{{ path('generate_monster', {'id': game.id}) }}"> >>> </a>
         </div>

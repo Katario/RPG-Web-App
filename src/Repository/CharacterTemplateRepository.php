@@ -18,9 +18,10 @@ class CharacterTemplateRepository extends ServiceEntityRepository
     public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
     {
         $queryBuilder =  $this->createQueryBuilder('ct');
-        $queryBuilder->where('ct.name LIKE :query')
+        $queryBuilder->where('ct.title LIKE :query')
+            ->orWhere('ct.kind LIKE :query')
             ->setParameter('query', '%'.$query.'%')
-            ->orderBy('ct.name', $orderBy)
+            ->orderBy('ct.title', $orderBy)
         ;
 
         if ($limit) {

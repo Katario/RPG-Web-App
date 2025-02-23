@@ -19,9 +19,7 @@ class Skill extends Encyclopedia
     #[ORM\Column(type: 'text')]
     private string $description;
     #[ORM\Column(type: 'integer')]
-    private int $manaCost;
-    #[ORM\Column(type: 'integer')]
-    private int $physicalCost;
+    private int $exhaustCost;
 
     public function getId(): ?int
     {
@@ -50,25 +48,14 @@ class Skill extends Encyclopedia
         return $this;
     }
 
-    public function getManaCost(): int
+    public function getExhaustCost(): int
     {
-        return $this->manaCost;
+        return $this->exhaustCost;
     }
 
-    public function setManaCost(int $manaCost): Skill
+    public function setExhaustCost(int $exhaustCost): Skill
     {
-        $this->manaCost = $manaCost;
-        return $this;
-    }
-
-    public function getPhysicalCost(): int
-    {
-        return $this->physicalCost;
-    }
-
-    public function setPhysicalCost(int $physicalCost): Skill
-    {
-        $this->physicalCost = $physicalCost;
+        $this->exhaustCost = $exhaustCost;
         return $this;
     }
 }

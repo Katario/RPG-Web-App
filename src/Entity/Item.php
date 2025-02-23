@@ -21,6 +21,8 @@ class Item extends Encyclopedia
     private int $value;
     #[ORM\Column(type: 'text')]
     private string $description;
+    #[ORM\Column(type: 'integer')]
+    private int $weight;
 
     public function getId(): ?int
     {
@@ -57,6 +59,17 @@ class Item extends Encyclopedia
     public function setDescription(string $description): Item
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getWeight(): int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(int $weight): Item
+    {
+        $this->weight = $weight;
         return $this;
     }
 }

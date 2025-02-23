@@ -28,7 +28,7 @@ class Character extends AbstractCharacter
     private string $title;
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
-    private ?User $player;
+    private ?User $user;
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'characters')]
     #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
@@ -104,14 +104,14 @@ class Character extends AbstractCharacter
         return $this;
     }
 
-    public function getPlayer(): User
+    public function getUser(): User
     {
-        return $this->player;
+        return $this->user;
     }
 
-    public function setPlayer(User $player): Character
+    public function setUser(User $user): Character
     {
-        $this->player = $player;
+        $this->user = $user;
         return $this;
     }
 

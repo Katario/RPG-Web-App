@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 
+#[MappedSuperclass]
 abstract class Encyclopedia
 {
     #[ORM\Column(type: 'boolean', options: ['default' => true])]

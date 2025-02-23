@@ -20,9 +20,13 @@ class ItemType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextType::class)
-            ->add('cost', IntegerType::class)
+            ->add('value', IntegerType::class)
+            ->add('weight', IntegerType::class)
             ->add('isReady', CheckboxType::class, [
-                'data' => true
+                'required' => false,
+            ])
+            ->add('isPrivate', CheckboxType::class, [
+                'required' => false,
             ])
             ->add('submit', SubmitType::class)
         ;

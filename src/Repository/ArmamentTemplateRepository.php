@@ -24,7 +24,7 @@ class ArmamentTemplateRepository extends ServiceEntityRepository
     {
         $queryBuilder =  $this->createQueryBuilder('a');
         $queryBuilder->where('a.name LIKE :query')
-            ->orWhere('a.type LIKE :query')
+            ->orWhere('a.category LIKE :query')
             ->setParameter('query', '%'.$query.'%')
             ->orderBy('a.name', $orderBy)
         ;

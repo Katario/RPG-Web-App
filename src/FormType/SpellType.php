@@ -23,7 +23,10 @@ class SpellType extends AbstractType
             ->add('description', TextType::class)
             ->add('manaCost', IntegerType::class)
             ->add('isReady', CheckboxType::class, [
-                'data' => true
+                'required' => false,
+            ])
+            ->add('isPrivate', CheckboxType::class, [
+                'required' => false,
             ])
             ->add('submit', SubmitType::class)
         ;
