@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 
+#[MappedSuperclass]
 abstract class AbstractCharacter
 {
     #[ORM\Column(type: 'string')]
     private string $kind;
     #[ORM\Column(type: 'integer')]
-    private string $level;
+    private int $level;
     #[ORM\Column(type: 'integer')]
     private int $currentHealthPoints;
     #[ORM\Column(type: 'integer')]
@@ -40,12 +42,12 @@ abstract class AbstractCharacter
         return $this;
     }
 
-    public function getLevel(): string
+    public function getLevel(): int
     {
         return $this->level;
     }
 
-    public function setLevel(string $level): AbstractCharacter
+    public function setLevel(int $level): AbstractCharacter
     {
         $this->level = $level;
         return $this;

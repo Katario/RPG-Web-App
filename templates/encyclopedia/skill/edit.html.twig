@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edition de {{ skill.name }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Edition de {{ skill.name }}</h2>
+
+    {{ include('encyclopedia/skill/_form.html.twig') }}
+{% endblock %}

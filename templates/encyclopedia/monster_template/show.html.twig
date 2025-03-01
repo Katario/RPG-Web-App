@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block title %}Monstre {{ monsterTemplate.kind }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Monstre {{ monsterTemplate.kind }}</h2>
+
+    <ul>
+        <li>Famille : {{ monsterTemplate.kind }}</li>
+        <li>Points de vie : min : {{ monsterTemplate.minHealthPoints }} - max : {{ monsterTemplate.maxHealthPoints }}</li>
+        <li>Points d'action : min : {{ monsterTemplate.minActionPoints }} - max : {{ monsterTemplate.maxActionPoints }}</li>
+        <li>Points de fatigue : min : {{ monsterTemplate.minExhaustPoints }} - max : {{ monsterTemplate.maxExhaustPoints }}</li>
+        <li>Points de Mana : min : {{ monsterTemplate.minManaPoints }} - max : {{ monsterTemplate.maxManaPoints }}</li>
+        <li>Strength : min : {{ monsterTemplate.minStrength }} - max : {{ monsterTemplate.maxStrength }}</li>
+        <li>Intelligence : min : {{ monsterTemplate.minIntelligence }} - max : {{ monsterTemplate.maxIntelligence }}</li>
+        <li>Stamina : min : {{ monsterTemplate.minStamina }} - max : {{ monsterTemplate.maxStamina }}</li>
+        <li>Agility : min : {{ monsterTemplate.minAgility }} - max : {{ monsterTemplate.maxAgility }}</li>
+        <li>Charisma : min : {{ monsterTemplate.minCharisma }} - max : {{ monsterTemplate.maxCharisma }}</li>
+    </ul>
+    <div>
+        Compétences :
+
+        {% if monsterTemplate.skills|length == 0 %}
+            -
+        {% else %}
+            <ul>
+                {% for skill in monsterTemplate.skills %}
+                    <li>{{ skill.name }}, {{ skill.description }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        Objets :
+
+        {% if monsterTemplate.items|length == 0 %}
+            -
+        {% else %}
+            <ul>
+                {% for item in monsterTemplate.items %}
+                    <li>{{ item.name }}, {{ item.description }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        Sorts :
+
+        {% if monsterTemplate.spells|length == 0 %}
+            -
+        {% else %}
+        <ul>
+            {% for spell in monsterTemplate.spells %}
+                <li>{{ spell.name }}, {{ spell.manaCost }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+{% endblock %}

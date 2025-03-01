@@ -7,10 +7,23 @@
 
     <ul>
         <li>Nom : {{ monster.name }}</li>
-        <li>Prénom : {{ monster.firstName }}</li>
-        <li>Nom de famille : {{ monster.lastName }}</li>
-        <li>Type : {{ monster.type }}</li>
-        <li>Points de vie : {{ monster.healthPoint }}</li>
+        <li>Espece : {{ monster.kind }}</li>
+        <li>Niveau : {{ monster.level }}</li>
+        <li>Points de vie : {{ monster.currentHealthPoints }} (max: {{ monster.maxHealthPoints }})</li>
+        <li>Points d'Action : {{ monster.currentActionPoints }} (max: {{ monster.maxActionPoints }})</li>
+        <li>Points de fatigue : {{ monster.currentExhaustPoints }} (max: {{ monster.maxExhaustPoints }})</li>
+        <li>Points de Mana : {{ monster.currentManaPoints }} (max: {{ monster.maxManaPoints }})</li>
+        <li>Force : {{ monster.strength }}</li>
+        <li>Intelligence : {{ monster.intelligence }}</li>
+        <li>Endurance : {{ monster.stamina }}</li>
+        <li>Agilité : {{ monster.agility }}</li>
+        <li>Charisme : {{ monster.charisma }}</li>
+        <li>
+            <label for="isBoss">
+                Est-ce un boss ?
+                <input name="isBoss" type="checkbox" disabled {{ monster.isBoss ? 'checked' : '' }}>
+            </label>
+        </li>
     </ul>
     <div>
         Equipement :

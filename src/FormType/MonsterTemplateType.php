@@ -22,22 +22,25 @@ class MonsterTemplateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('family', TextType::class)
             ->add('kind', TextType::class)
-            ->add('strengthMin', IntegerType::class)
-            ->add('strengthMax', IntegerType::class)
-            ->add('intelligenceMin', IntegerType::class)
-            ->add('intelligenceMax', IntegerType::class)
-            ->add('staminaMin', IntegerType::class)
-            ->add('staminaMax', IntegerType::class)
-            ->add('agilityMin', IntegerType::class)
-            ->add('agilityMax', IntegerType::class)
-            ->add('charismaMin', IntegerType::class)
-            ->add('charismaMax', IntegerType::class)
-            ->add('healthPointMin', IntegerType::class)
-            ->add('healthPointMax', IntegerType::class)
-            ->add('manaMin', IntegerType::class)
-            ->add('manaMax', IntegerType::class)
+            ->add('minStrength', IntegerType::class)
+            ->add('maxStrength', IntegerType::class)
+            ->add('minIntelligence', IntegerType::class)
+            ->add('maxIntelligence', IntegerType::class)
+            ->add('minStamina', IntegerType::class)
+            ->add('maxStamina', IntegerType::class)
+            ->add('minAgility', IntegerType::class)
+            ->add('maxAgility', IntegerType::class)
+            ->add('minCharisma', IntegerType::class)
+            ->add('maxCharisma', IntegerType::class)
+            ->add('minHealthPoints', IntegerType::class)
+            ->add('maxHealthPoints', IntegerType::class)
+            ->add('minManaPoints', IntegerType::class)
+            ->add('maxManaPoints', IntegerType::class)
+            ->add('minActionPoints', IntegerType::class)
+            ->add('maxActionPoints', IntegerType::class)
+            ->add('minExhaustPoints', IntegerType::class)
+            ->add('maxExhaustPoints', IntegerType::class)
             ->add('spells', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Spell::class,
@@ -57,7 +60,10 @@ class MonsterTemplateType extends AbstractType
                 'expanded' => true,
             ])
             ->add('isReady', CheckboxType::class, [
-                'data' => true
+                'required' => false,
+            ])
+            ->add('isPrivate', CheckboxType::class, [
+                'required' => false,
             ])
             ->add('submit', SubmitType::class)
         ;

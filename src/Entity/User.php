@@ -35,7 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'gameMaster')]
     private Collection|array $gameMasters;
 
-    #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'character')]
+    #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'user')]
     private Collection|array $characters;
 
     public function __construct()

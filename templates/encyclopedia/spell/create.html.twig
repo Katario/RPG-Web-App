@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créer un Sort {% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Création d'un sort</h2>
+
+    {{ include('encyclopedia/skill/_form.html.twig') }}
+{% endblock %}

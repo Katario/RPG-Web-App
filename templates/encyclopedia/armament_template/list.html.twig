@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des Equipements{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Liste des Equipements</h2>
+
+    <ul>
+        {% for armamentTemplate in armamentTemplates %}
+            <li>{{ armamentTemplate.name }}, {{ armamentTemplate.category }}, {{ armamentTemplate.description }}
+                <a href="{{ path('encyclopedia_show_armament_template', {'id': armamentTemplate.id}) }}"> >>> </a>
+                {#                <a href="{{ path('encyclopedia_edit_armamentTemplate', {'id': armamentTemplate.id}) }}"> +++ </a>#}
+                <a href="{{ path('encyclopedia_delete_armament_template', {'id': armamentTemplate.id}) }}"> xxx </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

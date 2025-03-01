@@ -9,133 +9,68 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasStatsTrait
 {
     #[ORM\Column(type: 'integer')]
-    private int $currentStrength;
+    private int $strength;
     #[ORM\Column(type: 'integer')]
-    private int $maxStrength;
+    private int $intelligence;
     #[ORM\Column(type: 'integer')]
-    private int $currentIntelligence;
+    private int $stamina;
     #[ORM\Column(type: 'integer')]
-    private int $maxIntelligence;
+    private int $agility;
     #[ORM\Column(type: 'integer')]
-    private int $currentStamina;
-    #[ORM\Column(type: 'integer')]
-    private int $maxStamina;
-    #[ORM\Column(type: 'integer')]
-    private int $currentAgility;
-    #[ORM\Column(type: 'integer')]
-    private int $maxAgility;
-    #[ORM\Column(type: 'integer')]
-    private int $currentCharisma;
-    #[ORM\Column(type: 'integer')]
-    private int $maxCharisma;
+    private int $charisma;
 
-    public function getCurrentStrength(): int
+    public function getStrength(): int
     {
-        return $this->currentStrength;
+        return $this->strength;
     }
 
-    public function setCurrentStrength(int $currentStrength): self
+    public function setStrength(int $strength): self
     {
-        $this->currentStrength = $currentStrength;
+        $this->strength = $strength;
         return $this;
     }
 
-    public function getMaxStrength(): int
+    public function getIntelligence(): int
     {
-        return $this->maxStrength;
+        return $this->intelligence;
     }
 
-    public function setMaxStrength(int $maxStrength): self
+    public function setIntelligence(int $intelligence): self
     {
-        $this->maxStrength = $maxStrength;
+        $this->intelligence = $intelligence;
         return $this;
     }
 
-    public function getCurrentIntelligence(): int
+    public function getStamina(): int
     {
-        return $this->currentIntelligence;
+        return $this->stamina;
     }
 
-    public function setCurrentIntelligence(int $currentIntelligence): self
+    public function setStamina(int $stamina): self
     {
-        $this->currentIntelligence = $currentIntelligence;
+        $this->stamina = $stamina;
         return $this;
     }
 
-    public function getMaxIntelligence(): int
+    public function getAgility(): int
     {
-        return $this->maxIntelligence;
+        return $this->agility;
     }
 
-    public function setMaxIntelligence(int $maxIntelligence): self
+    public function setAgility(int $agility): self
     {
-        $this->maxIntelligence = $maxIntelligence;
+        $this->agility = $agility;
         return $this;
     }
 
-    public function getCurrentStamina(): int
+    public function getCharisma(): int
     {
-        return $this->currentStamina;
+        return $this->charisma;
     }
 
-    public function setCurrentStamina(int $currentStamina): self
+    public function setCharisma(int $charisma): self
     {
-        $this->currentStamina = $currentStamina;
-        return $this;
-    }
-
-    public function getMaxStamina(): int
-    {
-        return $this->maxStamina;
-    }
-
-    public function setMaxStamina(int $maxStamina): self
-    {
-        $this->maxStamina = $maxStamina;
-        return $this;
-    }
-
-    public function getCurrentAgility(): int
-    {
-        return $this->currentAgility;
-    }
-
-    public function setCurrentAgility(int $currentAgility): self
-    {
-        $this->currentAgility = $currentAgility;
-        return $this;
-    }
-
-    public function getMaxAgility(): int
-    {
-        return $this->maxAgility;
-    }
-
-    public function setMaxAgility(int $maxAgility): self
-    {
-        $this->maxAgility = $maxAgility;
-        return $this;
-    }
-
-    public function getCurrentCharisma(): int
-    {
-        return $this->currentCharisma;
-    }
-
-    public function setCurrentCharisma(int $currentCharisma): self
-    {
-        $this->currentCharisma = $currentCharisma;
-        return $this;
-    }
-
-    public function getMaxCharisma(): int
-    {
-        return $this->maxCharisma;
-    }
-
-    public function setMaxCharisma(int $maxCharisma): self
-    {
-        $this->maxCharisma = $maxCharisma;
+        $this->charisma = $charisma;
         return $this;
     }
 }

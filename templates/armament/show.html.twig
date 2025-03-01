@@ -2,12 +2,29 @@
 {% block title %}Armament {{ armament.name }}{% endblock %}
 
 {% block main %}
-    <h2>Armament {{ armament.name }} - {{ armament.type }}</h2>
+    <h2>Armament {{ armament.name }} - {{ armament.category }}</h2>
 
     <ul>
         <li>Nom : {{ armament.name }}</li>
-        <li>Type : {{ armament.type }}</li>
+        <li>Type : {{ armament.category }}</li>
         <li>Value : {{ armament.value }}</li>
-        <li>Durability : {{ armament.durability }}</li>
+        <li>Durability : Current: {{ armament.currentDurability }} (max: {{ armament.maxDurability }})</li>
+        <li>Description : {{ armament.description }}</li>
     </ul>
+    <div>
+        Compétences :
+        <ul>
+            {% for skill in armament.skills %}
+                <li>{{ skill.name }}, {{ skill.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Sorts :
+        <ul>
+            {% for spell in armament.spells %}
+                <li>{{ spell.name }}, {{ spell.manaCost }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

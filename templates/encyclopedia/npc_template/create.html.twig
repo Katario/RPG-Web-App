@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créer un template de PNJ {% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Créer un template de PNJ</h2>
+
+    {{ include('encyclopedia/npc_template/_form.html.twig') }}
+{% endblock %}

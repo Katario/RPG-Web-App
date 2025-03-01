@@ -24,9 +24,10 @@ class ArmamentType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('type', TextType::class)
+            ->add('category', TextType::class)
             ->add('value', IntegerType::class)
-            ->add('durability', IntegerType::class)
+            ->add('currentDurability', IntegerType::class)
+            ->add('maxDurability', IntegerType::class)
             ->add('description', TextType::class)
             ->add('skills', EntityType::class, [
                 'choice_label' => 'name',
@@ -40,13 +41,7 @@ class ArmamentType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-//            ->add('gameId', IntegerType::class, [
-//                'mapped' => false,
-//            ])
-            ->add('game', EntityType::class, [
-                'choice_label' => 'name',
-                'class' => Game::class,
-            ])
+            ->add('game', EntityHiddenType::class)
             ->add('submit', SubmitType::class)
         ;
     }

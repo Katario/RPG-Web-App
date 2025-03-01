@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edition d'un Equipement {% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Back</a>
+    <h2>Edition d'un Equipement</h2>
+
+    {{ include('encyclopedia/armament_template/_form.html.twig') }}
+{% endblock %}

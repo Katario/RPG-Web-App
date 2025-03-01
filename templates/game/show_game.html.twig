@@ -9,91 +9,17 @@
             game="{{ game }}"
         />
 
-        <div class="bg-lime-300">
-            <span class="text-2xl">
-                Mes Monstres :
-            </span>
-            <ul class="flex flex-row gap-8 flex-wrap">
-{#                {% for monster in game.monsters %}#}
-{#                    <twig:Card#}
-{#                        show="{{ path('show_monster', {'id': monster.id}) }}"#}
-{#                        edit="{{ path('edit_monster', {'id': monster.id}) }}"#}
-{#                        delete="{{ path('delete_monster', {'id': monster.id}) }}"#}
-{#                        title="{{ monster.name }} - {{ monster.type }}"#}
-{#                    >#}
-{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
-{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
-{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
-{#                        <span class="basis-1/4">{{ monster.healthPoint }}/{{ monster.healthPoint }} PV</span>#}
-{#                    </twig:Card>#}
-{#                {% endfor %}#}
-            </ul>
-            Ajouter un nouveau monstre <a href="{{ path('generate_monster', {'id': game.id}) }}"> >>> </a>
-        </div>
-        <div class="bg-pink-300">
-            Mes Personnages Non-Joueurs :
-            <ul>
-                {% if game.nonPlayableCharacters is empty %}
-                    Nothing to see here!
-                {% endif %}
-{#                {% for nonPlayableCharacter in game.nonPlayableCharacters %}#}
-{#                    <li>{{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}, {{ nonPlayableCharacter.title }}#}
-{#                        <a href="{{ path('game_master_show_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> >>> </a>#}
-{#                        <a href="{{ path('game_master_edit_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> +++ </a>#}
-{#                        <a href="{{ path('game_master_delete_non_playable_character', {'id': nonPlayableCharacter.id}) }}"> XXX </a>#}
-{#                    </li>#}
-{#                    <twig:Card#}
-{#                        show="{{ path('game_master_show_non_playable_character', {'id': nonPlayableCharacter.id}) }}"#}
-{#                        edit="{{ path('game_master_edit_non_playable_character', {'id': nonPlayableCharacter.id}) }}"#}
-{#                        delete="{{ path('game_master_delete_non_playable_characters', {'id': nonPlayableCharacter.id}) }}"#}
-{#                        title="{{ nonPlayableCharacter.name }} {{ nonPlayableCharacter.lastName }} - {{ nonPlayableCharacter.title }}"#}
-{#                        subtitle="{{ character.user.username }}"#}
-{#                    >#}
-{#                        <span class="basis-1/4">{{ nonPlayableCharacter.healthPoints }}/{{ nonPlayableCharacter.maxHealthPoints }} PV</span>#}
-{#                        <span class="basis-1/4">{{ nonPlayableCharacter.healthPoints }}/{{ nonPlayableCharacter.maxHealthPoints }} PV</span>#}
-{#                        <span class="basis-1/4">{{ nonPlayableCharacter.healthPoints }}/{{ nonPlayableCharacter.maxHealthPoints }} PV</span>#}
-{#                        <span class="basis-1/4">{{ nonPlayableCharacter.healthPoints }}/{{ nonPlayableCharacter.maxHealthPoints }} PV</span>#}
-{#                    </twig:Card>#}
-{#                {% endfor %}#}
-            </ul>
-            Ajouter un nouveau Personnage non-joueur <a href="{{ path('generate_non_playable_character', {'id': game.id}) }}"> >>> </a>
-        </div>
-        <div class="bg-teal-300">
-{#            {% for armament in game.armaments %}#}
-{#                <twig:Card#}
-{#                    show="{{ path('game_master_show_armaments', {'id': armaments.id}) }}"#}
-{#                    edit="{{ path('game_master_edit_armaments', {'id': armaments.id}) }}"#}
-{#                    delete="{{ path('game_master_delete_armamentss', {'id': armaments.id}) }}"#}
-{#                    title="{{ armaments.name }} {{ armaments.lastName }} - {{ armaments.title }}"#}
-{#                    subtitle="{{ character.user.username }}"#}
-{#                >#}
-{#                    <span class="basis-1/4">{{ armaments.healthPoints }}/{{ armaments.maxHealthPoints }} PV</span>#}
-{#                    <span class="basis-1/4">{{ armaments.healthPoints }}/{{ armaments.maxHealthPoints }} PV</span>#}
-{#                    <span class="basis-1/4">{{ armaments.healthPoints }}/{{ armaments.maxHealthPoints }} PV</span>#}
-{#                    <span class="basis-1/4">{{ armaments.healthPoints }}/{{ armaments.maxHealthPoints }} PV</span>#}
-{#                </twig:Card>#}
-{#            {% endfor %}#}
-{#            <twig:Modal#}
-{#                :closeButton="true"#}
-{#                :fixedTop="true"#}
-{#                id="armament-search-modal"#}
-{#            >#}
-{#                <twig:block name="trigger">#}
-{#                    <twig:Button#}
-{#                        variant="link"#}
-{#                        type="button"#}
-{#                        data-action="modal#open"#}
-{#                    >#}
-{#                        Ajouter un nouvel équipement >>>#}
-{#                    </twig:Button>#}
-{#                </twig:block>#}
-{#                <twig:GenerateFromTemplate />#}
-{#            </twig:Modal>#}
+        <twig:Molecule:NonPlayableCharacterBlock
+            game="{{ game }}"
+        />
 
-            <twig:Molecule:ArmamentBlock
-                game="{{ game }}"
-            />
-        </div>
+        <twig:Molecule:MonsterBlock
+            game="{{ game }}"
+        />
+
+        <twig:Molecule:ArmamentBlock
+            game="{{ game }}"
+        />
 
         <twig:Button
             tag="a"

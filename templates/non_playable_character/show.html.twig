@@ -1,15 +1,24 @@
 {% extends 'base.html.twig' %}
-{% block title %}Fiche de {{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}{% endblock %}
+{% block title %}Fiche de {{ nonPlayableCharacter.name }} {{ nonPlayableCharacter.lastName }}{% endblock %}
 
 {% block main %}
     <a href="{{ path('home') }}">Retour</a>
-    <h2>Voici {{ nonPlayableCharacter.firstName }} {{ nonPlayableCharacter.lastName }}</h2>
+    <h2>Voici {{ nonPlayableCharacter.name }} {{ nonPlayableCharacter.lastName }}</h2>
 
     <ul>
-        <li>Prénom : {{ nonPlayableCharacter.firstName }}</li>
-        <li>Nom de famille : {{ nonPlayableCharacter.lastName }}</li>
-        <li>Titre : {{ nonPlayableCharacter.title }}</li>
-        <li>Points de vie : {{ nonPlayableCharacter.healthPoint }}</li>
+        <li>Nom : {{ nonPlayableCharacter.name }}</li>
+        <li>Classe : {{ nonPlayableCharacter.title }}</li>
+        <li>Espece : {{ nonPlayableCharacter.kind }}</li>
+        <li>Niveau : {{ nonPlayableCharacter.level }}</li>
+        <li>Points de vie : {{ nonPlayableCharacter.currentHealthPoints }} (max: {{ nonPlayableCharacter.maxHealthPoints }})</li>
+        <li>Points d'Action : {{ nonPlayableCharacter.currentActionPoints }} (max: {{ nonPlayableCharacter.maxActionPoints }})</li>
+        <li>Points de fatigue : {{ nonPlayableCharacter.currentExhaustPoints }} (max: {{ nonPlayableCharacter.maxExhaustPoints }})</li>
+        <li>Points de Mana : {{ nonPlayableCharacter.currentManaPoints }} (max: {{ nonPlayableCharacter.maxManaPoints }})</li>
+        <li>Force : {{ nonPlayableCharacter.strength }}</li>
+        <li>Intelligence : {{ nonPlayableCharacter.intelligence }}</li>
+        <li>Endurance : {{ nonPlayableCharacter.stamina }}</li>
+        <li>Agilité : {{ nonPlayableCharacter.agility }}</li>
+        <li>Charisme : {{ nonPlayableCharacter.charisma }}</li>
     </ul>
     <div>
         Equipement :

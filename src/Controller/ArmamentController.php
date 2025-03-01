@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Armament;
+use App\Entity\Game;
 use App\Factory\ArmamentFactory;
 use App\FormType\ArmamentType;
 use App\Repository\ArmamentRepository;
 use App\Repository\ArmamentTemplateRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,9 +112,14 @@ class ArmamentController
         ]));
     }
 
-    #[Route('/armaments/generate', name: 'generate_armament', methods: ['GET', 'POST'])]
+    #[Route('/games/{gameId}/armaments/generate',
+        name: 'generate_armament',
+        requirements: ['gameId' => '\d+'],
+        methods: ['GET', 'POST']),
+    ]
     public function generateArmament(
         Request $request,
+        #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
         ArmamentFactory $armamentFactory,
         ArmamentTemplateRepository $armamentTemplateRepository,
     ): Response|RedirectResponse
@@ -120,14 +127,17 @@ class ArmamentController
         if ($request->get('armamentTemplateId')) {
             $armamentTemplate = $armamentTemplateRepository->find($request->get('armamentTemplateId'));
             $armament = $armamentFactory->createOneFromArmamentTemplate($armamentTemplate);
+            $armament->setGame($game);
         } else {
             $armament = new Armament();
+            $armament->setGame($game);
         }
 
         $form = $this->formFactory->create(ArmamentType::class, $armament);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Armament $character */
             $armament = $form->getData();
 
             $this->armamentRepository->save($armament);

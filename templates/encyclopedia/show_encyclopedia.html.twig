@@ -18,6 +18,7 @@
         Afficher tous les sorts <a href="{{ path('encyclopedia_show_spells') }}"> >>> </a> <br />
         Ajouter un nouveau sort <a href="{{ path('encyclopedia_create_spell') }}"> +++ </a>
     </div>
+    <hr class="h-px my-8 w-72 mx-auto bg-gray-200 border-0 dark:bg-gray-700">
     <div>
         <h4>Consulter les Objets:</h4>
         <div>
@@ -31,6 +32,7 @@
         Afficher tous les objets <a href="{{ path('encyclopedia_show_items') }}"> >>> </a> <br />
         Ajouter un nouvel objet <a href="{{ path('encyclopedia_create_item') }}"> +++ </a>
     </div>
+    <hr class="h-px my-8 w-72 mx-auto bg-gray-200 border-0 dark:bg-gray-700">
     <div>
         <h4>Consulter les Skills:</h4>
         <div>
@@ -44,6 +46,7 @@
         Afficher toutes les compétences <a href="{{ path('encyclopedia_show_skills') }}"> >>> </a> <br />
         Ajouter une nouvelle compétence <a href="{{ path('encyclopedia_create_skill') }}"> +++ </a>
     </div>
+    <hr class="h-px my-8 w-72 mx-auto bg-gray-200 border-0 dark:bg-gray-700">
     <div>
         <h4>Consulter les templates d'équipements:</h4>
         <div>
@@ -57,39 +60,42 @@
         Afficher toutes les templates d'équipements <a href="{{ path('encyclopedia_show_armament_templates') }}"> >>> </a> <br />
         Ajouter un nouveau template d'équipement <a href="{{ path('encyclopedia_create_armament_template') }}"> +++ </a>
     </div>
+    <hr class="h-px my-8 w-72 mx-auto bg-gray-200 border-0 dark:bg-gray-700">
     <div>
         <h4>Consulter les templates de monstres:</h4>
         <div>
             Les 5 derniers:
             <ul>
                 {% for monsterTemplate in lastMonsterTemplates %}
-                    <li>{{ monsterTemplate.family }} - <a href="{{ path('encyclopedia_show_monster_template', {'id': monsterTemplate.id}) }}"> more >>> </a></li>
+                    <li>{{ monsterTemplate.kind }} - <a href="{{ path('encyclopedia_show_monster_template', {'id': monsterTemplate.id}) }}"> more >>> </a></li>
                 {% endfor %}
             </ul>
         </div>
         Afficher toutes les templates de monstres <a href="{{ path('encyclopedia_show_monster_templates') }}"> >>> </a> <br />
         Ajouter un nouveau template de monstre <a href="{{ path('encyclopedia_create_monster_template') }}"> +++ </a>
     </div>
+    <hr class="h-px my-8 w-72 mx-auto bg-gray-200 border-0 dark:bg-gray-700">
     <div>
         <h4>Consulter les templates de PNJ:</h4>
         <div>
             Les 5 derniers:
             <ul>
                 {% for nonPlayableCharacterTemplate in lastNonPlayableCharacterTemplates %}
-                    <li>{{ nonPlayableCharacterTemplate.name }} - <a href="{{ path('encyclopedia_show_non_playable_character_template', {'id': nonPlayableCharacterTemplate.id}) }}"> more >>> </a></li>
+                    <li>{{ nonPlayableCharacterTemplate.kind }} - <a href="{{ path('encyclopedia_show_non_playable_character_template', {'id': nonPlayableCharacterTemplate.id}) }}"> more >>> </a></li>
                 {% endfor %}
             </ul>
         </div>
         Afficher toutes les templates de PNJ <a href="{{ path('encyclopedia_show_non_playable_character_templates') }}"> >>> </a> <br />
         Ajouter un nouveau template de PNJ <a href="{{ path('encyclopedia_create_non_playable_character_template') }}"> +++ </a>
     </div>
+    <hr class="h-px my-8 w-72 mx-auto bg-gray-200 border-0 dark:bg-gray-700">
     <div>
         <h4>Consulter les templates de Personnage:</h4>
         <div>
             Les 5 derniers:
             <ul>
                 {% for characterTemplate in lastCharacterTemplates %}
-                    <li>{{ characterTemplate.name }} - <a href="{{ path('encyclopedia_show_character_template', {'id': characterTemplate.id}) }}"> more >>> </a></li>
+                    <li>{{ characterTemplate.kind }} - <a href="{{ path('encyclopedia_show_character_template', {'id': characterTemplate.id}) }}"> more >>> </a></li>
                 {% endfor %}
             </ul>
         </div>

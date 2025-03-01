@@ -21,6 +21,22 @@ class MonsterTemplateRepository extends ServiceEntityRepository
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
+    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    {
+        $queryBuilder =  $this->createQueryBuilder('mt');
+        $queryBuilder->where('mt.kind LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('mt.kind', $orderBy)
+        ;
+
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
 
     public function delete(MonsterTemplate $monsterTemplate): void
     {

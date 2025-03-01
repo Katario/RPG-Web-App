@@ -16,7 +16,7 @@ abstract class Encyclopedia
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     protected bool $isPrivate;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'creator')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[JoinColumn(name: 'created_by', referencedColumnName: 'id')]
     private User $createdBy;
 

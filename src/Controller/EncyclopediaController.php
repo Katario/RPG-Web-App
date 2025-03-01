@@ -37,12 +37,15 @@ use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 #[AsController]
-class EncyclopediaController
+readonly class EncyclopediaController
 {
     public function __construct(
-        private readonly RouterInterface $router,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly Environment $twig
+        private RouterInterface      $router,
+        private FormFactoryInterface $formFactory,
+        private Environment          $twig,
+        private ItemRepository       $itemRepository,
+        private SkillRepository      $skillRepository,
+        private SpellRepository      $spellRepository,
     ) {}
 
     #[Route('/encyclopedia', name: 'show_encyclopedia', methods: ['GET'])]
@@ -100,7 +103,7 @@ class EncyclopediaController
         }
 
         return new Response(
-            $this->twig->render('encyclopedia/create_spell.html.twig', [
+            $this->twig->render('encyclopedia/spell/create.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -112,7 +115,7 @@ class EncyclopediaController
         $spells = $spellRepository->findAll();
 
         return new Response(
-            $this->twig->render('encyclopedia/show_spells.html.twig', [
+            $this->twig->render('encyclopedia/spell/list.html.twig', [
                 'spells' => $spells
             ])
         );
@@ -127,7 +130,7 @@ class EncyclopediaController
         $spell = $spellRepository->find($id);
 
         return new Response(
-            $this->twig->render('encyclopedia/show_spell.html.twig', [
+            $this->twig->render('encyclopedia/spell/show.html.twig', [
                 'spell' => $spell
             ])
         );
@@ -153,13 +156,12 @@ class EncyclopediaController
         return new RedirectResponse($this->router->generate('encyclopedia_show_spells'));
     }
 
-    #[Route('/encyclopedia/create-item',
+    #[Route('/encyclopedia/items/create',
         name: 'encyclopedia_create_item',
         methods: ['GET', 'POST']
     )]
     public function createItem(
-        Request             $request,
-        ItemRepository $itemRepository,
+        Request $request,
     ): Response|RedirectResponse
     {
         $form = $this->formFactory->create(ItemType::class);
@@ -170,13 +172,13 @@ class EncyclopediaController
             /** @var Item $spell */
             $item = $form->getData();
 
-            $itemRepository->save($item);
+            $this->itemRepository->save($item);
 
             return new RedirectResponse($this->router->generate('show_encyclopedia'));
         }
 
         return new Response(
-            $this->twig->render('encyclopedia/create_item.html.twig', [
+            $this->twig->render('encyclopedia/item/create.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -188,7 +190,7 @@ class EncyclopediaController
         $items = $itemRepository->findAll();
 
         return new Response(
-            $this->twig->render('encyclopedia/show_items.html.twig', [
+            $this->twig->render('encyclopedia/item/list.html.twig', [
                 'items' => $items
             ])
         );
@@ -203,7 +205,7 @@ class EncyclopediaController
         $item = $itemRepository->find($id);
 
         return new Response(
-            $this->twig->render('encyclopedia/show_item.html.twig', [
+            $this->twig->render('encyclopedia/item/show.html.twig', [
                 'item' => $item
             ])
         );
@@ -252,7 +254,7 @@ class EncyclopediaController
         }
 
         return new Response(
-            $this->twig->render('encyclopedia/create_skill.html.twig', [
+            $this->twig->render('encyclopedia/skill/create.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -264,7 +266,7 @@ class EncyclopediaController
         $skills = $skillRepository->findAll();
 
         return new Response(
-            $this->twig->render('encyclopedia/show_skills.html.twig', [
+            $this->twig->render('encyclopedia/skill/list.html.twig', [
                 'skills' => $skills
             ])
         );
@@ -279,7 +281,7 @@ class EncyclopediaController
         $skill = $skillRepository->find($id);
 
         return new Response(
-            $this->twig->render('encyclopedia/show_skill.html.twig', [
+            $this->twig->render('encyclopedia/skill/show.html.twig', [
                 'skill' => $skill
             ])
         );
@@ -328,7 +330,7 @@ class EncyclopediaController
         }
 
         return new Response(
-            $this->twig->render('encyclopedia/create_armament_template.html.twig', [
+            $this->twig->render('encyclopedia/armament_template/create.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -340,7 +342,7 @@ class EncyclopediaController
         $armamentTemplates = $armamentTemplateRepository->findAll();
 
         return new Response(
-            $this->twig->render('encyclopedia/show_armament_templates.html.twig', [
+            $this->twig->render('encyclopedia/armament_template/list.html.twig', [
                 'armamentTemplates' => $armamentTemplates
             ])
         );
@@ -355,7 +357,7 @@ class EncyclopediaController
         $armamentTemplate = $armamentTemplateRepository->find($id);
 
         return new Response(
-            $this->twig->render('encyclopedia/show_armament_template.html.twig', [
+            $this->twig->render('encyclopedia/armament_template/show.html.twig', [
                 'armamentTemplate' => $armamentTemplate
             ])
         );
@@ -404,7 +406,7 @@ class EncyclopediaController
         }
 
         return new Response(
-            $this->twig->render('encyclopedia/create_monster_template.html.twig', [
+            $this->twig->render('encyclopedia/monster_template/create.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -416,7 +418,7 @@ class EncyclopediaController
         $monsterTemplates = $monsterTemplateRepository->findAll();
 
         return new Response(
-            $this->twig->render('encyclopedia/show_monster_templates.html.twig', [
+            $this->twig->render('encyclopedia/monster_template/list.html.twig', [
                 'monsterTemplates' => $monsterTemplates
             ])
         );
@@ -431,7 +433,7 @@ class EncyclopediaController
         $monsterTemplate = $monsterTemplateRepository->find($id);
 
         return new Response(
-            $this->twig->render('encyclopedia/show_monster_template.html.twig', [
+            $this->twig->render('encyclopedia/monster_template/show.html.twig', [
                 'monsterTemplate' => $monsterTemplate
             ])
         );
@@ -482,7 +484,7 @@ class EncyclopediaController
         }
 
         return new Response(
-            $this->twig->render('encyclopedia/create_non_playable_character_template.html.twig', [
+            $this->twig->render('encyclopedia/npc_template/create.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -494,7 +496,7 @@ class EncyclopediaController
         $nonPlayableCharacterTemplates = $nonPlayableCharacterTemplateRepository->findAll();
 
         return new Response(
-            $this->twig->render('encyclopedia/show_non_playable_character_templates.html.twig', [
+            $this->twig->render('encyclopedia/npc_template/list.html.twig', [
                 'nonPlayableCharacterTemplates' => $nonPlayableCharacterTemplates
             ])
         );
@@ -509,7 +511,7 @@ class EncyclopediaController
         $nonPlayableCharacterTemplate = $nonPlayableCharacterTemplateRepository->find($id);
 
         return new Response(
-            $this->twig->render('encyclopedia/show_non_playable_character_template.html.twig', [
+            $this->twig->render('encyclopedia/npc_template/show.html.twig', [
                 'nonPlayableCharacterTemplate' => $nonPlayableCharacterTemplate
             ])
         );
@@ -535,17 +537,6 @@ class EncyclopediaController
         return new RedirectResponse($this->router->generate('encyclopedia_show_non_playable_character_templates'));
     }
 
-
-
-
-
-
-
-
-
-
-
-
     #[Route('/encyclopedia/create-character',
         name: 'encyclopedia_create_character_template',
         methods: ['GET', 'POST']
@@ -569,7 +560,7 @@ class EncyclopediaController
         }
 
         return new Response(
-            $this->twig->render('encyclopedia/create_character_template.html.twig', [
+            $this->twig->render('encyclopedia/character_template/create.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -581,7 +572,7 @@ class EncyclopediaController
         $characterTemplates = $characterTemplateRepository->findAll();
 
         return new Response(
-            $this->twig->render('encyclopedia/show_character_templates.html.twig', [
+            $this->twig->render('encyclopedia/character_template/list.html.twig', [
                 'characterTemplates' => $characterTemplates
             ])
         );
@@ -596,7 +587,7 @@ class EncyclopediaController
         $characterTemplate = $characterTemplateRepository->find($id);
 
         return new Response(
-            $this->twig->render('encyclopedia/show_character_template.html.twig', [
+            $this->twig->render('encyclopedia/character_template/show.html.twig', [
                 'characterTemplate' => $characterTemplate
             ])
         );

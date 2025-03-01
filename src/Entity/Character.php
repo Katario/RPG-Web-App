@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'playable_character')]
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Character extends AbstractCharacter
 {
     use HasDateTimeTrait;

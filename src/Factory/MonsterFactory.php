@@ -14,19 +14,39 @@ class MonsterFactory
     public function createOneFromMonsterTemplate(MonsterTemplate $monsterTemplate): Monster
     {
         $monster = new Monster();
-        $monster->setFamily($monsterTemplate->getFamily())
+        $monster
             ->setKind($monsterTemplate->getKind())
-            ->setDescription($monsterTemplate->getDescription())
-            ->setSkills($monsterTemplate->getSkills())
+            ->setCurrentHealthPoints($monsterTemplate->getMaxHealthPoints())
+            ->setMaxHealthPoints($monsterTemplate->getMaxHealthPoints())
+            ->setCurrentActionPoints($monsterTemplate->getMaxActionPoints())
+            ->setMaxActionPoints($monsterTemplate->getMaxActionPoints())
+            ->setCurrentManaPoints($monsterTemplate->getMaxManaPoints())
+            ->setMaxManaPoints($monsterTemplate->getMaxManaPoints())
+            ->setCurrentExhaustPoints($monsterTemplate->getMaxExhaustPoints())
+            ->setMaxExhaustPoints($monsterTemplate->getMaxExhaustPoints())
+            ->setStrength(rand(
+                $monsterTemplate->getMinStrength(),
+                $monsterTemplate->getMaxStrength()
+            ))
+            ->setIntelligence(rand(
+                $monsterTemplate->getMinIntelligence(),
+                $monsterTemplate->getMaxIntelligence()
+            ))
+            ->setStamina(rand(
+                $monsterTemplate->getMinStamina(),
+                $monsterTemplate->getMaxStamina()
+            ))
+            ->setAgility(rand(
+                $monsterTemplate->getMinAgility(),
+                $monsterTemplate->getMaxAgility()
+            ))
+            ->setCharisma(rand(
+                $monsterTemplate->getMinCharisma(),
+                $monsterTemplate->getMaxCharisma()
+            ))
             ->setSpells($monsterTemplate->getSpells())
-        ;
-
-        $monster->setValue(
-            $this->generateBetweenMinAndMax($monsterTemplate->getValueMin(), $monsterTemplate->getValueMax())
-        )
-            ->setDurability(
-                $this->generateBetweenMinAndMax($monsterTemplate->getDurabilityMin(), $monsterTemplate->getDurabilityMax())
-            );
+            ->setItems($monsterTemplate->getItems())
+            ->setSkills($monsterTemplate->getSkills());
 
         return $monster;
     }

@@ -22,16 +22,30 @@ class NonPlayableCharacterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName', TextType::class)
+            ->add('name', TextType::class)
             ->add('lastName', TextType::class)
             ->add('title', TextType::class)
+            ->add('kind', TextType::class)
+            ->add('level', IntegerType::class)
             ->add('strength', IntegerType::class)
             ->add('intelligence', IntegerType::class)
             ->add('stamina', IntegerType::class)
             ->add('agility', IntegerType::class)
             ->add('charisma', IntegerType::class)
-            ->add('healthPoint', IntegerType::class)
-            ->add('mana', IntegerType::class)
+            ->add('currentHealthPoints', IntegerType::class)
+            ->add('maxHealthPoints', IntegerType::class)
+            ->add('currentManaPoints', IntegerType::class)
+            ->add('maxManaPoints', IntegerType::class)
+            ->add('currentActionPoints', IntegerType::class)
+            ->add('maxActionPoints', IntegerType::class)
+            ->add('currentExhaustPoints', IntegerType::class)
+            ->add('maxExhaustPoints', IntegerType::class)
+            ->add('armaments', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Armament::class,
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('spells', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Spell::class,
@@ -50,12 +64,7 @@ class NonPlayableCharacterType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('armaments', EntityType::class, [
-                'choice_label' => 'name',
-                'class' => Armament::class,
-                'multiple' => true,
-                'expanded' => true,
-            ])
+            ->add('game', EntityHiddenType::class)
             ->add('submit', SubmitType::class)
         ;
     }

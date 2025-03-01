@@ -22,12 +22,12 @@ class ArmamentTemplateType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('type', TextType::class)
-            ->add('valueMin', IntegerType::class)
-            ->add('valueMax', IntegerType::class)
-            ->add('durabilityMin', IntegerType::class)
-            ->add('durabilityMax', IntegerType::class)
+            ->add('category', TextType::class)
+            ->add('value', IntegerType::class)
+            ->add('minDurability', IntegerType::class)
+            ->add('maxDurability', IntegerType::class)
             ->add('description', TextType::class)
+            ->add('weight', IntegerType::class)
             ->add('skills', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Skill::class,
@@ -41,7 +41,10 @@ class ArmamentTemplateType extends AbstractType
                 'expanded' => true,
             ])
             ->add('isReady', CheckboxType::class, [
-                'data' => true
+                'required' => false,
+            ])
+            ->add('isPrivate', CheckboxType::class, [
+                'required' => false,
             ])
             ->add('submit', SubmitType::class)
         ;

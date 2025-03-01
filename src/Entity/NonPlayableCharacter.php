@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NonPlayableCharacterRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class NonPlayableCharacter extends AbstractCharacter
 {
     use HasDateTimeTrait;
@@ -73,6 +74,17 @@ class NonPlayableCharacter extends AbstractCharacter
     public function setLastName(?string $lastName): NonPlayableCharacter
     {
         $this->lastName = $lastName;
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): NonPlayableCharacter
+    {
+        $this->name = $name;
         return $this;
     }
 

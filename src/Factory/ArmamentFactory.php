@@ -14,18 +14,13 @@ class ArmamentFactory
         $armament = new Armament();
         $armament
             ->setName($armamentTemplate->getName())
-            ->setType($armamentTemplate->getType())
+            ->setCategory($armamentTemplate->getCategory())
+            ->setValue($armamentTemplate->getValue())
+            ->setCurrentDurability($armamentTemplate->getMaxDurability())
+            ->setMaxDurability($armamentTemplate->getMaxDurability())
             ->setDescription($armamentTemplate->getDescription())
-            ->setSkills($armamentTemplate->getSkills())
             ->setSpells($armamentTemplate->getSpells())
-        ;
-
-        $armament->setValue(
-            $this->generateBetweenMinAndMax($armamentTemplate->getValueMin(), $armamentTemplate->getValueMax())
-        )
-            ->setDurability(
-            $this->generateBetweenMinAndMax($armamentTemplate->getDurabilityMin(), $armamentTemplate->getDurabilityMax())
-        );
+            ->setSkills($armamentTemplate->getSkills());
 
         return $armament;
     }

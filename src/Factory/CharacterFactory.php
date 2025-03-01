@@ -13,8 +13,39 @@ class CharacterFactory
     {
         $character = new Character();
         $character
-            ->setName($characterTemplate->getName())
             ->setTitle($characterTemplate->getTitle())
+            ->setKind($characterTemplate->getKind())
+            ->setCurrentHealthPoints($characterTemplate->getMaxHealthPoints())
+            ->setMaxHealthPoints($characterTemplate->getMaxHealthPoints())
+            ->setCurrentActionPoints($characterTemplate->getMaxActionPoints())
+            ->setMaxActionPoints($characterTemplate->getMaxActionPoints())
+            ->setCurrentManaPoints($characterTemplate->getMaxManaPoints())
+            ->setMaxManaPoints($characterTemplate->getMaxManaPoints())
+            ->setCurrentExhaustPoints($characterTemplate->getMaxExhaustPoints())
+            ->setMaxExhaustPoints($characterTemplate->getMaxExhaustPoints())
+            ->setStrength(rand(
+                $characterTemplate->getMinStrength(),
+                $characterTemplate->getMaxStrength()
+            ))
+            ->setIntelligence(rand(
+                $characterTemplate->getMinIntelligence(),
+                $characterTemplate->getMaxIntelligence()
+            ))
+            ->setStamina(rand(
+                $characterTemplate->getMinStamina(),
+                $characterTemplate->getMaxStamina()
+            ))
+            ->setAgility(rand(
+                $characterTemplate->getMinAgility(),
+                $characterTemplate->getMaxAgility()
+            ))
+            ->setCharisma(rand(
+                $characterTemplate->getMinCharisma(),
+                $characterTemplate->getMaxCharisma()
+            ))
+            ->setSpells($characterTemplate->getSpells())
+            ->setItems($characterTemplate->getItems())
+            ->setSkills($characterTemplate->getSkills())
         ;
 
         return $character;

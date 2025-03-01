@@ -6,10 +6,43 @@
     <h2>Voici votre personnage</h2>
 
     <ul>
-        <li>Nom : {{ character.lastName }}</li>
-        <li>Prénom : {{ character.name }}</li>
+        <li>Nom : {{ character.name }}</li>
+        <li>Joueur : {{ character.user.username }}</li>
         <li>Classe : {{ character.title }}</li>
-        <li>Niveau : {{ character.currentLevel }}</li>
-        <li>Points de vie : {{ character.healthPoints }} / {{ character.maxHealthPoints }}</li>
+        <li>Espece : {{ character.kind }}</li>
+        <li>Niveau : {{ character.level }}</li>
+        <li>Points de vie : {{ character.currentHealthPoints }} (max: {{ character.maxHealthPoints }})</li>
+        <li>Points d'Action : {{ character.currentActionPoints }} (max: {{ character.maxActionPoints }})</li>
+        <li>Points de fatigue : {{ character.currentExhaustPoints }} (max: {{ character.maxExhaustPoints }})</li>
+        <li>Points de Mana : {{ character.currentManaPoints }} (max: {{ character.maxManaPoints }})</li>
+        <li>Force : {{ character.strength }}</li>
+        <li>Intelligence : {{ character.intelligence }}</li>
+        <li>Endurance : {{ character.stamina }}</li>
+        <li>Agilité : {{ character.agility }}</li>
+        <li>Charisme : {{ character.charisma }}</li>
     </ul>
+    <div>
+        Equipement :
+        <ul>
+            {% for armament in character.armaments %}
+                <li>{{ armament.name }}, {{ armament.category }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Compétences :
+        <ul>
+            {% for skill in character.skills %}
+                <li>{{ skill.name }}, {{ skill.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Sorts :
+        <ul>
+            {% for spell in character.spells %}
+                <li>{{ spell.name }}, {{ spell.manaCost }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

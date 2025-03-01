@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des Personnages{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Liste des Templates de Personnage</h2>
+
+    <ul>
+        {% for characterTemplate in characterTemplates %}
+            <li>{{ characterTemplate.title }}, {{ characterTemplate.kind }}
+                <a href="{{ path('encyclopedia_show_character_template', {'id': characterTemplate.id}) }}"> >>> </a>
+                {#                <a href="{{ path('encyclopedia_edit_characterTemplate', {'id': characterTemplate.id}) }}"> +++ </a>#}
+                <a href="{{ path('encyclopedia_delete_character_template', {'id': characterTemplate.id}) }}"> xxx </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -21,6 +21,23 @@ class NonPlayableCharacterTemplateRepository extends ServiceEntityRepository
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
+    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    {
+        $queryBuilder =  $this->createQueryBuilder('npct');
+        $queryBuilder->where('npct.title LIKE :query')
+            ->orWhere('npct.kind LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('npct.title', $orderBy)
+        ;
+
+        if ($limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
 
     public function delete(NonPlayableCharacterTemplate $nonPlayableCharacter): void
     {

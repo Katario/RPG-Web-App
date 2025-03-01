@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Game;
 use App\Entity\Monster;
 use App\Factory\MonsterFactory;
 use App\FormType\MonsterType;
 use App\Repository\MonsterRepository;
 use App\Repository\MonsterTemplateRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +40,7 @@ class MonsterController
         $monster = $this->monsterRepository->find($id);
 
         return new Response(
-            $this->twig->render('game_master/show.html.twig', [
+            $this->twig->render('monster/show.html.twig', [
                 'monster' => $monster,
             ])
         );
@@ -74,11 +76,13 @@ class MonsterController
 
             $this->monsterRepository->save($monster);
 
-            return new RedirectResponse($this->router->generate('home'));
+            return new RedirectResponse($this->router->generate('show_game',
+                ['id' => $monster->getGame()->getId()]
+            ));
         }
 
         return new Response(
-            $this->twig->render('game_master/edit.html.twig', [
+            $this->twig->render('monster/edit.html.twig', [
                 'form' => $form->createView(),
             ])
         );
@@ -97,18 +101,23 @@ class MonsterController
         $monster = $this->monsterRepository->find($id);
 
         if ($monster) {
+            $gameId = $monster->getGame()->getId();
             $this->monsterRepository->delete($monster);
         }
 
-        return new RedirectResponse($this->router->generate('home'));
+        return new RedirectResponse($this->router->generate('show_game',
+            ['id' => $gameId]
+        ));
     }
 
-    #[Route('/monsters/generate',
+    #[Route('/games/{gameId}//monsters/generate',
         name: 'generate_monster',
+        requirements: ['gameId' => '\d+'],
         methods: ['GET', 'POST']
     )]
     public function generateMonster(
         Request $request,
+        #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
         MonsterTemplateRepository $monsterTemplateRepository,
         MonsterFactory $monsterFactory,
     ): Response|RedirectResponse
@@ -116,8 +125,10 @@ class MonsterController
         if ($request->get('monsterTemplateId')) {
             $monsterTemplate = $monsterTemplateRepository->find($request->get('monsterTemplateId'));
             $monster = $monsterFactory->createOneFromMonsterTemplate($monsterTemplate);
+            $monster->setGame($game);
         } else {
             $monster = new Monster();
+            $monster->setGame($game);
         }
         $form = $this->formFactory->create(MonsterType::class, $monster);
 
@@ -135,7 +146,7 @@ class MonsterController
         }
 
         return new Response(
-            $this->twig->render('game_master/generate.html.twig', [
+            $this->twig->render('monster/generate.html.twig', [
                 'form' => $form->createView(),
             ])
         );

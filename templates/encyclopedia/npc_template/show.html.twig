@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block title %}PNJ {{ nonPlayableCharacterTemplate.kind }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>{{ nonPlayableCharacterTemplate.kind }}</h2>
+
+    <ul>
+        <li>Classe : {{ nonPlayableCharacterTemplate.title }}</li>
+        <li>Espece : {{ nonPlayableCharacterTemplate.kind }}</li>
+        <li>Points de vie : min : {{ nonPlayableCharacterTemplate.minHealthPoints }} - max : {{ nonPlayableCharacterTemplate.maxHealthPoints }}</li>
+        <li>Points d'action : min : {{ nonPlayableCharacterTemplate.minActionPoints }} - max : {{ nonPlayableCharacterTemplate.maxActionPoints }}</li>
+        <li>Points de fatigue : min : {{ nonPlayableCharacterTemplate.minExhaustPoints }} - max : {{ nonPlayableCharacterTemplate.maxExhaustPoints }}</li>
+        <li>Points de Mana : min : {{ nonPlayableCharacterTemplate.minManaPoints }} - max : {{ nonPlayableCharacterTemplate.maxManaPoints }}</li>
+        <li>Strength : min : {{ nonPlayableCharacterTemplate.minStrength }} - max : {{ nonPlayableCharacterTemplate.maxStrength }}</li>
+        <li>Intelligence : min : {{ nonPlayableCharacterTemplate.minIntelligence }} - max : {{ nonPlayableCharacterTemplate.maxIntelligence }}</li>
+        <li>Stamina : min : {{ nonPlayableCharacterTemplate.minStamina }} - max : {{ nonPlayableCharacterTemplate.maxStamina }}</li>
+        <li>Agility : min : {{ nonPlayableCharacterTemplate.minAgility }} - max : {{ nonPlayableCharacterTemplate.maxAgility }}</li>
+        <li>Charisma : min : {{ nonPlayableCharacterTemplate.minCharisma }} - max : {{ nonPlayableCharacterTemplate.maxCharisma }}</li>
+    </ul>
+    <div>
+        Compétences :
+
+        {% if nonPlayableCharacterTemplate.skills|length == 0 %}
+            -
+        {% else %}
+            <ul>
+                {% for skill in nonPlayableCharacterTemplate.skills %}
+                    <li>{{ skill.name }}, {{ skill.description }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        Objets :
+
+        {% if nonPlayableCharacterTemplate.items|length == 0 %}
+            -
+        {% else %}
+            <ul>
+                {% for item in nonPlayableCharacterTemplate.items %}
+                    <li>{{ item.name }}, {{ item.description }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        Sorts :
+
+        {% if nonPlayableCharacterTemplate.spells|length == 0 %}
+        -
+        {% else %}
+        <ul>
+            {% for spell in nonPlayableCharacterTemplate.spells %}
+                <li>{{ spell.name }}, {{ spell.manaCost }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+{% endblock %}

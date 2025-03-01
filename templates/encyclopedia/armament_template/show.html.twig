@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Equipement {{ armamentTemplate.name }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Objet {{ armamentTemplate.name }}</h2>
+
+    <ul>
+        <li>Name : {{ armamentTemplate.name }}</li>
+        <li>Categorie : {{ armamentTemplate.category }}</li>
+        <li>Value : {{ armamentTemplate.value }}</li>
+        <li>Durability : min = {{ armamentTemplate.minDurability }}, max = {{ armamentTemplate.maxDurability }}</li>
+        <li>Description : {{ armamentTemplate.description }}</li>
+    </ul>
+    <div>
+        Compétences :
+
+        {% if armamentTemplate.skills|length == 0 %}
+            -
+        {% else %}
+            <ul>
+                {% for skill in armamentTemplate.skills %}
+                    <li>{{ skill.name }}, {{ skill.description }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
+        Sorts :
+
+        {% if armamentTemplate.spells|length == 0 %}
+            -
+        {% else %}
+            <ul>
+                {% for spell in armamentTemplate.spells %}
+                    <li>{{ spell.name }}, {{ spell.manaCost }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

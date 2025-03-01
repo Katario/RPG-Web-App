@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edition d'un Monstre {% endblock %}
+
+{% block main %}
+    <a href="{{ path('home') }}">Back</a>
+    <h2>Editer un monstre</h2>
+
+    {{ include('encyclopedia/monster_template/_form.html.twig') }}
+{% endblock %}

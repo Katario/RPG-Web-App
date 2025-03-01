@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Cascade;
 
 #[ORM\Entity(repositoryClass: MonsterRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Monster extends AbstractCharacter
 {
     use HasDateTimeTrait;

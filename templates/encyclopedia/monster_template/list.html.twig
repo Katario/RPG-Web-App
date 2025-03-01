@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des Templates de Monstre{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Liste des Templates de Monstre</h2>
+
+    <ul>
+        {% for monsterTemplate in monsterTemplates %}
+            <li>{{ monsterTemplate.kind }}
+                <a href="{{ path('encyclopedia_show_monster_template', {'id': monsterTemplate.id}) }}"> >>> </a>
+                {#                <a href="{{ path('encyclopedia_edit_monsterTemplate', {'id': monsterTemplate.id}) }}"> +++ </a>#}
+                <a href="{{ path('encyclopedia_delete_monster_template', {'id': monsterTemplate.id}) }}"> xxx </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
