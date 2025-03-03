@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
-{% block title %}PNJ {{ characterTemplate.title }}{% endblock %}
+{% block title %}PNJ {{ characterTemplate.name }}{% endblock %}
 
 {% block main %}
     <a href="{{ path('show_encyclopedia') }}">Retour</a>
-    <h2>{{ characterTemplate.title }}</h2>
+    <h2>{{ characterTemplate.name }}</h2>
 
     <ul>
-        <li>Classe : {{ characterTemplate.title }}</li>
-        <li>Espece : {{ characterTemplate.kind }}</li>
+        <li>Classe : {{ characterTemplate.characterClass.name }}</li>
+        <li>Espece : {{ characterTemplate.kind.name }}</li>
         <li>Points de vie : min : {{ characterTemplate.minHealthPoints }} - max : {{ characterTemplate.maxHealthPoints }}</li>
         <li>Points d'action : min : {{ characterTemplate.minActionPoints }} - max : {{ characterTemplate.maxActionPoints }}</li>
         <li>Points de fatigue : min : {{ characterTemplate.minExhaustPoints }} - max : {{ characterTemplate.maxExhaustPoints }}</li>

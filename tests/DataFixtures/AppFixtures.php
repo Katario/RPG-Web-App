@@ -6,10 +6,12 @@ namespace App\Tests\DataFixtures;
 
 use App\Tests\DataFixtures\Factory\ArmamentFactory;
 use App\Tests\DataFixtures\Factory\ArmamentTemplateFactory;
+use App\Tests\DataFixtures\Factory\CharacterClassFactory;
 use App\Tests\DataFixtures\Factory\CharacterFactory;
 use App\Tests\DataFixtures\Factory\CharacterTemplateFactory;
 use App\Tests\DataFixtures\Factory\GameFactory;
 use App\Tests\DataFixtures\Factory\ItemFactory;
+use App\Tests\DataFixtures\Factory\KindFactory;
 use App\Tests\DataFixtures\Factory\MonsterFactory;
 use App\Tests\DataFixtures\Factory\MonsterTemplateFactory;
 use App\Tests\DataFixtures\Factory\NonPlayableCharacterFactory;
@@ -67,7 +69,31 @@ class AppFixtures extends Fixture
         ]);
 
         // 3. Fill Encyclopedia
-        // 3.1. Create Items, Skills && Spells
+        // 3.1. Create Kind, CharacterClass, Items, Skills && Spells
+        $human = KindFactory::createOne([
+            'name' => 'Human'
+        ]);
+        $elf = KindFactory::createOne([
+            'name' => 'Elf'
+        ]);
+        $dwarf = KindFactory::createOne([
+            'name' => 'Dwarf'
+        ]);
+        $orc = KindFactory::createOne([
+            'name' => 'Orc'
+        ]);
+        $warrior = CharacterClassFactory::createOne([
+            'name' => 'Warrior'
+        ]);
+        $magician = CharacterClassFactory::createOne([
+            'name' => 'Magician'
+        ]);
+        $priest = CharacterClassFactory::createOne([
+            'name' => 'Priest'
+        ]);
+        $hunter = CharacterClassFactory::createOne([
+            'name' => 'Hunter'
+        ]);
         ItemFactory::createMany(10,
         static function (int $incremental) {
             return ['name' => 'Item ' . $incremental];
@@ -98,9 +124,11 @@ class AppFixtures extends Fixture
         // 3.3. Create Characters, NPCs and Monsters Templates
         CharacterTemplateFactory::new()
             ->many(5)
-            ->create(static function (int $incremental) {
+            ->create(static function (int $incremental) use ($human, $warrior) {
                 return [
-                    'title' => 'Character Template ' . $incremental,
+                    'name' => 'Character Template ' . $incremental,
+                    'kind' => $human,
+                    'characterClass' => $warrior,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),
                     'items' => ItemFactory::randomRange(0, 3),
@@ -109,9 +137,11 @@ class AppFixtures extends Fixture
         ;
         NonPlayableCharacterTemplateFactory::new()
             ->many(5)
-            ->create(static function (int $incremental) {
+            ->create(static function (int $incremental) use ($human, $priest) {
                 return [
-                    'title' => 'NonPlayableCharacter Template ' . $incremental,
+                    'name' => 'NonPlayableCharacter Template ' . $incremental,
+                    'kind' => $human,
+                    'characterClass' => $priest,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),
                     'items' => ItemFactory::randomRange(0, 3),
@@ -122,7 +152,7 @@ class AppFixtures extends Fixture
             ->many(5)
             ->create(static function (int $incremental) {
                 return [
-                    'kind' => 'Monster Template ' . $incremental,
+                    'name' => 'Monster Template ' . $incremental,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),
                     'items' => ItemFactory::randomRange(0, 3),
@@ -136,7 +166,8 @@ class AppFixtures extends Fixture
             'user' => $secondAccount,
             'game' => $mainGame,
             'name' => 'Character of Red',
-            'spells' => SpellFactory::randomRange(0, 3),
+            'kind' => $human,
+            'characterClass' => $warrior,
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
@@ -144,6 +175,8 @@ class AppFixtures extends Fixture
             'user' => $thirdAccount,
             'game' => $mainGame,
             'name' => 'Character of Blue',
+            'kind' => $elf,
+            'characterClass' => $priest,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
@@ -152,6 +185,8 @@ class AppFixtures extends Fixture
             'user' => $fourthAccount,
             'game' => $mainGame,
             'name' => 'Character of Green',
+            'kind' => $human,
+            'characterClass' => $hunter,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
@@ -160,9 +195,11 @@ class AppFixtures extends Fixture
         // 4.2. Create NPCs
         NonPlayableCharacterFactory::createMany(
             5,
-            static function (int $incremental) use ($mainGame) {
+            static function (int $incremental) use ($mainGame, $human, $hunter) {
                 return [
                     'game' => $mainGame,
+                    'kind' => $human,
+                    'characterClass' => $hunter,
                     'name' => 'NonPlayableCharacter ' . $incremental,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),

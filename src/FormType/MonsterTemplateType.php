@@ -22,7 +22,7 @@ class MonsterTemplateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('kind', TextType::class)
+            ->add('name', TextType::class)
             ->add('minStrength', IntegerType::class)
             ->add('maxStrength', IntegerType::class)
             ->add('minIntelligence', IntegerType::class)

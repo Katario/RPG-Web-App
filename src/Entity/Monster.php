@@ -7,11 +7,10 @@ use App\Repository\MonsterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Cascade;
 
 #[ORM\Entity(repositoryClass: MonsterRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Monster extends AbstractCharacter
+class Monster
 {
     use HasDateTimeTrait;
     use HasStatsTrait;
@@ -24,10 +23,26 @@ class Monster extends AbstractCharacter
     private string $name;
     #[ORM\Column(type: 'boolean')]
     private bool $isBoss = false;
-
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'monsters')]
     private Game $game;
-
+    #[ORM\Column(type: 'integer')]
+    private int $level;
+    #[ORM\Column(type: 'integer')]
+    private int $currentHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentExhaustPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxExhaustPoints;
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'monster')]
     #[ORM\JoinColumn(nullable: true)]
     private Collection|array $armaments;
@@ -37,19 +52,16 @@ class Monster extends AbstractCharacter
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
-
     #[ORM\JoinTable(name: 'monsters_items')]
     #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
-
     #[ORM\JoinTable(name: 'monsters_skills')]
     #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
-
 
     public function __construct()
     {
@@ -211,6 +223,105 @@ class Monster extends AbstractCharacter
     public function setGame(Game $game): Monster
     {
         $this->game = $game;
+        return $this;
+    }
+
+    public function getLevel(): int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): Monster
+    {
+        $this->level = $level;
+        return $this;
+    }
+
+    public function getCurrentHealthPoints(): int
+    {
+        return $this->currentHealthPoints;
+    }
+
+    public function setCurrentHealthPoints(int $currentHealthPoints): Monster
+    {
+        $this->currentHealthPoints = $currentHealthPoints;
+        return $this;
+    }
+
+    public function getMaxHealthPoints(): int
+    {
+        return $this->maxHealthPoints;
+    }
+
+    public function setMaxHealthPoints(int $maxHealthPoints): Monster
+    {
+        $this->maxHealthPoints = $maxHealthPoints;
+        return $this;
+    }
+
+    public function getCurrentManaPoints(): int
+    {
+        return $this->currentManaPoints;
+    }
+
+    public function setCurrentManaPoints(int $currentManaPoints): Monster
+    {
+        $this->currentManaPoints = $currentManaPoints;
+        return $this;
+    }
+
+    public function getMaxManaPoints(): int
+    {
+        return $this->maxManaPoints;
+    }
+
+    public function setMaxManaPoints(int $maxManaPoints): Monster
+    {
+        $this->maxManaPoints = $maxManaPoints;
+        return $this;
+    }
+
+    public function getCurrentActionPoints(): int
+    {
+        return $this->currentActionPoints;
+    }
+
+    public function setCurrentActionPoints(int $currentActionPoints): Monster
+    {
+        $this->currentActionPoints = $currentActionPoints;
+        return $this;
+    }
+
+    public function getMaxActionPoints(): int
+    {
+        return $this->maxActionPoints;
+    }
+
+    public function setMaxActionPoints(int $maxActionPoints): Monster
+    {
+        $this->maxActionPoints = $maxActionPoints;
+        return $this;
+    }
+
+    public function getCurrentExhaustPoints(): int
+    {
+        return $this->currentExhaustPoints;
+    }
+
+    public function setCurrentExhaustPoints(int $currentExhaustPoints): Monster
+    {
+        $this->currentExhaustPoints = $currentExhaustPoints;
+        return $this;
+    }
+
+    public function getMaxExhaustPoints(): int
+    {
+        return $this->maxExhaustPoints;
+    }
+
+    public function setMaxExhaustPoints(int $maxExhaustPoints): Monster
+    {
+        $this->maxExhaustPoints = $maxExhaustPoints;
         return $this;
     }
 }

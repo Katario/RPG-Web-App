@@ -7,8 +7,8 @@
 
     <ul>
         <li>Nom : {{ nonPlayableCharacter.name }}</li>
-        <li>Classe : {{ nonPlayableCharacter.title }}</li>
-        <li>Espece : {{ nonPlayableCharacter.kind }}</li>
+        <li>Classe : {{ nonPlayableCharacter.characterClass.name }}</li>
+        <li>Espece : {{ nonPlayableCharacter.kind.name }}</li>
         <li>Niveau : {{ nonPlayableCharacter.level }}</li>
         <li>Points de vie : {{ nonPlayableCharacter.currentHealthPoints }} (max: {{ nonPlayableCharacter.maxHealthPoints }})</li>
         <li>Points d'Action : {{ nonPlayableCharacter.currentActionPoints }} (max: {{ nonPlayableCharacter.maxActionPoints }})</li>

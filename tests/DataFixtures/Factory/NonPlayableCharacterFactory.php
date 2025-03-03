@@ -48,8 +48,6 @@ final class NonPlayableCharacterFactory extends PersistentProxyObjectFactory
             'strength' => self::faker()->numberBetween(20, 30),
             'name' => self::faker()->text(),
             'lastName' => self::faker()->text(),
-            'title' => self::faker()->text(),
-            'kind' => self::faker()->text(),
             'level' => 1,
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];

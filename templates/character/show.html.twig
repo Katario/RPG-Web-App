@@ -8,8 +8,8 @@
     <ul>
         <li>Nom : {{ character.name }}</li>
         <li>Joueur : {{ character.user.username }}</li>
-        <li>Classe : {{ character.title }}</li>
-        <li>Espece : {{ character.kind }}</li>
+        <li>Classe : {{ character.characterClass.name }}</li>
+        <li>Espece : {{ character.kind.name }}</li>
         <li>Niveau : {{ character.level }}</li>
         <li>Points de vie : {{ character.currentHealthPoints }} (max: {{ character.maxHealthPoints }})</li>
         <li>Points d'Action : {{ character.currentActionPoints }} (max: {{ character.maxActionPoints }})</li>

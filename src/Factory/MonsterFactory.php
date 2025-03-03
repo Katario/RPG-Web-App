@@ -15,7 +15,7 @@ class MonsterFactory
     {
         $monster = new Monster();
         $monster
-            ->setKind($monsterTemplate->getKind())
+            ->setName($monsterTemplate->getName())
             ->setCurrentHealthPoints($monsterTemplate->getMaxHealthPoints())
             ->setMaxHealthPoints($monsterTemplate->getMaxHealthPoints())
             ->setCurrentActionPoints($monsterTemplate->getMaxActionPoints())

@@ -25,7 +25,6 @@ class MonsterType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('kind', TextType::class)
             ->add('level', IntegerType::class)
             ->add('strength', IntegerType::class)
             ->add('intelligence', IntegerType::class)

@@ -13,7 +13,7 @@ class NonPlayableCharacterFactory
     {
         $nonPlayableCharacter = new NonPlayableCharacter();
         $nonPlayableCharacter
-            ->setTitle($nonPlayableCharacterTemplate->getTitle())
+            ->setCharacterClass($nonPlayableCharacterTemplate->getCharacterClass())
             ->setKind($nonPlayableCharacterTemplate->getKind())
             ->setCurrentHealthPoints($nonPlayableCharacterTemplate->getMaxHealthPoints())
             ->setMaxHealthPoints($nonPlayableCharacterTemplate->getMaxHealthPoints())

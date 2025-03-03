@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NonPlayableCharacterRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class NonPlayableCharacter extends AbstractCharacter
+class NonPlayableCharacter
 {
     use HasDateTimeTrait;
     use HasStatsTrait;
@@ -22,8 +22,34 @@ class NonPlayableCharacter extends AbstractCharacter
     private string $name;
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $lastName;
-    #[ORM\Column(type: 'string')]
-    private string $title;
+    #[ORM\JoinTable(name: 'non_playable_characters_kind')]
+    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'Kind')]
+    private Collection $kind;
+    #[ORM\JoinTable(name: 'non_playable_characters_character_class')]
+    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'character_class_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'CharacterClass')]
+    private Collection $characterClass;
+    #[ORM\Column(type: 'integer')]
+    private int $level;
+    #[ORM\Column(type: 'integer')]
+    private int $currentHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentExhaustPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxExhaustPoints;
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'nonPlayableCharacters')]
     #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
@@ -48,6 +74,8 @@ class NonPlayableCharacter extends AbstractCharacter
 
     public function __construct()
     {
+        $this->kind = new ArrayCollection();
+        $this->characterClass = new ArrayCollection();
         $this->armaments = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
@@ -85,17 +113,6 @@ class NonPlayableCharacter extends AbstractCharacter
     public function setName(?string $name): NonPlayableCharacter
     {
         $this->name = $name;
-        return $this;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): NonPlayableCharacter
-    {
-        $this->title = $title;
         return $this;
     }
 
@@ -217,6 +234,135 @@ class NonPlayableCharacter extends AbstractCharacter
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+        return $this;
+    }
+
+    public function getLevel(): int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): NonPlayableCharacter
+    {
+        $this->level = $level;
+        return $this;
+    }
+
+    public function getCurrentHealthPoints(): int
+    {
+        return $this->currentHealthPoints;
+    }
+
+    public function setCurrentHealthPoints(int $currentHealthPoints): NonPlayableCharacter
+    {
+        $this->currentHealthPoints = $currentHealthPoints;
+        return $this;
+    }
+
+    public function getMaxHealthPoints(): int
+    {
+        return $this->maxHealthPoints;
+    }
+
+    public function setMaxHealthPoints(int $maxHealthPoints): NonPlayableCharacter
+    {
+        $this->maxHealthPoints = $maxHealthPoints;
+        return $this;
+    }
+
+    public function getCurrentManaPoints(): int
+    {
+        return $this->currentManaPoints;
+    }
+
+    public function setCurrentManaPoints(int $currentManaPoints): NonPlayableCharacter
+    {
+        $this->currentManaPoints = $currentManaPoints;
+        return $this;
+    }
+
+    public function getMaxManaPoints(): int
+    {
+        return $this->maxManaPoints;
+    }
+
+    public function setMaxManaPoints(int $maxManaPoints): NonPlayableCharacter
+    {
+        $this->maxManaPoints = $maxManaPoints;
+        return $this;
+    }
+
+    public function getCurrentActionPoints(): int
+    {
+        return $this->currentActionPoints;
+    }
+
+    public function setCurrentActionPoints(int $currentActionPoints): NonPlayableCharacter
+    {
+        $this->currentActionPoints = $currentActionPoints;
+        return $this;
+    }
+
+    public function getMaxActionPoints(): int
+    {
+        return $this->maxActionPoints;
+    }
+
+    public function setMaxActionPoints(int $maxActionPoints): NonPlayableCharacter
+    {
+        $this->maxActionPoints = $maxActionPoints;
+        return $this;
+    }
+
+    public function getCurrentExhaustPoints(): int
+    {
+        return $this->currentExhaustPoints;
+    }
+
+    public function setCurrentExhaustPoints(int $currentExhaustPoints): NonPlayableCharacter
+    {
+        $this->currentExhaustPoints = $currentExhaustPoints;
+        return $this;
+    }
+
+    public function getMaxExhaustPoints(): int
+    {
+        return $this->maxExhaustPoints;
+    }
+
+    public function setMaxExhaustPoints(int $maxExhaustPoints): NonPlayableCharacter
+    {
+        $this->maxExhaustPoints = $maxExhaustPoints;
+        return $this;
+    }
+
+    public function getKind(): ?Kind
+    {
+        return $this->kind->first();
+    }
+
+    public function setKind(Kind $kind): NonPlayableCharacter
+    {
+        if (!$this->kind->contains($kind)) {
+            $this->kind->clear();
+            $this->kind->add($kind);
+        }
+
+        return $this;
+    }
+
+    public function getCharacterClass(): ?CharacterClass
+    {
+        return $this->characterClass->first();
+    }
+
+    public function setCharacterClass(CharacterClass $characterClass): NonPlayableCharacter
+    {
+        if (!$this->characterClass->contains($characterClass)) {
+            $this->characterClass->clear();
+            $this->characterClass->add($characterClass);
+        }
+
         return $this;
     }
 }

@@ -13,7 +13,7 @@
                         edit="{{ path('edit_non_playable_character', {'gameId': game.id, 'id': nonPlayableCharacter.id}) }}"
                         delete="{{ path('delete_non_playable_character', {'gameId': game.id,'id': nonPlayableCharacter.id}) }}"
                         title="{{ nonPlayableCharacter.name }}"
-                        subtitle="{{ nonPlayableCharacter.title }}"
+                        subtitle="{{ nonPlayableCharacter.characterClass.name }}"
                         imagePath="{{ asset('images/innkeeper.jpg') }}"
                 >
                     <span class="basis-1/4">Test</span>
@@ -70,8 +70,8 @@
                                 class="px-0 py-0"
                             >
                                 <twig:Badge
-                                    name="{{ nonPlayableCharacterTemplate.title }}"
-                                    type="{{ nonPlayableCharacterTemplate.kind }}"
+                                    name="{{ nonPlayableCharacterTemplate.characterClass.name }}"
+                                    type="{{ nonPlayableCharacterTemplate.kind.name }}"
                                     imagePath="{{ asset('images/innkeeper.jpg') }}"
                                 />
                             </twig:Button>

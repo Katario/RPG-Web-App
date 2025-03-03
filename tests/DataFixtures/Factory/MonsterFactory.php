@@ -47,7 +47,6 @@ final class MonsterFactory extends PersistentProxyObjectFactory
             'stamina' => self::faker()->numberBetween(20, 30),
             'strength' => self::faker()->numberBetween(20, 30),
             'name' => self::faker()->text(),
-            'kind' => self::faker()->text(),
             'level' => 1,
             'isBoss' => self::faker()->boolean(),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),

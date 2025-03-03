@@ -18,9 +18,9 @@ class MonsterRepository extends ServiceEntityRepository
     public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
     {
         $queryBuilder =  $this->createQueryBuilder('m');
-        $queryBuilder->where('m.kind LIKE :query')
+        $queryBuilder->where('m.name LIKE :query')
             ->setParameter('query', '%'.$query.'%')
-            ->orderBy('m.kind', $orderBy)
+            ->orderBy('m.name', $orderBy)
         ;
 
         if ($limit) {

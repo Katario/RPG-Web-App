@@ -13,7 +13,7 @@
                         edit="{{ path('edit_monster', {'gameId': game.id, 'id': monster.id}) }}"
                         delete="{{ path('delete_monster', {'gameId': game.id,'id': monster.id}) }}"
                         title="{{ monster.name }}"
-                        subtitle="{{ monster.kind }}"
+                        subtitle=""
                         imagePath="{{ asset('images/goblin.png') }}"
                 >
                     <span class="basis-1/4">Test</span>
@@ -69,7 +69,7 @@
                                 class="px-0 py-0"
                             >
                                 <twig:Badge
-                                    name="{{ monsterTemplate.kind }}"
+                                    name="{{ monsterTemplate.name }}"
                                     imagePath="{{ asset('images/goblin.png') }}"
                                 />
                             </twig:Button>

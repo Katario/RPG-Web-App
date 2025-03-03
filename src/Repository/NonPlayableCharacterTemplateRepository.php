@@ -24,10 +24,9 @@ class NonPlayableCharacterTemplateRepository extends ServiceEntityRepository
     public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
     {
         $queryBuilder =  $this->createQueryBuilder('npct');
-        $queryBuilder->where('npct.title LIKE :query')
-            ->orWhere('npct.kind LIKE :query')
+        $queryBuilder->where('npct.name LIKE :query')
             ->setParameter('query', '%'.$query.'%')
-            ->orderBy('npct.title', $orderBy)
+            ->orderBy('npct.name', $orderBy)
         ;
 
         if ($limit) {

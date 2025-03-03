@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\FormType;
 
+use App\Entity\CharacterClass;
 use App\Entity\Item;
+use App\Entity\Kind;
 use App\Entity\NonPlayableCharacterTemplate;
 use App\Entity\Skill;
 use App\Entity\Spell;
@@ -22,8 +24,14 @@ class NonPlayableCharacterTemplateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('kind', TextType::class)
+            ->add('characterClass', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => CharacterClass::class,
+            ])
+            ->add('kind', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Kind::class,
+            ])
             ->add('minStrength', IntegerType::class)
             ->add('maxStrength', IntegerType::class)
             ->add('minIntelligence', IntegerType::class)

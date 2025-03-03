@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NonPlayableCharacterTemplateRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class NonPlayableCharacterTemplate extends AbstractCharacterTemplate
+class NonPlayableCharacterTemplate extends Encyclopedia
 {
     use HasDateTimeTrait;
     use HasGenerableStatsTrait;
@@ -20,7 +20,33 @@ class NonPlayableCharacterTemplate extends AbstractCharacterTemplate
     #[ORM\Column]
     private ?int $id = null;
     #[ORM\Column(type: 'string')]
-    private string $title;
+    private string $name;
+    #[ORM\Column(type: 'integer')]
+    private int $minHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $minManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $minActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $minExhaustPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxExhaustPoints;
+    #[ORM\JoinTable(name: 'non_playable_character_templates_kind')]
+    #[ORM\JoinColumn(name: 'non_playable_character_template_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'Kind')]
+    private Collection $kind;
+    #[ORM\JoinTable(name: 'non_playable_character_templates_character_class')]
+    #[ORM\JoinColumn(name: 'non_playable_character_template_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'character_class_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'CharacterClass')]
+    private Collection $characterClass;
     #[ORM\JoinTable(name: 'non_playable_character_templates_spells')]
     #[ORM\JoinColumn(name: 'non_playable_character_template_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id', onDelete: 'cascade')]
@@ -39,6 +65,8 @@ class NonPlayableCharacterTemplate extends AbstractCharacterTemplate
 
     public function __construct()
     {
+        $this->kind = new ArrayCollection();
+        $this->characterClass = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->skills = new ArrayCollection();
@@ -55,14 +83,14 @@ class NonPlayableCharacterTemplate extends AbstractCharacterTemplate
         return $this;
     }
 
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): NonPlayableCharacterTemplate
+    public function setName(string $name): NonPlayableCharacterTemplate
     {
-        $this->title = $title;
+        $this->name = $name;
         return $this;
     }
 
@@ -147,6 +175,124 @@ class NonPlayableCharacterTemplate extends AbstractCharacterTemplate
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+        return $this;
+    }
+
+    public function getMinHealthPoints(): int
+    {
+        return $this->minHealthPoints;
+    }
+
+    public function setMinHealthPoints(int $minHealthPoints): NonPlayableCharacterTemplate
+    {
+        $this->minHealthPoints = $minHealthPoints;
+        return $this;
+    }
+
+    public function getMaxHealthPoints(): int
+    {
+        return $this->maxHealthPoints;
+    }
+
+    public function setMaxHealthPoints(int $maxHealthPoints): NonPlayableCharacterTemplate
+    {
+        $this->maxHealthPoints = $maxHealthPoints;
+        return $this;
+    }
+
+    public function getMinManaPoints(): int
+    {
+        return $this->minManaPoints;
+    }
+
+    public function setMinManaPoints(int $minManaPoints): NonPlayableCharacterTemplate
+    {
+        $this->minManaPoints = $minManaPoints;
+        return $this;
+    }
+
+    public function getMaxManaPoints(): int
+    {
+        return $this->maxManaPoints;
+    }
+
+    public function setMaxManaPoints(int $maxManaPoints): NonPlayableCharacterTemplate
+    {
+        $this->maxManaPoints = $maxManaPoints;
+        return $this;
+    }
+
+    public function getMinActionPoints(): int
+    {
+        return $this->minActionPoints;
+    }
+
+    public function setMinActionPoints(int $minActionPoints): NonPlayableCharacterTemplate
+    {
+        $this->minActionPoints = $minActionPoints;
+        return $this;
+    }
+
+    public function getMaxActionPoints(): int
+    {
+        return $this->maxActionPoints;
+    }
+
+    public function setMaxActionPoints(int $maxActionPoints): NonPlayableCharacterTemplate
+    {
+        $this->maxActionPoints = $maxActionPoints;
+        return $this;
+    }
+
+    public function getMinExhaustPoints(): int
+    {
+        return $this->minExhaustPoints;
+    }
+
+    public function setMinExhaustPoints(int $minExhaustPoints): NonPlayableCharacterTemplate
+    {
+        $this->minExhaustPoints = $minExhaustPoints;
+        return $this;
+    }
+
+    public function getMaxExhaustPoints(): int
+    {
+        return $this->maxExhaustPoints;
+    }
+
+    public function setMaxExhaustPoints(int $maxExhaustPoints): NonPlayableCharacterTemplate
+    {
+        $this->maxExhaustPoints = $maxExhaustPoints;
+        return $this;
+    }
+
+    public function getKind(): ?Kind
+    {
+        return $this->kind->first();
+    }
+
+    public function setKind(Kind $kind): NonPlayableCharacterTemplate
+    {
+        if (!$this->kind->contains($kind)) {
+            $this->kind->clear();
+            $this->kind->add($kind);
+        }
+
+        return $this;
+    }
+
+    public function getCharacterClass(): ?CharacterClass
+    {
+        return $this->characterClass->first();
+    }
+
+    public function setCharacterClass(CharacterClass $characterClass): NonPlayableCharacterTemplate
+    {
+        if (!$this->characterClass->contains($characterClass)) {
+            $this->characterClass->clear();
+            $this->characterClass->add($characterClass);
+        }
+
         return $this;
     }
 }

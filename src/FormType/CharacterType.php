@@ -6,7 +6,9 @@ namespace App\FormType;
 
 use App\Entity\Armament;
 use App\Entity\Character;
+use App\Entity\CharacterClass;
 use App\Entity\Item;
+use App\Entity\Kind;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use App\Entity\User;
@@ -25,8 +27,14 @@ class CharacterType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('lastName', TextType::class)
-            ->add('title', TextType::class)
-            ->add('kind', TextType::class)
+            ->add('characterClass', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => CharacterClass::class,
+            ])
+            ->add('kind', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Kind::class,
+            ])
             ->add('level', IntegerType::class)
             ->add('strength', IntegerType::class)
             ->add('intelligence', IntegerType::class)

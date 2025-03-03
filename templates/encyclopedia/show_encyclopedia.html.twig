@@ -67,7 +67,7 @@
             Les 5 derniers:
             <ul>
                 {% for monsterTemplate in lastMonsterTemplates %}
-                    <li>{{ monsterTemplate.kind }} - <a href="{{ path('encyclopedia_show_monster_template', {'id': monsterTemplate.id}) }}"> more >>> </a></li>
+                    <li>{{ monsterTemplate.name }} - <a href="{{ path('encyclopedia_show_monster_template', {'id': monsterTemplate.id}) }}"> more >>> </a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -81,7 +81,7 @@
             Les 5 derniers:
             <ul>
                 {% for nonPlayableCharacterTemplate in lastNonPlayableCharacterTemplates %}
-                    <li>{{ nonPlayableCharacterTemplate.kind }} - <a href="{{ path('encyclopedia_show_non_playable_character_template', {'id': nonPlayableCharacterTemplate.id}) }}"> more >>> </a></li>
+                    <li>{{ nonPlayableCharacterTemplate.kind.name }} - <a href="{{ path('encyclopedia_show_non_playable_character_template', {'id': nonPlayableCharacterTemplate.id}) }}"> more >>> </a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -95,7 +95,7 @@
             Les 5 derniers:
             <ul>
                 {% for characterTemplate in lastCharacterTemplates %}
-                    <li>{{ characterTemplate.kind }} - <a href="{{ path('encyclopedia_show_character_template', {'id': characterTemplate.id}) }}"> more >>> </a></li>
+                    <li>{{ characterTemplate.kind.name }} - <a href="{{ path('encyclopedia_show_character_template', {'id': characterTemplate.id}) }}"> more >>> </a></li>
                 {% endfor %}
             </ul>
         </div>

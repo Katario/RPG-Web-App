@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\FormType;
 
+use App\Entity\CharacterClass;
 use App\Entity\CharacterTemplate;
 use App\Entity\Item;
+use App\Entity\Kind;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,8 +24,18 @@ class CharacterTemplateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('kind', TextType::class)
+            ->add('characterClass', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => CharacterClass::class,
+                'multiple' => false,
+                'expanded' => true,
+            ])
+            ->add('kind', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Kind::class,
+                'multiple' => false,
+                'expanded' => true,
+            ])
             ->add('minStrength', IntegerType::class)
             ->add('maxStrength', IntegerType::class)
             ->add('minIntelligence', IntegerType::class)

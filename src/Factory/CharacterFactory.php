@@ -13,7 +13,7 @@ class CharacterFactory
     {
         $character = new Character();
         $character
-            ->setTitle($characterTemplate->getTitle())
+            ->setCharacterClass($characterTemplate->getCharacterClass())
             ->setKind($characterTemplate->getKind())
             ->setCurrentHealthPoints($characterTemplate->getMaxHealthPoints())
             ->setMaxHealthPoints($characterTemplate->getMaxHealthPoints())

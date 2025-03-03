@@ -8,11 +8,13 @@ use App\Repository\CharacterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
 
 #[ORM\Table(name: 'playable_character')]
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Character extends AbstractCharacter
+class Character
 {
     use HasDateTimeTrait;
     use HasStatsTrait;
@@ -25,8 +27,34 @@ class Character extends AbstractCharacter
     private string $name;
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $lastName;
-    #[ORM\Column(type: 'string')]
-    private string $title;
+    #[ORM\Column(type: 'integer')]
+    private int $level;
+    #[ORM\Column(type: 'integer')]
+    private int $currentHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxHealthPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxManaPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxActionPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $currentExhaustPoints;
+    #[ORM\Column(type: 'integer')]
+    private int $maxExhaustPoints;
+    #[ORM\JoinTable(name: 'characters_kind')]
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'Kind')]
+    private Collection $kind;
+    #[ORM\JoinTable(name: 'characters_character_class')]
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'character_class_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'CharacterClass')]
+    private Collection $characterClass;
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
     private ?User $user;
@@ -54,6 +82,8 @@ class Character extends AbstractCharacter
 
     public function __construct()
     {
+        $this->kind = new ArrayCollection();
+        $this->characterClass = new ArrayCollection();
         $this->armaments = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
@@ -94,14 +124,33 @@ class Character extends AbstractCharacter
         return $this;
     }
 
-    public function getTitle(): string
+    public function getKind(): ?Kind
     {
-        return $this->title;
+        return $this->kind->first();
     }
 
-    public function setTitle(string $title): Character
+    public function setKind(Kind $kind): Character
     {
-        $this->title = $title;
+        if (!$this->kind->contains($kind)) {
+            $this->kind->clear();
+            $this->kind->add($kind);
+        }
+
+        return $this;
+    }
+
+    public function getCharacterClass(): ?CharacterClass
+    {
+        return $this->characterClass->first();
+    }
+
+    public function setCharacterClass(CharacterClass $characterClass): Character
+    {
+        if (!$this->characterClass->contains($characterClass)) {
+            $this->characterClass->clear();
+            $this->characterClass->add($characterClass);
+        }
+
         return $this;
     }
 
@@ -217,6 +266,116 @@ class Character extends AbstractCharacter
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+        return $this;
+    }
+
+    public function getLevel(): int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): Character
+    {
+        $this->level = $level;
+        return $this;
+    }
+
+    public function getCurrentHealthPoints(): int
+    {
+        return $this->currentHealthPoints;
+    }
+
+    public function setCurrentHealthPoints(int $currentHealthPoints): Character
+    {
+        $this->currentHealthPoints = $currentHealthPoints;
+        return $this;
+    }
+
+    public function getMaxHealthPoints(): int
+    {
+        return $this->maxHealthPoints;
+    }
+
+    public function setMaxHealthPoints(int $maxHealthPoints): Character
+    {
+        $this->maxHealthPoints = $maxHealthPoints;
+        return $this;
+    }
+
+    public function getCurrentManaPoints(): int
+    {
+        return $this->currentManaPoints;
+    }
+
+    public function setCurrentManaPoints(int $currentManaPoints): Character
+    {
+        $this->currentManaPoints = $currentManaPoints;
+        return $this;
+    }
+
+    public function getMaxManaPoints(): int
+    {
+        return $this->maxManaPoints;
+    }
+
+    public function setMaxManaPoints(int $maxManaPoints): Character
+    {
+        $this->maxManaPoints = $maxManaPoints;
+        return $this;
+    }
+
+    public function getCurrentActionPoints(): int
+    {
+        return $this->currentActionPoints;
+    }
+
+    public function setCurrentActionPoints(int $currentActionPoints): Character
+    {
+        $this->currentActionPoints = $currentActionPoints;
+        return $this;
+    }
+
+    public function getMaxActionPoints(): int
+    {
+        return $this->maxActionPoints;
+    }
+
+    public function setMaxActionPoints(int $maxActionPoints): Character
+    {
+        $this->maxActionPoints = $maxActionPoints;
+        return $this;
+    }
+
+    public function getCurrentExhaustPoints(): int
+    {
+        return $this->currentExhaustPoints;
+    }
+
+    public function setCurrentExhaustPoints(int $currentExhaustPoints): Character
+    {
+        $this->currentExhaustPoints = $currentExhaustPoints;
+        return $this;
+    }
+
+    public function getMaxExhaustPoints(): int
+    {
+        return $this->maxExhaustPoints;
+    }
+
+    public function setMaxExhaustPoints(int $maxExhaustPoints): Character
+    {
+        $this->maxExhaustPoints = $maxExhaustPoints;
+        return $this;
+    }
+
+    public function getTitle(): Kind
+    {
+        return $this->title;
+    }
+
+    public function setTitle(Kind $title): Character
+    {
+        $this->title = $title;
         return $this;
     }
 }

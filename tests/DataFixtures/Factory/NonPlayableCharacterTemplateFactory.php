@@ -33,9 +33,9 @@ final class NonPlayableCharacterTemplateFactory extends PersistentProxyObjectFac
     {
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'name' => self::faker()->word(),
             'isPrivate' => self::faker()->boolean(),
             'isReady' => self::faker()->boolean(),
-            'kind' => self::faker()->word(),
             'minHealthPoints' => self::faker()->numberBetween(50, 250),
             'minManaPoints' => self::faker()->numberBetween(50, 250),
             'minExhaustPoints' => self::faker()->numberBetween(50, 250),
