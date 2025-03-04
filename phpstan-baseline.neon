@@ -1,0 +1,2707 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Cannot call method getId\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Controller/ArmamentController.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Controller/ArmamentController.php
+
+		-
+			message: '#^Parameter \#1 \$armament of method App\\Repository\\ArmamentRepository\:\:save\(\) expects App\\Entity\\Armament, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/ArmamentController.php
+
+		-
+			message: '#^Parameter \#1 \$armamentTemplate of method App\\Factory\\ArmamentFactory\:\:createOneFromArmamentTemplate\(\) expects App\\Entity\\ArmamentTemplate, object\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/ArmamentController.php
+
+		-
+			message: '#^Variable \$character in PHPDoc tag @var does not match assigned variable \$armament\.$#'
+			identifier: varTag.differentVariable
+			count: 1
+			path: src/Controller/ArmamentController.php
+
+		-
+			message: '#^Call to an undefined method object\:\:getGame\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Controller/CharacterController.php
+
+		-
+			message: '#^Cannot call method getId\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Controller/CharacterController.php
+
+		-
+			message: '#^Parameter \#1 \$character of method App\\Repository\\CharacterRepository\:\:delete\(\) expects App\\Entity\\Character, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/CharacterController.php
+
+		-
+			message: '#^Parameter \#1 \$characterTemplate of method App\\Factory\\CharacterFactory\:\:createOneFromCharacterTemplate\(\) expects App\\Entity\\CharacterTemplate, object\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/CharacterController.php
+
+		-
+			message: '#^Parameter \#1 \$armamentTemplate of method App\\Repository\\ArmamentTemplateRepository\:\:delete\(\) expects App\\Entity\\ArmamentTemplate, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$character of method App\\Repository\\CharacterTemplateRepository\:\:delete\(\) expects App\\Entity\\CharacterTemplate, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$item of method App\\Repository\\ItemRepository\:\:delete\(\) expects App\\Entity\\Item, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$item of method App\\Repository\\ItemRepository\:\:save\(\) expects App\\Entity\\Item, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$monsterTemplate of method App\\Repository\\MonsterTemplateRepository\:\:delete\(\) expects App\\Entity\\MonsterTemplate, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$nonPlayableCharacter of method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:delete\(\) expects App\\Entity\\NonPlayableCharacterTemplate, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$skill of method App\\Repository\\SkillRepository\:\:delete\(\) expects App\\Entity\\Skill, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$skill of method App\\Repository\\SkillRepository\:\:save\(\) expects App\\Entity\\Skill, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Parameter \#1 \$spell of method App\\Repository\\SpellRepository\:\:delete\(\) expects App\\Entity\\Spell, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Property App\\Controller\\EncyclopediaController\:\:\$skillRepository is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Property App\\Controller\\EncyclopediaController\:\:\$spellRepository is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Variable \$spell in PHPDoc tag @var does not match assigned variable \$item\.$#'
+			identifier: varTag.differentVariable
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Variable \$spell in PHPDoc tag @var does not match assigned variable \$skill\.$#'
+			identifier: varTag.differentVariable
+			count: 1
+			path: src/Controller/EncyclopediaController.php
+
+		-
+			message: '#^Method App\\Controller\\HomeController\:\:getGamesByUser\(\) invoked with 1 parameter, 0 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/Controller/HomeController.php
+
+		-
+			message: '#^Method App\\Controller\\HomeController\:\:getGamesByUser\(\) should return array\<App\\Entity\\Game\> but returns list\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Controller/HomeController.php
+
+		-
+			message: '#^Parameter \#1 \$user of method App\\Repository\\GameRepository\:\:getGamesByUser\(\) expects Symfony\\Component\\Security\\Core\\User\\UserInterface, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/HomeController.php
+
+		-
+			message: '#^Parameter \#1 \$user of method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) expects Symfony\\Component\\Security\\Core\\User\\UserInterface, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/HomeController.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Controller/MonsterController.php
+
+		-
+			message: '#^Parameter \#1 \$monsterTemplate of method App\\Factory\\MonsterFactory\:\:createOneFromMonsterTemplate\(\) expects App\\Entity\\MonsterTemplate, object\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/MonsterController.php
+
+		-
+			message: '#^Call to an undefined method object\:\:getGame\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Controller/NonPlayableCharacterController.php
+
+		-
+			message: '#^Cannot call method getId\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Controller/NonPlayableCharacterController.php
+
+		-
+			message: '#^Parameter \#1 \$nonPlayableCharacter of method App\\Repository\\NonPlayableCharacterRepository\:\:delete\(\) expects App\\Entity\\NonPlayableCharacter, object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/NonPlayableCharacterController.php
+
+		-
+			message: '#^Parameter \#1 \$nonPlayableCharacterTemplate of method App\\Factory\\NonPlayableCharacterFactory\:\:createOneFromNonPlayableCharacterTemplate\(\) expects App\\Entity\\NonPlayableCharacterTemplate, object\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/NonPlayableCharacterController.php
+
+		-
+			message: '#^Parameter \#2 \$plainPassword of method Symfony\\Component\\PasswordHasher\\Hasher\\UserPasswordHasherInterface\:\:hashPassword\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/UserController.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Method App\\Entity\\Armament\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Property App\\Entity\\Armament\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Property App\\Entity\\Armament\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Property App\\Entity\\Armament\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Property App\\Entity\\Armament\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Property App\\Entity\\Armament\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Property App\\Entity\\Armament\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Property App\\Entity\\Armament\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Armament.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\ArmamentTemplate\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\ArmamentTemplate\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\ArmamentTemplate\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\ArmamentTemplate\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\ArmamentTemplate\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\ArmamentTemplate\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\ArmamentTemplate\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\ArmamentTemplate\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/ArmamentTemplate.php
+
+		-
+			message: '#^Access to an undefined property App\\Entity\\Character\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 2
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getArmaments\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getArmaments\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getArmaments\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getCharacterClass\(\) should return App\\Entity\\CharacterClass\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getItems\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getItems\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getItems\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getKind\(\) should return App\\Entity\\Kind\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getLastName\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getTitle\(\) should return App\\Entity\\Kind but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:getUser\(\) should return App\\Entity\\User but returns App\\Entity\\User\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setArmaments\(\) has parameter \$armaments with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setItems\(\) has parameter \$items with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setItems\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setItems\(\) has parameter \$items with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Method App\\Entity\\Character\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Parameter \$targetEntity of attribute class Doctrine\\ORM\\Mapping\\ManyToMany constructor expects class\-string, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$armaments type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$armaments type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$armaments with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$characterClass with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$items type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$items type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$items with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$kind with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$lastName \(string\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Property App\\Entity\\Character\:\:\$user \(App\\Entity\\User\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Character.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getCharacterClass\(\) should return App\\Entity\\CharacterClass\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getItems\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getItems\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getItems\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getKind\(\) should return App\\Entity\\Kind\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:setItems\(\) has parameter \$items with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\CharacterTemplate\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Parameter \$targetEntity of attribute class Doctrine\\ORM\\Mapping\\ManyToMany constructor expects class\-string, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$characterClass with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$items type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$items type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$items with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$kind with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\CharacterTemplate\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/CharacterTemplate.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 8
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getArmaments\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getArmaments\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getArmaments\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getCharacters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getCharacters\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getCharacters\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getId\(\) should return int but returns int\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getMonsters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getMonsters\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getMonsters\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getNonPlayableCharacters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getNonPlayableCharacters\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:getNonPlayableCharacters\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:setArmaments\(\) has parameter \$armaments with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:setCharacters\(\) has parameter \$characters with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:setCharacters\(\) has parameter \$characters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Method App\\Entity\\Game\:\:setCharacters\(\) has parameter \$characters with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$armaments type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$armaments type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$armaments with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$characters type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$characters type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$characters with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$monsters \(array\|Doctrine\\Common\\Collections\\Collection\) is never assigned array so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$monsters type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$monsters type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$monsters with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$nonPlayableCharacters \(array\|Doctrine\\Common\\Collections\\Collection\) is never assigned array so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$nonPlayableCharacters type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$nonPlayableCharacters type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Game\:\:\$nonPlayableCharacters with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Game.php
+
+		-
+			message: '#^Property App\\Entity\\Item\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Item.php
+
+		-
+			message: '#^Property App\\Entity\\Mastery\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Mastery.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 8
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getArmaments\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getArmaments\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getArmaments\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getItems\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getItems\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getItems\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setArmaments\(\) has parameter \$armaments with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setItems\(\) has parameter \$items with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setItems\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setItems\(\) has parameter \$items with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Method App\\Entity\\Monster\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$armaments type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$armaments type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$armaments with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$items type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$items type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$items with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Property App\\Entity\\Monster\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Monster.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getItems\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getItems\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getItems\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:setItems\(\) has parameter \$items with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\MonsterTemplate\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$items type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$items type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$items with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\MonsterTemplate\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/MonsterTemplate.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 8
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getArmaments\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getArmaments\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getArmaments\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getCharacterClass\(\) should return App\\Entity\\CharacterClass\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getItems\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getItems\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getItems\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getKind\(\) should return App\\Entity\\Kind\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setArmaments\(\) has parameter \$armaments with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setArmaments\(\) has parameter \$armaments with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setItems\(\) has parameter \$items with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setItems\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setItems\(\) has parameter \$items with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setSkills\(\) has parameter \$skills with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacter\:\:setSpells\(\) has parameter \$spells with no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Parameter \$targetEntity of attribute class Doctrine\\ORM\\Mapping\\ManyToMany constructor expects class\-string, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$armaments type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$armaments type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$armaments with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$characterClass with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$items type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$items type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$items with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$kind with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$name \(string\) does not accept string\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacter\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacter.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getCharacterClass\(\) should return App\\Entity\\CharacterClass\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getItems\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getItems\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getItems\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getKind\(\) should return App\\Entity\\Kind\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getSkills\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getSkills\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getSpells\(\) return type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:setItems\(\) has parameter \$items with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:setSkills\(\) has parameter \$skills with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Method App\\Entity\\NonPlayableCharacterTemplate\:\:setSpells\(\) has parameter \$spells with generic interface Doctrine\\Common\\Collections\\Collection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Parameter \$targetEntity of attribute class Doctrine\\ORM\\Mapping\\ManyToMany constructor expects class\-string, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$characterClass with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$items type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$items type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$items with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$kind with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$skills type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$skills type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$skills with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$spells type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$spells type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\NonPlayableCharacterTemplate\:\:\$spells with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/NonPlayableCharacterTemplate.php
+
+		-
+			message: '#^Property App\\Entity\\Skill\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Skill.php
+
+		-
+			message: '#^Property App\\Entity\\Spell\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Spell.php
+
+		-
+			message: '#^Property App\\Entity\\Talent\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Talent.php
+
+		-
+			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Entity/User.php
+
+		-
+			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getCharacters\(\) return type with generic class Doctrine\\Common\\Collections\\ArrayCollection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getCharacters\(\) should return Doctrine\\Common\\Collections\\ArrayCollection but returns array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getGameMasters\(\) return type with generic class Doctrine\\Common\\Collections\\ArrayCollection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getGameMasters\(\) should return Doctrine\\Common\\Collections\\ArrayCollection but returns array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getRoles\(\) should return array\<string\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getUserIdentifier\(\) should return non\-empty\-string but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:setCharacters\(\) has parameter \$characters with generic class Doctrine\\Common\\Collections\\ArrayCollection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:setGameMasters\(\) has parameter \$gameMasters with generic class Doctrine\\Common\\Collections\\ArrayCollection but does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:setRoles\(\) has parameter \$roles with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$characters \(array\|Doctrine\\Common\\Collections\\Collection\) is never assigned array so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$characters type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$characters type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$characters with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$gameMasters \(array\|Doctrine\\Common\\Collections\\Collection\) is never assigned array so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$gameMasters type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$gameMasters type has no value type specified in iterable type array\|Doctrine\\Common\\Collections\\Collection\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$gameMasters with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$roles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Factory\\ArmamentFactory\:\:generateBetweenMinAndMax\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/Factory/ArmamentFactory.php
+
+		-
+			message: '#^Parameter \#1 \$characterClass of method App\\Entity\\Character\:\:setCharacterClass\(\) expects App\\Entity\\CharacterClass, App\\Entity\\CharacterClass\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Factory/CharacterFactory.php
+
+		-
+			message: '#^Parameter \#1 \$kind of method App\\Entity\\Character\:\:setKind\(\) expects App\\Entity\\Kind, App\\Entity\\Kind\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Factory/CharacterFactory.php
+
+		-
+			message: '#^Method App\\Factory\\MonsterFactory\:\:generateBetweenMinAndMax\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/Factory/MonsterFactory.php
+
+		-
+			message: '#^Parameter \#1 \$characterClass of method App\\Entity\\NonPlayableCharacter\:\:setCharacterClass\(\) expects App\\Entity\\CharacterClass, App\\Entity\\CharacterClass\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Factory/NonPlayableCharacterFactory.php
+
+		-
+			message: '#^Parameter \#1 \$kind of method App\\Entity\\NonPlayableCharacter\:\:setKind\(\) expects App\\Entity\\Kind, App\\Entity\\Kind\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Factory/NonPlayableCharacterFactory.php
+
+		-
+			message: '#^Call to an undefined method object\:\:getId\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/FormType/EntityHiddenType.php
+
+		-
+			message: '#^Class App\\FormType\\EntityHiddenType implements generic interface Symfony\\Component\\Form\\DataTransformerInterface but does not specify its types\: TValue, TTransformedValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/FormType/EntityHiddenType.php
+
+		-
+			message: '#^Method App\\FormType\\EntityHiddenType\:\:transform\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/FormType/EntityHiddenType.php
+
+		-
+			message: '#^Parameter \#1 \$persistentObject of method Doctrine\\Persistence\\ManagerRegistry\:\:getRepository\(\) expects class\-string\<object\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/FormType/EntityHiddenType.php
+
+		-
+			message: '#^Parameter \#3 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/FormType/EntityHiddenType.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Persistence\\ManagerRegistry\:\:getRepository\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/FormType/EntityHiddenType.php
+
+		-
+			message: '#^Class App\\Repository\\ArmamentRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/ArmamentRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/ArmamentRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/ArmamentRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/ArmamentRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/ArmamentRepository.php
+
+		-
+			message: '#^Class App\\Repository\\ArmamentTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/ArmamentTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/ArmamentTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/ArmamentTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/ArmamentTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:getLastFiveArmamentTemplates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/ArmamentTemplateRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/ArmamentTemplateRepository.php
+
+		-
+			message: '#^Class App\\Repository\\CharacterClassRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/CharacterClassRepository.php
+
+		-
+			message: '#^Class App\\Repository\\CharacterRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/CharacterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CharacterRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/CharacterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CharacterRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/CharacterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CharacterRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/CharacterRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/CharacterRepository.php
+
+		-
+			message: '#^Class App\\Repository\\CharacterTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/CharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/CharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/CharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/CharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:getLastFiveCharacterTemplates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/CharacterTemplateRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/CharacterTemplateRepository.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Security\\Core\\User\\UserInterface\:\:getId\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Repository/GameRepository.php
+
+		-
+			message: '#^Class App\\Repository\\GameRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/GameRepository.php
+
+		-
+			message: '#^Method App\\Repository\\GameRepository\:\:getGamesByUser\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/GameRepository.php
+
+		-
+			message: '#^Method App\\Repository\\GameRepository\:\:getGamesByUser\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/GameRepository.php
+
+		-
+			message: '#^Method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/GameRepository.php
+
+		-
+			message: '#^Method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/GameRepository.php
+
+		-
+			message: '#^Class App\\Repository\\ItemRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/ItemRepository.php
+
+		-
+			message: '#^Method App\\Repository\\ItemRepository\:\:getLastFiveItems\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/ItemRepository.php
+
+		-
+			message: '#^Class App\\Repository\\KindRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/KindRepository.php
+
+		-
+			message: '#^Class App\\Repository\\MasteryRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/MasteryRepository.php
+
+		-
+			message: '#^Class App\\Repository\\MonsterRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/MonsterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MonsterRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/MonsterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MonsterRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MonsterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MonsterRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/MonsterRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/MonsterRepository.php
+
+		-
+			message: '#^Class App\\Repository\\MonsterTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/MonsterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/MonsterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MonsterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/MonsterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:getLastFiveMonsterTemplates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MonsterTemplateRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/MonsterTemplateRepository.php
+
+		-
+			message: '#^Class App\\Repository\\NonPlayableCharacterRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/NonPlayableCharacterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\NonPlayableCharacterRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/NonPlayableCharacterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\NonPlayableCharacterRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/NonPlayableCharacterRepository.php
+
+		-
+			message: '#^Method App\\Repository\\NonPlayableCharacterRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/NonPlayableCharacterRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/NonPlayableCharacterRepository.php
+
+		-
+			message: '#^Class App\\Repository\\NonPlayableCharacterTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/NonPlayableCharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Repository/NonPlayableCharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/NonPlayableCharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Repository/NonPlayableCharacterTemplateRepository.php
+
+		-
+			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:getLastFiveNonPlayableCharacterTemplates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/NonPlayableCharacterTemplateRepository.php
+
+		-
+			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/NonPlayableCharacterTemplateRepository.php
+
+		-
+			message: '#^Class App\\Repository\\SkillRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/SkillRepository.php
+
+		-
+			message: '#^Method App\\Repository\\SkillRepository\:\:getLastFiveSkills\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/SkillRepository.php
+
+		-
+			message: '#^Class App\\Repository\\SpellRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/SpellRepository.php
+
+		-
+			message: '#^Method App\\Repository\\SpellRepository\:\:getLastFiveSpells\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/SpellRepository.php
+
+		-
+			message: '#^Class App\\Repository\\TalentRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/TalentRepository.php
+
+		-
+			message: '#^Class App\\Repository\\UserRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/UserRepository.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\ArmamentBlock\:\:getArmamentTemplates\(\) should return array\<App\\Entity\\ArmamentTemplate\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/ArmamentBlock.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\ArmamentBlock\:\:getArmaments\(\) should return array\<App\\Entity\\Armament\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/ArmamentBlock.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\CharacterBlock\:\:getCharacterTemplates\(\) should return array\<App\\Entity\\CharacterTemplate\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/CharacterBlock.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\CharacterBlock\:\:getCharacters\(\) should return array\<App\\Entity\\Character\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/CharacterBlock.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\MonsterBlock\:\:getMonsterTemplates\(\) should return array\<App\\Entity\\MonsterTemplate\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/MonsterBlock.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\MonsterBlock\:\:getMonsters\(\) should return array\<App\\Entity\\Monster\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/MonsterBlock.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\NonPlayableCharacterBlock\:\:getNonPlayableCharacterTemplates\(\) should return array\<App\\Entity\\NonPlayableCharacterTemplate\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/NonPlayableCharacterBlock.php
+
+		-
+			message: '#^Method App\\Twig\\Components\\Molecule\\NonPlayableCharacterBlock\:\:getNonPlayableCharacters\(\) should return array\<App\\Entity\\NonPlayableCharacter\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twig/Components/Molecule/NonPlayableCharacterBlock.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\ArmamentFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/ArmamentFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\ArmamentTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/ArmamentTemplateFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\CharacterClassFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/CharacterClassFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\CharacterFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/CharacterFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\CharacterTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/CharacterTemplateFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\GameFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/GameFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\ItemFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/ItemFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\KindFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/KindFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\MasteryFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/MasteryFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\MonsterFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/MonsterFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\MonsterTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/MonsterTemplateFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\NonPlayableCharacterFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/NonPlayableCharacterFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\NonPlayableCharacterTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/NonPlayableCharacterTemplateFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\SkillFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/SkillFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\SpellFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/SpellFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\TalentFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/TalentFactory.php
+
+		-
+			message: '#^Method App\\Tests\\DataFixtures\\Factory\\UserFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/DataFixtures/Factory/UserFactory.php
+
+		-
+			message: '#^Parameter \#2 \$plainPassword of method Symfony\\Component\\PasswordHasher\\Hasher\\UserPasswordHasherInterface\:\:hashPassword\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/DataFixtures/Factory/UserFactory.php

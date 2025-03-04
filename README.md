@@ -1,10 +1,29 @@
 # RPG-APP
 
-This is the first version of my RPG app.
+
+
+## Installation:
+
+## Tools:
+- To list all files that needs to be fixed: `vendor/bin/php-cs-fixer check`
+    - To fix files according to configured rules: `vendor/bin/php-cs-fixer fix`
+- PHPUnit:
+    - To run the PHPUnit tests: `vendor/bin/phpunit`
+- PHP Stan:
+    - Run the tool: `vendor/bin/phpstan analyse --level=10 src tests --generate-baseline`
+    - Note: we're using the MAX level of PHPStan. The baseline allow us to tackle the problems one by one. The goal is to never increase the number of errors identified.
 
 
 
-## What are all of these Entities? TOREWORK
+
+
+
+
+
+
+
+
+## What are all of these Entities? TO-REWORK
 
 #### *Something*Encyclopedia
 These are the classes that list an example of a standard object. It may serve as a model to create some. Theses classes will be moved in their own API later.
