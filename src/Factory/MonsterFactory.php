@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Entity\Armament;
-use App\Entity\ArmamentTemplate;
 use App\Entity\Monster;
 use App\Entity\MonsterTemplate;
 

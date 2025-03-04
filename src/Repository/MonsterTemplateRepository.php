@@ -21,9 +21,9 @@ class MonsterTemplateRepository extends ServiceEntityRepository
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
     {
-        $queryBuilder =  $this->createQueryBuilder('mt');
+        $queryBuilder = $this->createQueryBuilder('mt');
         $queryBuilder->where('mt.name LIKE :query')
             ->setParameter('query', '%'.$query.'%')
             ->orderBy('mt.name', $orderBy)

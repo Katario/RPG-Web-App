@@ -37,6 +37,7 @@ trait HasGenerableStatsTrait
     public function setMinStrength(int $minStrength): self
     {
         $this->minStrength = $minStrength;
+
         return $this;
     }
 
@@ -48,6 +49,7 @@ trait HasGenerableStatsTrait
     public function setMaxStrength(int $maxStrength): self
     {
         $this->maxStrength = $maxStrength;
+
         return $this;
     }
 
@@ -59,6 +61,7 @@ trait HasGenerableStatsTrait
     public function setMinIntelligence(int $minIntelligence): self
     {
         $this->minIntelligence = $minIntelligence;
+
         return $this;
     }
 
@@ -70,6 +73,7 @@ trait HasGenerableStatsTrait
     public function setMaxIntelligence(int $maxIntelligence): self
     {
         $this->maxIntelligence = $maxIntelligence;
+
         return $this;
     }
 
@@ -81,6 +85,7 @@ trait HasGenerableStatsTrait
     public function setMinStamina(int $minStamina): self
     {
         $this->minStamina = $minStamina;
+
         return $this;
     }
 
@@ -92,6 +97,7 @@ trait HasGenerableStatsTrait
     public function setMaxStamina(int $maxStamina): self
     {
         $this->maxStamina = $maxStamina;
+
         return $this;
     }
 
@@ -103,6 +109,7 @@ trait HasGenerableStatsTrait
     public function setMinAgility(int $minAgility): self
     {
         $this->minAgility = $minAgility;
+
         return $this;
     }
 
@@ -114,6 +121,7 @@ trait HasGenerableStatsTrait
     public function setMaxAgility(int $maxAgility): self
     {
         $this->maxAgility = $maxAgility;
+
         return $this;
     }
 
@@ -125,6 +133,7 @@ trait HasGenerableStatsTrait
     public function setMinCharisma(int $minCharisma): self
     {
         $this->minCharisma = $minCharisma;
+
         return $this;
     }
 
@@ -136,6 +145,7 @@ trait HasGenerableStatsTrait
     public function setMaxCharisma(int $maxCharisma): self
     {
         $this->maxCharisma = $maxCharisma;
+
         return $this;
     }
 }

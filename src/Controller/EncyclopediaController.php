@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Armament;
 use App\Entity\ArmamentTemplate;
 use App\Entity\CharacterTemplate;
 use App\Entity\Item;
@@ -19,7 +18,6 @@ use App\FormType\MonsterTemplateType;
 use App\FormType\NonPlayableCharacterTemplateType;
 use App\FormType\SkillType;
 use App\FormType\SpellType;
-use App\Repository\ArmamentRepository;
 use App\Repository\ArmamentTemplateRepository;
 use App\Repository\CharacterTemplateRepository;
 use App\Repository\ItemRepository;
@@ -40,13 +38,14 @@ use Twig\Environment;
 readonly class EncyclopediaController
 {
     public function __construct(
-        private RouterInterface      $router,
+        private RouterInterface $router,
         private FormFactoryInterface $formFactory,
-        private Environment          $twig,
-        private ItemRepository       $itemRepository,
-        private SkillRepository      $skillRepository,
-        private SpellRepository      $spellRepository,
-    ) {}
+        private Environment $twig,
+        private ItemRepository $itemRepository,
+        private SkillRepository $skillRepository,
+        private SpellRepository $spellRepository,
+    ) {
+    }
 
     #[Route('/encyclopedia', name: 'show_encyclopedia', methods: ['GET'])]
     public function showEncyclopedia(
@@ -57,8 +56,7 @@ readonly class EncyclopediaController
         MonsterTemplateRepository $monsterTemplateRepository,
         NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
         CharacterTemplateRepository $characterTemplateRepository,
-    ): Response
-    {
+    ): Response {
         $lastSpells = $spellRepository->getLastFiveSpells();
         $lastItems = $itemRepository->getLastFiveItems();
         $lastSkills = $skillRepository->getLastFiveSkills();
@@ -85,10 +83,9 @@ readonly class EncyclopediaController
         methods: ['GET', 'POST']
     )]
     public function createSpell(
-        Request             $request,
+        Request $request,
         SpellRepository $spellRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(SpellType::class);
 
         $form->handleRequest($request);
@@ -116,7 +113,7 @@ readonly class EncyclopediaController
 
         return new Response(
             $this->twig->render('encyclopedia/spell/list.html.twig', [
-                'spells' => $spells
+                'spells' => $spells,
             ])
         );
     }
@@ -124,14 +121,13 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia/spells/{id}', name: 'encyclopedia_show_spell', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showSpell(
         SpellRepository $spellRepository,
-        int                 $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $spell = $spellRepository->find($id);
 
         return new Response(
             $this->twig->render('encyclopedia/spell/show.html.twig', [
-                'spell' => $spell
+                'spell' => $spell,
             ])
         );
     }
@@ -143,10 +139,9 @@ readonly class EncyclopediaController
         methods: ['GET']
     )]
     public function deleteSpell(
-        int                   $id,
+        int $id,
         SpellRepository $spellRepository,
-    ): Response
-    {
+    ): Response {
         $spell = $spellRepository->find($id);
 
         if ($spell) {
@@ -162,8 +157,7 @@ readonly class EncyclopediaController
     )]
     public function createItem(
         Request $request,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(ItemType::class);
 
         $form->handleRequest($request);
@@ -191,7 +185,7 @@ readonly class EncyclopediaController
 
         return new Response(
             $this->twig->render('encyclopedia/item/list.html.twig', [
-                'items' => $items
+                'items' => $items,
             ])
         );
     }
@@ -199,14 +193,13 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia/items/{id}', name: 'encyclopedia_show_item', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showItem(
         ItemRepository $itemRepository,
-        int                 $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $item = $itemRepository->find($id);
 
         return new Response(
             $this->twig->render('encyclopedia/item/show.html.twig', [
-                'item' => $item
+                'item' => $item,
             ])
         );
     }
@@ -218,10 +211,9 @@ readonly class EncyclopediaController
         methods: ['GET']
     )]
     public function deleteItem(
-        int                   $id,
+        int $id,
         ItemRepository $itemRepository,
-    ): Response
-    {
+    ): Response {
         $item = $itemRepository->find($id);
 
         if ($item) {
@@ -236,10 +228,9 @@ readonly class EncyclopediaController
         methods: ['GET', 'POST']
     )]
     public function createSkill(
-        Request             $request,
+        Request $request,
         SkillRepository $skillRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(SkillType::class);
 
         $form->handleRequest($request);
@@ -267,7 +258,7 @@ readonly class EncyclopediaController
 
         return new Response(
             $this->twig->render('encyclopedia/skill/list.html.twig', [
-                'skills' => $skills
+                'skills' => $skills,
             ])
         );
     }
@@ -275,14 +266,13 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia/skills/{id}', name: 'encyclopedia_show_skill', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showSkill(
         SkillRepository $skillRepository,
-        int                 $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $skill = $skillRepository->find($id);
 
         return new Response(
             $this->twig->render('encyclopedia/skill/show.html.twig', [
-                'skill' => $skill
+                'skill' => $skill,
             ])
         );
     }
@@ -294,10 +284,9 @@ readonly class EncyclopediaController
         methods: ['GET']
     )]
     public function deleteSkill(
-        int                   $id,
+        int $id,
         SkillRepository $skillRepository,
-    ): Response
-    {
+    ): Response {
         $skill = $skillRepository->find($id);
 
         if ($skill) {
@@ -312,10 +301,9 @@ readonly class EncyclopediaController
         methods: ['GET', 'POST']
     )]
     public function createArmamentTemplate(
-        Request             $request,
+        Request $request,
         ArmamentTemplateRepository $armamentTemplateRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(ArmamentTemplateType::class);
 
         $form->handleRequest($request);
@@ -343,7 +331,7 @@ readonly class EncyclopediaController
 
         return new Response(
             $this->twig->render('encyclopedia/armament_template/list.html.twig', [
-                'armamentTemplates' => $armamentTemplates
+                'armamentTemplates' => $armamentTemplates,
             ])
         );
     }
@@ -351,14 +339,13 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia/armaments/{id}', name: 'encyclopedia_show_armament_template', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showArmamentTemplate(
         ArmamentTemplateRepository $armamentTemplateRepository,
-        int                 $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $armamentTemplate = $armamentTemplateRepository->find($id);
 
         return new Response(
             $this->twig->render('encyclopedia/armament_template/show.html.twig', [
-                'armamentTemplate' => $armamentTemplate
+                'armamentTemplate' => $armamentTemplate,
             ])
         );
     }
@@ -370,10 +357,9 @@ readonly class EncyclopediaController
         methods: ['GET']
     )]
     public function deleteArmamentTemplate(
-        int                   $id,
+        int $id,
         ArmamentTemplateRepository $armamentTemplateRepository,
-    ): Response
-    {
+    ): Response {
         $armamentTemplate = $armamentTemplateRepository->find($id);
 
         if ($armamentTemplate) {
@@ -388,10 +374,9 @@ readonly class EncyclopediaController
         methods: ['GET', 'POST']
     )]
     public function createMonsterTemplate(
-        Request             $request,
+        Request $request,
         MonsterTemplateRepository $monsterTemplateRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(MonsterTemplateType::class);
 
         $form->handleRequest($request);
@@ -419,7 +404,7 @@ readonly class EncyclopediaController
 
         return new Response(
             $this->twig->render('encyclopedia/monster_template/list.html.twig', [
-                'monsterTemplates' => $monsterTemplates
+                'monsterTemplates' => $monsterTemplates,
             ])
         );
     }
@@ -427,14 +412,13 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia/monsters/{id}', name: 'encyclopedia_show_monster_template', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showMonsterTemplate(
         MonsterTemplateRepository $monsterTemplateRepository,
-        int                 $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $monsterTemplate = $monsterTemplateRepository->find($id);
 
         return new Response(
             $this->twig->render('encyclopedia/monster_template/show.html.twig', [
-                'monsterTemplate' => $monsterTemplate
+                'monsterTemplate' => $monsterTemplate,
             ])
         );
     }
@@ -446,10 +430,9 @@ readonly class EncyclopediaController
         methods: ['GET']
     )]
     public function deleteMonsterTemplate(
-        int                   $id,
+        int $id,
         MonsterTemplateRepository $monsterTemplateRepository,
-    ): Response
-    {
+    ): Response {
         $monsterTemplate = $monsterTemplateRepository->find($id);
 
         if ($monsterTemplate) {
@@ -459,17 +442,14 @@ readonly class EncyclopediaController
         return new RedirectResponse($this->router->generate('encyclopedia_show_monster_templates'));
     }
 
-
-
     #[Route('/encyclopedia/create-non-playable-character',
         name: 'encyclopedia_create_non_playable_character_template',
         methods: ['GET', 'POST']
     )]
     public function createNonPlayableCharacterTemplate(
-        Request             $request,
+        Request $request,
         NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(NonPlayableCharacterTemplateType::class);
 
         $form->handleRequest($request);
@@ -497,7 +477,7 @@ readonly class EncyclopediaController
 
         return new Response(
             $this->twig->render('encyclopedia/npc_template/list.html.twig', [
-                'nonPlayableCharacterTemplates' => $nonPlayableCharacterTemplates
+                'nonPlayableCharacterTemplates' => $nonPlayableCharacterTemplates,
             ])
         );
     }
@@ -505,14 +485,13 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia/nonPlayableCharacters/{id}', name: 'encyclopedia_show_non_playable_character_template', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showNonPlayableCharacterTemplate(
         NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
-        int                 $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $nonPlayableCharacterTemplate = $nonPlayableCharacterTemplateRepository->find($id);
 
         return new Response(
             $this->twig->render('encyclopedia/npc_template/show.html.twig', [
-                'nonPlayableCharacterTemplate' => $nonPlayableCharacterTemplate
+                'nonPlayableCharacterTemplate' => $nonPlayableCharacterTemplate,
             ])
         );
     }
@@ -524,10 +503,9 @@ readonly class EncyclopediaController
         methods: ['GET']
     )]
     public function deleteNonPlayableCharacterTemplate(
-        int                   $id,
+        int $id,
         NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
-    ): Response
-    {
+    ): Response {
         $nonPlayableCharacterTemplate = $nonPlayableCharacterTemplateRepository->find($id);
 
         if ($nonPlayableCharacterTemplate) {
@@ -542,10 +520,9 @@ readonly class EncyclopediaController
         methods: ['GET', 'POST']
     )]
     public function createCharacterTemplate(
-        Request             $request,
+        Request $request,
         CharacterTemplateRepository $characterTemplateRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(CharacterTemplateType::class);
 
         $form->handleRequest($request);
@@ -573,7 +550,7 @@ readonly class EncyclopediaController
 
         return new Response(
             $this->twig->render('encyclopedia/character_template/list.html.twig', [
-                'characterTemplates' => $characterTemplates
+                'characterTemplates' => $characterTemplates,
             ])
         );
     }
@@ -581,14 +558,13 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia/characters/{id}', name: 'encyclopedia_show_character_template', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showCharacterTemplate(
         CharacterTemplateRepository $characterTemplateRepository,
-        int                 $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $characterTemplate = $characterTemplateRepository->find($id);
 
         return new Response(
             $this->twig->render('encyclopedia/character_template/show.html.twig', [
-                'characterTemplate' => $characterTemplate
+                'characterTemplate' => $characterTemplate,
             ])
         );
     }
@@ -600,10 +576,9 @@ readonly class EncyclopediaController
         methods: ['GET']
     )]
     public function deleteCharacterTemplate(
-        int                   $id,
+        int $id,
         CharacterTemplateRepository $characterTemplateRepository,
-    ): Response
-    {
+    ): Response {
         $characterTemplate = $characterTemplateRepository->find($id);
 
         if ($characterTemplate) {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\FormType;
 
-use App\Entity\Game;
 use App\Entity\Spell;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

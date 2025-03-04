@@ -8,10 +8,8 @@ use App\Entity\Character;
 use App\Entity\Game;
 use App\Factory\CharacterFactory;
 use App\FormType\CharacterType;
-use App\FormType\GenerateCharacterType;
-use App\Repository\CharacterTemplateRepository;
-use App\Repository\GameRepository;
 use App\Repository\CharacterRepository;
+use App\Repository\CharacterTemplateRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -19,12 +17,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
-use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 #[AsController]
@@ -36,13 +31,13 @@ class CharacterController
         public UrlGeneratorInterface $router,
         public Security $security,
         public CharacterRepository $characterRepository,
-    ) {}
+    ) {
+    }
 
     #[Route('/games/{gameId}/characters/{id}', name: 'show_character', requirements: ['gameId' => '\d+', 'id' => '\d+'], methods: ['GET'])]
     public function showCharacter(
         int $id,
-    ): Response
-    {
+    ): Response {
         $character = $this->characterRepository->find($id);
 
         return new Response(
@@ -60,8 +55,7 @@ class CharacterController
     public function editCharacter(
         Request $request,
         int $id,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $character = $this->characterRepository->find($id);
 
         if (!$character) {
@@ -100,8 +94,7 @@ class CharacterController
     )]
     public function deleteCharacter(
         int $id,
-    ): Response
-    {
+    ): Response {
         $character = $this->characterRepository->find($id);
 
         if (!$character) {
@@ -124,8 +117,7 @@ class CharacterController
         #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
         CharacterFactory $characterFactory,
         CharacterTemplateRepository $characterTemplateRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         if ($request->get('characterTemplateId')) {
             $characterTemplate = $characterTemplateRepository->find($request->get('characterTemplateId'));
             $character = $characterFactory->createOneFromCharacterTemplate($characterTemplate);

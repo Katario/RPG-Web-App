@@ -9,7 +9,6 @@ use App\Entity\Item;
 use App\Entity\Monster;
 use App\Entity\Skill;
 use App\Entity\Spell;
-use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

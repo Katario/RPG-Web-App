@@ -37,6 +37,7 @@ class Item extends Encyclopedia
     public function setName(string $name): Item
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -48,6 +49,7 @@ class Item extends Encyclopedia
     public function setValue(int $value): Item
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -59,6 +61,7 @@ class Item extends Encyclopedia
     public function setDescription(string $description): Item
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -70,6 +73,7 @@ class Item extends Encyclopedia
     public function setWeight(int $weight): Item
     {
         $this->weight = $weight;
+
         return $this;
     }
 }

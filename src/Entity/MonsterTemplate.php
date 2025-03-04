@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use App\Repository\MonsterTemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -56,7 +57,6 @@ class MonsterTemplate extends Encyclopedia
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
 
-
     public function __construct()
     {
         $this->spells = new ArrayCollection();
@@ -72,6 +72,7 @@ class MonsterTemplate extends Encyclopedia
     public function setId(?int $id): MonsterTemplate
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -83,6 +84,7 @@ class MonsterTemplate extends Encyclopedia
     public function setName(string $name): MonsterTemplate
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -95,6 +97,7 @@ class MonsterTemplate extends Encyclopedia
     public function setSpells(Collection|array $spells): MonsterTemplate
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -103,6 +106,7 @@ class MonsterTemplate extends Encyclopedia
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -111,6 +115,7 @@ class MonsterTemplate extends Encyclopedia
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 
@@ -123,6 +128,7 @@ class MonsterTemplate extends Encyclopedia
     public function setItems(Collection|array $items): MonsterTemplate
     {
         $this->items = $items;
+
         return $this;
     }
 
@@ -131,6 +137,7 @@ class MonsterTemplate extends Encyclopedia
         if (!$this->getItems()->contains($item)) {
             $this->items->add($item);
         }
+
         return $this;
     }
 
@@ -139,6 +146,7 @@ class MonsterTemplate extends Encyclopedia
         if ($this->getItems()->contains($item)) {
             $this->items->removeElement($item);
         }
+
         return $this;
     }
 
@@ -151,6 +159,7 @@ class MonsterTemplate extends Encyclopedia
     public function setSkills(Collection|array $skills): MonsterTemplate
     {
         $this->skills = $skills;
+
         return $this;
     }
 
@@ -159,6 +168,7 @@ class MonsterTemplate extends Encyclopedia
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -167,6 +177,7 @@ class MonsterTemplate extends Encyclopedia
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -178,6 +189,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMinHealthPoints(int $minHealthPoints): MonsterTemplate
     {
         $this->minHealthPoints = $minHealthPoints;
+
         return $this;
     }
 
@@ -189,6 +201,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMaxHealthPoints(int $maxHealthPoints): MonsterTemplate
     {
         $this->maxHealthPoints = $maxHealthPoints;
+
         return $this;
     }
 
@@ -200,6 +213,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMinManaPoints(int $minManaPoints): MonsterTemplate
     {
         $this->minManaPoints = $minManaPoints;
+
         return $this;
     }
 
@@ -211,6 +225,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMaxManaPoints(int $maxManaPoints): MonsterTemplate
     {
         $this->maxManaPoints = $maxManaPoints;
+
         return $this;
     }
 
@@ -222,6 +237,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMinActionPoints(int $minActionPoints): MonsterTemplate
     {
         $this->minActionPoints = $minActionPoints;
+
         return $this;
     }
 
@@ -233,6 +249,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMaxActionPoints(int $maxActionPoints): MonsterTemplate
     {
         $this->maxActionPoints = $maxActionPoints;
+
         return $this;
     }
 
@@ -244,6 +261,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMinExhaustPoints(int $minExhaustPoints): MonsterTemplate
     {
         $this->minExhaustPoints = $minExhaustPoints;
+
         return $this;
     }
 
@@ -255,6 +273,7 @@ class MonsterTemplate extends Encyclopedia
     public function setMaxExhaustPoints(int $maxExhaustPoints): MonsterTemplate
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
         return $this;
     }
 }

@@ -13,9 +13,9 @@ class ArmamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Armament::class);
     }
 
-    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
     {
-        $queryBuilder =  $this->createQueryBuilder('a');
+        $queryBuilder = $this->createQueryBuilder('a');
         $queryBuilder->where('a.name LIKE :query')
             ->orWhere('a.category LIKE :query')
             ->setParameter('query', '%'.$query.'%')

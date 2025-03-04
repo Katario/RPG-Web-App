@@ -45,37 +45,37 @@ class Character
     private int $currentExhaustPoints;
     #[ORM\Column(type: 'integer')]
     private int $maxExhaustPoints;
-    #[ORM\JoinTable(name: 'characters_kind')]
-    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
+    #[JoinTable(name: 'characters_kind')]
+    #[JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
     #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'Kind')]
     private Collection $kind;
-    #[ORM\JoinTable(name: 'characters_character_class')]
-    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
+    #[JoinTable(name: 'characters_character_class')]
+    #[JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
     #[ORM\InverseJoinColumn(name: 'character_class_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'CharacterClass')]
     private Collection $characterClass;
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
+    #[JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
     private ?User $user;
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'characters')]
-    #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
+    #[JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'character')]
-    #[ORM\JoinColumn(nullable: true, onDelete:'SET NULL')]
+    #[JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Collection|array $armaments;
-    #[ORM\JoinTable(name: 'characters_spells')]
-    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id')]
+    #[JoinTable(name: 'characters_spells')]
+    #[JoinColumn(name: 'character_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
-    #[ORM\JoinTable(name: 'characters_items')]
-    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id')]
+    #[JoinTable(name: 'characters_items')]
+    #[JoinColumn(name: 'character_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
-    #[ORM\JoinTable(name: 'characters_skills')]
-    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id')]
+    #[JoinTable(name: 'characters_skills')]
+    #[JoinColumn(name: 'character_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
@@ -110,6 +110,7 @@ class Character
     public function setName(string $name): Character
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -121,6 +122,7 @@ class Character
     public function setLastName(string $lastName): Character
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
@@ -162,6 +164,7 @@ class Character
     public function setUser(User $user): Character
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -173,6 +176,7 @@ class Character
     public function setGame(Game $game): Character
     {
         $this->game = $game;
+
         return $this;
     }
 
@@ -184,6 +188,7 @@ class Character
     public function setArmaments(Collection|array $armaments): Character
     {
         $this->armaments = $armaments;
+
         return $this;
     }
 
@@ -195,6 +200,7 @@ class Character
     public function setSpells(Collection|array $spells): Character
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -203,6 +209,7 @@ class Character
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -211,6 +218,7 @@ class Character
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 
@@ -222,6 +230,7 @@ class Character
     public function setItems(Collection|array $items): Character
     {
         $this->items = $items;
+
         return $this;
     }
 
@@ -230,6 +239,7 @@ class Character
         if (!$this->getItems()->contains($item)) {
             $this->items->add($item);
         }
+
         return $this;
     }
 
@@ -238,6 +248,7 @@ class Character
         if ($this->getItems()->contains($item)) {
             $this->items->removeElement($item);
         }
+
         return $this;
     }
 
@@ -249,15 +260,16 @@ class Character
     public function setSkills(Collection|array $skills): Character
     {
         $this->skills = $skills;
+
         return $this;
     }
-
 
     public function addSkill(Skill $skill): Character
     {
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -266,6 +278,7 @@ class Character
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -277,6 +290,7 @@ class Character
     public function setLevel(int $level): Character
     {
         $this->level = $level;
+
         return $this;
     }
 
@@ -288,6 +302,7 @@ class Character
     public function setCurrentHealthPoints(int $currentHealthPoints): Character
     {
         $this->currentHealthPoints = $currentHealthPoints;
+
         return $this;
     }
 
@@ -299,6 +314,7 @@ class Character
     public function setMaxHealthPoints(int $maxHealthPoints): Character
     {
         $this->maxHealthPoints = $maxHealthPoints;
+
         return $this;
     }
 
@@ -310,6 +326,7 @@ class Character
     public function setCurrentManaPoints(int $currentManaPoints): Character
     {
         $this->currentManaPoints = $currentManaPoints;
+
         return $this;
     }
 
@@ -321,6 +338,7 @@ class Character
     public function setMaxManaPoints(int $maxManaPoints): Character
     {
         $this->maxManaPoints = $maxManaPoints;
+
         return $this;
     }
 
@@ -332,6 +350,7 @@ class Character
     public function setCurrentActionPoints(int $currentActionPoints): Character
     {
         $this->currentActionPoints = $currentActionPoints;
+
         return $this;
     }
 
@@ -343,6 +362,7 @@ class Character
     public function setMaxActionPoints(int $maxActionPoints): Character
     {
         $this->maxActionPoints = $maxActionPoints;
+
         return $this;
     }
 
@@ -354,6 +374,7 @@ class Character
     public function setCurrentExhaustPoints(int $currentExhaustPoints): Character
     {
         $this->currentExhaustPoints = $currentExhaustPoints;
+
         return $this;
     }
 
@@ -365,6 +386,7 @@ class Character
     public function setMaxExhaustPoints(int $maxExhaustPoints): Character
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
         return $this;
     }
 
@@ -376,6 +398,7 @@ class Character
     public function setTitle(Kind $title): Character
     {
         $this->title = $title;
+
         return $this;
     }
 }

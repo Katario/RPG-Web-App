@@ -29,6 +29,7 @@ class CharacterClass extends Encyclopedia
     public function setId(?int $id): CharacterClass
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -40,6 +41,7 @@ class CharacterClass extends Encyclopedia
     public function setName(string $name): CharacterClass
     {
         $this->name = $name;
+
         return $this;
     }
 }

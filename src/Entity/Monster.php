@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use App\Repository\MonsterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -91,6 +92,7 @@ class Monster
     public function setName(string $name): Monster
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -102,6 +104,7 @@ class Monster
     public function setIsBoss(bool $isBoss): Monster
     {
         $this->isBoss = $isBoss;
+
         return $this;
     }
 
@@ -113,6 +116,7 @@ class Monster
     public function setSpells(Collection|array $spells): Monster
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -121,6 +125,7 @@ class Monster
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -129,6 +134,7 @@ class Monster
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 
@@ -140,6 +146,7 @@ class Monster
     public function setArmaments(Collection|array $armaments): Monster
     {
         $this->armaments = $armaments;
+
         return $this;
     }
 
@@ -149,15 +156,17 @@ class Monster
             $armament->setMonster($this);
             $this->armaments->add($armament);
         }
+
         return $this;
     }
 
     public function removeArmament(Armament $armament): Monster
     {
         if ($this->getArmaments()->contains($armament)) {
-            $armament->setMonster(NULL);
+            $armament->setMonster(null);
             $this->armaments->removeElement($armament);
         }
+
         return $this;
     }
 
@@ -169,6 +178,7 @@ class Monster
     public function setItems(Collection|array $items): Monster
     {
         $this->items = $items;
+
         return $this;
     }
 
@@ -177,6 +187,7 @@ class Monster
         if (!$this->getItems()->contains($item)) {
             $this->items->add($item);
         }
+
         return $this;
     }
 
@@ -185,6 +196,7 @@ class Monster
         if ($this->getItems()->contains($item)) {
             $this->items->removeElement($item);
         }
+
         return $this;
     }
 
@@ -196,6 +208,7 @@ class Monster
     public function setSkills(Collection|array $skills): Monster
     {
         $this->skills = $skills;
+
         return $this;
     }
 
@@ -204,6 +217,7 @@ class Monster
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -212,6 +226,7 @@ class Monster
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -223,6 +238,7 @@ class Monster
     public function setGame(Game $game): Monster
     {
         $this->game = $game;
+
         return $this;
     }
 
@@ -234,6 +250,7 @@ class Monster
     public function setLevel(int $level): Monster
     {
         $this->level = $level;
+
         return $this;
     }
 
@@ -245,6 +262,7 @@ class Monster
     public function setCurrentHealthPoints(int $currentHealthPoints): Monster
     {
         $this->currentHealthPoints = $currentHealthPoints;
+
         return $this;
     }
 
@@ -256,6 +274,7 @@ class Monster
     public function setMaxHealthPoints(int $maxHealthPoints): Monster
     {
         $this->maxHealthPoints = $maxHealthPoints;
+
         return $this;
     }
 
@@ -267,6 +286,7 @@ class Monster
     public function setCurrentManaPoints(int $currentManaPoints): Monster
     {
         $this->currentManaPoints = $currentManaPoints;
+
         return $this;
     }
 
@@ -278,6 +298,7 @@ class Monster
     public function setMaxManaPoints(int $maxManaPoints): Monster
     {
         $this->maxManaPoints = $maxManaPoints;
+
         return $this;
     }
 
@@ -289,6 +310,7 @@ class Monster
     public function setCurrentActionPoints(int $currentActionPoints): Monster
     {
         $this->currentActionPoints = $currentActionPoints;
+
         return $this;
     }
 
@@ -300,6 +322,7 @@ class Monster
     public function setMaxActionPoints(int $maxActionPoints): Monster
     {
         $this->maxActionPoints = $maxActionPoints;
+
         return $this;
     }
 
@@ -311,6 +334,7 @@ class Monster
     public function setCurrentExhaustPoints(int $currentExhaustPoints): Monster
     {
         $this->currentExhaustPoints = $currentExhaustPoints;
+
         return $this;
     }
 
@@ -322,6 +346,7 @@ class Monster
     public function setMaxExhaustPoints(int $maxExhaustPoints): Monster
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
         return $this;
     }
 }

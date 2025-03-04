@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use App\Repository\NonPlayableCharacterTemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -80,6 +81,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setId(?int $id): NonPlayableCharacterTemplate
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setName(string $name): NonPlayableCharacterTemplate
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -103,6 +106,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setSpells(Collection|array $spells): NonPlayableCharacterTemplate
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -111,6 +115,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -119,6 +124,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 
@@ -131,6 +137,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setItems(Collection|array $items): NonPlayableCharacterTemplate
     {
         $this->items = $items;
+
         return $this;
     }
 
@@ -139,6 +146,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
         if (!$this->getItems()->contains($item)) {
             $this->items->add($item);
         }
+
         return $this;
     }
 
@@ -147,6 +155,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
         if ($this->getItems()->contains($item)) {
             $this->items->removeElement($item);
         }
+
         return $this;
     }
 
@@ -159,6 +168,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setSkills(Collection|array $skills): NonPlayableCharacterTemplate
     {
         $this->skills = $skills;
+
         return $this;
     }
 
@@ -167,6 +177,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -175,6 +186,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -186,6 +198,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMinHealthPoints(int $minHealthPoints): NonPlayableCharacterTemplate
     {
         $this->minHealthPoints = $minHealthPoints;
+
         return $this;
     }
 
@@ -197,6 +210,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMaxHealthPoints(int $maxHealthPoints): NonPlayableCharacterTemplate
     {
         $this->maxHealthPoints = $maxHealthPoints;
+
         return $this;
     }
 
@@ -208,6 +222,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMinManaPoints(int $minManaPoints): NonPlayableCharacterTemplate
     {
         $this->minManaPoints = $minManaPoints;
+
         return $this;
     }
 
@@ -219,6 +234,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMaxManaPoints(int $maxManaPoints): NonPlayableCharacterTemplate
     {
         $this->maxManaPoints = $maxManaPoints;
+
         return $this;
     }
 
@@ -230,6 +246,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMinActionPoints(int $minActionPoints): NonPlayableCharacterTemplate
     {
         $this->minActionPoints = $minActionPoints;
+
         return $this;
     }
 
@@ -241,6 +258,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMaxActionPoints(int $maxActionPoints): NonPlayableCharacterTemplate
     {
         $this->maxActionPoints = $maxActionPoints;
+
         return $this;
     }
 
@@ -252,6 +270,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMinExhaustPoints(int $minExhaustPoints): NonPlayableCharacterTemplate
     {
         $this->minExhaustPoints = $minExhaustPoints;
+
         return $this;
     }
 
@@ -263,6 +282,7 @@ class NonPlayableCharacterTemplate extends Encyclopedia
     public function setMaxExhaustPoints(int $maxExhaustPoints): NonPlayableCharacterTemplate
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
         return $this;
     }
 

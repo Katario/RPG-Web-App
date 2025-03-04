@@ -20,8 +20,10 @@ class UserController extends AbstractController
 {
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
-    ) {}
-    #[Route('/sign-in', name:'sign_in', methods: ['GET', 'POST'])]
+    ) {
+    }
+
+    #[Route('/sign-in', name: 'sign_in', methods: ['GET', 'POST'])]
     public function signIn(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -35,13 +37,12 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/sign-up', name:'sign_up', methods: ['GET', 'POST'])]
+    #[Route('/sign-up', name: 'sign_up', methods: ['GET', 'POST'])]
     public function signUp(
         Request $request,
         UserRepository $userRepository,
-        UserPasswordHasherInterface $passwordHasher
-    ): Response|RedirectResponse
-    {
+        UserPasswordHasherInterface $passwordHasher,
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(UserType::class);
 
         $form->handleRequest($request);

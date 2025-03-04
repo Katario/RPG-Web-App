@@ -26,14 +26,14 @@ class GameController
         public FormFactoryInterface $formFactory,
         public UrlGeneratorInterface $router,
         public GameRepository $gameRepository,
-        public Security $security
-    ) {}
+        public Security $security,
+    ) {
+    }
 
     #[Route('/games/{id}', name: 'show_game', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showGame(
-        int $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $game = $this->gameRepository->find($id);
 
         return new Response(
@@ -45,9 +45,8 @@ class GameController
 
     #[Route('/games/create', name: 'create_game', methods: ['GET', 'POST'])]
     public function createGame(
-        Request               $request,
-    ): Response|RedirectResponse
-    {
+        Request $request,
+    ): Response|RedirectResponse {
         $form = $this->formFactory->create(GameType::class);
 
         $form->handleRequest($request);

@@ -54,7 +54,7 @@ class NonPlayableCharacter
     #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'nonPlayableCharacter')]
-    #[ORM\JoinColumn(nullable: true, onDelete:'SET NULL')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Collection|array $armaments;
     #[ORM\JoinTable(name: 'non_playable_characters_spells')]
     #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id')]
@@ -102,6 +102,7 @@ class NonPlayableCharacter
     public function setLastName(?string $lastName): NonPlayableCharacter
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
@@ -113,6 +114,7 @@ class NonPlayableCharacter
     public function setName(?string $name): NonPlayableCharacter
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -124,6 +126,7 @@ class NonPlayableCharacter
     public function setGame(Game $game): NonPlayableCharacter
     {
         $this->game = $game;
+
         return $this;
     }
 
@@ -135,6 +138,7 @@ class NonPlayableCharacter
     public function setArmaments(Collection|array $armaments): NonPlayableCharacter
     {
         $this->armaments = $armaments;
+
         return $this;
     }
 
@@ -144,6 +148,7 @@ class NonPlayableCharacter
             $armament->setNonPlayableCharacter($this);
             $this->armaments->add($armament);
         }
+
         return $this;
     }
 
@@ -153,6 +158,7 @@ class NonPlayableCharacter
             $armament->setNonPlayableCharacter(null);
             $this->armaments->removeElement($armament);
         }
+
         return $this;
     }
 
@@ -164,6 +170,7 @@ class NonPlayableCharacter
     public function setSpells(Collection|array $spells): NonPlayableCharacter
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -172,6 +179,7 @@ class NonPlayableCharacter
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -180,6 +188,7 @@ class NonPlayableCharacter
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 
@@ -191,6 +200,7 @@ class NonPlayableCharacter
     public function setItems(Collection|array $items): NonPlayableCharacter
     {
         $this->items = $items;
+
         return $this;
     }
 
@@ -199,6 +209,7 @@ class NonPlayableCharacter
         if (!$this->getItems()->contains($item)) {
             $this->items->add($item);
         }
+
         return $this;
     }
 
@@ -207,6 +218,7 @@ class NonPlayableCharacter
         if ($this->getItems()->contains($item)) {
             $this->items->removeElement($item);
         }
+
         return $this;
     }
 
@@ -218,6 +230,7 @@ class NonPlayableCharacter
     public function setSkills(Collection|array $skills): NonPlayableCharacter
     {
         $this->skills = $skills;
+
         return $this;
     }
 
@@ -226,6 +239,7 @@ class NonPlayableCharacter
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -234,6 +248,7 @@ class NonPlayableCharacter
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -245,6 +260,7 @@ class NonPlayableCharacter
     public function setLevel(int $level): NonPlayableCharacter
     {
         $this->level = $level;
+
         return $this;
     }
 
@@ -256,6 +272,7 @@ class NonPlayableCharacter
     public function setCurrentHealthPoints(int $currentHealthPoints): NonPlayableCharacter
     {
         $this->currentHealthPoints = $currentHealthPoints;
+
         return $this;
     }
 
@@ -267,6 +284,7 @@ class NonPlayableCharacter
     public function setMaxHealthPoints(int $maxHealthPoints): NonPlayableCharacter
     {
         $this->maxHealthPoints = $maxHealthPoints;
+
         return $this;
     }
 
@@ -278,6 +296,7 @@ class NonPlayableCharacter
     public function setCurrentManaPoints(int $currentManaPoints): NonPlayableCharacter
     {
         $this->currentManaPoints = $currentManaPoints;
+
         return $this;
     }
 
@@ -289,6 +308,7 @@ class NonPlayableCharacter
     public function setMaxManaPoints(int $maxManaPoints): NonPlayableCharacter
     {
         $this->maxManaPoints = $maxManaPoints;
+
         return $this;
     }
 
@@ -300,6 +320,7 @@ class NonPlayableCharacter
     public function setCurrentActionPoints(int $currentActionPoints): NonPlayableCharacter
     {
         $this->currentActionPoints = $currentActionPoints;
+
         return $this;
     }
 
@@ -311,6 +332,7 @@ class NonPlayableCharacter
     public function setMaxActionPoints(int $maxActionPoints): NonPlayableCharacter
     {
         $this->maxActionPoints = $maxActionPoints;
+
         return $this;
     }
 
@@ -322,6 +344,7 @@ class NonPlayableCharacter
     public function setCurrentExhaustPoints(int $currentExhaustPoints): NonPlayableCharacter
     {
         $this->currentExhaustPoints = $currentExhaustPoints;
+
         return $this;
     }
 
@@ -333,6 +356,7 @@ class NonPlayableCharacter
     public function setMaxExhaustPoints(int $maxExhaustPoints): NonPlayableCharacter
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
         return $this;
     }
 

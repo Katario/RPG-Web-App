@@ -21,7 +21,6 @@ class SpellRepository extends ServiceEntityRepository
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-
     public function delete(Spell $spell): void
     {
         $this->getEntityManager()->remove($spell);

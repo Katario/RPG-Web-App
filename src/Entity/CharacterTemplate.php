@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use App\Repository\CharacterTemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -81,6 +82,7 @@ class CharacterTemplate extends Encyclopedia
     public function setId(?int $id): CharacterTemplate
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -92,6 +94,7 @@ class CharacterTemplate extends Encyclopedia
     public function setName(string $name): CharacterTemplate
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -104,6 +107,7 @@ class CharacterTemplate extends Encyclopedia
     public function setSpells(Collection|array $spells): CharacterTemplate
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -112,6 +116,7 @@ class CharacterTemplate extends Encyclopedia
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -120,6 +125,7 @@ class CharacterTemplate extends Encyclopedia
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 
@@ -132,6 +138,7 @@ class CharacterTemplate extends Encyclopedia
     public function setItems(Collection|array $items): CharacterTemplate
     {
         $this->items = $items;
+
         return $this;
     }
 
@@ -140,6 +147,7 @@ class CharacterTemplate extends Encyclopedia
         if (!$this->getItems()->contains($item)) {
             $this->items->add($item);
         }
+
         return $this;
     }
 
@@ -148,6 +156,7 @@ class CharacterTemplate extends Encyclopedia
         if ($this->getItems()->contains($item)) {
             $this->items->removeElement($item);
         }
+
         return $this;
     }
 
@@ -160,6 +169,7 @@ class CharacterTemplate extends Encyclopedia
     public function setSkills(Collection|array $skills): CharacterTemplate
     {
         $this->skills = $skills;
+
         return $this;
     }
 
@@ -168,6 +178,7 @@ class CharacterTemplate extends Encyclopedia
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -176,6 +187,7 @@ class CharacterTemplate extends Encyclopedia
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -187,6 +199,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMinHealthPoints(int $minHealthPoints): CharacterTemplate
     {
         $this->minHealthPoints = $minHealthPoints;
+
         return $this;
     }
 
@@ -198,6 +211,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMaxHealthPoints(int $maxHealthPoints): CharacterTemplate
     {
         $this->maxHealthPoints = $maxHealthPoints;
+
         return $this;
     }
 
@@ -209,6 +223,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMinManaPoints(int $minManaPoints): CharacterTemplate
     {
         $this->minManaPoints = $minManaPoints;
+
         return $this;
     }
 
@@ -220,6 +235,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMaxManaPoints(int $maxManaPoints): CharacterTemplate
     {
         $this->maxManaPoints = $maxManaPoints;
+
         return $this;
     }
 
@@ -231,6 +247,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMinActionPoints(int $minActionPoints): CharacterTemplate
     {
         $this->minActionPoints = $minActionPoints;
+
         return $this;
     }
 
@@ -242,6 +259,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMaxActionPoints(int $maxActionPoints): CharacterTemplate
     {
         $this->maxActionPoints = $maxActionPoints;
+
         return $this;
     }
 
@@ -253,6 +271,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMinExhaustPoints(int $minExhaustPoints): CharacterTemplate
     {
         $this->minExhaustPoints = $minExhaustPoints;
+
         return $this;
     }
 
@@ -264,6 +283,7 @@ class CharacterTemplate extends Encyclopedia
     public function setMaxExhaustPoints(int $maxExhaustPoints): CharacterTemplate
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
         return $this;
     }
 

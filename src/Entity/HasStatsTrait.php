@@ -27,6 +27,7 @@ trait HasStatsTrait
     public function setStrength(int $strength): self
     {
         $this->strength = $strength;
+
         return $this;
     }
 
@@ -38,6 +39,7 @@ trait HasStatsTrait
     public function setIntelligence(int $intelligence): self
     {
         $this->intelligence = $intelligence;
+
         return $this;
     }
 
@@ -49,6 +51,7 @@ trait HasStatsTrait
     public function setStamina(int $stamina): self
     {
         $this->stamina = $stamina;
+
         return $this;
     }
 
@@ -60,6 +63,7 @@ trait HasStatsTrait
     public function setAgility(int $agility): self
     {
         $this->agility = $agility;
+
         return $this;
     }
 
@@ -71,6 +75,7 @@ trait HasStatsTrait
     public function setCharisma(int $charisma): self
     {
         $this->charisma = $charisma;
+
         return $this;
     }
 }

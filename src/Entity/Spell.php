@@ -36,6 +36,7 @@ class Spell extends Encyclopedia
     public function setName(string $name): Spell
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -47,6 +48,7 @@ class Spell extends Encyclopedia
     public function setDescription(string $description): Spell
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -58,6 +60,7 @@ class Spell extends Encyclopedia
     public function setManaCost(int $manaCost): Spell
     {
         $this->manaCost = $manaCost;
+
         return $this;
     }
 }

@@ -10,12 +10,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class EntityHiddenType extends HiddenType implements DataTransformerInterface
 {
-
     private string $entityClass;
 
     public function __construct(
-        public ManagerRegistry $doctrine
-    ) { }
+        public ManagerRegistry $doctrine,
+    ) {
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -42,15 +42,14 @@ class EntityHiddenType extends HiddenType implements DataTransformerInterface
         $return = null;
         try {
             $repository = $this->doctrine->getRepository($this->entityClass);
-            $return = $repository->findOneBy(array(
-                "id" => $value
-            ));
-        }
-        catch (\Exception $e) {
+            $return = $repository->findOneBy([
+                'id' => $value,
+            ]);
+        } catch (\Exception $e) {
             throw new TransformationFailedException($e->getMessage());
         }
 
-        if ($return === null) {
+        if (null === $return) {
             throw new TransformationFailedException(sprintf('A %s with id "%s" does not exist!', $this->entityClass, $value));
         }
 

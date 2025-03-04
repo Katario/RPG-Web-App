@@ -121,6 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGameMasters(ArrayCollection $gameMasters): User
     {
         $this->gameMasters = $gameMasters;
+
         return $this;
     }
 
@@ -129,6 +130,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->getGameMasters()->contains($game)) {
             $this->gameMasters->add($game);
         }
+
         return $this;
     }
 
@@ -137,6 +139,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->getGameMasters()->contains($game)) {
             $this->gameMasters->removeElement($game);
         }
+
         return $this;
     }
 
@@ -148,6 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCharacters(ArrayCollection $characters): User
     {
         $this->characters = $characters;
+
         return $this;
     }
 
@@ -156,6 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->getCharacters()->contains($character)) {
             $this->characters->add($character);
         }
+
         return $this;
     }
 
@@ -164,6 +169,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->getCharacters()->contains($character)) {
             $this->characters->removeElement($character);
         }
+
         return $this;
     }
 }

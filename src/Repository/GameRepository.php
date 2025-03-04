@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Game;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -48,7 +46,7 @@ class GameRepository extends ServiceEntityRepository
 
     public function save(Game $game): void
     {
-//        $game->setUpdatedAt(new \DateTimeImmutable());
+        //        $game->setUpdatedAt(new \DateTimeImmutable());
 
         $this->getEntityManager()->persist($game);
         $this->getEntityManager()->flush();

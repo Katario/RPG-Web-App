@@ -62,6 +62,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setName(string $name): ArmamentTemplate
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -73,6 +74,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setCategory(string $category): ArmamentTemplate
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -84,6 +86,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setValue(?int $value): ArmamentTemplate
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -95,6 +98,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setMinDurability(int $minDurability): ArmamentTemplate
     {
         $this->minDurability = $minDurability;
+
         return $this;
     }
 
@@ -106,6 +110,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setMaxDurability(int $maxDurability): ArmamentTemplate
     {
         $this->maxDurability = $maxDurability;
+
         return $this;
     }
 
@@ -117,6 +122,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setWeight(int $weight): ArmamentTemplate
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -128,6 +134,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setDescription(string $description): ArmamentTemplate
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -140,6 +147,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setSkills(Collection|array $skills): ArmamentTemplate
     {
         $this->skills = $skills;
+
         return $this;
     }
 
@@ -148,6 +156,7 @@ class ArmamentTemplate extends Encyclopedia
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -156,6 +165,7 @@ class ArmamentTemplate extends Encyclopedia
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -168,6 +178,7 @@ class ArmamentTemplate extends Encyclopedia
     public function setSpells(Collection|array $spells): ArmamentTemplate
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -176,6 +187,7 @@ class ArmamentTemplate extends Encyclopedia
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -184,6 +196,7 @@ class ArmamentTemplate extends Encyclopedia
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 }

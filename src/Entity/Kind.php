@@ -27,6 +27,7 @@ class Kind extends Encyclopedia
     public function setId(?int $id): Kind
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -38,6 +39,7 @@ class Kind extends Encyclopedia
     public function setName(string $name): Kind
     {
         $this->name = $name;
+
         return $this;
     }
 }

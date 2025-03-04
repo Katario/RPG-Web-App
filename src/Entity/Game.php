@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -51,6 +52,7 @@ class Game
     public function setName(string $name): Game
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -62,6 +64,7 @@ class Game
     public function setGameMaster(User $gameMaster): Game
     {
         $this->gameMaster = $gameMaster;
+
         return $this;
     }
 
@@ -73,6 +76,7 @@ class Game
     public function setCharacters(Collection|array $characters): Game
     {
         $this->characters = $characters;
+
         return $this;
     }
 
@@ -81,6 +85,7 @@ class Game
         if (!$this->getCharacters()->contains($character)) {
             $this->characters->add($character);
         }
+
         return $this;
     }
 
@@ -89,6 +94,7 @@ class Game
         if ($this->getCharacters()->contains($character)) {
             $this->characters->removeElement($character);
         }
+
         return $this;
     }
 
@@ -100,6 +106,7 @@ class Game
     public function setArmaments(Collection|array $armaments): Game
     {
         $this->armaments = $armaments;
+
         return $this;
     }
 
@@ -108,6 +115,7 @@ class Game
         if (!$this->getArmaments()->contains($armament)) {
             $this->armaments->add($armament);
         }
+
         return $this;
     }
 
@@ -116,6 +124,7 @@ class Game
         if ($this->getArmaments()->contains($armament)) {
             $this->armaments->removeElement($armament);
         }
+
         return $this;
     }
 
@@ -129,6 +138,7 @@ class Game
         if (!$this->getMonsters()->contains($monster)) {
             $this->monsters->add($monster);
         }
+
         return $this;
     }
 
@@ -137,6 +147,7 @@ class Game
         if ($this->getMonsters()->contains($monster)) {
             $this->monsters->removeElement($monster);
         }
+
         return $this;
     }
 
@@ -150,6 +161,7 @@ class Game
         if (!$this->getNonPlayableCharacters()->contains($nonPlayableCharacter)) {
             $this->nonPlayableCharacters->add($nonPlayableCharacter);
         }
+
         return $this;
     }
 
@@ -158,6 +170,7 @@ class Game
         if ($this->getNonPlayableCharacters()->contains($nonPlayableCharacter)) {
             $this->nonPlayableCharacters->removeElement($nonPlayableCharacter);
         }
+
         return $this;
     }
 }

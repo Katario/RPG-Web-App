@@ -34,3 +34,8 @@ compose.yaml
 docker/db
 TODO.md
 ###< Other ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###

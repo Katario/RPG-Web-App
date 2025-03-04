@@ -21,6 +21,7 @@ trait HasDateTimeTrait
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -32,13 +33,14 @@ trait HasDateTimeTrait
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
     #[ORM\PrePersist]
     public function updateCreatedAtOnPrePersist(): void
     {
-        if ($this->getCreatedAt() === null) {
+        if (null === $this->getCreatedAt()) {
             $this->setCreatedAt(new \DateTimeImmutable('now'));
             $this->setUpdatedAt(new \DateTimeImmutable('now'));
         }

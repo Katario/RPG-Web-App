@@ -34,6 +34,7 @@ class Skill extends Encyclopedia
     public function setName(string $name): Skill
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -45,6 +46,7 @@ class Skill extends Encyclopedia
     public function setDescription(string $description): Skill
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -56,6 +58,7 @@ class Skill extends Encyclopedia
     public function setExhaustCost(int $exhaustCost): Skill
     {
         $this->exhaustCost = $exhaustCost;
+
         return $this;
     }
 }

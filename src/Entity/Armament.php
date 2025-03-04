@@ -29,13 +29,13 @@ class Armament
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'armaments')]
     private Game $game;
     #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
-    #[ORM\JoinColumn(onDelete:'SET NULL')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?Monster $monster;
     #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'armaments')]
-    #[ORM\JoinColumn(onDelete:'SET NULL')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?Character $character;
     #[ORM\ManyToOne(targetEntity: NonPlayableCharacter::class, inversedBy: 'armaments')]
-    #[ORM\JoinColumn(onDelete:'SET NULL')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?NonPlayableCharacter $nonPlayableCharacter;
     #[ORM\JoinTable(name: 'armaments_skills')]
     #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id')]
@@ -67,6 +67,7 @@ class Armament
     public function setName(string $name): Armament
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -78,6 +79,7 @@ class Armament
     public function setCategory(string $category): Armament
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -89,6 +91,7 @@ class Armament
     public function setValue(?int $value): Armament
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -100,6 +103,7 @@ class Armament
     public function setMaxDurability(int $maxDurability): Armament
     {
         $this->maxDurability = $maxDurability;
+
         return $this;
     }
 
@@ -111,6 +115,7 @@ class Armament
     public function setCurrentDurability(int $currentDurability): Armament
     {
         $this->currentDurability = $currentDurability;
+
         return $this;
     }
 
@@ -122,6 +127,7 @@ class Armament
     public function setDescription(string $description): Armament
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -133,6 +139,7 @@ class Armament
     public function setSkills(Collection|array $skills): Armament
     {
         $this->skills = $skills;
+
         return $this;
     }
 
@@ -141,6 +148,7 @@ class Armament
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
         }
+
         return $this;
     }
 
@@ -149,6 +157,7 @@ class Armament
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
         }
+
         return $this;
     }
 
@@ -160,6 +169,7 @@ class Armament
     public function setSpells(Collection|array $spells): Armament
     {
         $this->spells = $spells;
+
         return $this;
     }
 
@@ -168,6 +178,7 @@ class Armament
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
         }
+
         return $this;
     }
 
@@ -176,6 +187,7 @@ class Armament
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
         }
+
         return $this;
     }
 
@@ -187,6 +199,7 @@ class Armament
     public function setGame(Game $game): Armament
     {
         $this->game = $game;
+
         return $this;
     }
 
@@ -198,6 +211,7 @@ class Armament
     public function setMonster(?Monster $monster): Armament
     {
         $this->monster = $monster;
+
         return $this;
     }
 
@@ -209,6 +223,7 @@ class Armament
     public function setCharacter(?Character $character): Armament
     {
         $this->character = $character;
+
         return $this;
     }
 
@@ -220,6 +235,7 @@ class Armament
     public function setNonPlayableCharacter(?NonPlayableCharacter $nonPlayableCharacter): Armament
     {
         $this->nonPlayableCharacter = $nonPlayableCharacter;
+
         return $this;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Armament;
 use App\Entity\ArmamentTemplate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,9 +19,9 @@ class ArmamentTemplateRepository extends ServiceEntityRepository
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-    public function findBySearch(?string $query, int $limit = null, $orderBy = 'ASC'): array
+    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
     {
-        $queryBuilder =  $this->createQueryBuilder('a');
+        $queryBuilder = $this->createQueryBuilder('a');
         $queryBuilder->where('a.name LIKE :query')
             ->orWhere('a.category LIKE :query')
             ->setParameter('query', '%'.$query.'%')

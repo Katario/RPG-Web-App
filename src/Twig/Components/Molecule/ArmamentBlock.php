@@ -27,14 +27,15 @@ class ArmamentBlock
     public function __construct(
         public ArmamentRepository $armamentRepository,
         public ArmamentTemplateRepository $armamentTemplateRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @return Armament[]
      */
     public function getArmaments(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 
@@ -48,7 +49,7 @@ class ArmamentBlock
      */
     public function getArmamentTemplates(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 

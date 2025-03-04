@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Entity\NonPlayableCharacter;
 use App\Factory\NonPlayableCharacterFactory;
 use App\FormType\NonPlayableCharacterType;
-use App\Repository\GameRepository;
 use App\Repository\NonPlayableCharacterRepository;
 use App\Repository\NonPlayableCharacterTemplateRepository;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -28,8 +27,8 @@ class NonPlayableCharacterController
         public readonly Environment $twig,
         public readonly UrlGeneratorInterface $router,
         public readonly FormFactoryInterface $formFactory,
-    )
-    {}
+    ) {
+    }
 
     #[Route('/npcs/{id}', name: 'show_non_playable_character', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showNonPlayableCharacter(int $id): Response
@@ -51,8 +50,7 @@ class NonPlayableCharacterController
     public function editNonPlayableCharacter(
         Request $request,
         int $id,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $nonPlayableCharacter = $this->nonPlayableCharacterRepository->find($id);
         if (!$nonPlayableCharacter) {
             throw new NotFoundHttpException();
@@ -72,7 +70,7 @@ class NonPlayableCharacterController
             $this->nonPlayableCharacterRepository->save($nonPlayableCharacter);
 
             return new RedirectResponse($this->router->generate('show_game', [
-                'id' => $nonPlayableCharacter->getGame()->getId()
+                'id' => $nonPlayableCharacter->getGame()->getId(),
             ]));
         }
 
@@ -91,8 +89,7 @@ class NonPlayableCharacterController
     )]
     public function deleteNonPlayableCharacter(
         int $id,
-    ): Response
-    {
+    ): Response {
         $nonPlayableCharacter = $this->nonPlayableCharacterRepository->find($id);
 
         if (!$nonPlayableCharacter) {
@@ -103,7 +100,7 @@ class NonPlayableCharacterController
         $this->nonPlayableCharacterRepository->delete($nonPlayableCharacter);
 
         return new RedirectResponse($this->router->generate('show_game', [
-            'id' => $gameId
+            'id' => $gameId,
         ]));
     }
 
@@ -115,8 +112,7 @@ class NonPlayableCharacterController
         Request $request,
         NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
         NonPlayableCharacterFactory $nonPlayableCharacterFactory,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         if ($request->get('nonPlayableCharacterTemplateId')) {
             $nonPlayableCharacterTemplate = $nonPlayableCharacterTemplateRepository->find($request->get('nonPlayableCharacterTemplateId'));
             $nonPlayableCharacter = $nonPlayableCharacterFactory->createOneFromNonPlayableCharacterTemplate($nonPlayableCharacterTemplate);

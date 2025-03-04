@@ -31,7 +31,6 @@ final class UserFactory extends PersistentProxyObjectFactory
      */
     protected function defaults(): array|callable
     {
-
         return [
             'email' => self::faker()->email(),
             'password' => self::faker()->password(6, 20),
@@ -51,6 +50,4 @@ final class UserFactory extends PersistentProxyObjectFactory
             })
         ;
     }
-
-
 }

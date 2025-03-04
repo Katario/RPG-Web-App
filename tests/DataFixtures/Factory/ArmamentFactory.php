@@ -33,7 +33,7 @@ final class ArmamentFactory extends PersistentProxyObjectFactory
     {
         return [
             'category' => self::faker()->text(),
-            'currentDurability' => self::faker()->numberBetween(1,10),
+            'currentDurability' => self::faker()->numberBetween(1, 10),
             'description' => self::faker()->text(),
             'maxDurability' => self::faker()->numberBetween(11, 20),
             'name' => self::faker()->text(),

@@ -18,8 +18,9 @@ class HomeController
     public function __construct(
         public Environment $twig,
         public Security $security,
-        public GameRepository $gameRepository
-    ) {}
+        public GameRepository $gameRepository,
+    ) {
+    }
 
     #[Route('/', name: 'home', methods: ['GET'])]
     public function showGames(): Response
@@ -40,17 +41,15 @@ class HomeController
      */
     private function getGamesByUser(): array
     {
-        # Retrieve games where user is GM
+        // Retrieve games where user is GM
         $games = [];
         /** @var Game $game */
-        foreach ($this->gameRepository->getGamesByUser($this->security->getUser()) as $game)
-        {
+        foreach ($this->gameRepository->getGamesByUser($this->security->getUser()) as $game) {
             $games[] = $game;
         }
 
-        # Retrieve games where user is a playable character
-        foreach ($this->gameRepository->getGamesWithCharacterByUser($this->security->getUser()) as $game)
-        {
+        // Retrieve games where user is a playable character
+        foreach ($this->gameRepository->getGamesWithCharacterByUser($this->security->getUser()) as $game) {
             if (!in_array($game, $games)) {
                 $games[] = $game;
             }

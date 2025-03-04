@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\MappedSuperclass;
@@ -26,6 +27,7 @@ abstract class Encyclopedia
     public function setIsReady(bool $isReady): Encyclopedia
     {
         $this->isReady = $isReady;
+
         return $this;
     }
 
@@ -37,6 +39,7 @@ abstract class Encyclopedia
     public function setIsPrivate(bool $isPrivate): Encyclopedia
     {
         $this->isPrivate = $isPrivate;
+
         return $this;
     }
 
@@ -48,6 +51,7 @@ abstract class Encyclopedia
     public function setCreatedBy(User $createdBy): Encyclopedia
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
 }

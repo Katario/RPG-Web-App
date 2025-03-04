@@ -29,14 +29,13 @@ class MonsterController
         public readonly Environment $twig,
         public readonly UrlGeneratorInterface $router,
         public readonly FormFactoryInterface $formFactory,
-    )
-    {}
+    ) {
+    }
 
     #[Route('/monsters/{id}', name: 'show_monster', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showMonster(
-        int $id
-    ): Response
-    {
+        int $id,
+    ): Response {
         $monster = $this->monsterRepository->find($id);
 
         return new Response(
@@ -46,7 +45,6 @@ class MonsterController
         );
     }
 
-
     #[Route('/monsters/{id}/edit',
         name: 'edit_monster',
         requirements: ['id' => '\d+'],
@@ -55,8 +53,7 @@ class MonsterController
     public function editMonster(
         Request $request,
         int $id,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $monster = $this->monsterRepository->find($id);
 
         if (!$monster) {
@@ -94,9 +91,8 @@ class MonsterController
         methods: ['GET']
     )]
     public function deleteMonster(
-        int                   $id,
-    ): Response
-    {
+        int $id,
+    ): Response {
         /** @var Monster $monster */
         $monster = $this->monsterRepository->find($id);
 
@@ -120,8 +116,7 @@ class MonsterController
         #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
         MonsterTemplateRepository $monsterTemplateRepository,
         MonsterFactory $monsterFactory,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         if ($request->get('monsterTemplateId')) {
             $monsterTemplate = $monsterTemplateRepository->find($request->get('monsterTemplateId'));
             $monster = $monsterFactory->createOneFromMonsterTemplate($monsterTemplate);

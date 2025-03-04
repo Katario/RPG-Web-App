@@ -27,14 +27,15 @@ class NonPlayableCharacterBlock
     public function __construct(
         public NonPlayableCharacterRepository $nonPlayableCharacterRepository,
         public NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @return NonPlayableCharacter[]
      */
     public function getNonPlayableCharacters(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 
@@ -48,7 +49,7 @@ class NonPlayableCharacterBlock
      */
     public function getNonPlayableCharacterTemplates(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 
@@ -56,6 +57,4 @@ class NonPlayableCharacterBlock
             $this->query, 12
         );
     }
-
-
 }

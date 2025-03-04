@@ -29,13 +29,13 @@ class ArmamentController
         public readonly FormFactoryInterface $formFactory,
         private readonly RouterInterface $router,
         public ArmamentRepository $armamentRepository,
-    ) {}
+    ) {
+    }
 
     #[Route('/armaments/{id}', name: 'show_armament', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showArmament(
         int $id,
-    ): Response
-    {
+    ): Response {
         $armament = $this->armamentRepository->find($id);
 
         return new Response(
@@ -53,8 +53,7 @@ class ArmamentController
     public function editArmament(
         Request $request,
         int $id,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         $armament = $this->armamentRepository->find($id);
 
         if (!$armament) {
@@ -75,7 +74,7 @@ class ArmamentController
             $this->armamentRepository->save($armament);
 
             return new RedirectResponse($this->router->generate('show_game', [
-                'id' => $armament->getGame()->getId()
+                'id' => $armament->getGame()->getId(),
             ]));
         }
 
@@ -95,8 +94,7 @@ class ArmamentController
     )]
     public function deleteArmament(
         int $id,
-    ): Response
-    {
+    ): Response {
         /** @var Armament $armament */
         $armament = $this->armamentRepository->find($id);
 
@@ -108,7 +106,7 @@ class ArmamentController
         $this->armamentRepository->delete($armament);
 
         return new RedirectResponse($this->router->generate('show_game', [
-            'id' => $gameId
+            'id' => $gameId,
         ]));
     }
 
@@ -122,8 +120,7 @@ class ArmamentController
         #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
         ArmamentFactory $armamentFactory,
         ArmamentTemplateRepository $armamentTemplateRepository,
-    ): Response|RedirectResponse
-    {
+    ): Response|RedirectResponse {
         if ($request->get('armamentTemplateId')) {
             $armamentTemplate = $armamentTemplateRepository->find($request->get('armamentTemplateId'));
             $armament = $armamentFactory->createOneFromArmamentTemplate($armamentTemplate);
@@ -144,7 +141,7 @@ class ArmamentController
 
             return new RedirectResponse($this->router->generate(
                 'show_armament', [
-                    'id' => $armament->getId()
+                    'id' => $armament->getId(),
                 ]
             ));
         }

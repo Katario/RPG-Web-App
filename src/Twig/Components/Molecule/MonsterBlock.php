@@ -27,14 +27,15 @@ class MonsterBlock
     public function __construct(
         public MonsterRepository $monsterRepository,
         public MonsterTemplateRepository $monsterTemplateRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @return Monster[]
      */
     public function getMonsters(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 
@@ -48,7 +49,7 @@ class MonsterBlock
      */
     public function getMonsterTemplates(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 
@@ -56,5 +57,4 @@ class MonsterBlock
             $this->query, 12
         );
     }
-
 }

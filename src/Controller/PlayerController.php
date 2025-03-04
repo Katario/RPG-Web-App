@@ -9,5 +9,4 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 #[AsController]
 class PlayerController
 {
-
 }

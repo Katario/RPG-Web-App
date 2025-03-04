@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\Molecule;
 
-use App\Entity\Armament;
 use App\Entity\Character;
 use App\Entity\CharacterTemplate;
 use App\Entity\Game;
-use App\Repository\ArmamentRepository;
 use App\Repository\CharacterRepository;
 use App\Repository\CharacterTemplateRepository;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -29,14 +27,15 @@ class CharacterBlock
     public function __construct(
         public CharacterRepository $characterRepository,
         public CharacterTemplateRepository $characterTemplateRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @return Character[]
      */
     public function getCharacters(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 
@@ -50,7 +49,7 @@ class CharacterBlock
      */
     public function getCharacterTemplates(): array
     {
-        if ($this->game === null) {
+        if (null === $this->game) {
             return [];
         }
 

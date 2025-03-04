@@ -71,50 +71,50 @@ class AppFixtures extends Fixture
         // 3. Fill Encyclopedia
         // 3.1. Create Kind, CharacterClass, Items, Skills && Spells
         $human = KindFactory::createOne([
-            'name' => 'Human'
+            'name' => 'Human',
         ]);
         $elf = KindFactory::createOne([
-            'name' => 'Elf'
+            'name' => 'Elf',
         ]);
         $dwarf = KindFactory::createOne([
-            'name' => 'Dwarf'
+            'name' => 'Dwarf',
         ]);
         $orc = KindFactory::createOne([
-            'name' => 'Orc'
+            'name' => 'Orc',
         ]);
         $warrior = CharacterClassFactory::createOne([
-            'name' => 'Warrior'
+            'name' => 'Warrior',
         ]);
         $magician = CharacterClassFactory::createOne([
-            'name' => 'Magician'
+            'name' => 'Magician',
         ]);
         $priest = CharacterClassFactory::createOne([
-            'name' => 'Priest'
+            'name' => 'Priest',
         ]);
         $hunter = CharacterClassFactory::createOne([
-            'name' => 'Hunter'
+            'name' => 'Hunter',
         ]);
         ItemFactory::createMany(10,
-        static function (int $incremental) {
-            return ['name' => 'Item ' . $incremental];
-        });
+            static function (int $incremental) {
+                return ['name' => 'Item '.$incremental];
+            });
 
         SkillFactory::createMany(10,
-        static function (int $incremental) {
-            return ['name' => 'Skill ' . $incremental];
-        });
+            static function (int $incremental) {
+                return ['name' => 'Skill '.$incremental];
+            });
 
         SpellFactory::createMany(10,
-        static function (int $incremental) {
-            return ['name' => 'Spell ' . $incremental];
-        });
+            static function (int $incremental) {
+                return ['name' => 'Spell '.$incremental];
+            });
 
         // 3.2. Create Armaments Templates
         ArmamentTemplateFactory::new()
             ->many(5)
             ->create(static function (int $incremental) {
                 return [
-                    'name' => 'Armament Template ' . $incremental,
+                    'name' => 'Armament Template '.$incremental,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),
                 ];
@@ -126,7 +126,7 @@ class AppFixtures extends Fixture
             ->many(5)
             ->create(static function (int $incremental) use ($human, $warrior) {
                 return [
-                    'name' => 'Character Template ' . $incremental,
+                    'name' => 'Character Template '.$incremental,
                     'kind' => $human,
                     'characterClass' => $warrior,
                     'spells' => SpellFactory::randomRange(0, 3),
@@ -139,7 +139,7 @@ class AppFixtures extends Fixture
             ->many(5)
             ->create(static function (int $incremental) use ($human, $priest) {
                 return [
-                    'name' => 'NonPlayableCharacter Template ' . $incremental,
+                    'name' => 'NonPlayableCharacter Template '.$incremental,
                     'kind' => $human,
                     'characterClass' => $priest,
                     'spells' => SpellFactory::randomRange(0, 3),
@@ -152,7 +152,7 @@ class AppFixtures extends Fixture
             ->many(5)
             ->create(static function (int $incremental) {
                 return [
-                    'name' => 'Monster Template ' . $incremental,
+                    'name' => 'Monster Template '.$incremental,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),
                     'items' => ItemFactory::randomRange(0, 3),
@@ -200,7 +200,7 @@ class AppFixtures extends Fixture
                     'game' => $mainGame,
                     'kind' => $human,
                     'characterClass' => $hunter,
-                    'name' => 'NonPlayableCharacter ' . $incremental,
+                    'name' => 'NonPlayableCharacter '.$incremental,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),
                     'items' => ItemFactory::randomRange(0, 3),
@@ -213,7 +213,7 @@ class AppFixtures extends Fixture
             static function (int $incremental) use ($mainGame) {
                 return [
                     'game' => $mainGame,
-                    'name' => 'Monster ' . $incremental,
+                    'name' => 'Monster '.$incremental,
                     'spells' => SpellFactory::randomRange(0, 3),
                     'skills' => SkillFactory::randomRange(0, 3),
                     'items' => ItemFactory::randomRange(0, 3),
