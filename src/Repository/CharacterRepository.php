@@ -15,12 +15,14 @@ class CharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, Character::class);
     }
 
-    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('c');
         $queryBuilder->where('c.name LIKE :query')
             ->orWhere('c.lastName LIKE :query')
+            ->andWhere('c.game = :gameId')
             ->setParameter('query', '%'.$query.'%')
+            ->setParameter('gameId', $gameId)
             ->orderBy('c.name', $orderBy)
         ;
 

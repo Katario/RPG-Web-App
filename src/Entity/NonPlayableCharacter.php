@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 class NonPlayableCharacter
 {
     use HasDateTimeTrait;
-    use HasStatsTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -145,7 +144,7 @@ class NonPlayableCharacter
     public function addArmament(Armament $armament): NonPlayableCharacter
     {
         if (!$this->getArmaments()->contains($armament)) {
-            $armament->setNonPlayableCharacter($this);
+            $armament->setIsOwned(true);
             $this->armaments->add($armament);
         }
 
@@ -154,8 +153,8 @@ class NonPlayableCharacter
 
     public function removeArmament(Armament $armament): NonPlayableCharacter
     {
-        if ($this->getArmaments()->contains($armament)) {
-            $armament->setNonPlayableCharacter(null);
+        if ($this->getSpells()->contains($armament)) {
+            $armament->setIsOwned(false);
             $this->armaments->removeElement($armament);
         }
 
@@ -362,6 +361,10 @@ class NonPlayableCharacter
 
     public function getKind(): ?Kind
     {
+        if (0 === $this->kind->count()) {
+            return null;
+        }
+
         return $this->kind->first();
     }
 
@@ -377,6 +380,10 @@ class NonPlayableCharacter
 
     public function getCharacterClass(): ?CharacterClass
     {
+        if (0 === $this->characterClass->count()) {
+            return null;
+        }
+
         return $this->characterClass->first();
     }
 
@@ -388,5 +395,10 @@ class NonPlayableCharacter
         }
 
         return $this;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->name.' '.$this->getLastName();
     }
 }

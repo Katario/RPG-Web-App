@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 class CharacterTemplate extends Encyclopedia
 {
     use HasDateTimeTrait;
-    use HasGenerableStatsTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -289,6 +288,10 @@ class CharacterTemplate extends Encyclopedia
 
     public function getKind(): ?Kind
     {
+        if (0 === $this->kind->count()) {
+            return null;
+        }
+
         return $this->kind->first();
     }
 
@@ -304,6 +307,10 @@ class CharacterTemplate extends Encyclopedia
 
     public function getCharacterClass(): ?CharacterClass
     {
+        if (0 === $this->characterClass->count()) {
+            return null;
+        }
+
         return $this->characterClass->first();
     }
 

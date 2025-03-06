@@ -15,12 +15,14 @@ class NonPlayableCharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, NonPlayableCharacter::class);
     }
 
-    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('npc');
         $queryBuilder->where('npc.name LIKE :query')
             ->orWhere('npc.lastName LIKE :query')
+            ->andWhere('npc.game = :gameId')
             ->setParameter('query', '%'.$query.'%')
+            ->setParameter('gameId', $gameId)
             ->orderBy('npc.name', $orderBy)
         ;
 

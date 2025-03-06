@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Monster
 {
     use HasDateTimeTrait;
-    use HasStatsTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -153,7 +152,7 @@ class Monster
     public function addArmament(Armament $armament): Monster
     {
         if (!$this->getArmaments()->contains($armament)) {
-            $armament->setMonster($this);
+            $armament->setIsOwned(true);
             $this->armaments->add($armament);
         }
 
@@ -162,8 +161,8 @@ class Monster
 
     public function removeArmament(Armament $armament): Monster
     {
-        if ($this->getArmaments()->contains($armament)) {
-            $armament->setMonster(null);
+        if ($this->getSpells()->contains($armament)) {
+            $armament->setIsOwned(false);
             $this->armaments->removeElement($armament);
         }
 

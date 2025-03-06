@@ -39,8 +39,8 @@ class ArmamentBlock
             return [];
         }
 
-        return $this->armamentRepository->findBySearch(
-            '', 12
+        return $this->armamentRepository->findByGameBySearch(
+            $this->game->getId(), '', 12
         );
     }
 

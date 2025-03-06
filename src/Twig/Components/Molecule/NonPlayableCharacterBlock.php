@@ -39,8 +39,8 @@ class NonPlayableCharacterBlock
             return [];
         }
 
-        return $this->nonPlayableCharacterRepository->findBySearch(
-            '', 12
+        return $this->nonPlayableCharacterRepository->findByGameBySearch(
+            $this->game->getId(), '', 12
         );
     }
 

@@ -14,7 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
 class MonsterTemplate extends Encyclopedia
 {
     use HasDateTimeTrait;
-    use HasGenerableStatsTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

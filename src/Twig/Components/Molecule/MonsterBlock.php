@@ -39,8 +39,8 @@ class MonsterBlock
             return [];
         }
 
-        return $this->monsterRepository->findBySearch(
-            '', 12
+        return $this->monsterRepository->findByGameBySearch(
+            $this->game->getId(), '', 12
         );
     }
 

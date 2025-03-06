@@ -31,16 +31,6 @@ class NonPlayableCharacterTemplateType extends AbstractType
                 'choice_label' => 'name',
                 'class' => Kind::class,
             ])
-            ->add('minStrength', IntegerType::class)
-            ->add('maxStrength', IntegerType::class)
-            ->add('minIntelligence', IntegerType::class)
-            ->add('maxIntelligence', IntegerType::class)
-            ->add('minStamina', IntegerType::class)
-            ->add('maxStamina', IntegerType::class)
-            ->add('minAgility', IntegerType::class)
-            ->add('maxAgility', IntegerType::class)
-            ->add('minCharisma', IntegerType::class)
-            ->add('maxCharisma', IntegerType::class)
             ->add('minHealthPoints', IntegerType::class)
             ->add('maxHealthPoints', IntegerType::class)
             ->add('minManaPoints', IntegerType::class)

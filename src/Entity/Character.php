@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping\JoinTable;
 class Character
 {
     use HasDateTimeTrait;
-    use HasStatsTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -128,6 +127,10 @@ class Character
 
     public function getKind(): ?Kind
     {
+        if (0 === $this->kind->count()) {
+            return null;
+        }
+
         return $this->kind->first();
     }
 
@@ -143,6 +146,10 @@ class Character
 
     public function getCharacterClass(): ?CharacterClass
     {
+        if (0 === $this->characterClass->count()) {
+            return null;
+        }
+
         return $this->characterClass->first();
     }
 
@@ -188,6 +195,26 @@ class Character
     public function setArmaments(Collection|array $armaments): Character
     {
         $this->armaments = $armaments;
+
+        return $this;
+    }
+
+    public function addArmament(Armament $armament): Character
+    {
+        if (!$this->getArmaments()->contains($armament)) {
+            $armament->setIsOwned(true);
+            $this->armaments->add($armament);
+        }
+
+        return $this;
+    }
+
+    public function removeArmament(Armament $armament): Character
+    {
+        if ($this->getSpells()->contains($armament)) {
+            $armament->setIsOwned(false);
+            $this->armaments->removeElement($armament);
+        }
 
         return $this;
     }
@@ -390,15 +417,8 @@ class Character
         return $this;
     }
 
-    public function getTitle(): Kind
+    public function getFullName(): string
     {
-        return $this->title;
-    }
-
-    public function setTitle(Kind $title): Character
-    {
-        $this->title = $title;
-
-        return $this;
+        return $this->name.' '.$this->getLastName();
     }
 }

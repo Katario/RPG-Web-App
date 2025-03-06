@@ -26,6 +26,8 @@ class Armament
     private int $currentDurability;
     #[ORM\Column(type: 'text')]
     private string $description = '';
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private bool $isOwned = false;
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'armaments')]
     private Game $game;
     #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
@@ -127,6 +129,18 @@ class Armament
     public function setDescription(string $description): Armament
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function isOwned(): bool
+    {
+        return $this->isOwned;
+    }
+
+    public function setIsOwned(bool $isOwned): Armament
+    {
+        $this->isOwned = $isOwned;
 
         return $this;
     }
@@ -237,5 +251,20 @@ class Armament
         $this->nonPlayableCharacter = $nonPlayableCharacter;
 
         return $this;
+    }
+
+    public function getOwnerName(): ?string
+    {
+        if ($this->getCharacter()) {
+            return $this->getCharacter()->getFullName();
+        }
+        if ($this->getMonster()) {
+            return $this->getMonster()->getName();
+        }
+        if ($this->getNonPlayableCharacter()) {
+            return $this->getNonPlayableCharacter()->getFullName();
+        }
+
+        return null;
     }
 }

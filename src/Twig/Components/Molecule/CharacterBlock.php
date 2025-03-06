@@ -39,8 +39,8 @@ class CharacterBlock
             return [];
         }
 
-        return $this->characterRepository->findBySearch(
-            '', 12
+        return $this->characterRepository->findByGameBySearch(
+            $this->game->getId(), '', 12
         );
     }
 

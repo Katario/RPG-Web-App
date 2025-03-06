@@ -347,6 +347,7 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
         ArmamentFactory::createOne([
             'name' => 'Armament Monster',
             'game' => $mainGame,
+            'isOwned' => true,
             'monster' => MonsterFactory::random(),
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
@@ -354,6 +355,7 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
         ArmamentFactory::createOne([
             'name' => 'Armament NPC',
             'game' => $mainGame,
+            'isOwned' => true,
             'nonPlayableCharacter' => NonPlayableCharacterFactory::random(),
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
@@ -361,6 +363,7 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
         ArmamentFactory::createOne([
             'name' => 'Armament Red 1',
             'game' => $mainGame,
+            'isOwned' => true,
             'character' => $characterRed,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
@@ -368,6 +371,7 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
         ArmamentFactory::createOne([
             'name' => 'Armament Red 2',
             'game' => $mainGame,
+            'isOwned' => true,
             'character' => $characterRed,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
@@ -375,6 +379,7 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
         ArmamentFactory::createOne([
             'name' => 'Armament Green',
             'game' => $mainGame,
+            'isOwned' => true,
             'character' => $characterGreen,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),

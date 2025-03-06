@@ -35,11 +35,6 @@ class NonPlayableCharacterType extends AbstractType
                 'class' => Kind::class,
             ])
             ->add('level', IntegerType::class)
-            ->add('strength', IntegerType::class)
-            ->add('intelligence', IntegerType::class)
-            ->add('stamina', IntegerType::class)
-            ->add('agility', IntegerType::class)
-            ->add('charisma', IntegerType::class)
             ->add('currentHealthPoints', IntegerType::class)
             ->add('maxHealthPoints', IntegerType::class)
             ->add('currentManaPoints', IntegerType::class)
