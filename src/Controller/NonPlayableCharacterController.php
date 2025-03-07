@@ -58,7 +58,11 @@ class NonPlayableCharacterController
 
         $form = $this->formFactory->create(
             NonPlayableCharacterType::class,
-            $nonPlayableCharacter
+            $nonPlayableCharacter,
+            [
+                'gameId' => $nonPlayableCharacter->getGame()->getId(),
+                'nonPlayableCharacterId' => $nonPlayableCharacter->getId(),
+            ]
         );
 
         $form->handleRequest($request);

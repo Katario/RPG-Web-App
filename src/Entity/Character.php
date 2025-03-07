@@ -203,6 +203,7 @@ class Character
     {
         if (!$this->getArmaments()->contains($armament)) {
             $armament->setIsOwned(true);
+            $armament->setCharacter($this);
             $this->armaments->add($armament);
         }
 
@@ -211,7 +212,8 @@ class Character
 
     public function removeArmament(Armament $armament): Character
     {
-        if ($this->getSpells()->contains($armament)) {
+        if ($this->getArmaments()->contains($armament)) {
+            $armament->setCharacter(null);
             $armament->setIsOwned(false);
             $this->armaments->removeElement($armament);
         }

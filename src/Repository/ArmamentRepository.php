@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Armament;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ArmamentRepository extends ServiceEntityRepository
@@ -31,6 +32,27 @@ class ArmamentRepository extends ServiceEntityRepository
         return $queryBuilder
             ->getQuery()
             ->getResult();
+    }
+
+    public function availableArmamentsQueryBuilder(int $gameId, string $owner, $ownerId): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->where($qb->expr()->andX(
+                $qb->expr()->eq('a.game', ':gameId'),
+                $qb->expr()->orX(
+                    $qb->expr()->eq('a.isOwned', 'false'),
+                    $qb->expr()->andX(
+                        $qb->expr()->eq('a.isOwned', 'true'),
+                        $qb->expr()->eq('a.'.$owner, ':ownerId'),
+                    )
+                )
+            ))
+            ->setParameter('gameId', $gameId)
+            ->setParameter('ownerId', $ownerId);
+
+        return $qb;
     }
 
     public function delete(Armament $armament): void

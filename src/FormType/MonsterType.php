@@ -9,6 +9,8 @@ use App\Entity\Item;
 use App\Entity\Monster;
 use App\Entity\Skill;
 use App\Entity\Spell;
+use App\Repository\ArmamentRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -41,6 +43,14 @@ class MonsterType extends AbstractType
                 'class' => Armament::class,
                 'multiple' => true,
                 'expanded' => true,
+                'by_reference' => false,
+                'query_builder' => function (ArmamentRepository $armamentRepository) use ($options): QueryBuilder {
+                    return $armamentRepository->availableArmamentsQueryBuilder(
+                        $options['gameId'],
+                        'monster', // @TODO: replace with constant
+                        $options['monsterId'],
+                    );
+                },
             ])
             ->add('spells', EntityType::class, [
                 'choice_label' => 'name',
@@ -69,6 +79,8 @@ class MonsterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Monster::class,
+            'gameId' => null,
+            'monsterId' => null,
         ]);
     }
 }

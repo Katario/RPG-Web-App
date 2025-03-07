@@ -62,7 +62,11 @@ class MonsterController
 
         $form = $this->formFactory->create(
             MonsterType::class,
-            $monster
+            $monster,
+            [
+                'gameId' => $monster->getGame()->getId(),
+                'monsterId' => $monster->getId(),
+            ]
         );
 
         $form->handleRequest($request);

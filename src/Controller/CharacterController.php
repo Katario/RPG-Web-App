@@ -64,7 +64,11 @@ class CharacterController
 
         $form = $this->formFactory->create(
             CharacterType::class,
-            $character
+            $character,
+            [
+                'gameId' => $character->getGame()->getId(),
+                'characterId' => $character->getId(),
+            ]
         );
 
         $form->handleRequest($request);

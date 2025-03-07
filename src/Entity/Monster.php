@@ -153,6 +153,7 @@ class Monster
     {
         if (!$this->getArmaments()->contains($armament)) {
             $armament->setIsOwned(true);
+            $armament->setMonster($this);
             $this->armaments->add($armament);
         }
 
@@ -161,7 +162,8 @@ class Monster
 
     public function removeArmament(Armament $armament): Monster
     {
-        if ($this->getSpells()->contains($armament)) {
+        if ($this->getArmaments()->contains($armament)) {
+            $armament->setMonster(null);
             $armament->setIsOwned(false);
             $this->armaments->removeElement($armament);
         }

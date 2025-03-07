@@ -145,6 +145,7 @@ class NonPlayableCharacter
     {
         if (!$this->getArmaments()->contains($armament)) {
             $armament->setIsOwned(true);
+            $armament->setNonPlayableCharacter($this);
             $this->armaments->add($armament);
         }
 
@@ -153,7 +154,8 @@ class NonPlayableCharacter
 
     public function removeArmament(Armament $armament): NonPlayableCharacter
     {
-        if ($this->getSpells()->contains($armament)) {
+        if ($this->getArmaments()->contains($armament)) {
+            $armament->setNonPlayableCharacter(null);
             $armament->setIsOwned(false);
             $this->armaments->removeElement($armament);
         }
