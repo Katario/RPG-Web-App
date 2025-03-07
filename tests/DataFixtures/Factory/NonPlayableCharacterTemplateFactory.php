@@ -27,9 +27,9 @@ final class NonPlayableCharacterTemplateFactory extends PersistentProxyObjectFac
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
-     * @todo add your default values here
+     * @return array<bool|\DateTimeImmutable|int|string>
      */
-    protected function defaults(): array|callable
+    protected function defaults(): array
     {
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),

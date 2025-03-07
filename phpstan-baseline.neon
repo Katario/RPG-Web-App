@@ -1,6 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Parameter \#1 \$environment of class App\\Kernel constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: public/index.php
+
+		-
 			message: '#^Cannot call method getId\(\) on mixed\.$#'
 			identifier: method.nonObject
 			count: 1
@@ -19,7 +25,7 @@ parameters:
 			path: src/Controller/ArmamentController.php
 
 		-
-			message: '#^Parameter \#1 \$armamentTemplate of method App\\Factory\\ArmamentFactory\:\:createOneFromArmamentTemplate\(\) expects App\\Entity\\ArmamentTemplate, object\|null given\.$#'
+			message: '#^Parameter \#1 \$armamentTemplate of method App\\Factory\\ArmamentFactory\:\:createOneFromArmamentTemplate\(\) expects App\\Entity\\ArmamentTemplate, App\\Entity\\ArmamentTemplate\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controller/ArmamentController.php
@@ -31,46 +37,10 @@ parameters:
 			path: src/Controller/ArmamentController.php
 
 		-
-			message: '#^Call to an undefined method object\:\:getGame\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Controller/CharacterController.php
-
-		-
-			message: '#^Cannot call method getId\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Controller/CharacterController.php
-
-		-
-			message: '#^Parameter \#1 \$character of method App\\Repository\\CharacterRepository\:\:delete\(\) expects App\\Entity\\Character, object given\.$#'
+			message: '#^Parameter \#1 \$characterTemplate of method App\\Factory\\CharacterFactory\:\:createOneFromCharacterTemplate\(\) expects App\\Entity\\CharacterTemplate, App\\Entity\\CharacterTemplate\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controller/CharacterController.php
-
-		-
-			message: '#^Parameter \#1 \$characterTemplate of method App\\Factory\\CharacterFactory\:\:createOneFromCharacterTemplate\(\) expects App\\Entity\\CharacterTemplate, object\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/CharacterController.php
-
-		-
-			message: '#^Parameter \#1 \$armamentTemplate of method App\\Repository\\ArmamentTemplateRepository\:\:delete\(\) expects App\\Entity\\ArmamentTemplate, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/EncyclopediaController.php
-
-		-
-			message: '#^Parameter \#1 \$character of method App\\Repository\\CharacterTemplateRepository\:\:delete\(\) expects App\\Entity\\CharacterTemplate, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/EncyclopediaController.php
-
-		-
-			message: '#^Parameter \#1 \$item of method App\\Repository\\ItemRepository\:\:delete\(\) expects App\\Entity\\Item, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/EncyclopediaController.php
 
 		-
 			message: '#^Parameter \#1 \$item of method App\\Repository\\ItemRepository\:\:save\(\) expects App\\Entity\\Item, mixed given\.$#'
@@ -79,31 +49,7 @@ parameters:
 			path: src/Controller/EncyclopediaController.php
 
 		-
-			message: '#^Parameter \#1 \$monsterTemplate of method App\\Repository\\MonsterTemplateRepository\:\:delete\(\) expects App\\Entity\\MonsterTemplate, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/EncyclopediaController.php
-
-		-
-			message: '#^Parameter \#1 \$nonPlayableCharacter of method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:delete\(\) expects App\\Entity\\NonPlayableCharacterTemplate, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/EncyclopediaController.php
-
-		-
-			message: '#^Parameter \#1 \$skill of method App\\Repository\\SkillRepository\:\:delete\(\) expects App\\Entity\\Skill, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/EncyclopediaController.php
-
-		-
 			message: '#^Parameter \#1 \$skill of method App\\Repository\\SkillRepository\:\:save\(\) expects App\\Entity\\Skill, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/EncyclopediaController.php
-
-		-
-			message: '#^Parameter \#1 \$spell of method App\\Repository\\SpellRepository\:\:delete\(\) expects App\\Entity\\Spell, object given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controller/EncyclopediaController.php
@@ -139,19 +85,13 @@ parameters:
 			path: src/Controller/HomeController.php
 
 		-
-			message: '#^Method App\\Controller\\HomeController\:\:getGamesByUser\(\) should return array\<App\\Entity\\Game\> but returns list\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Controller/HomeController.php
-
-		-
-			message: '#^Parameter \#1 \$user of method App\\Repository\\GameRepository\:\:getGamesByUser\(\) expects Symfony\\Component\\Security\\Core\\User\\UserInterface, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
+			message: '#^Parameter \#1 \$user of method App\\Repository\\GameRepository\:\:getGamesByUser\(\) expects App\\Entity\\User, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controller/HomeController.php
 
 		-
-			message: '#^Parameter \#1 \$user of method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) expects Symfony\\Component\\Security\\Core\\User\\UserInterface, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
+			message: '#^Parameter \#1 \$user of method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) expects App\\Entity\\User, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controller/HomeController.php
@@ -163,31 +103,13 @@ parameters:
 			path: src/Controller/MonsterController.php
 
 		-
-			message: '#^Parameter \#1 \$monsterTemplate of method App\\Factory\\MonsterFactory\:\:createOneFromMonsterTemplate\(\) expects App\\Entity\\MonsterTemplate, object\|null given\.$#'
+			message: '#^Parameter \#1 \$monsterTemplate of method App\\Factory\\MonsterFactory\:\:createOneFromMonsterTemplate\(\) expects App\\Entity\\MonsterTemplate, App\\Entity\\MonsterTemplate\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controller/MonsterController.php
 
 		-
-			message: '#^Call to an undefined method object\:\:getGame\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Controller/NonPlayableCharacterController.php
-
-		-
-			message: '#^Cannot call method getId\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Controller/NonPlayableCharacterController.php
-
-		-
-			message: '#^Parameter \#1 \$nonPlayableCharacter of method App\\Repository\\NonPlayableCharacterRepository\:\:delete\(\) expects App\\Entity\\NonPlayableCharacter, object given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controller/NonPlayableCharacterController.php
-
-		-
-			message: '#^Parameter \#1 \$nonPlayableCharacterTemplate of method App\\Factory\\NonPlayableCharacterFactory\:\:createOneFromNonPlayableCharacterTemplate\(\) expects App\\Entity\\NonPlayableCharacterTemplate, object\|null given\.$#'
+			message: '#^Parameter \#1 \$nonPlayableCharacterTemplate of method App\\Factory\\NonPlayableCharacterFactory\:\:createOneFromNonPlayableCharacterTemplate\(\) expects App\\Entity\\NonPlayableCharacterTemplate, App\\Entity\\NonPlayableCharacterTemplate\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controller/NonPlayableCharacterController.php
@@ -439,27 +361,21 @@ parameters:
 			path: src/Entity/ArmamentTemplate.php
 
 		-
-			message: '#^Access to an undefined property App\\Entity\\Character\:\:\$title\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Entity/Character.php
-
-		-
 			message: '#^Cannot call method add\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
 			identifier: method.nonObject
-			count: 3
+			count: 4
 			path: src/Entity/Character.php
 
 		-
 			message: '#^Cannot call method contains\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
 			identifier: method.nonObject
-			count: 6
+			count: 8
 			path: src/Entity/Character.php
 
 		-
 			message: '#^Cannot call method removeElement\(\) on array\|Doctrine\\Common\\Collections\\Collection\.$#'
 			identifier: method.nonObject
-			count: 3
+			count: 4
 			path: src/Entity/Character.php
 
 		-
@@ -549,12 +465,6 @@ parameters:
 		-
 			message: '#^Method App\\Entity\\Character\:\:getSpells\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
 			identifier: missingType.generics
-			count: 1
-			path: src/Entity/Character.php
-
-		-
-			message: '#^Method App\\Entity\\Character\:\:getTitle\(\) should return App\\Entity\\Kind but returns mixed\.$#'
-			identifier: return.type
 			count: 1
 			path: src/Entity/Character.php
 
@@ -2149,6 +2059,18 @@ parameters:
 			path: src/Factory/NonPlayableCharacterFactory.php
 
 		-
+			message: '#^Parameter \#1 \$gameId of method App\\Repository\\ArmamentRepository\:\:availableArmamentsQueryBuilder\(\) expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/FormType/CharacterType.php
+
+		-
+			message: '#^Parameter \#3 \$ownerId of method App\\Repository\\ArmamentRepository\:\:availableArmamentsQueryBuilder\(\) expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/FormType/CharacterType.php
+
+		-
 			message: '#^Call to an undefined method object\:\:getId\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -2185,520 +2107,88 @@ parameters:
 			path: src/FormType/EntityHiddenType.php
 
 		-
-			message: '#^Class App\\Repository\\ArmamentRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
+			message: '#^Parameter \#1 \$gameId of method App\\Repository\\ArmamentRepository\:\:availableArmamentsQueryBuilder\(\) expects int, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Repository/ArmamentRepository.php
+			path: src/FormType/MonsterType.php
 
 		-
-			message: '#^Method App\\Repository\\ArmamentRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
+			message: '#^Parameter \#3 \$ownerId of method App\\Repository\\ArmamentRepository\:\:availableArmamentsQueryBuilder\(\) expects int, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Repository/ArmamentRepository.php
+			path: src/FormType/MonsterType.php
 
 		-
-			message: '#^Method App\\Repository\\ArmamentRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
+			message: '#^Parameter \#1 \$gameId of method App\\Repository\\ArmamentRepository\:\:availableArmamentsQueryBuilder\(\) expects int, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Repository/ArmamentRepository.php
+			path: src/FormType/NonPlayableCharacterType.php
 
 		-
-			message: '#^Method App\\Repository\\ArmamentRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Parameter \#3 \$ownerId of method App\\Repository\\ArmamentRepository\:\:availableArmamentsQueryBuilder\(\) expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/FormType/NonPlayableCharacterType.php
+
+		-
+			message: '#^Method App\\Repository\\ArmamentRepository\:\:findByGameBySearch\(\) should return array\<App\\Entity\\Armament\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/ArmamentRepository.php
 
 		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/ArmamentRepository.php
-
-		-
-			message: '#^Class App\\Repository\\ArmamentTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/ArmamentTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Repository/ArmamentTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/ArmamentTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:findBySearch\(\) should return array\<App\\Entity\\ArmamentTemplate\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/ArmamentTemplateRepository.php
 
 		-
-			message: '#^Method App\\Repository\\ArmamentTemplateRepository\:\:getLastFiveArmamentTemplates\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/ArmamentTemplateRepository.php
-
-		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/ArmamentTemplateRepository.php
-
-		-
-			message: '#^Class App\\Repository\\CharacterClassRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/CharacterClassRepository.php
-
-		-
-			message: '#^Class App\\Repository\\CharacterRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/CharacterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\CharacterRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Repository/CharacterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\CharacterRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/CharacterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\CharacterRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\CharacterRepository\:\:findByGameBySearch\(\) should return array\<App\\Entity\\Character\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/CharacterRepository.php
 
 		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/CharacterRepository.php
-
-		-
-			message: '#^Class App\\Repository\\CharacterTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/CharacterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Repository/CharacterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/CharacterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:findBySearch\(\) should return array\<App\\Entity\\CharacterTemplate\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/CharacterTemplateRepository.php
 
 		-
-			message: '#^Method App\\Repository\\CharacterTemplateRepository\:\:getLastFiveCharacterTemplates\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/CharacterTemplateRepository.php
-
-		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/CharacterTemplateRepository.php
-
-		-
-			message: '#^Call to an undefined method Symfony\\Component\\Security\\Core\\User\\UserInterface\:\:getId\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Repository/GameRepository.php
-
-		-
-			message: '#^Class App\\Repository\\GameRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/GameRepository.php
-
-		-
-			message: '#^Method App\\Repository\\GameRepository\:\:getGamesByUser\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/GameRepository.php
-
-		-
-			message: '#^Method App\\Repository\\GameRepository\:\:getGamesByUser\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\GameRepository\:\:getGamesByUser\(\) should return array\<App\\Entity\\Game\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/GameRepository.php
 
 		-
-			message: '#^Method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/GameRepository.php
-
-		-
-			message: '#^Method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\GameRepository\:\:getGamesWithCharacterByUser\(\) should return array\<App\\Entity\\Game\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/GameRepository.php
 
 		-
-			message: '#^Class App\\Repository\\ItemRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/ItemRepository.php
-
-		-
-			message: '#^Method App\\Repository\\ItemRepository\:\:getLastFiveItems\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/ItemRepository.php
-
-		-
-			message: '#^Class App\\Repository\\KindRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/KindRepository.php
-
-		-
-			message: '#^Class App\\Repository\\MasteryRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/MasteryRepository.php
-
-		-
-			message: '#^Class App\\Repository\\MonsterRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/MonsterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\MonsterRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Repository/MonsterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\MonsterRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/MonsterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\MonsterRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\MonsterRepository\:\:findByGameBySearch\(\) should return array\<App\\Entity\\Monster\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/MonsterRepository.php
 
 		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/MonsterRepository.php
-
-		-
-			message: '#^Class App\\Repository\\MonsterTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/MonsterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Repository/MonsterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/MonsterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:findBySearch\(\) should return array\<App\\Entity\\MonsterTemplate\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/MonsterTemplateRepository.php
 
 		-
-			message: '#^Method App\\Repository\\MonsterTemplateRepository\:\:getLastFiveMonsterTemplates\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/MonsterTemplateRepository.php
-
-		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/MonsterTemplateRepository.php
-
-		-
-			message: '#^Class App\\Repository\\NonPlayableCharacterRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/NonPlayableCharacterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\NonPlayableCharacterRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Repository/NonPlayableCharacterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\NonPlayableCharacterRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/NonPlayableCharacterRepository.php
-
-		-
-			message: '#^Method App\\Repository\\NonPlayableCharacterRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\NonPlayableCharacterRepository\:\:findByGameBySearch\(\) should return array\<App\\Entity\\NonPlayableCharacter\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/NonPlayableCharacterRepository.php
 
 		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/NonPlayableCharacterRepository.php
-
-		-
-			message: '#^Class App\\Repository\\NonPlayableCharacterTemplateRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/NonPlayableCharacterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:findBySearch\(\) has parameter \$orderBy with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/Repository/NonPlayableCharacterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:findBySearch\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/NonPlayableCharacterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:findBySearch\(\) should return array but returns mixed\.$#'
+			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:findBySearch\(\) should return array\<App\\Entity\\NonPlayableCharacterTemplate\> but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Repository/NonPlayableCharacterTemplateRepository.php
-
-		-
-			message: '#^Method App\\Repository\\NonPlayableCharacterTemplateRepository\:\:getLastFiveNonPlayableCharacterTemplates\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/NonPlayableCharacterTemplateRepository.php
-
-		-
-			message: '#^Parameter \#2 \$order of method Doctrine\\ORM\\QueryBuilder\:\:orderBy\(\) expects string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Repository/NonPlayableCharacterTemplateRepository.php
-
-		-
-			message: '#^Class App\\Repository\\SkillRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/SkillRepository.php
-
-		-
-			message: '#^Method App\\Repository\\SkillRepository\:\:getLastFiveSkills\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/SkillRepository.php
-
-		-
-			message: '#^Class App\\Repository\\SpellRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/SpellRepository.php
-
-		-
-			message: '#^Method App\\Repository\\SpellRepository\:\:getLastFiveSpells\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Repository/SpellRepository.php
-
-		-
-			message: '#^Class App\\Repository\\TalentRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/TalentRepository.php
-
-		-
-			message: '#^Class App\\Repository\\UserRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
-			identifier: missingType.generics
-			count: 1
-			path: src/Repository/UserRepository.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\ArmamentBlock\:\:getArmamentTemplates\(\) should return array\<App\\Entity\\ArmamentTemplate\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/ArmamentBlock.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\ArmamentBlock\:\:getArmaments\(\) should return array\<App\\Entity\\Armament\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/ArmamentBlock.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\CharacterBlock\:\:getCharacterTemplates\(\) should return array\<App\\Entity\\CharacterTemplate\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/CharacterBlock.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\CharacterBlock\:\:getCharacters\(\) should return array\<App\\Entity\\Character\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/CharacterBlock.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\MonsterBlock\:\:getMonsterTemplates\(\) should return array\<App\\Entity\\MonsterTemplate\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/MonsterBlock.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\MonsterBlock\:\:getMonsters\(\) should return array\<App\\Entity\\Monster\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/MonsterBlock.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\NonPlayableCharacterBlock\:\:getNonPlayableCharacterTemplates\(\) should return array\<App\\Entity\\NonPlayableCharacterTemplate\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/NonPlayableCharacterBlock.php
-
-		-
-			message: '#^Method App\\Twig\\Components\\Molecule\\NonPlayableCharacterBlock\:\:getNonPlayableCharacters\(\) should return array\<App\\Entity\\NonPlayableCharacter\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Twig/Components/Molecule/NonPlayableCharacterBlock.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\ArmamentFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/ArmamentFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\ArmamentTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/ArmamentTemplateFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\CharacterClassFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/CharacterClassFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\CharacterFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/CharacterFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\CharacterTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/CharacterTemplateFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\GameFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/GameFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\ItemFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/ItemFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\KindFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/KindFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\MasteryFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/MasteryFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\MonsterFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/MonsterFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\MonsterTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/MonsterTemplateFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\NonPlayableCharacterFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/NonPlayableCharacterFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\NonPlayableCharacterTemplateFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/NonPlayableCharacterTemplateFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\SkillFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/SkillFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\SpellFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/SpellFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\TalentFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/TalentFactory.php
-
-		-
-			message: '#^Method App\\Tests\\DataFixtures\\Factory\\UserFactory\:\:defaults\(\) never returns callable\(int\)\: array\<string, mixed\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/DataFixtures/Factory/UserFactory.php
 
 		-
 			message: '#^Parameter \#2 \$plainPassword of method Symfony\\Component\\PasswordHasher\\Hasher\\UserPasswordHasherInterface\:\:hashPassword\(\) expects string, string\|null given\.$#'

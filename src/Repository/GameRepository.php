@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Game;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @extends ServiceEntityRepository<Game>
+ */
 class GameRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,7 +20,8 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
-    public function getGamesByUser(UserInterface $user): array
+    /** @return Game[] */
+    public function getGamesByUser(User $user): array
     {
         return $this->createQueryBuilder('g')
             ->where('g.gameMaster = :gameMaster')
@@ -25,17 +30,16 @@ class GameRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getGamesWithCharacterByUser(UserInterface $user): array
+    /** @return Game[] */
+    public function getGamesWithCharacterByUser(User $user): array
     {
-        $toto = $this->createQueryBuilder('g')
+        return $this->createQueryBuilder('g')
             ->innerJoin('g.characters', 'pc')
             ->innerJoin('pc.user', 'u')
             ->where('u.id = :userId')
             ->setParameter('userId', $user->getId())
             ->getQuery()
             ->getResult();
-
-        return $toto;
     }
 
     public function delete(Game $game): void

@@ -285,7 +285,6 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
             'items' => ItemFactory::randomRange(0, 3),
         ]);
 
-
         NonPlayableCharacterFactory::createOne([
             'game' => $mainGame,
             'name' => 'Maurice',
@@ -313,7 +312,6 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
-
 
         MonsterFactory::createOne([
             'game' => $mainGame,

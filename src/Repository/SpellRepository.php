@@ -8,6 +8,9 @@ use App\Entity\Spell;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Spell>
+ */
 class SpellRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -15,7 +18,7 @@ class SpellRepository extends ServiceEntityRepository
         parent::__construct($registry, Spell::class);
     }
 
-    /** @Return Spell[] */
+    /** @return Spell[] */
     public function getLastFiveSpells(): ?array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);

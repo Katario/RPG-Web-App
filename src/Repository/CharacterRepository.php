@@ -8,6 +8,9 @@ use App\Entity\Character;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Character>
+ */
 class CharacterRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -15,7 +18,8 @@ class CharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, Character::class);
     }
 
-    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    /** @return Character[] */
+    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('c');
         $queryBuilder->where('c.name LIKE :query')
@@ -43,8 +47,6 @@ class CharacterRepository extends ServiceEntityRepository
 
     public function save(Character $character): void
     {
-        //        $character->setUpdatedAt(new \DateTimeImmutable());
-
         $this->getEntityManager()->persist($character);
         $this->getEntityManager()->flush();
     }

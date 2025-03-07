@@ -6,6 +6,9 @@ use App\Entity\Skill;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Skill>
+ */
 class SkillRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -13,7 +16,7 @@ class SkillRepository extends ServiceEntityRepository
         parent::__construct($registry, Skill::class);
     }
 
-    /** @Return Skill[] */
+    /** @return Skill[] */
     public function getLastFiveSkills(): ?array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);

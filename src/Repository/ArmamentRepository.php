@@ -7,6 +7,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Armament>
+ */
 class ArmamentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -14,7 +17,8 @@ class ArmamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Armament::class);
     }
 
-    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    /** @return Armament[] */
+    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('a');
         $queryBuilder->where('a.name LIKE :query')
@@ -34,7 +38,7 @@ class ArmamentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function availableArmamentsQueryBuilder(int $gameId, string $owner, $ownerId): QueryBuilder
+    public function availableArmamentsQueryBuilder(int $gameId, string $owner, int $ownerId): QueryBuilder
     {
         $qb = $this->createQueryBuilder('a');
 

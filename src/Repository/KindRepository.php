@@ -8,6 +8,9 @@ use App\Entity\Kind;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Kind>
+ */
 class KindRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

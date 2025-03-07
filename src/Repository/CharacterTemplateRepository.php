@@ -8,6 +8,9 @@ use App\Entity\CharacterTemplate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<CharacterTemplate>
+ */
 class CharacterTemplateRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -15,7 +18,8 @@ class CharacterTemplateRepository extends ServiceEntityRepository
         parent::__construct($registry, CharacterTemplate::class);
     }
 
-    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    /** @return CharacterTemplate[] */
+    public function findBySearch(?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('ct');
         $queryBuilder->where('ct.name LIKE :query')
@@ -32,8 +36,8 @@ class CharacterTemplateRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /** @Return CharacterTemplate[] */
-    public function getLastFiveCharacterTemplates(): ?array
+    /** @return CharacterTemplate[] */
+    public function getLastFiveCharacterTemplates(): array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }

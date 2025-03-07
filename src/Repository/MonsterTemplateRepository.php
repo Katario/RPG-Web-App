@@ -8,6 +8,9 @@ use App\Entity\MonsterTemplate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<MonsterTemplate>
+ */
 class MonsterTemplateRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -15,13 +18,14 @@ class MonsterTemplateRepository extends ServiceEntityRepository
         parent::__construct($registry, MonsterTemplate::class);
     }
 
-    /** @Return MonsterTemplate[] */
-    public function getLastFiveMonsterTemplates(): ?array
+    /** @return MonsterTemplate[] */
+    public function getLastFiveMonsterTemplates(): array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    /** @return MonsterTemplate[] */
+    public function findBySearch(?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('mt');
         $queryBuilder->where('mt.name LIKE :query')

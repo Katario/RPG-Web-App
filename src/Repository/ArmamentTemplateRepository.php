@@ -6,6 +6,9 @@ use App\Entity\ArmamentTemplate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ArmamentTemplate>
+ */
 class ArmamentTemplateRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -13,13 +16,14 @@ class ArmamentTemplateRepository extends ServiceEntityRepository
         parent::__construct($registry, ArmamentTemplate::class);
     }
 
-    /** @Return ArmamentTemplate[] */
-    public function getLastFiveArmamentTemplates(): ?array
+    /** @return ArmamentTemplate[] */
+    public function getLastFiveArmamentTemplates(): array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    /** @return ArmamentTemplate[] */
+    public function findBySearch(?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('a');
         $queryBuilder->where('a.name LIKE :query')

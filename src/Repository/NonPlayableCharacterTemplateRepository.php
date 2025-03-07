@@ -8,6 +8,9 @@ use App\Entity\NonPlayableCharacterTemplate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<NonPlayableCharacterTemplate>
+ */
 class NonPlayableCharacterTemplateRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -15,13 +18,14 @@ class NonPlayableCharacterTemplateRepository extends ServiceEntityRepository
         parent::__construct($registry, NonPlayableCharacterTemplate::class);
     }
 
-    /** @Return NonPlayableCharacterTemplate[] */
-    public function getLastFiveNonPlayableCharacterTemplates(): ?array
+    /** @return NonPlayableCharacterTemplate[] */
+    public function getLastFiveNonPlayableCharacterTemplates(): array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-    public function findBySearch(?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    /** @return NonPlayableCharacterTemplate[] */
+    public function findBySearch(?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('npct');
         $queryBuilder->where('npct.name LIKE :query')

@@ -8,6 +8,9 @@ use App\Entity\NonPlayableCharacter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<NonPlayableCharacter>
+ */
 class NonPlayableCharacterRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -15,7 +18,8 @@ class NonPlayableCharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, NonPlayableCharacter::class);
     }
 
-    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, $orderBy = 'ASC'): array
+    /** @return NonPlayableCharacter[] */
+    public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('npc');
         $queryBuilder->where('npc.name LIKE :query')
