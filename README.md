@@ -1,41 +1,100 @@
 # RPG-APP
-
-
+NOTE: this is still in Alpha.
+Welcome! This application is a tool to help Game Masters and Players to create their Role Playing Games.
 
 ## Installation:
+To run the project, you need to have Docker installed (version 28+ are supported, probably Docker version 21 to 27 are also, but not sure.)
+1. First, you need to clone the repo on your computer. Please `git clone `
+2. `cp .env.dist .env` and fill the different keys
+3. Pull the Docker image, build the container, and log into it: `make connect`
+4. Once in the container, install the project: `composer install`
+5. Create the database: `bin/console doctrine:database:create`
+6. Populate it with fixtures: `bin/console doctrine:fixtures:load`
+6. You should now be able to access the website at `http://localhost:9984`
+
+Note: to interact with the project, I recommand to connect to the *-php container, and to start every command in it.
+The only commands you should do outside of the container should be the `make` commands and the `git` commands.
+
+
+## Stack used:
+- PHP 8.3 (will be updated to PHP 8.4 later)
+- Symfony: as a framework, support the application.
+- Symfony UX: for the front, I'm using a mix of Twig and Stimulus, as suggested in the Symfony UX initiative. If you still don't know about  it, [check it out!](https://ux.symfony.com/)
+- Composer: Composer is a dependency Manager for PHP. If you don't know it... You have a lot to catch up with PHP :D 
+- Docker: Docker is the container application. You should now about it by now, and if it's not the case, go check it out. I'm using it to handle a local environment easily. I plan to deploy with it in the future, but not right now.
+- PostGreSQL: A object-relational oriented Database.
+
 
 ## Tools:
+#### [MakeFile](https://www.gnu.org/software/make/manual/make.html)
+I've set up a Makefile to help enter the most common commands.
+
+#### [PHP-CS-Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer)
+PHP-CS-Fixer is a tool that analyse / fix the code by applying rules, like PSR or custom ones. On this project, we currently
+only use PSR & Symfony rules. Check php-cs-fixer.dist.php for more informations.
 - To list all files that needs to be fixed: `vendor/bin/php-cs-fixer check`
-    - To fix files according to configured rules: `vendor/bin/php-cs-fixer fix`
-- PHPUnit:
-    - To run the PHPUnit tests: `vendor/bin/phpunit`
-- PHP Stan:
-    - Run the tool: `vendor/bin/phpstan analyse --level=10 src tests --generate-baseline`
-    - Note: we're using the MAX level of PHPStan. The baseline allow us to tackle the problems one by one. The goal is to never increase the number of errors identified.
+- To fix files according to configured rules: `vendor/bin/php-cs-fixer fix`
+
+Note: this tool should be applied before EACH commit, so you should configure your git hooks. It will also run in the pipeline, to check if everything has been made properly.
+
+#### [PHPUnit](https://github.com/sebastianbergmann/phpunit/)
+> PHPUnit is a programmer-oriented testing framework for PHP. It is an instance of the xUnit architecture for unit testing frameworks.
+
+- To run the tests: `vendor/bin/phpunit`
+
+#### [PHPStan](https://phpstan.org/)
+> PHPStan is a static analisys tool. It runs the code, without actually running the code.
+
+On this project, this tool is used to look for bugs in the code, and to maintain an even Higher quality of code. I'm
+using the current maximum level to set (lvl 10), and while I know it's not applied yet, there is a `phpstan-baseline.neon`
+that list every error to do.
+My current rule is to get used to PHPStan lvl 10, and try to decrease on each commit the number of errors in the file.
+
+- To run PHPStan: `vendor/bin/phpstan`
+- To run PHPStan and generate the baseline for it: `vendor/bin/phpstan --generate-baseline`
 
 
+## Most useful Commands:
+- `make connect`: Down the container, then build it, create it and open a bash in the php container.
+- `make watch`: Down the container, then build it, create it and open a bash in the php container. Then, start tailwind with watch option.
+- `make stop`: Down the container
+- `make test`: Start the unit tests
+- `make phpstan`: Start PHP Stan, and generate the baseline
+- `make cs-fix`: Fix every file with the current php-cs-fixer configuration
 
 
+## Git Workflow process:
+The Gitflow process is Straight Forward for now, as I'm the only developer, and there are no Pipeline tools.
+The goal would be to adopt a Git-Forkflow system, but adapted to the fact I'm the only developer. More on that later.  
 
 
+## [Agile Methodology](https://agilemanifesto.org/):
+This Project follows the ScrumBan Methodology. This is a method directly inspired from the Agility manifest.
+Since We're two for now, and one of us is not a developer, we need to organise in a simple way. We built a board (A Trello)
+to follow the evolution of the project, and follow the ScrumBan Methodology:
+- The process contains five steps: "to do", "ongoing", "test", "deploy", "done"
+- Each task is clearly define, as a DoD and a priority.
+- Each task should go from left to right, across all the different steps of the process
+- If a task is failing a step (test KO), a new task linked to the old one should be created
+
+Aside from the Process Steps, there are also some useful columns: A "Backlog", "Abandoned"...
 
 
-
-
-
-## What are all of these Entities? TO-REWORK
-
-#### *Something*Encyclopedia
-These are the classes that list an example of a standard object. It may serve as a model to create some. Theses classes will be moved in their own API later.
-Ex: A Goblin.
-
-#### *Something*
-These are the implementations of the Encyclopdia classes.
-Ex: A Goblin lvl 2 and a Goblin lvl 5 for instance.
+## Summary of all the Concepts in the App
+Since this is an app about RPG, I'll assume you have all the basic knowledge of RPG stuff, like GM or Player!
 
 #### Character:
-A character that may be played by a player.
+A character may be played by a player.
 Ex: Epolas Eret'Matkin
+
+#### Non-Playable Character:
+A character that can't be incarnated by a player, is used by the Game Master, and can do some actions by itself.
+Ex: Al'Ratab
+
+#### Encyclopedia
+The Encyclopedia contains every "static" concepts of the game (Like Items, Skill, or Spells) and every templates for
+"dynamic" concepts (like MonsterTemplate, or ArmamentTemplates).
+It is common to every GM.
 
 #### Item:
 An item may be used by a player to do an action.
@@ -49,9 +108,9 @@ Ex: Far-Sight
 A creature that may attack the player.
 Ex: A Goblin
 
-#### Non-Playable Character:
-A character that can't be played by a player, is used by the Game Master, and can do some actions by itself.
-Ex: Al'Ratab
+#### Armament:
+A type of item, that may be used in battle to fight or protect.
+Ex: A wooden sword or a wooden helmet
 
 #### Skill:
 A skill is attached to a Weapon, an Item or a Character. It is used as an action.
@@ -65,6 +124,5 @@ Ex: Fireball
 A character have many talent that are used to act.
 Ex: Archery
 
-#### Weaponry:
-A type of item, that may be used in battle to fight or protect.
-Ex: A wooden sword or a wooden helmet
+## How to update ?
+You currently can't. Please contact me via my LinkedIn profile.
