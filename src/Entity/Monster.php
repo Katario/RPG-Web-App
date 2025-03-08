@@ -47,6 +47,12 @@ class Monster
     #[ORM\JoinColumn(nullable: true)]
     private Collection|array $armaments;
 
+    #[ORM\JoinTable(name: 'monsters_specie')]
+    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'specie_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'Specie')]
+    private Collection $specie;
+
     #[ORM\JoinTable(name: 'monsters_spells')]
     #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
@@ -347,6 +353,25 @@ class Monster
     public function setMaxExhaustPoints(int $maxExhaustPoints): Monster
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
+        return $this;
+    }
+
+    public function getSpecie(): ?Specie
+    {
+        if (0 === $this->specie->count()) {
+            return null;
+        }
+
+        return $this->specie->first();
+    }
+
+    public function setSpecie(Specie $specie): Monster
+    {
+        if (!$this->specie->contains($specie)) {
+            $this->specie->clear();
+            $this->specie->add($specie);
+        }
 
         return $this;
     }

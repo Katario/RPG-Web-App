@@ -8,8 +8,6 @@ use App\Repository\CharacterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
 
 #[ORM\Table(name: 'playable_character')]
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
@@ -44,37 +42,37 @@ class Character
     private int $currentExhaustPoints;
     #[ORM\Column(type: 'integer')]
     private int $maxExhaustPoints;
-    #[JoinTable(name: 'characters_kind')]
-    #[JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\JoinTable(name: 'characters_kind')]
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
     #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'Kind')]
     private Collection $kind;
-    #[JoinTable(name: 'characters_character_class')]
-    #[JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\JoinTable(name: 'characters_character_class')]
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true)]
     #[ORM\InverseJoinColumn(name: 'character_class_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'CharacterClass')]
     private Collection $characterClass;
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'characters')]
-    #[JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
     private ?User $user;
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'characters')]
-    #[JoinColumn(name: 'game_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'character')]
-    #[JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Collection|array $armaments;
-    #[JoinTable(name: 'characters_spells')]
-    #[JoinColumn(name: 'character_id', referencedColumnName: 'id')]
+    #[ORM\JoinTable(name: 'characters_spells')]
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
-    #[JoinTable(name: 'characters_items')]
-    #[JoinColumn(name: 'character_id', referencedColumnName: 'id')]
+    #[ORM\JoinTable(name: 'characters_items')]
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
-    #[JoinTable(name: 'characters_skills')]
-    #[JoinColumn(name: 'character_id', referencedColumnName: 'id')]
+    #[ORM\JoinTable(name: 'characters_skills')]
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;

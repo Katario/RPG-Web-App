@@ -25,6 +25,18 @@ The only commands you should do outside of the container should be the `make` co
 - PostGreSQL: A object-relational oriented Database.
 
 
+## Architecture approach:
+In the Back environment, I choose to start with MVC: I started a project which is suppose to be displaying informations,
+and I'm not sure where it's heading. If it is getting more complex, like adding a live board system or else, then I'll
+refacto the project to another structure.
+
+In the Front environment, I'm trying to adopt [an "Atomic" approach](https://atomicdesign.bradfrost.com/chapter-2/).
+The idea is to have multiple components, split in size and goal:
+- An Atom, which is the smallest component possible. It doesn't contains any business logic, and should contain "Variants", which are different behaviors according to passed parameters, but close enough in meaning to be gathered as a simple Atom. Example : a Button component
+- A Molecule, which is a gathering of only Atoms. It should contains the minimum possible of business logic, which will mostly decide when to display an atom, and which parameters to pass to it. Example: A Block
+- An Organism (or a page), which is the gathering of multiple Atoms and Molecules, to display an ensemble. It contains the most of our display logic!
+
+
 ## Tools:
 #### [MakeFile](https://www.gnu.org/software/make/manual/make.html)
 I've set up a Makefile to help enter the most common commands.
