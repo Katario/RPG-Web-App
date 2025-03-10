@@ -17,6 +17,7 @@ use App\Tests\DataFixtures\Factory\MonsterTemplateFactory;
 use App\Tests\DataFixtures\Factory\NonPlayableCharacterFactory;
 use App\Tests\DataFixtures\Factory\NonPlayableCharacterTemplateFactory;
 use App\Tests\DataFixtures\Factory\SkillFactory;
+use App\Tests\DataFixtures\Factory\SpecieFactory;
 use App\Tests\DataFixtures\Factory\SpellFactory;
 use App\Tests\DataFixtures\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -114,6 +115,25 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
         ]);
         ItemFactory::createOne([
             'name' => 'Herbs',
+        ]);
+
+        $goblin = SpecieFactory::createOne([
+            'name' => 'Goblin',
+        ]);
+        $wolf = SpecieFactory::createOne([
+            'name' => 'Wolf',
+        ]);
+        $orcSpecie = SpecieFactory::createOne([
+            'name' => 'Orc',
+        ]);
+        $griffin = SpecieFactory::createOne([
+            'name' => 'Griffin',
+        ]);
+        $slime = SpecieFactory::createOne([
+            'name' => 'Slime',
+        ]);
+        $rat = SpecieFactory::createOne([
+            'name' => 'Rat',
         ]);
 
         SkillFactory::createOne([
@@ -222,34 +242,35 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
 
         MonsterTemplateFactory::createOne([
             'name' => 'Goblin template',
+            'specie' => $goblin,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
-
         MonsterTemplateFactory::createOne([
             'name' => 'Wolf template',
+            'specie' => $wolf,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
-
         MonsterTemplateFactory::createOne([
             'name' => 'Griffin template',
+            'specie' => $griffin,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
-
         MonsterTemplateFactory::createOne([
             'name' => 'Slime template',
+            'specie' => $slime,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
-
         MonsterTemplateFactory::createOne([
             'name' => 'Rat template',
+            'specie' => $rat,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
@@ -315,21 +336,32 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
 
         MonsterFactory::createOne([
             'game' => $mainGame,
-            'name' => 'Goblin 1',
+            'name' => 'Green Goblin',
+            'specie' => $goblin,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
         MonsterFactory::createOne([
             'game' => $mainGame,
-            'name' => 'Goblin 2',
+            'name' => 'Archer Goblin',
+            'specie' => $goblin,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
         MonsterFactory::createOne([
             'game' => $mainGame,
-            'name' => 'Goblin 3',
+            'name' => 'HobGoblin',
+            'specie' => $goblin,
+            'spells' => SpellFactory::randomRange(0, 3),
+            'skills' => SkillFactory::randomRange(0, 3),
+            'items' => ItemFactory::randomRange(0, 3),
+        ]);
+        MonsterFactory::createOne([
+            'game' => $mainGame,
+            'name' => 'Blue Slime',
+            'specie' => $slime,
             'spells' => SpellFactory::randomRange(0, 3),
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),

@@ -8,6 +8,7 @@ use App\Entity\Armament;
 use App\Entity\Item;
 use App\Entity\Monster;
 use App\Entity\Skill;
+use App\Entity\Specie;
 use App\Entity\Spell;
 use App\Repository\ArmamentRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -35,6 +36,10 @@ class MonsterType extends AbstractType
             ->add('maxActionPoints', IntegerType::class)
             ->add('currentExhaustPoints', IntegerType::class)
             ->add('maxExhaustPoints', IntegerType::class)
+            ->add('specie', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Specie::class,
+            ])
             ->add('isBoss', CheckboxType::class, [
                 'required' => false,
             ])

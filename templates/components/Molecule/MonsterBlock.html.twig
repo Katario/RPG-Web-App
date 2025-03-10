@@ -9,12 +9,12 @@
         {% for monster in this.monsters %}
             <li>
                 <twig:Card
-                        show="{{ path('show_monster', {'gameId': game.id,'id': monster.id}) }}"
-                        edit="{{ path('edit_monster', {'gameId': game.id, 'id': monster.id}) }}"
-                        delete="{{ path('delete_monster', {'gameId': game.id,'id': monster.id}) }}"
-                        title="{{ monster.name }}"
-                        subtitle=""
-                        imagePath="{{ asset('images/goblin.png') }}"
+                    show="{{ path('show_monster', {'gameId': game.id,'id': monster.id}) }}"
+                    edit="{{ path('edit_monster', {'gameId': game.id, 'id': monster.id}) }}"
+                    delete="{{ path('delete_monster', {'gameId': game.id,'id': monster.id}) }}"
+                    title="{{ monster.name }}"
+                    subtitle="{{ monster.specie.name }}"
+                    imagePath="{{ asset('images/goblin.png') }}"
                 >
                     <span class="basis-1/4">Test</span>
                 </twig:Card>
@@ -70,6 +70,7 @@
                             >
                                 <twig:Badge
                                     name="{{ monsterTemplate.name }}"
+                                    type="{{ monsterTemplate.specie.name }}"
                                     imagePath="{{ asset('images/goblin.png') }}"
                                 />
                             </twig:Button>

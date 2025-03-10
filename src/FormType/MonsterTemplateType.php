@@ -7,6 +7,7 @@ namespace App\FormType;
 use App\Entity\Item;
 use App\Entity\MonsterTemplate;
 use App\Entity\Skill;
+use App\Entity\Specie;
 use App\Entity\Spell;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -31,6 +32,10 @@ class MonsterTemplateType extends AbstractType
             ->add('maxActionPoints', IntegerType::class)
             ->add('minExhaustPoints', IntegerType::class)
             ->add('maxExhaustPoints', IntegerType::class)
+            ->add('specie', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Specie::class,
+            ])
             ->add('spells', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Spell::class,

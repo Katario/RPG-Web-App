@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Game;
 use App\Entity\NonPlayableCharacter;
 use App\Factory\NonPlayableCharacterFactory;
 use App\FormType\NonPlayableCharacterType;
 use App\Repository\NonPlayableCharacterRepository;
 use App\Repository\NonPlayableCharacterTemplateRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,23 +110,31 @@ class NonPlayableCharacterController
         ]));
     }
 
-    #[Route('/npcs/generate',
+    #[Route('/games/{gameId}/npcs/generate',
         name: 'generate_non_playable_character',
         methods: ['GET', 'POST']
     )]
     public function generateNonPlayableCharacter(
         Request $request,
+        #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
         NonPlayableCharacterTemplateRepository $nonPlayableCharacterTemplateRepository,
         NonPlayableCharacterFactory $nonPlayableCharacterFactory,
     ): Response|RedirectResponse {
         if ($request->get('nonPlayableCharacterTemplateId')) {
             $nonPlayableCharacterTemplate = $nonPlayableCharacterTemplateRepository->find($request->get('nonPlayableCharacterTemplateId'));
             $nonPlayableCharacter = $nonPlayableCharacterFactory->createOneFromNonPlayableCharacterTemplate($nonPlayableCharacterTemplate);
+            $nonPlayableCharacter->setGame($game);
         } else {
             $nonPlayableCharacter = new NonPlayableCharacter();
+            $nonPlayableCharacter->setGame($game);
         }
 
-        $form = $this->formFactory->create(NonPlayableCharacterType::class, $nonPlayableCharacter);
+        $form = $this->formFactory->create(
+            NonPlayableCharacterType::class,
+            $nonPlayableCharacter, [
+                'gameId' => $game->getId(),
+            ]
+        );
 
         $form->handleRequest($request);
 

@@ -110,7 +110,7 @@ class MonsterController
         ));
     }
 
-    #[Route('/games/{gameId}//monsters/generate',
+    #[Route('/games/{gameId}/monsters/generate',
         name: 'generate_monster',
         requirements: ['gameId' => '\d+'],
         methods: ['GET', 'POST']
@@ -129,7 +129,12 @@ class MonsterController
             $monster = new Monster();
             $monster->setGame($game);
         }
-        $form = $this->formFactory->create(MonsterType::class, $monster);
+        $form = $this->formFactory->create(
+            MonsterType::class,
+            $monster, [
+                'gameId' => $game->getId(),
+            ]
+        );
 
         $form->handleRequest($request);
 

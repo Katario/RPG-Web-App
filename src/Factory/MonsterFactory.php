@@ -22,6 +22,7 @@ class MonsterFactory
             ->setMaxManaPoints($monsterTemplate->getMaxManaPoints())
             ->setCurrentExhaustPoints($monsterTemplate->getMaxExhaustPoints())
             ->setMaxExhaustPoints($monsterTemplate->getMaxExhaustPoints())
+            ->setSpecie($monsterTemplate->getSpecie())
             ->setSpells($monsterTemplate->getSpells())
             ->setItems($monsterTemplate->getItems())
             ->setSkills($monsterTemplate->getSkills());

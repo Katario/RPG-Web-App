@@ -71,6 +71,7 @@ class Monster
 
     public function __construct()
     {
+        $this->specie = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->armaments = new ArrayCollection();

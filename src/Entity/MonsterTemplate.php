@@ -38,6 +38,12 @@ class MonsterTemplate extends Encyclopedia
     #[ORM\Column(type: 'integer')]
     private int $maxExhaustPoints;
 
+    #[ORM\JoinTable(name: 'monster_templates_specie')]
+    #[ORM\JoinColumn(name: 'monster_template_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\InverseJoinColumn(name: 'specie_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: 'Specie')]
+    private Collection $specie;
+
     #[ORM\JoinTable(name: 'monster_templates_spells')]
     #[ORM\JoinColumn(name: 'monster_template_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id', onDelete: 'cascade')]
@@ -45,7 +51,7 @@ class MonsterTemplate extends Encyclopedia
     private Collection|array $spells;
 
     #[ORM\JoinTable(name: 'monster_templates_items')]
-    #[ORM\JoinColumn(name: 'monste_templater_id', referencedColumnName: 'id', onDelete: 'cascade')]
+    #[ORM\JoinColumn(name: 'monster_templates_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
@@ -58,6 +64,7 @@ class MonsterTemplate extends Encyclopedia
 
     public function __construct()
     {
+        $this->specie = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->skills = new ArrayCollection();
@@ -272,6 +279,25 @@ class MonsterTemplate extends Encyclopedia
     public function setMaxExhaustPoints(int $maxExhaustPoints): MonsterTemplate
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
+        return $this;
+    }
+
+    public function getSpecie(): ?Specie
+    {
+        if (0 === $this->specie->count()) {
+            return null;
+        }
+
+        return $this->specie->first();
+    }
+
+    public function setSpecie(Specie $specie): MonsterTemplate
+    {
+        if (!$this->specie->contains($specie)) {
+            $this->specie->clear();
+            $this->specie->add($specie);
+        }
 
         return $this;
     }

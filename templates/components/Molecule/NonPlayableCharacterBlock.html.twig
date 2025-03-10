@@ -9,12 +9,12 @@
         {% for nonPlayableCharacter in this.nonPlayableCharacters %}
             <li>
                 <twig:Card
-                        show="{{ path('show_non_playable_character', {'gameId': game.id,'id': nonPlayableCharacter.id}) }}"
-                        edit="{{ path('edit_non_playable_character', {'gameId': game.id, 'id': nonPlayableCharacter.id}) }}"
-                        delete="{{ path('delete_non_playable_character', {'gameId': game.id,'id': nonPlayableCharacter.id}) }}"
-                        title="{{ nonPlayableCharacter.name }}"
-                        subtitle="{{ nonPlayableCharacter.characterClass.name }}"
-                        imagePath="{{ asset('images/innkeeper.jpg') }}"
+                    show="{{ path('show_non_playable_character', {'gameId': game.id,'id': nonPlayableCharacter.id}) }}"
+                    edit="{{ path('edit_non_playable_character', {'gameId': game.id, 'id': nonPlayableCharacter.id}) }}"
+                    delete="{{ path('delete_non_playable_character', {'gameId': game.id,'id': nonPlayableCharacter.id}) }}"
+                    title="{{ nonPlayableCharacter.name }}"
+                    subtitle="{{ nonPlayableCharacter.characterClass.name }}"
+                    imagePath="{{ asset('images/innkeeper.jpg') }}"
                 >
                     <span class="basis-1/4">Test</span>
                 </twig:Card>
@@ -57,7 +57,6 @@
                 method='POST'
                 data-turbo="false"
             >
-                {# @TODO: is it still mandatory? #}
                 <input type="hidden" name="game" value="{{ game.id }}"/>
                 {% if outerScope.this.nonPlayableCharacterTemplates is not empty %}
                     <div class="flex flex-row flex-wrap gap-4 m-4">
@@ -70,7 +69,7 @@
                                 class="px-0 py-0"
                             >
                                 <twig:Badge
-                                    name="{{ nonPlayableCharacterTemplate.characterClass.name }}"
+                                    name="{{ nonPlayableCharacterTemplate.name }}"
                                     type="{{ nonPlayableCharacterTemplate.kind.name }}"
                                     imagePath="{{ asset('images/innkeeper.jpg') }}"
                                 />
@@ -85,7 +84,7 @@
                     Click here to go without Template:
                     <twig:Button
                         variant="link"
-                        formaction="{{ path('generate_character', {'gameId': game.id}) }}"
+                        formaction="{{ path('generate_non_playable_character', {'gameId': game.id}) }}"
                     >
                         Don't use template
                     </twig:Button>

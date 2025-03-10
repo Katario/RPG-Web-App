@@ -38,7 +38,7 @@ class ArmamentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function availableArmamentsQueryBuilder(int $gameId, string $owner, int $ownerId): QueryBuilder
+    public function availableArmamentsQueryBuilder(int $gameId, string $owner, ?int $ownerId = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -49,12 +49,17 @@ class ArmamentRepository extends ServiceEntityRepository
                     $qb->expr()->eq('a.isOwned', 'false'),
                     $qb->expr()->andX(
                         $qb->expr()->eq('a.isOwned', 'true'),
-                        $qb->expr()->eq('a.'.$owner, ':ownerId'),
+                        $ownerId
+                            ? $qb->expr()->eq('a.'.$owner, ':ownerId')
+                            : '1 = 1',
                     )
                 )
             ))
-            ->setParameter('gameId', $gameId)
-            ->setParameter('ownerId', $ownerId);
+            ->setParameter('gameId', $gameId);
+
+        if ($ownerId) {
+            $qb->setParameter('ownerId', $ownerId);
+        }
 
         return $qb;
     }
