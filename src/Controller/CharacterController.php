@@ -135,6 +135,7 @@ class CharacterController
             CharacterType::class,
             $character, [
                 'gameId' => $game->getId(),
+                'gameMasterId' => $game->getGameMaster()->getId(),
             ]
         );
 

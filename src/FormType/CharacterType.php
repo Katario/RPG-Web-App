@@ -85,8 +85,11 @@ class CharacterType extends AbstractType
                 'query_builder' => function (UserRepository $userRepository) use ($options): QueryBuilder {
                     return $userRepository->getAvailableForNewCharacterUser(
                         $options['gameId'],
+                        $options['gameMasterId']
                     );
                 },
+                'placeholder' => 'Nobody',
+                'required' => false,
             ])
             ->add('game', EntityHiddenType::class)
             ->add('submit', SubmitType::class)
@@ -99,6 +102,7 @@ class CharacterType extends AbstractType
             'data_class' => Character::class,
             'gameId' => null,
             'characterId' => null,
+            'gameMasterId' => null,
         ]);
     }
 }

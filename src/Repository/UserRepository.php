@@ -22,15 +22,25 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function getAvailableForNewCharacterUser(int $gameId): QueryBuilder
+    public function getAvailableForNewCharacterUser(int $gameId, int $userId): QueryBuilder
     {
-        return $this->createQueryBuilder('u')
-            ->innerJoin(Game::class, 'g', Join::WITH, 'g.gameMaster != u.id')
-            ->leftJoin(Character::class, 'c', Join::WITH, 'c.user = u.id')
-            ->where('g.id = :gameId')
-            ->andWhere('c.id is null')
-            ->groupBy('u.id, c.id')
-            ->setParameter('gameId', $gameId);
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        return $queryBuilder
+            ->where(
+                $queryBuilder->expr()->not(
+                    $queryBuilder->expr()->exists(
+                        $this->createQueryBuilder('uc')
+                            ->from(Character::class, 'c')
+                            ->where('c.game = :gameId')
+                            ->andWhere('c.user = u.id')
+                            ->getDQL()
+                    )
+                )
+            )
+            ->andWhere('u.id != :userId')
+            ->setParameter('gameId', $gameId)
+            ->setParameter('userId', $userId);
     }
 
     public function delete(User $user): void
