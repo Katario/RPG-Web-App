@@ -39,6 +39,17 @@ class NonPlayableCharacterRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function deleteFromGame(int $gameId): void
+    {
+        $this->createQueryBuilder('npc')
+            ->delete()
+            ->where('npc.game = :gameId')
+            ->setParameter('gameId', $gameId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function delete(NonPlayableCharacter $nonPlayableCharacter): void
     {
         $this->getEntityManager()->remove($nonPlayableCharacter);

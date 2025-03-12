@@ -7,13 +7,18 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Entity\User;
 use App\FormType\GameType;
+use App\Repository\ArmamentRepository;
+use App\Repository\CharacterRepository;
 use App\Repository\GameRepository;
+use App\Repository\MonsterRepository;
+use App\Repository\NonPlayableCharacterRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
@@ -68,5 +73,42 @@ class GameController
                 'form' => $form->createView(),
             ])
         );
+    }
+
+    #[Route('/games/{id}/delete',
+        name: 'delete_game',
+        requirements: ['id' => '\d+'],
+        methods: ['POST']
+    )]
+    public function deleteGame(
+        int $id,
+        Request $request,
+        ArmamentRepository $armamentRepository,
+        MonsterRepository $monsterRepository,
+        CharacterRepository $characterRepository,
+        NonPlayableCharacterRepository $nonPlayableCharacterRepository,
+    ): Response {
+        $game = $this->gameRepository->find($id);
+
+        if (!$game) {
+            throw new NotFoundHttpException();
+        }
+
+        $gameNameConfirmation = $request->get('gameNameConfirmation');
+        if ($gameNameConfirmation !== $game->getName()) {
+            return new RedirectResponse($this->router->generate(
+                'show_game', [
+                    'id' => $game->getId(),
+                ]
+            ));
+        }
+
+        $armamentRepository->deleteFromGame($game->getId());
+        $monsterRepository->deleteFromGame($game->getId());
+        $characterRepository->deleteFromGame($game->getId());
+        $nonPlayableCharacterRepository->deleteFromGame($game->getId());
+        $this->gameRepository->delete($game);
+
+        return new RedirectResponse($this->router->generate('home'));
     }
 }

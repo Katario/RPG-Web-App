@@ -40,12 +40,12 @@ class Armament
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?NonPlayableCharacter $nonPlayableCharacter;
     #[ORM\JoinTable(name: 'armaments_skills')]
-    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
     #[ORM\JoinTable(name: 'armaments_spells')]
-    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;

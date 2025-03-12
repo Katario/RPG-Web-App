@@ -64,6 +64,17 @@ class ArmamentRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function deleteFromGame(int $gameId): void
+    {
+        $this->createQueryBuilder('a')
+            ->delete()
+            ->where('a.game = :gameId')
+            ->setParameter('gameId', $gameId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function delete(Armament $armament): void
     {
         $this->getEntityManager()->remove($armament);

@@ -38,6 +38,17 @@ class MonsterRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function deleteFromGame(int $gameId): void
+    {
+        $this->createQueryBuilder('m')
+            ->delete()
+            ->where('m.game = :gameId')
+            ->setParameter('gameId', $gameId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function delete(Monster $monster): void
     {
         $this->getEntityManager()->remove($monster);

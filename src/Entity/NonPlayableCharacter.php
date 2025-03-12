@@ -22,12 +22,12 @@ class NonPlayableCharacter
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $lastName;
     #[ORM\JoinTable(name: 'non_playable_characters_kind')]
-    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', unique: true, onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'Kind')]
     private Collection $kind;
     #[ORM\JoinTable(name: 'non_playable_characters_character_class')]
-    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', unique: true, onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'character_class_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'CharacterClass')]
     private Collection $characterClass;
@@ -56,17 +56,17 @@ class NonPlayableCharacter
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Collection|array $armaments;
     #[ORM\JoinTable(name: 'non_playable_characters_spells')]
-    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
     #[ORM\JoinTable(name: 'non_playable_characters_items')]
-    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
     #[ORM\JoinTable(name: 'non_playable_characters_skills')]
-    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'non_playable_character_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;

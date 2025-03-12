@@ -48,23 +48,23 @@ class Monster
     private Collection|array $armaments;
 
     #[ORM\JoinTable(name: 'monsters_specie')]
-    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id', unique: true, onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'specie_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'Specie')]
     private Collection $specie;
 
     #[ORM\JoinTable(name: 'monsters_spells')]
-    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
     #[ORM\JoinTable(name: 'monsters_items')]
-    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
     #[ORM\JoinTable(name: 'monsters_skills')]
-    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
