@@ -62,6 +62,13 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
             'roles' => [],
         ]);
 
+        $fifthAccount = UserFactory::createOne([
+            'email' => 'yellow@fixture.com',
+            'username' => 'yellow',
+            'password' => 'test',
+            'roles' => [],
+        ]);
+
         UserFactory::createMany(3);
 
         // 2. Create Games

@@ -13,6 +13,7 @@ use App\Entity\Skill;
 use App\Entity\Spell;
 use App\Entity\User;
 use App\Repository\ArmamentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -81,6 +82,11 @@ class CharacterType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'username',
+                'query_builder' => function (UserRepository $userRepository) use ($options): QueryBuilder {
+                    return $userRepository->getAvailableForNewCharacterUser(
+                        $options['gameId'],
+                    );
+                },
             ])
             ->add('game', EntityHiddenType::class)
             ->add('submit', SubmitType::class)
