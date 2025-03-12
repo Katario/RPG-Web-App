@@ -77,6 +77,7 @@ class NonPlayableCharacterType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
+            ->add('note', TextType::class)
             ->add('game', EntityHiddenType::class)
             ->add('submit', SubmitType::class)
         ;

@@ -22,6 +22,7 @@ class ItemType extends AbstractType
             ->add('description', TextType::class)
             ->add('value', IntegerType::class)
             ->add('weight', IntegerType::class)
+            ->add('note', TextType::class)
             ->add('isReady', CheckboxType::class, [
                 'required' => false,
             ])

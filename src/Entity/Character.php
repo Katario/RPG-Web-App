@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Character
 {
     use HasDateTimeTrait;
+    use HasNoteTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -13,6 +13,9 @@ use Doctrine\ORM\Mapping\JoinColumn;
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
 {
+    use HasDateTimeTrait;
+    use HasNoteTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

@@ -17,6 +17,7 @@ class GameType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('note', TextType::class)
             ->add('submit', SubmitType::class)
         ;
     }

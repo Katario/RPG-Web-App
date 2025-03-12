@@ -26,6 +26,7 @@ class ArmamentType extends AbstractType
             ->add('currentDurability', IntegerType::class)
             ->add('maxDurability', IntegerType::class)
             ->add('description', TextType::class)
+            ->add('note', TextType::class)
             ->add('skills', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Skill::class,

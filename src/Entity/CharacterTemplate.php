@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CharacterTemplate extends Encyclopedia
 {
     use HasDateTimeTrait;
+    use HasNoteTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

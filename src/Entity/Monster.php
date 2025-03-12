@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Monster
 {
     use HasDateTimeTrait;
+    use HasNoteTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

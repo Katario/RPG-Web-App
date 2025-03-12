@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Spell extends Encyclopedia
 {
     use HasDateTimeTrait;
+    use HasNoteTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

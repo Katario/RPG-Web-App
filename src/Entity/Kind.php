@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Kind extends Encyclopedia
 {
     use HasDateTimeTrait;
+    use HasNoteTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

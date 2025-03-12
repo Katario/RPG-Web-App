@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class NonPlayableCharacter
 {
     use HasDateTimeTrait;
+    use HasNoteTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

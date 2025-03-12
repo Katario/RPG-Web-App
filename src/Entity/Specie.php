@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Specie extends Encyclopedia
 {
     use HasDateTimeTrait;
+    use HasNoteTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

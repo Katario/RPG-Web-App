@@ -91,6 +91,7 @@ class CharacterType extends AbstractType
                 'placeholder' => 'Nobody',
                 'required' => false,
             ])
+            ->add('note', TextType::class)
             ->add('game', EntityHiddenType::class)
             ->add('submit', SubmitType::class)
         ;
