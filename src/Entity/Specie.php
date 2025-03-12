@@ -27,6 +27,7 @@ class Specie extends Encyclopedia
     public function setId(?int $id): Specie
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -38,6 +39,7 @@ class Specie extends Encyclopedia
     public function setName(string $name): Specie
     {
         $this->name = $name;
+
         return $this;
     }
 }
