@@ -71,10 +71,13 @@ class NonPlayableCharacter
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
+    #[ORM\OneToMany(targetEntity: NonPlayableCharacterTalent::class, mappedBy: 'nonPlayableCharacter')]
+    private Collection|array $talents;
 
     public function __construct()
     {
         $this->kind = new ArrayCollection();
+        $this->talents = new ArrayCollection();
         $this->characterClass = new ArrayCollection();
         $this->armaments = new ArrayCollection();
         $this->spells = new ArrayCollection();
@@ -403,5 +406,35 @@ class NonPlayableCharacter
     public function getFullName(): string
     {
         return $this->name.' '.$this->getLastName();
+    }
+
+    public function getTalents(): Collection|array
+    {
+        return $this->talents;
+    }
+
+    public function setTalents(Collection|array $talents): NonPlayableCharacter
+    {
+        $this->talents = $talents;
+
+        return $this;
+    }
+
+    public function addTalent(Talent $talent): NonPlayableCharacter
+    {
+        if (!$this->getTalents()->contains($talent)) {
+            $this->talents->add($talent);
+        }
+
+        return $this;
+    }
+
+    public function removeTalent(Talent $talent): NonPlayableCharacter
+    {
+        if ($this->getTalents()->contains($talent)) {
+            $this->talents->removeElement($talent);
+        }
+
+        return $this;
     }
 }

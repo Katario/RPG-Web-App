@@ -7,7 +7,7 @@
 
     <ul>
         <li>Nom : {{ monster.name }}</li>
-        <li>Famille : {{ monster.specie }}</li>
+        <li>Famille : {{ monster.specie.name }}</li>
         <li>Niveau : {{ monster.level }}</li>
         <li>Points de vie : {{ monster.currentHealthPoints }} (max: {{ monster.maxHealthPoints }})</li>
         <li>Points d'Action : {{ monster.currentActionPoints }} (max: {{ monster.maxActionPoints }})</li>
@@ -21,6 +21,14 @@
             </label>
         </li>
     </ul>
+    <div>
+        Talents :
+        <ul>
+            {% for talent in monster.talents %}
+                <li>{{ talent.name }} - {{ talent.value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
     <div>
         Equipement :
         <ul>

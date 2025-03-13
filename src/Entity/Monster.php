@@ -69,10 +69,13 @@ class Monster
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
+    #[ORM\OneToMany(targetEntity: MonsterTalent::class, mappedBy: 'monster')]
+    private Collection|array $talents;
 
     public function __construct()
     {
         $this->specie = new ArrayCollection();
+        $this->talents = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->armaments = new ArrayCollection();
@@ -373,6 +376,36 @@ class Monster
         if (!$this->specie->contains($specie)) {
             $this->specie->clear();
             $this->specie->add($specie);
+        }
+
+        return $this;
+    }
+
+    public function getTalents(): Collection|array
+    {
+        return $this->talents;
+    }
+
+    public function setTalents(Collection|array $talents): Monster
+    {
+        $this->talents = $talents;
+
+        return $this;
+    }
+
+    public function addTalent(Talent $talent): Monster
+    {
+        if (!$this->getTalents()->contains($talent)) {
+            $this->talents->add($talent);
+        }
+
+        return $this;
+    }
+
+    public function removeTalent(Talent $talent): Monster
+    {
+        if ($this->getTalents()->contains($talent)) {
+            $this->talents->removeElement($talent);
         }
 
         return $this;

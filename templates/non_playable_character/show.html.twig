@@ -17,6 +17,14 @@
         <li>Notes: {{ nonPlayableCharacter.note }}</li>
     </ul>
     <div>
+        Talents :
+        <ul>
+            {% for talent in nonPlayableCharacter.talents %}
+                <li>{{ talent.name }} - {{ talent.value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
         Equipement :
         <ul>
             {% for armament in nonPlayableCharacter.armaments %}

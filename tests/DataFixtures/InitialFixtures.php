@@ -14,8 +14,10 @@ use App\Tests\DataFixtures\Factory\GameFactory;
 use App\Tests\DataFixtures\Factory\ItemFactory;
 use App\Tests\DataFixtures\Factory\KindFactory;
 use App\Tests\DataFixtures\Factory\MonsterFactory;
+use App\Tests\DataFixtures\Factory\MonsterTalentFactory;
 use App\Tests\DataFixtures\Factory\MonsterTemplateFactory;
 use App\Tests\DataFixtures\Factory\NonPlayableCharacterFactory;
+use App\Tests\DataFixtures\Factory\NonPlayableCharacterTalentFactory;
 use App\Tests\DataFixtures\Factory\NonPlayableCharacterTemplateFactory;
 use App\Tests\DataFixtures\Factory\SkillFactory;
 use App\Tests\DataFixtures\Factory\SpecieFactory;
@@ -331,16 +333,6 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
             'items' => ItemFactory::randomRange(0, 3),
         ]);
 
-        CharacterTalentFactory::createMany(
-            5, // create 5 comments
-            function () {
-                return [
-                    'character' => CharacterFactory::random(),
-                    'talent' => TalentFactory::new(),
-                ];
-            }
-        );
-
         NonPlayableCharacterFactory::createOne([
             'game' => $mainGame,
             'name' => 'Maurice',
@@ -401,6 +393,36 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
+
+        CharacterTalentFactory::createMany(
+            15, // create 5 comments
+            function () {
+                return [
+                    'character' => CharacterFactory::random(),
+                    'talent' => TalentFactory::new(),
+                ];
+            }
+        );
+
+        NonPlayableCharacterTalentFactory::createMany(
+            15, // create 5 comments
+            function () {
+                return [
+                    'nonPlayableCharacter' => NonPlayableCharacterFactory::random(),
+                    'talent' => TalentFactory::new(),
+                ];
+            }
+        );
+
+        MonsterTalentFactory::createMany(
+            15, // create 5 comments
+            function () {
+                return [
+                    'monster' => MonsterFactory::random(),
+                    'talent' => TalentFactory::new(),
+                ];
+            }
+        );
 
         // 4.4. Create Armaments
         ArmamentFactory::createOne([
