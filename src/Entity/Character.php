@@ -43,12 +43,12 @@ class Character
     private int $currentExhaustPoints;
     #[ORM\Column(type: 'integer')]
     private int $maxExhaustPoints;
-    #[ORM\JoinTable(name: 'characters_kind')]
+    #[ORM\JoinTable(name: 'playable_characters_kind')]
     #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true, onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'Kind')]
     private Collection $kind;
-    #[ORM\JoinTable(name: 'characters_character_class')]
+    #[ORM\JoinTable(name: 'playable_characters_character_class')]
     #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true, onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'character_class_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: 'CharacterClass')]
@@ -62,17 +62,17 @@ class Character
     #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'character')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Collection|array $armaments;
-    #[ORM\JoinTable(name: 'characters_spells')]
+    #[ORM\JoinTable(name: 'playable_characters_spells')]
     #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
     private Collection|array $spells;
-    #[ORM\JoinTable(name: 'characters_items')]
+    #[ORM\JoinTable(name: 'playable_characters_items')]
     #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'item_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Item::class)]
     private Collection|array $items;
-    #[ORM\JoinTable(name: 'characters_skills')]
+    #[ORM\JoinTable(name: 'playable_characters_skills')]
     #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]

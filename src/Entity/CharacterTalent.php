@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Repository\CharacterTalentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Table(name: 'playable_character_talent')]
 #[ORM\Entity(repositoryClass: CharacterTalentRepository::class)]
 class CharacterTalent
 {
