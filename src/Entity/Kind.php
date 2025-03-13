@@ -8,6 +8,7 @@ use App\Repository\KindRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: KindRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Kind extends Encyclopedia
 {
     use HasDateTimeTrait;

@@ -16,6 +16,13 @@ class TalentRepository extends ServiceEntityRepository
         parent::__construct($registry, Talent::class);
     }
 
+
+    /** @return Talent[] */
+    public function getLastFiveTalents(): array
+    {
+        return $this->findBy([], ['updatedAt' => 'DESC'], 5);
+    }
+
     public function delete(Talent $talent): void
     {
         $this->getEntityManager()->remove($talent);

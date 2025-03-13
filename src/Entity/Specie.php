@@ -8,6 +8,7 @@ use App\Repository\SpecieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpecieRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Specie extends Encyclopedia
 {
     use HasDateTimeTrait;

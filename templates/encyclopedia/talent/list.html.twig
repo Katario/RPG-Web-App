@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des Talents{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>liste des sorts</h2>
+
+    <ul>
+        {% for talent in talents %}
+            <li>{{ talent.name }}
+                <a href="{{ path('encyclopedia_show_talent', {'id': talent.id}) }}"> >>> </a>
+{#                <a href="{{ path('encyclopedia_edit_talent', {'id': talent.id}) }}"> +++ </a>#}
+                <a href="{{ path('encyclopedia_delete_talent', {'id': talent.id}) }}"> xxx </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

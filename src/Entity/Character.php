@@ -77,6 +77,8 @@ class Character
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     private Collection|array $skills;
+    #[ORM\OneToMany(targetEntity: CharacterTalent::class, mappedBy: 'character')]
+    private Collection|array $talents;
 
     public function __construct()
     {
@@ -86,6 +88,7 @@ class Character
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->skills = new ArrayCollection();
+        $this->talents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -305,6 +308,36 @@ class Character
     {
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
+        }
+
+        return $this;
+    }
+
+    public function getTalents(): Collection|array
+    {
+        return $this->talents;
+    }
+
+    public function setTalents(Collection|array $talents): Character
+    {
+        $this->talents = $talents;
+
+        return $this;
+    }
+
+    public function addTalent(Talent $talent): Character
+    {
+        if (!$this->getTalents()->contains($talent)) {
+            $this->talents->add($talent);
+        }
+
+        return $this;
+    }
+
+    public function removeTalent(Talent $talent): Character
+    {
+        if ($this->getTalents()->contains($talent)) {
+            $this->talents->removeElement($talent);
         }
 
         return $this;

@@ -11,6 +11,7 @@ use App\Entity\MonsterTemplate;
 use App\Entity\NonPlayableCharacterTemplate;
 use App\Entity\Skill;
 use App\Entity\Spell;
+use App\Entity\Talent;
 use App\FormType\ArmamentTemplateType;
 use App\FormType\CharacterTemplateType;
 use App\FormType\ItemType;
@@ -18,6 +19,7 @@ use App\FormType\MonsterTemplateType;
 use App\FormType\NonPlayableCharacterTemplateType;
 use App\FormType\SkillType;
 use App\FormType\SpellType;
+use App\FormType\TalentType;
 use App\Repository\ArmamentTemplateRepository;
 use App\Repository\CharacterTemplateRepository;
 use App\Repository\ItemRepository;
@@ -25,6 +27,7 @@ use App\Repository\MonsterTemplateRepository;
 use App\Repository\NonPlayableCharacterTemplateRepository;
 use App\Repository\SkillRepository;
 use App\Repository\SpellRepository;
+use App\Repository\TalentRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,6 +53,7 @@ readonly class EncyclopediaController
     #[Route('/encyclopedia', name: 'show_encyclopedia', methods: ['GET'])]
     public function showEncyclopedia(
         SpellRepository $spellRepository,
+        TalentRepository $talentRepository,
         ItemRepository $itemRepository,
         SkillRepository $skillRepository,
         ArmamentTemplateRepository $armamentTemplateRepository,
@@ -58,6 +62,7 @@ readonly class EncyclopediaController
         CharacterTemplateRepository $characterTemplateRepository,
     ): Response {
         $lastSpells = $spellRepository->getLastFiveSpells();
+        $lastTalents = $talentRepository->getLastFiveTalents();
         $lastItems = $itemRepository->getLastFiveItems();
         $lastSkills = $skillRepository->getLastFiveSkills();
         $lastArmamentTemplates = $armamentTemplateRepository->getLastFiveArmamentTemplates();
@@ -68,6 +73,7 @@ readonly class EncyclopediaController
         return new Response(
             $this->twig->render('encyclopedia/show_encyclopedia.html.twig', [
                 'lastSpells' => $lastSpells,
+                'lastTalents' => $lastTalents,
                 'lastItems' => $lastItems,
                 'lastSkills' => $lastSkills,
                 'lastArmamentTemplates' => $lastArmamentTemplates,
@@ -149,6 +155,79 @@ readonly class EncyclopediaController
         }
 
         return new RedirectResponse($this->router->generate('encyclopedia_show_spells'));
+    }
+
+    #[Route('/encyclopedia/create-talent',
+        name: 'encyclopedia_create_talent',
+        methods: ['GET', 'POST']
+    )]
+    public function createTalent(
+        Request $request,
+        TalentRepository $talentRepository,
+    ): Response|RedirectResponse {
+        $form = $this->formFactory->create(TalentType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Talent $talent */
+            $talent = $form->getData();
+
+            $talentRepository->save($talent);
+
+            return new RedirectResponse($this->router->generate('show_encyclopedia'));
+        }
+
+        return new Response(
+            $this->twig->render('encyclopedia/talent/create.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/talents', name: 'encyclopedia_show_talents', methods: ['GET'])]
+    public function showTalents(TalentRepository $talentRepository): Response
+    {
+        $talents = $talentRepository->findAll();
+
+        return new Response(
+            $this->twig->render('encyclopedia/talent/list.html.twig', [
+                'talents' => $talents,
+            ])
+        );
+    }
+
+    #[Route('/encyclopedia/talents/{id}', name: 'encyclopedia_show_talent', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function showTalent(
+        TalentRepository $talentRepository,
+        int $id,
+    ): Response {
+        $talent = $talentRepository->find($id);
+
+        return new Response(
+            $this->twig->render('encyclopedia/talent/show.html.twig', [
+                'talent' => $talent,
+            ])
+        );
+    }
+
+    // @TODO: should be updated to use DELETE HTTP method, but must use AJAX in front to do so
+    #[Route('/encyclopedia/talents/{id}/delete',
+        name: 'encyclopedia_delete_talent',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
+    public function deleteTalent(
+        int $id,
+        TalentRepository $talentRepository,
+    ): Response {
+        $talent = $talentRepository->find($id);
+
+        if ($talent) {
+            $talentRepository->delete($talent);
+        }
+
+        return new RedirectResponse($this->router->generate('encyclopedia_show_talents'));
     }
 
     #[Route('/encyclopedia/items/create',

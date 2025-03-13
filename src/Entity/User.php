@@ -13,8 +13,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Table(name: '"user"')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use HasDateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

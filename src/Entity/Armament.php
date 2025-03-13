@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArmamentRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Armament
 {
     use HasDateTimeTrait;

@@ -8,6 +8,7 @@ use App\Tests\DataFixtures\Factory\ArmamentFactory;
 use App\Tests\DataFixtures\Factory\ArmamentTemplateFactory;
 use App\Tests\DataFixtures\Factory\CharacterClassFactory;
 use App\Tests\DataFixtures\Factory\CharacterFactory;
+use App\Tests\DataFixtures\Factory\CharacterTalentFactory;
 use App\Tests\DataFixtures\Factory\CharacterTemplateFactory;
 use App\Tests\DataFixtures\Factory\GameFactory;
 use App\Tests\DataFixtures\Factory\ItemFactory;
@@ -19,6 +20,7 @@ use App\Tests\DataFixtures\Factory\NonPlayableCharacterTemplateFactory;
 use App\Tests\DataFixtures\Factory\SkillFactory;
 use App\Tests\DataFixtures\Factory\SpecieFactory;
 use App\Tests\DataFixtures\Factory\SpellFactory;
+use App\Tests\DataFixtures\Factory\TalentFactory;
 use App\Tests\DataFixtures\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -157,6 +159,22 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
         ]);
         SkillFactory::createOne([
             'name' => 'Thunder Punch',
+        ]);
+
+        TalentFactory::createOne([
+            'name' => 'Masonry',
+        ]);
+        TalentFactory::createOne([
+            'name' => 'Archery',
+        ]);
+        TalentFactory::createOne([
+            'name' => 'Mystic',
+        ]);
+        TalentFactory::createOne([
+            'name' => 'Hunt',
+        ]);
+        TalentFactory::createOne([
+            'name' => 'Armor',
         ]);
 
         SpellFactory::createOne([
@@ -312,6 +330,16 @@ class InitialFixtures extends Fixture implements FixtureGroupInterface
             'skills' => SkillFactory::randomRange(0, 3),
             'items' => ItemFactory::randomRange(0, 3),
         ]);
+
+        CharacterTalentFactory::createMany(
+            5, // create 5 comments
+            function () {
+                return [
+                    'character' => CharacterFactory::random(),
+                    'talent' => TalentFactory::new(),
+                ];
+            }
+        );
 
         NonPlayableCharacterFactory::createOne([
             'game' => $mainGame,

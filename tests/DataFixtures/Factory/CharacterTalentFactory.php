@@ -2,13 +2,13 @@
 
 namespace App\Tests\DataFixtures\Factory;
 
-use App\Entity\Talent;
+use App\Entity\CharacterTalent;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
  * @extends PersistentProxyObjectFactory<Talent>
  */
-final class TalentFactory extends PersistentProxyObjectFactory
+final class CharacterTalentFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -19,10 +19,9 @@ final class TalentFactory extends PersistentProxyObjectFactory
     {
     }
 
-
     public static function class(): string
     {
-        return Talent::class;
+        return CharacterTalent::class;
     }
 
     /**
@@ -33,10 +32,7 @@ final class TalentFactory extends PersistentProxyObjectFactory
     protected function defaults(): array
     {
         return [
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'description' => self::faker()->text(),
-            'name' => self::faker()->word(),
-            'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'value' => self::faker()->randomDigit(),
         ];
     }
 
@@ -45,8 +41,6 @@ final class TalentFactory extends PersistentProxyObjectFactory
      */
     protected function initialize(): static
     {
-        return $this
-            // ->afterInstantiate(function(Talent $talent): void {})
-        ;
+        return $this;
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}Talent {{ talent.name }}{% endblock %}
+
+{% block main %}
+    <a href="{{ path('show_encyclopedia') }}">Retour</a>
+    <h2>Sort {{ talent.name }}</h2>
+
+    <ul>
+        <li>Name : {{ talent.name }}</li>
+        <li>Description : {{ talent.description }}</li>
+        <li>Notes: {{ talent.note }}</li>
+    </ul>
+{% endblock %}
