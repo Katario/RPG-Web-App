@@ -18,6 +18,14 @@
         <li>Notes: {{ character.note }}</li>
     </ul>
     <div>
+        Talents :
+        <ul>
+            {% for talent in character.talents %}
+                <li>{{ talent.name }} - {{ talent.value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
         Equipement :
         <ul>
             {% for armament in character.armaments %}

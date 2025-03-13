@@ -52,4 +52,8 @@ class CharacterTalent
         return $this;
     }
 
+    public function getName(): string
+    {
+        return $this->talent->getName();
+    }
 }

@@ -36,6 +36,8 @@ final class TalentFactory extends PersistentProxyObjectFactory
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->text(),
             'name' => self::faker()->word(),
+            'isPrivate' => self::faker()->boolean(),
+            'isReady' => self::faker()->boolean(),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }

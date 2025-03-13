@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TalentRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Talent
+class Talent extends Encyclopedia
 {
     use HasDateTimeTrait;
     use hasNoteTrait;
