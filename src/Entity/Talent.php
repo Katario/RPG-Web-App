@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Talent extends Encyclopedia
 {
     use HasDateTimeTrait;
-    use hasNoteTrait;
+    use HasNoteTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
