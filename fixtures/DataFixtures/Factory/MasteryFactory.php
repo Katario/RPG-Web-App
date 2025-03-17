@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
 use App\Entity\Mastery;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;

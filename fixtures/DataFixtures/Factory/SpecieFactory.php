@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\CharacterTalent;
+use App\Entity\Kind;
+use App\Entity\Specie;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Talent>
+ * @extends PersistentProxyObjectFactory<Kind>
  */
-final class CharacterTalentFactory extends PersistentProxyObjectFactory
+final class SpecieFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,18 +22,22 @@ final class CharacterTalentFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return CharacterTalent::class;
+        return Specie::class;
     }
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
-     * @return array{}
+     * @return array<bool|\DateTimeImmutable|int|string>
      */
     protected function defaults(): array
     {
         return [
-            'value' => self::faker()->randomDigit(),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'isPrivate' => self::faker()->boolean(),
+            'isReady' => self::faker()->boolean(),
+            'name' => self::faker()->text(100),
+            'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 

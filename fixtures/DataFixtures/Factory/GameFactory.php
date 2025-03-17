@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\CharacterTalent;
-use App\Entity\MonsterTalent;
+use App\Entity\Game;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Talent>
+ * @extends PersistentProxyObjectFactory<Game>
  */
-final class MonsterTalentFactory extends PersistentProxyObjectFactory
+final class GameFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -22,18 +21,18 @@ final class MonsterTalentFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return MonsterTalent::class;
+        return Game::class;
     }
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
-     * @return array{}
+     * @return array<bool|\DateTimeImmutable|int|string>
      */
     protected function defaults(): array
     {
         return [
-            'value' => self::faker()->randomDigit(),
+            'name' => self::faker()->text(),
         ];
     }
 
@@ -42,6 +41,8 @@ final class MonsterTalentFactory extends PersistentProxyObjectFactory
      */
     protected function initialize(): static
     {
-        return $this;
+        return $this
+            // ->afterInstantiate(function(Game $game): void {})
+        ;
     }
 }

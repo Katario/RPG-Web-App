@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\ArmamentTemplate;
+use App\Entity\MonsterTemplate;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<ArmamentTemplate>
+ * @extends PersistentProxyObjectFactory<MonsterTemplate>
  */
-final class ArmamentTemplateFactory extends PersistentProxyObjectFactory
+final class MonsterTemplateFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class ArmamentTemplateFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return ArmamentTemplate::class;
+        return MonsterTemplate::class;
     }
 
     /**
@@ -32,16 +32,19 @@ final class ArmamentTemplateFactory extends PersistentProxyObjectFactory
     protected function defaults(): array
     {
         return [
-            'category' => self::faker()->text(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'description' => self::faker()->text(),
+            'name' => self::faker()->word(),
             'isPrivate' => self::faker()->boolean(),
             'isReady' => self::faker()->boolean(),
-            'maxDurability' => self::faker()->numberBetween(0, 100),
-            'minDurability' => self::faker()->numberBetween(0, 100),
-            'name' => self::faker()->text(),
+            'minHealthPoints' => self::faker()->numberBetween(50, 250),
+            'minManaPoints' => self::faker()->numberBetween(50, 250),
+            'minExhaustPoints' => self::faker()->numberBetween(50, 250),
+            'minActionPoints' => self::faker()->numberBetween(50, 250),
+            'maxHealthPoints' => self::faker()->numberBetween(255, 500),
+            'maxManaPoints' => self::faker()->numberBetween(255, 500),
+            'maxExhaustPoints' => self::faker()->numberBetween(255, 500),
+            'maxActionPoints' => self::faker()->numberBetween(255, 500),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'weight' => self::faker()->randomNumber(),
         ];
     }
 
@@ -51,7 +54,7 @@ final class ArmamentTemplateFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(ArmamentTemplate $armamentTemplate): void {})
+            // ->afterInstantiate(function(MonsterTemplate $monsterTemplate): void {})
         ;
     }
 }

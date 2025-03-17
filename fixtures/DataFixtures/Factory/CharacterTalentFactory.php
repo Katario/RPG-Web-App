@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
 use App\Entity\CharacterTalent;
-use App\Entity\NonPlayableCharacterTalent;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
  * @extends PersistentProxyObjectFactory<Talent>
  */
-final class NonPlayableCharacterTalentFactory extends PersistentProxyObjectFactory
+final class CharacterTalentFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -22,7 +21,7 @@ final class NonPlayableCharacterTalentFactory extends PersistentProxyObjectFacto
 
     public static function class(): string
     {
-        return NonPlayableCharacterTalent::class;
+        return CharacterTalent::class;
     }
 
     /**

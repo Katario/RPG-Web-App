@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\MonsterTemplate;
+use App\Entity\Kind;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<MonsterTemplate>
+ * @extends PersistentProxyObjectFactory<Kind>
  */
-final class MonsterTemplateFactory extends PersistentProxyObjectFactory
+final class KindFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class MonsterTemplateFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return MonsterTemplate::class;
+        return Kind::class;
     }
 
     /**
@@ -33,17 +33,9 @@ final class MonsterTemplateFactory extends PersistentProxyObjectFactory
     {
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => self::faker()->word(),
             'isPrivate' => self::faker()->boolean(),
             'isReady' => self::faker()->boolean(),
-            'minHealthPoints' => self::faker()->numberBetween(50, 250),
-            'minManaPoints' => self::faker()->numberBetween(50, 250),
-            'minExhaustPoints' => self::faker()->numberBetween(50, 250),
-            'minActionPoints' => self::faker()->numberBetween(50, 250),
-            'maxHealthPoints' => self::faker()->numberBetween(255, 500),
-            'maxManaPoints' => self::faker()->numberBetween(255, 500),
-            'maxExhaustPoints' => self::faker()->numberBetween(255, 500),
-            'maxActionPoints' => self::faker()->numberBetween(255, 500),
+            'name' => self::faker()->text(100),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
@@ -53,8 +45,6 @@ final class MonsterTemplateFactory extends PersistentProxyObjectFactory
      */
     protected function initialize(): static
     {
-        return $this
-            // ->afterInstantiate(function(MonsterTemplate $monsterTemplate): void {})
-        ;
+        return $this;
     }
 }

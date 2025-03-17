@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Skill;
+use App\Entity\Character;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Skill>
+ * @extends PersistentProxyObjectFactory<Character>
  */
-final class SkillFactory extends PersistentProxyObjectFactory
+final class CharacterFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class SkillFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Skill::class;
+        return Character::class;
     }
 
     /**
@@ -33,11 +33,17 @@ final class SkillFactory extends PersistentProxyObjectFactory
     {
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'description' => self::faker()->text(),
-            'isPrivate' => self::faker()->boolean(),
-            'isReady' => self::faker()->boolean(),
+            'currentHealthPoints' => self::faker()->numberBetween(50, 250),
+            'currentManaPoints' => self::faker()->numberBetween(50, 250),
+            'currentExhaustPoints' => self::faker()->numberBetween(50, 250),
+            'currentActionPoints' => self::faker()->numberBetween(50, 250),
+            'maxHealthPoints' => self::faker()->numberBetween(255, 500),
+            'maxManaPoints' => self::faker()->numberBetween(255, 500),
+            'maxExhaustPoints' => self::faker()->numberBetween(255, 500),
+            'maxActionPoints' => self::faker()->numberBetween(255, 500),
             'name' => self::faker()->text(),
-            'exhaustCost' => self::faker()->randomNumber(),
+            'lastName' => self::faker()->text(),
+            'level' => 1,
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
@@ -48,7 +54,7 @@ final class SkillFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Skill $skill): void {})
+            // ->afterInstantiate(function(Character $character): void {})
         ;
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\NonPlayableCharacter;
+use App\Entity\Spell;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<NonPlayableCharacter>
+ * @extends PersistentProxyObjectFactory<Spell>
  */
-final class NonPlayableCharacterFactory extends PersistentProxyObjectFactory
+final class SpellFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class NonPlayableCharacterFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return NonPlayableCharacter::class;
+        return Spell::class;
     }
 
     /**
@@ -33,17 +33,11 @@ final class NonPlayableCharacterFactory extends PersistentProxyObjectFactory
     {
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'currentHealthPoints' => self::faker()->numberBetween(50, 250),
-            'currentManaPoints' => self::faker()->numberBetween(50, 250),
-            'currentExhaustPoints' => self::faker()->numberBetween(50, 250),
-            'currentActionPoints' => self::faker()->numberBetween(50, 250),
-            'maxHealthPoints' => self::faker()->numberBetween(255, 500),
-            'maxManaPoints' => self::faker()->numberBetween(255, 500),
-            'maxExhaustPoints' => self::faker()->numberBetween(255, 500),
-            'maxActionPoints' => self::faker()->numberBetween(255, 500),
+            'description' => self::faker()->text(),
+            'isPrivate' => self::faker()->boolean(),
+            'isReady' => self::faker()->boolean(),
+            'manaCost' => self::faker()->randomNumber(),
             'name' => self::faker()->text(),
-            'lastName' => self::faker()->text(),
-            'level' => 1,
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
@@ -54,7 +48,7 @@ final class NonPlayableCharacterFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(NonPlayableCharacter $nonPlayableCharacter): void {})
+            // ->afterInstantiate(function(Spell $spell): void {})
         ;
     }
 }

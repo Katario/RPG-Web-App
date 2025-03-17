@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Armament;
+use App\Entity\Item;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Armament>
+ * @extends PersistentProxyObjectFactory<Item>
  */
-final class ArmamentFactory extends PersistentProxyObjectFactory
+final class ItemFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class ArmamentFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Armament::class;
+        return Item::class;
     }
 
     /**
@@ -32,12 +32,14 @@ final class ArmamentFactory extends PersistentProxyObjectFactory
     protected function defaults(): array
     {
         return [
-            'category' => self::faker()->text(),
-            'currentDurability' => self::faker()->numberBetween(1, 10),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->text(),
-            'maxDurability' => self::faker()->numberBetween(11, 20),
+            'isPrivate' => self::faker()->boolean(),
+            'isReady' => self::faker()->boolean(),
             'name' => self::faker()->text(),
-            'value' => self::faker()->numberBetween(1, 10000),
+            'weight' => self::faker()->randomNumber(),
+            'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'value' => self::faker()->randomNumber(),
         ];
     }
 
@@ -47,7 +49,7 @@ final class ArmamentFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Armament $armament): void {})
+            // ->afterInstantiate(function(Item $item): void {})
         ;
     }
 }

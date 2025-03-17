@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Kind;
-use App\Entity\Specie;
+use App\Entity\CharacterClass;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Kind>
+ * @extends PersistentProxyObjectFactory<CharacterClass>
  */
-final class SpecieFactory extends PersistentProxyObjectFactory
+final class CharacterClassFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -22,7 +21,7 @@ final class SpecieFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Specie::class;
+        return CharacterClass::class;
     }
 
     /**

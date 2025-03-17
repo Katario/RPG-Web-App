@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Game;
+use App\Entity\Talent;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Game>
+ * @extends PersistentProxyObjectFactory<Talent>
  */
-final class GameFactory extends PersistentProxyObjectFactory
+final class TalentFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -19,20 +19,26 @@ final class GameFactory extends PersistentProxyObjectFactory
     {
     }
 
+
     public static function class(): string
     {
-        return Game::class;
+        return Talent::class;
     }
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
-     * @return array<bool|\DateTimeImmutable|int|string>
+     * @return array{}
      */
     protected function defaults(): array
     {
         return [
-            'name' => self::faker()->text(),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'description' => self::faker()->text(),
+            'name' => self::faker()->word(),
+            'isPrivate' => self::faker()->boolean(),
+            'isReady' => self::faker()->boolean(),
+            'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 
@@ -42,7 +48,7 @@ final class GameFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Game $game): void {})
+            // ->afterInstantiate(function(Talent $talent): void {})
         ;
     }
 }

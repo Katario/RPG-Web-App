@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Item;
+use App\Entity\ArmamentTemplate;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Item>
+ * @extends PersistentProxyObjectFactory<ArmamentTemplate>
  */
-final class ItemFactory extends PersistentProxyObjectFactory
+final class ArmamentTemplateFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class ItemFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Item::class;
+        return ArmamentTemplate::class;
     }
 
     /**
@@ -32,14 +32,16 @@ final class ItemFactory extends PersistentProxyObjectFactory
     protected function defaults(): array
     {
         return [
+            'category' => self::faker()->text(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->text(),
             'isPrivate' => self::faker()->boolean(),
             'isReady' => self::faker()->boolean(),
+            'maxDurability' => self::faker()->numberBetween(0, 100),
+            'minDurability' => self::faker()->numberBetween(0, 100),
             'name' => self::faker()->text(),
-            'weight' => self::faker()->randomNumber(),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'value' => self::faker()->randomNumber(),
+            'weight' => self::faker()->randomNumber(),
         ];
     }
 
@@ -49,7 +51,7 @@ final class ItemFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Item $item): void {})
+            // ->afterInstantiate(function(ArmamentTemplate $armamentTemplate): void {})
         ;
     }
 }

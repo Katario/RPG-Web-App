@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Talent;
+use App\Entity\Armament;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Talent>
+ * @extends PersistentProxyObjectFactory<Armament>
  */
-final class TalentFactory extends PersistentProxyObjectFactory
+final class ArmamentFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -19,26 +19,25 @@ final class TalentFactory extends PersistentProxyObjectFactory
     {
     }
 
-
     public static function class(): string
     {
-        return Talent::class;
+        return Armament::class;
     }
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
-     * @return array{}
+     * @return array<bool|\DateTimeImmutable|int|string>
      */
     protected function defaults(): array
     {
         return [
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'category' => self::faker()->text(),
+            'currentDurability' => self::faker()->numberBetween(1, 10),
             'description' => self::faker()->text(),
-            'name' => self::faker()->word(),
-            'isPrivate' => self::faker()->boolean(),
-            'isReady' => self::faker()->boolean(),
-            'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'maxDurability' => self::faker()->numberBetween(11, 20),
+            'name' => self::faker()->text(),
+            'value' => self::faker()->numberBetween(1, 10000),
         ];
     }
 
@@ -48,7 +47,7 @@ final class TalentFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Talent $talent): void {})
+            // ->afterInstantiate(function(Armament $armament): void {})
         ;
     }
 }

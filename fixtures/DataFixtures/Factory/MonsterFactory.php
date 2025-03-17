@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\DataFixtures\Factory;
+namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Spell;
+use App\Entity\Monster;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Spell>
+ * @extends PersistentProxyObjectFactory<Monster>
  */
-final class SpellFactory extends PersistentProxyObjectFactory
+final class MonsterFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class SpellFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Spell::class;
+        return Monster::class;
     }
 
     /**
@@ -33,11 +33,17 @@ final class SpellFactory extends PersistentProxyObjectFactory
     {
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'description' => self::faker()->text(),
-            'isPrivate' => self::faker()->boolean(),
-            'isReady' => self::faker()->boolean(),
-            'manaCost' => self::faker()->randomNumber(),
+            'currentHealthPoints' => self::faker()->numberBetween(50, 250),
+            'currentManaPoints' => self::faker()->numberBetween(50, 250),
+            'currentExhaustPoints' => self::faker()->numberBetween(50, 250),
+            'currentActionPoints' => self::faker()->numberBetween(50, 250),
+            'maxHealthPoints' => self::faker()->numberBetween(255, 500),
+            'maxManaPoints' => self::faker()->numberBetween(255, 500),
+            'maxExhaustPoints' => self::faker()->numberBetween(255, 500),
+            'maxActionPoints' => self::faker()->numberBetween(255, 500),
             'name' => self::faker()->text(),
+            'level' => 1,
+            'isBoss' => self::faker()->boolean(),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
@@ -48,7 +54,7 @@ final class SpellFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Spell $spell): void {})
+            // ->afterInstantiate(function(Monster $monster): void {})
         ;
     }
 }
