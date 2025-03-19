@@ -27,7 +27,7 @@ class ArmamentTemplateType extends AbstractType
             ->add('minDurability', IntegerType::class)
             ->add('maxDurability', IntegerType::class)
             ->add('description', TextType::class)
-            ->add('note', TextType::class)
+            ->add('note', NoteType::class)
             ->add('weight', IntegerType::class)
             ->add('skills', EntityType::class, [
                 'choice_label' => 'name',

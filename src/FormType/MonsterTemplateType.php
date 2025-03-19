@@ -32,7 +32,7 @@ class MonsterTemplateType extends AbstractType
             ->add('maxActionPoints', IntegerType::class)
             ->add('minExhaustPoints', IntegerType::class)
             ->add('maxExhaustPoints', IntegerType::class)
-            ->add('note', TextType::class)
+            ->add('note', NoteType::class)
             ->add('specie', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Specie::class,

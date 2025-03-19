@@ -27,7 +27,7 @@ class TalentType extends AbstractType
             ->add('isPrivate', CheckboxType::class, [
                 'required' => false,
             ])
-            ->add('note', TextType::class)
+            ->add('note', NoteType::class)
             ->add('submit', SubmitType::class)
         ;
     }

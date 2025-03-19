@@ -52,6 +52,7 @@ class GameController
     public function createGame(
         Request $request,
     ): Response|RedirectResponse {
+
         $form = $this->formFactory->create(GameType::class);
 
         $form->handleRequest($request);
