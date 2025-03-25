@@ -36,13 +36,13 @@ class Armament
     private Game $game;
     #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    private ?Monster $monster;
+    private ?Monster $monster = null;
     #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'armaments')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    private ?Character $character;
+    private ?Character $character = null;
     #[ORM\ManyToOne(targetEntity: NonPlayableCharacter::class, inversedBy: 'armaments')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    private ?NonPlayableCharacter $nonPlayableCharacter;
+    private ?NonPlayableCharacter $nonPlayableCharacter = null;
     #[ORM\JoinTable(name: 'armaments_skills')]
     #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
@@ -229,6 +229,9 @@ class Armament
     public function setMonster(?Monster $monster): Armament
     {
         $this->monster = $monster;
+        if ($this->monster) {
+            $this->setIsOwned(true);
+        }
 
         return $this;
     }
@@ -241,6 +244,9 @@ class Armament
     public function setCharacter(?Character $character): Armament
     {
         $this->character = $character;
+        if ($this->character) {
+            $this->setIsOwned(true);
+        }
 
         return $this;
     }
@@ -253,6 +259,9 @@ class Armament
     public function setNonPlayableCharacter(?NonPlayableCharacter $nonPlayableCharacter): Armament
     {
         $this->nonPlayableCharacter = $nonPlayableCharacter;
+        if ($this->nonPlayableCharacter) {
+            $this->setIsOwned(true);
+        }
 
         return $this;
     }
