@@ -10,6 +10,7 @@ use App\Entity\Monster;
 use App\Entity\Skill;
 use App\Entity\Specie;
 use App\Entity\Spell;
+use App\Enum\PossibleOwnerEnum;
 use App\Repository\ArmamentRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -52,7 +53,7 @@ class MonsterType extends AbstractType
                 'query_builder' => function (ArmamentRepository $armamentRepository) use ($options): QueryBuilder {
                     return $armamentRepository->availableArmamentsQueryBuilder(
                         $options['gameId'],
-                        'monster', // @TODO: replace with constant
+                        PossibleOwnerEnum::MONSTER,
                         $options['monsterId'],
                     );
                 },

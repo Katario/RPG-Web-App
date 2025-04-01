@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Armament;
+use App\Enum\PossibleOwnerEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,7 +39,7 @@ class ArmamentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function availableArmamentsQueryBuilder(int $gameId, string $owner, ?int $ownerId = null): QueryBuilder
+    public function availableArmamentsQueryBuilder(int $gameId, PossibleOwnerEnum $owner, ?int $ownerId = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('a');
 

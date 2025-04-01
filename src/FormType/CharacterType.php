@@ -12,6 +12,7 @@ use App\Entity\Kind;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use App\Entity\User;
+use App\Enum\PossibleOwnerEnum;
 use App\Repository\ArmamentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -56,7 +57,7 @@ class CharacterType extends AbstractType
                 'query_builder' => function (ArmamentRepository $armamentRepository) use ($options): QueryBuilder {
                     return $armamentRepository->availableArmamentsQueryBuilder(
                         $options['gameId'],
-                        'character', // @TODO: replace with constant
+                        PossibleOwnerEnum::CHARACTER,
                         $options['characterId'],
                     );
                 },

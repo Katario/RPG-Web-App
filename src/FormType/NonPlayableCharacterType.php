@@ -11,6 +11,7 @@ use App\Entity\Kind;
 use App\Entity\NonPlayableCharacter;
 use App\Entity\Skill;
 use App\Entity\Spell;
+use App\Enum\PossibleOwnerEnum;
 use App\Repository\ArmamentRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -54,7 +55,7 @@ class NonPlayableCharacterType extends AbstractType
                 'query_builder' => function (ArmamentRepository $armamentRepository) use ($options): QueryBuilder {
                     return $armamentRepository->availableArmamentsQueryBuilder(
                         $options['gameId'],
-                        'nonPlayableCharacter', // @TODO: replace with constant
+                        PossibleOwnerEnum::NON_PLAYABLE_CHARACTER,
                         $options['nonPlayableCharacterId'],
                     );
                 },
