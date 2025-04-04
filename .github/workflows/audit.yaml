@@ -3,7 +3,7 @@ on: [push, pull_request]
 jobs:
   audit:
     name: Composer Audit
-    runs-on: debian-12
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout Codebase
       uses: actions/checkout@v4
@@ -13,11 +13,13 @@ jobs:
       with:
         php-version: 8.3
         tools: composer:v2
+
     - name: Setup Cache
       run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
 
     - name: Caching dependencies
-      uses: action/cache@v4
+      uses: actions/cache@v4
+      id: cache
       with:
         path: ${{ env.COMPOSER_CACHE_DIR }}
         key: php8.3-composer-${{ hashFiles('**/composer.json') }}
@@ -43,4 +45,4 @@ jobs:
       if: always()
       with:
         name: composer-audit
-        path: /tpm/composer-audit.json
+        path: /tmp/composer-audit.json
