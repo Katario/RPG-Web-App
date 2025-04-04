@@ -90,6 +90,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "app:quality-check": [
+            "./vendor/bin/php-cs-fixer fix",
+            "./vendor/bin/phpstan --no-ansi --no-progress"
         ]
     },
     "conflict": {

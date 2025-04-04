@@ -1,8 +1,8 @@
 name: Quality check
 on: [push, pull_request]
 jobs:
-  audit:
-    name: Composer Audit
+  quality:
+    name: Quality Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Codebase
@@ -13,3 +13,24 @@ jobs:
         with:
           php-version: 8.3
           tools: composer:v2
+
+      - name: Setup Cache
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+
+      - name: Caching dependencies
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key: php8.3-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            php8.3-composer-latest-
+
+      - name: Update composer
+        run: composer self-update
+
+      - name: install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi --dev
+
+      - name: Quality analysis
+        run: composer app:quality-check
