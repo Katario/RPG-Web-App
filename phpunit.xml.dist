@@ -21,9 +21,9 @@
         <testsuite name="unit">
             <directory>tests/Unit</directory>
         </testsuite>
-        <!--        <testsuite name="integration">-->
-        <!--            <directory>tests/integration</directory>-->
-        <!--        </testsuite>-->
+        <testsuite name="integration">
+            <directory>tests/integration</directory>
+        </testsuite>
     </testsuites>
 
     <source>
@@ -32,15 +32,9 @@
         </include>
     </source>
 
-<!--    <coverage>-->
-<!--        <report>-->
-<!--            <clover outputFile="phpunit-reports/clover.xml"/>-->
-<!--            <cobertura outputFile="phpunit-reports/cobertura.xml"/>-->
-<!--            <crap4j outputFile="phpunit-reports/crap4j.xml" threshold="50"/>-->
-<!--            <html outputDirectory="phpunit-reports/html-coverage" lowUpperBound="50" highLowerBound="90"/>-->
-<!--            <php outputFile="phpunit-reports/coverage.php"/>-->
-<!--            <text outputFile="phpunit-reports/coverage.txt" showUncoveredFiles="false" showOnlySummary="true"/>-->
-<!--            <xml outputDirectory="phpunit-reports/xml-coverage"/>-->
-<!--        </report>-->
-<!--    </coverage>-->
+    <coverage>
+        <report>
+            <html outputDirectory="phpunit-reports/html-coverage" lowUpperBound="50" highLowerBound="90"/>
+        </report>
+    </coverage>
 </phpunit>

@@ -46,6 +46,9 @@ RUN docker-php-ext-install \
     # Code caching for performance
     opcache
 
+RUN pecl install pcov && \
+    docker-php-ext-enable pcov
+
 # Redis for caching/sessions
 #RUN pecl install redis && docker-php-ext-enable redis
 

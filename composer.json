@@ -94,18 +94,10 @@
             "@auto-scripts"
         ],
         "app:unit-tests": [
-            "./vendor/bin/phpunit src tests/Unit"
+            "./vendor/bin/phpunit ./src ./tests/Unit"
         ],
         "app:integration-tests": [
-            "./vendor/bin/phpunit src tests/Integration"
-        ],
-        "app:quality-check": [
-            "./vendor/bin/php-cs-fixer check",
-            "./vendor/bin/phpstan --no-ansi --no-progress"
-        ],
-        "app:all-tests": [
-            "@app:unit-tests",
-            "@app:integration-tests"
+            "./vendor/bin/phpunit ./src ./tests/Integration"
         ]
     },
     "conflict": {
