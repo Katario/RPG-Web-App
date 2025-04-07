@@ -19,7 +19,6 @@ final class TalentFactory extends PersistentProxyObjectFactory
     {
     }
 
-
     public static function class(): string
     {
         return Talent::class;

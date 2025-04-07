@@ -27,6 +27,7 @@ class MonsterTalent
     public function setMonster(Monster $monster): MonsterTalent
     {
         $this->monster = $monster;
+
         return $this;
     }
 
@@ -38,6 +39,7 @@ class MonsterTalent
     public function setTalent(Talent $talent): MonsterTalent
     {
         $this->talent = $talent;
+
         return $this;
     }
 
@@ -49,6 +51,7 @@ class MonsterTalent
     public function setValue(int $value): MonsterTalent
     {
         $this->value = $value;
+
         return $this;
     }
 

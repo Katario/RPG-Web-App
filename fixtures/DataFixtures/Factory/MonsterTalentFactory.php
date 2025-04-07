@@ -2,7 +2,6 @@
 
 namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\CharacterTalent;
 use App\Entity\MonsterTalent;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 

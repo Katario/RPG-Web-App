@@ -29,6 +29,7 @@ class Talent extends Encyclopedia
     public function setId(?int $id): Talent
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -40,6 +41,7 @@ class Talent extends Encyclopedia
     public function setName(string $name): Talent
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -51,6 +53,7 @@ class Talent extends Encyclopedia
     public function setDescription(string $description): Talent
     {
         $this->description = $description;
+
         return $this;
     }
 }

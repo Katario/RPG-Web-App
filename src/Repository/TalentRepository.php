@@ -16,7 +16,6 @@ class TalentRepository extends ServiceEntityRepository
         parent::__construct($registry, Talent::class);
     }
 
-
     /** @return Talent[] */
     public function getLastFiveTalents(): array
     {

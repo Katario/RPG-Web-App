@@ -30,5 +30,4 @@ class MonsterTalentRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($monster);
         $this->getEntityManager()->flush();
     }
-
 }

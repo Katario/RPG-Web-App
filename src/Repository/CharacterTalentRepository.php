@@ -30,5 +30,4 @@ class CharacterTalentRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($character);
         $this->getEntityManager()->flush();
     }
-
 }

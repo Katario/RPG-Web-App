@@ -28,6 +28,7 @@ class CharacterTalent
     public function setCharacter(Character $character): CharacterTalent
     {
         $this->character = $character;
+
         return $this;
     }
 
@@ -39,6 +40,7 @@ class CharacterTalent
     public function setTalent(Talent $talent): CharacterTalent
     {
         $this->talent = $talent;
+
         return $this;
     }
 
@@ -50,6 +52,7 @@ class CharacterTalent
     public function setValue(int $value): CharacterTalent
     {
         $this->value = $value;
+
         return $this;
     }
 

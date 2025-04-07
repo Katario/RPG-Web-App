@@ -5,32 +5,35 @@ jobs:
     name: Quality Check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Codebase
-        uses: actions/checkout@v4
+    - name: Checkout Codebase
+      uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3
-          tools: composer:v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+        tools: composer:v2
 
-      - name: Setup Cache
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+    - name: Validate composer files
+      run: composer validate
 
-      - name: Caching dependencies
-        uses: actions/cache@v4
-        id: cache
-        with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key: php8.3-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            php8.3-composer-latest-
+    - name: Setup Cache
+      run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
 
-      - name: Update composer
-        run: composer self-update
+    - name: Caching dependencies
+      uses: actions/cache@v4
+      id: cache
+      with:
+        path: ${{ env.COMPOSER_CACHE_DIR }}
+        key: php8.3-composer-${{ hashFiles('**/composer.json') }}
+        restore-keys: |
+          php8.3-composer-latest-
 
-      - name: install dependencies
-        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi --dev
+    - name: Update composer
+      run: composer self-update
 
-      - name: Quality analysis
-        run: composer app:quality-check
+    - name: install dependencies
+      run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --no-ansi
+
+    - name: Quality analysis
+      run: composer app:quality-check

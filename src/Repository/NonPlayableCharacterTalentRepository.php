@@ -31,5 +31,4 @@ class NonPlayableCharacterTalentRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($character);
         $this->getEntityManager()->flush();
     }
-
 }

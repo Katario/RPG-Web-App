@@ -14,6 +14,9 @@ jobs:
         php-version: 8.3
         tools: composer:v2
 
+    - name: Validate composer files
+      run: composer validate
+
     - name: Setup Cache
       run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
 
