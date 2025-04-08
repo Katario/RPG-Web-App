@@ -35,5 +35,8 @@ jobs:
     - name: install dependencies
       run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --no-ansi
 
-    - name: Quality analysis
-      run: composer app:quality-check
+    - name: PHP Cs Fixer Check
+      run: composer app:php-cs-fixer-check
+
+    - name: PHPStan Analysis
+      run: composer app:php-stan-analysis

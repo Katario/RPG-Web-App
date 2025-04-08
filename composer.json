@@ -93,6 +93,12 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "app:php-cs-fixer-check": [
+            "./vendor/bin/php-cs-fixer check"
+        ],
+        "app:php-stan-analysis": [
+            "./vendor/bin/phpstan analyse --no-ansi --no-progress"
+        ],
         "app:unit-tests": [
             "./vendor/bin/phpunit ./src ./tests/Unit"
         ],

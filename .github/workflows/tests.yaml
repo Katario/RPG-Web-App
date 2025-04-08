@@ -4,6 +4,22 @@ jobs:
   tests:
     name: Tests (unit & functional)
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: app_test
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: app-test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout Codebase
         uses: actions/checkout@v4
@@ -35,5 +51,13 @@ jobs:
       - name: install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --no-ansi
 
-      - name: Quality analysis
-        run: ./vendor/bin/phpunit src tests --testdox
+      - name: Prepare the Database
+        run: sudo systemctl start postgresql
+
+      ## @TODO: Add Coverage
+      - name: PHPUnit Tests
+        run: ./vendor/bin/phpunit src tests --testdox --debug
+        env:
+          APP_ENV: test
+          DATABASE_URL: postgresql://app-test:password@127.0.0.1:${{ job.services.postgres.ports['5432'] }}/app_test?serverVersion=16&charset=utf8
+          SYMFONY_DEPRECATIONS_HELPER: 999999
