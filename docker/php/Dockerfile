@@ -1,11 +1,6 @@
 # Start with PHP 8.3 FPM (FastCGI Process Manager)
 FROM php:8.3-fpm
 
-# Define a proper user to avoid permission issues
-RUN addgroup --gid 1000 user
-RUN adduser --disabled-password --gecos '' --uid 1000 --gid 1000 user
-RUN usermod -aG www-data user
-
 # Update package list and install dependencies
 RUN apt-get update && apt-get install -y \
     curl vim ssh apt-utils build-essential wget bash \
@@ -60,6 +55,11 @@ COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Set working directory
 WORKDIR /var/www/app
+
+# Define a proper user to avoid permission issues
+RUN addgroup --gid 1000 user
+RUN adduser --disabled-password --gecos '' --uid 1000 --gid 1000 user
+RUN usermod -aG www-data user
 
 # Use the user created earlier
 USER user
