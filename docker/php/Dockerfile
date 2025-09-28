@@ -65,7 +65,7 @@ RUN usermod -aG www-data user
 USER user
 
 # What command to run
-CMD ["php-fpm"]
+ENTRYPOINT ["docker/php/entrypoint.sh"]
 
 # Document that we use port 9000
 EXPOSE 9000

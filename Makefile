@@ -12,13 +12,6 @@ up:
 stop:
 	@docker compose down
 
-connect:
-	@if [ -z "$$(docker compose ps -q $(PROJECT_NAME))" ]; then \
-		docker compose down && \
-		docker compose up --build -d; \
-	fi
-	docker exec -it $(PROJECT_NAME) bash
-
 watch:
 	# Check if docker is up? Else throw an error
 	@if [ -z "$$(docker compose ps -q $(PROJECT_NAME))" ]; then \
@@ -28,6 +21,14 @@ watch:
 	@if [ -n "$$(docker compose ps -q $(PROJECT_NAME))" ]; then \
 		docker exec -it $(PROJECT_NAME) bin/console tailwind:build -w; \
 	fi
+
+reset-database:
+	# Check if docker is up? Else throw an error
+	@if [ -z "$$(docker compose ps -q $(PROJECT_NAME))" ]; then \
+		echo "The project is not up!"; \
+	fi
+	docker exec -it $(PROJECT_NAME) bin/console doctrine:database:create -y && bin/console doctrine:schema:create -y  && bin/console doctrine:fixtures:load;
+
 
 cache:
 	# Check if docker is up? Else throw an error

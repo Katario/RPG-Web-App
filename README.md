@@ -4,16 +4,14 @@ Welcome! This application is a tool to help Game Masters and Players to create t
 
 ## Installation:
 To run the project, you need to have Docker installed (version 28+ are supported, probably Docker version 21 to 27 are also, but not sure.)
-1. First, you need to clone the repo on your computer. Please `git clone `
-2. `cp .env.dist .env` and fill the different keys
-3. Pull the Docker image, build the container, and log into it: `make connect`
-4. Once in the container, install the project: `composer install`
-5. Create the database: `bin/console doctrine:database:create`
-6. Populate it with fixtures: `bin/console doctrine:fixtures:load`
-6. You should now be able to access the website at `http://localhost:9984`
+   1. First, you need to clone the repo on your computer. Please `git clone `
+   2. Copy the `.env` to a `.env.local`, and fill the different keys.
+   3. Pull the Docker image, build the container and log into it: `make start`
+   4. Create the database, the schema, and add fixtures: `make reset-database`
+   5. You should now be able to access the website at `http://localhost:9984`
 
-Note: to interact with the project, I recommand to connect to the *-php container, and to start every command in it.
-The only commands you should do outside of the container should be the `make` commands and the `git` commands.
+Note: to interact with the project, I recommend connecting to the *-php container and starting every command in it.
+The only commands you should do outside the container should be `make` and `git` commands.
 
 
 ## Stack used:
@@ -22,7 +20,7 @@ The only commands you should do outside of the container should be the `make` co
 - Symfony UX: for the front, I'm using a mix of Twig and Stimulus, as suggested in the Symfony UX initiative. If you still don't know about  it, [check it out!](https://ux.symfony.com/)
 - Composer: Composer is a dependency Manager for PHP. If you don't know it... You have a lot to catch up with PHP :D 
 - Docker: Docker is the container application. You should now about it by now, and if it's not the case, go check it out. I'm using it to handle a local environment easily. I plan to deploy with it in the future, but not right now.
-- PostGreSQL: A object-relational oriented Database.
+- PostGreSQL: An object-relational-oriented Database.
 
 
 ## Architecture approach:
@@ -57,7 +55,7 @@ Note: this tool should be applied before EACH commit, so you should configure yo
 #### [PHPStan](https://phpstan.org/)
 > PHPStan is a static analisys tool. It runs the code, without actually running the code.
 
-On this project, this tool is used to look for bugs in the code, and to maintain an even Higher quality of code. I'm
+In this project, this tool is used to look for bugs in the code and to maintain an even Higher quality of code. I'm
 using the current maximum level to set (lvl 10), and while I know it's not applied yet, there is a `phpstan-baseline.neon`
 that list every error to do.
 My current rule is to get used to PHPStan lvl 10, and try to decrease on each commit the number of errors in the file.
@@ -67,7 +65,7 @@ My current rule is to get used to PHPStan lvl 10, and try to decrease on each co
 
 
 ## Most useful Commands:
-- `make connect`: Down the container, then build it, create it and open a bash in the php container.
+- `make start`: Down the container, then build it, create it.
 - `make watch`: Down the container, then build it, create it and open a bash in the php container. Then, start tailwind with watch option.
 - `make stop`: Down the container
 - `make test`: Start the unit tests
@@ -104,13 +102,13 @@ A character that can't be incarnated by a player, is used by the Game Master, an
 Ex: Al'Ratab
 
 #### Encyclopedia
-The Encyclopedia contains every "static" concepts of the game (Like Items, Skill, or Spells) and every templates for
+The Encyclopedia contains every "static" concepts of the game (Like Items, Skill or Spells) and every templates for
 "dynamic" concepts (like MonsterTemplate, or ArmamentTemplates).
 It is common to every GM.
 
 #### Item:
 An item may be used by a player to do an action.
-Ex: A rock, a potion, or a key
+Ex: A rock, a potion or a key
 
 #### Mastery:
 A mastery may be unlocked on a Mastery Tree.
