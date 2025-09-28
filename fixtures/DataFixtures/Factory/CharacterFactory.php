@@ -37,13 +37,14 @@ final class CharacterFactory extends PersistentProxyObjectFactory
             'currentManaPoints' => self::faker()->numberBetween(50, 250),
             'currentExhaustPoints' => self::faker()->numberBetween(50, 250),
             'currentActionPoints' => self::faker()->numberBetween(50, 250),
+            'lastName' => self::faker()->text(),
+            'level' => 1,
             'maxHealthPoints' => self::faker()->numberBetween(255, 500),
             'maxManaPoints' => self::faker()->numberBetween(255, 500),
             'maxExhaustPoints' => self::faker()->numberBetween(255, 500),
             'maxActionPoints' => self::faker()->numberBetween(255, 500),
             'name' => self::faker()->text(),
-            'lastName' => self::faker()->text(),
-            'level' => 1,
+            'token' => self::faker()->md5(),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }

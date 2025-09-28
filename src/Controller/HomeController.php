@@ -10,6 +10,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
 #[AsController]
@@ -30,26 +31,23 @@ class HomeController
 
         return new Response(
             $this->twig->render('main/main.html.twig', [
-                'user' => $this->security->getUser(),
+                'user' => $user,
                 'games' => $allGames,
             ])
         );
     }
 
-    /**
-     * @return Game[]
-     */
-    private function getGamesByUser(): array
+    /** @return Game[] */
+    private function getGamesByUser(UserInterface $user): array
     {
-        // Retrieve games where user is GM
+        // Games where User is GM
         $games = [];
-        /** @var Game $game */
-        foreach ($this->gameRepository->getGamesByUser($this->security->getUser()) as $game) {
+        foreach ($this->gameRepository->getGamesByUser($user) as $game) {
             $games[] = $game;
         }
 
-        // Retrieve games where user is a playable character
-        foreach ($this->gameRepository->getGamesWithCharacterByUser($this->security->getUser()) as $game) {
+        // Games where User is a playable character
+        foreach ($this->gameRepository->getGamesWithCharacterByUser($user) as $game) {
             if (!in_array($game, $games)) {
                 $games[] = $game;
             }

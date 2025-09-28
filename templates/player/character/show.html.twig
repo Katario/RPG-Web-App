@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
+{% block navbar %}
+{% endblock %}
 {% block title %}Fiche de {{ character.name }}{% endblock %}
 
 {% block main %}
-    <a href="{{ path('home') }}">Retour</a>
+    {% if app.user is not null %}
+        <a href="{{ path('home') }}">Retour</a>
+    {% endif %}
     <h2>Voici votre personnage</h2>
 
     <ul>
@@ -16,7 +20,6 @@
         <li>Points de fatigue : {{ character.currentExhaustPoints }} (max: {{ character.maxExhaustPoints }})</li>
         <li>Points de Mana : {{ character.currentManaPoints }} (max: {{ character.maxManaPoints }})</li>
         <li>Notes: {{ character.note }}</li>
-        <li>Token: {{ character.token }}</li>
     </ul>
     <div>
         Talents :

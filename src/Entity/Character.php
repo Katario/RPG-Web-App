@@ -43,6 +43,8 @@ class Character
     private int $currentExhaustPoints;
     #[ORM\Column(type: 'integer')]
     private int $maxExhaustPoints;
+    #[ORM\Column(type: 'string')]
+    private string $token;
     #[ORM\JoinTable(name: 'playable_characters_kind')]
     #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', unique: true, onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'kind_id', referencedColumnName: 'id')]
@@ -447,6 +449,18 @@ class Character
     public function setMaxExhaustPoints(int $maxExhaustPoints): Character
     {
         $this->maxExhaustPoints = $maxExhaustPoints;
+
+        return $this;
+    }
+
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): Character
+    {
+        $this->token = $token;
 
         return $this;
     }
