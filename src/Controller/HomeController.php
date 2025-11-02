@@ -27,7 +27,7 @@ class HomeController
     public function showGames(): Response
     {
         $user = $this->security->getUser();
-        $allGames = $this->getGamesByUser($user);
+        $allGames = $this->getGamesByGameMaster($user);
 
         return new Response(
             $this->twig->render('main/main.html.twig', [
@@ -38,19 +38,11 @@ class HomeController
     }
 
     /** @return Game[] */
-    private function getGamesByUser(UserInterface $user): array
+    private function getGamesByGameMaster(UserInterface $user): array
     {
-        // Games where User is GM
         $games = [];
-        foreach ($this->gameRepository->getGamesByUser($user) as $game) {
+        foreach ($this->gameRepository->getGamesAsGameMaster($user) as $game) {
             $games[] = $game;
-        }
-
-        // Games where User is a playable character
-        foreach ($this->gameRepository->getGamesWithCharacterByUser($user) as $game) {
-            if (!in_array($game, $games)) {
-                $games[] = $game;
-            }
         }
 
         return $games;

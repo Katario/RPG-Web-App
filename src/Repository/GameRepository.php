@@ -21,23 +21,11 @@ class GameRepository extends ServiceEntityRepository
     }
 
     /** @return Game[] */
-    public function getGamesByUser(UserInterface $user): array
+    public function getGamesAsGameMaster(UserInterface $user): array
     {
         return $this->createQueryBuilder('g')
             ->where('g.gameMaster = :gameMaster')
             ->setParameter('gameMaster', $user)
-            ->getQuery()
-            ->getResult();
-    }
-
-    /** @return Game[] */
-    public function getGamesWithCharacterByUser(UserInterface $user): array
-    {
-        return $this->createQueryBuilder('g')
-            ->innerJoin('g.characters', 'pc')
-            ->innerJoin('pc.user', 'u')
-            ->where('u.id = :userId')
-            ->setParameter('userId', $user->getId())
             ->getQuery()
             ->getResult();
     }

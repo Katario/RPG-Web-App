@@ -12,26 +12,22 @@
 
         <ul class="flex flex-wrap flex-col gap-8 md:flex-row">
             {% for game in games %}
-                {% if game.gamemaster.id == app.user.id %}
-                    <li>
-                        <twig:Button
-                            tag="a"
-                            href="{{ path('show_game', {'id': game.id}) }}"
-                            variant="card"
-                            class="flex-col px-0 py-0"
-                        >
-                            <div class="w-full bg-gray-300">
-                                {{ game.name}}
-                            </div>
-                            <div>
-                                MJ<br />
-                                Number of players
-                            </div>
-                        </twig:Button>
-                    </li>
-                {% else %}
-                    <li>You're a player!</li>
-                {% endif %}
+                <li>
+                    <twig:Button
+                        tag="a"
+                        href="{{ path('show_game', {'id': game.id}) }}"
+                        variant="card"
+                        class="flex-col px-0 py-0"
+                    >
+                        <div class="w-full bg-gray-300">
+                            {{ game.name}}
+                        </div>
+                        <div>
+                            MJ<br />
+                            Number of players
+                        </div>
+                    </twig:Button>
+                </li>
             {% endfor %}
             <li class="">
                 <twig:Button
