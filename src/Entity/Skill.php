@@ -20,7 +20,12 @@ class Skill extends Encyclopedia
     #[ORM\Column(type: 'text')]
     private string $description;
     #[ORM\Column(type: 'integer')]
-    private int $exhaustCost;
+    private int $exhaustPointCost;
+    #[ORM\Column(type: 'integer')]
+    private int $actionPointCost;
+    // @TODO: replace by an array of Dice ValueObject, move damages in a Damage Model
+    #[ORM\Column(type: 'string')]
+    private string $diceValue;
 
     public function getId(): ?int
     {
@@ -51,14 +56,38 @@ class Skill extends Encyclopedia
         return $this;
     }
 
-    public function getExhaustCost(): int
+    public function getExhaustPointCost(): int
     {
-        return $this->exhaustCost;
+        return $this->exhaustPointCost;
     }
 
-    public function setExhaustCost(int $exhaustCost): Skill
+    public function setExhaustPointCost(int $exhaustPointCost): Skill
     {
-        $this->exhaustCost = $exhaustCost;
+        $this->exhaustPointCost = $exhaustPointCost;
+
+        return $this;
+    }
+
+    public function getActionPointCost(): int
+    {
+        return $this->actionPointCost;
+    }
+
+    public function setActionPointCost(int $actionPointCost): Skill
+    {
+        $this->actionPointCost = $actionPointCost;
+
+        return $this;
+    }
+
+    public function getDiceValue(): string
+    {
+        return $this->diceValue;
+    }
+
+    public function setDiceValue(string $diceValue): Skill
+    {
+        $this->diceValue = $diceValue;
 
         return $this;
     }

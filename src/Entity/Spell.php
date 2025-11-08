@@ -23,6 +23,11 @@ class Spell extends Encyclopedia
     private string $description;
     #[ORM\Column(type: 'integer')]
     private int $manaCost;
+    #[ORM\Column(type: 'integer')]
+    private int $actionPointCost;
+    // @TODO: replace by an array of Dice ValueObject, move damages in a Damage Model
+    #[ORM\Column(type: 'string')]
+    private string $diceValue;
 
     public function getId(): ?int
     {
@@ -61,6 +66,30 @@ class Spell extends Encyclopedia
     public function setManaCost(int $manaCost): Spell
     {
         $this->manaCost = $manaCost;
+
+        return $this;
+    }
+
+    public function getActionPointCost(): int
+    {
+        return $this->actionPointCost;
+    }
+
+    public function setActionPointCost(int $actionPointCost): Spell
+    {
+        $this->actionPointCost = $actionPointCost;
+
+        return $this;
+    }
+
+    public function getDiceValue(): string
+    {
+        return $this->diceValue;
+    }
+
+    public function setDiceValue(string $diceValue): Spell
+    {
+        $this->diceValue = $diceValue;
 
         return $this;
     }

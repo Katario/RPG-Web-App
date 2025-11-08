@@ -13,5 +13,6 @@ class PlayerController extends AbstractController
     #[Route('/player')]
     public function index(): Response
     {
+        return new Response();
     }
 }

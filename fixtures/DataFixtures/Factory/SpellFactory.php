@@ -36,7 +36,9 @@ final class SpellFactory extends PersistentProxyObjectFactory
             'description' => self::faker()->text(),
             'isPrivate' => self::faker()->boolean(),
             'isReady' => self::faker()->boolean(),
-            'manaCost' => self::faker()->randomNumber(),
+            'manaCost' => self::faker()->numberBetween(10, 100),
+            'actionPointCost' => self::faker()->randomNumber(),
+            'diceValue' => self::faker()->randomElement(['2d6', '1d12', '3d4 + 1']),
             'name' => self::faker()->text(),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];

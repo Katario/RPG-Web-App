@@ -20,6 +20,7 @@ class Talent extends Encyclopedia
     private string $name;
     #[ORM\Column(type: 'text')]
     private string $description;
+    // @TODO: relation with TalentLevel: a talent have multiple TalentLevel, a TalentLevel have one Talent
 
     public function getId(): ?int
     {

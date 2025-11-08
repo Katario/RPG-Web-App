@@ -37,7 +37,9 @@ final class SkillFactory extends PersistentProxyObjectFactory
             'isPrivate' => self::faker()->boolean(),
             'isReady' => self::faker()->boolean(),
             'name' => self::faker()->text(),
-            'exhaustCost' => self::faker()->randomNumber(),
+            'exhaustPointCost' => self::faker()->randomNumber(),
+            'actionPointCost' => self::faker()->randomNumber(),
+            'diceValue' => self::faker()->randomElement(['2d6', '1d12', '3d4 + 1']),
             'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
