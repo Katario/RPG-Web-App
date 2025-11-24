@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Repository;
 
-use App\Enum\PossibleOwnerEnum;
+use App\Enum\BeingEnum;
 use App\Fixtures\DataFixtures\Factory\ArmamentFactory;
 use App\Fixtures\DataFixtures\Factory\GameFactory;
-use App\Repository\ArmamentRepository;
+use App\Repository\EquipmentRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-#[CoversClass(ArmamentRepository::class)]
+#[CoversClass(EquipmentRepository::class)]
 class ArmamentRepositoryTest extends KernelTestCase
 {
     use ResetDatabase;
@@ -22,7 +22,7 @@ class ArmamentRepositoryTest extends KernelTestCase
 
     #[DataProvider('possibleOwnerEnumProvider')]
     public function testIsArmamentAvailableWithNoOwner(
-        PossibleOwnerEnum $possibleOwnerEnum,
+        BeingEnum $possibleOwnerEnum,
     ): void {
         self::bootKernel();
 
@@ -44,13 +44,13 @@ class ArmamentRepositoryTest extends KernelTestCase
 
     public static function possibleOwnerEnumProvider(): \Generator
     {
-        yield 'Armament available for Monsters' => [PossibleOwnerEnum::MONSTER];
-        yield 'Armament available for Characters' => [PossibleOwnerEnum::CHARACTER];
-        yield 'Armament available for NPCs' => [PossibleOwnerEnum::NON_PLAYABLE_CHARACTER];
+        yield 'Armament available for Monsters' => [BeingEnum::MONSTER];
+        yield 'Armament available for Characters' => [BeingEnum::CHARACTER];
+        yield 'Armament available for NPCs' => [BeingEnum::NON_PLAYABLE_CHARACTER];
     }
 
-    private function getArmamentRepository(): ArmamentRepository
+    private function getArmamentRepository(): EquipmentRepository
     {
-        return self::getContainer()->get(ArmamentRepository::class);
+        return self::getContainer()->get(EquipmentRepository::class);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\FormType;
 
-use App\Entity\ArmamentTemplate;
+use App\Entity\EquipmentTemplate;
 use App\Entity\Skill;
 use App\Entity\Spell;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -54,7 +54,7 @@ class ArmamentTemplateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ArmamentTemplate::class,
+            'data_class' => EquipmentTemplate::class,
         ]);
     }
 }

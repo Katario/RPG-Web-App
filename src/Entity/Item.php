@@ -18,12 +18,16 @@ class Item extends Encyclopedia
     private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
-    #[ORM\Column(type: 'integer')]
-    private int $value;
     #[ORM\Column(type: 'text')]
     private string $description;
     #[ORM\Column(type: 'integer')]
+    private int $value;
+    #[ORM\Column(type: 'integer')]
     private int $weight;
+    #[ORM\Column(type: 'integer')]
+    private int $currentDurabilityPoints = 0;
+    #[ORM\Column(type: 'integer')]
+    private int $maxDurabilityPoints = 0;
 
     public function getId(): ?int
     {
@@ -42,18 +46,6 @@ class Item extends Encyclopedia
         return $this;
     }
 
-    public function getValue(): int
-    {
-        return $this->value;
-    }
-
-    public function setValue(int $value): Item
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
     public function getDescription(): string
     {
         return $this->description;
@@ -62,6 +54,18 @@ class Item extends Encyclopedia
     public function setDescription(string $description): Item
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getValue(): int
+    {
+        return $this->value;
+    }
+
+    public function setValue(int $value): Item
+    {
+        $this->value = $value;
 
         return $this;
     }
@@ -76,5 +80,25 @@ class Item extends Encyclopedia
         $this->weight = $weight;
 
         return $this;
+    }
+
+    public function getCurrentDurabilityPoints(): int
+    {
+        return $this->currentDurabilityPoints;
+    }
+
+    public function setCurrentDurabilityPoints(int $currentDurabilityPoints): void
+    {
+        $this->currentDurabilityPoints = $currentDurabilityPoints;
+    }
+
+    public function getMaxDurabilityPoints(): int
+    {
+        return $this->maxDurabilityPoints;
+    }
+
+    public function setMaxDurabilityPoints(int $maxDurabilityPoints): void
+    {
+        $this->maxDurabilityPoints = $maxDurabilityPoints;
     }
 }

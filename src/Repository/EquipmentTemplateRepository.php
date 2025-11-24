@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\ArmamentTemplate;
+use App\Entity\EquipmentTemplate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ArmamentTemplate>
+ * @extends ServiceEntityRepository<EquipmentTemplate>
  */
-class ArmamentTemplateRepository extends ServiceEntityRepository
+class EquipmentTemplateRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ArmamentTemplate::class);
+        parent::__construct($registry, EquipmentTemplate::class);
     }
 
-    /** @return ArmamentTemplate[] */
+    /** @return EquipmentTemplate[] */
     public function getLastFiveArmamentTemplates(): array
     {
         return $this->findBy([], ['updatedAt' => 'DESC'], 5);
     }
 
-    /** @return ArmamentTemplate[] */
+    /** @return EquipmentTemplate[] */
     public function findBySearch(?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('a');
@@ -41,13 +41,13 @@ class ArmamentTemplateRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function delete(ArmamentTemplate $armamentTemplate): void
+    public function delete(EquipmentTemplate $armamentTemplate): void
     {
         $this->getEntityManager()->remove($armamentTemplate);
         $this->getEntityManager()->flush();
     }
 
-    public function save(ArmamentTemplate $armamentTemplate): void
+    public function save(EquipmentTemplate $armamentTemplate): void
     {
         $this->getEntityManager()->persist($armamentTemplate);
         $this->getEntityManager()->flush();

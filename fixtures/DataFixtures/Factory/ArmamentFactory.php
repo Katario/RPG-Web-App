@@ -2,11 +2,11 @@
 
 namespace App\Fixtures\DataFixtures\Factory;
 
-use App\Entity\Armament;
+use App\Entity\Equipment;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Armament>
+ * @extends PersistentProxyObjectFactory<Equipment>
  */
 final class ArmamentFactory extends PersistentProxyObjectFactory
 {
@@ -21,7 +21,7 @@ final class ArmamentFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Armament::class;
+        return Equipment::class;
     }
 
     /**

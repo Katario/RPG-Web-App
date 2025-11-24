@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\FormType;
 
-use App\Entity\Armament;
+use App\Entity\Equipment;
 use App\Entity\CharacterClass;
 use App\Entity\Item;
 use App\Entity\Kind;
 use App\Entity\NonPlayableCharacter;
 use App\Entity\Skill;
 use App\Entity\Spell;
-use App\Enum\PossibleOwnerEnum;
-use App\Repository\ArmamentRepository;
+use App\Enum\BeingEnum;
+use App\Repository\EquipmentRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -48,14 +48,14 @@ class NonPlayableCharacterType extends AbstractType
             ->add('maxExhaustPoints', IntegerType::class)
             ->add('armaments', EntityType::class, [
                 'choice_label' => 'name',
-                'class' => Armament::class,
+                'class' => Equipment::class,
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
-                'query_builder' => function (ArmamentRepository $armamentRepository) use ($options): QueryBuilder {
+                'query_builder' => function (EquipmentRepository $armamentRepository) use ($options): QueryBuilder {
                     return $armamentRepository->availableArmamentsQueryBuilder(
                         $options['gameId'],
-                        PossibleOwnerEnum::NON_PLAYABLE_CHARACTER,
+                        BeingEnum::NON_PLAYABLE_CHARACTER,
                         $options['nonPlayableCharacterId'],
                     );
                 },

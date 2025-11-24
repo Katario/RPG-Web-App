@@ -28,8 +28,8 @@ class Game
     private User $gameMaster;
     #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'game')]
     private Collection|array $characters;
-    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'game')]
-    private Collection|array $armaments;
+    #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'game')]
+    private Collection|array $equipments;
     #[ORM\OneToMany(targetEntity: Monster::class, mappedBy: 'game')]
     private Collection|array $monsters;
     #[ORM\OneToMany(targetEntity: NonPlayableCharacter::class, mappedBy: 'game')]
@@ -38,7 +38,7 @@ class Game
     public function __construct()
     {
         $this->characters = new ArrayCollection();
-        $this->armaments = new ArrayCollection();
+        $this->equipments = new ArrayCollection();
         $this->monsters = new ArrayCollection();
         $this->nonPlayableCharacters = new ArrayCollection();
     }
@@ -102,31 +102,31 @@ class Game
         return $this;
     }
 
-    public function getArmaments(): Collection|array
+    public function getEquipments(): Collection|array
     {
-        return $this->armaments;
+        return $this->equipments;
     }
 
-    public function setArmaments(Collection|array $armaments): Game
+    public function setEquipments(Collection|array $equipments): Game
     {
-        $this->armaments = $armaments;
+        $this->equipments = $equipments;
 
         return $this;
     }
 
-    public function addArmament(Armament $armament): Game
+    public function addArmament(Equipment $armament): Game
     {
-        if (!$this->getArmaments()->contains($armament)) {
-            $this->armaments->add($armament);
+        if (!$this->getEquipments()->contains($armament)) {
+            $this->equipments->add($armament);
         }
 
         return $this;
     }
 
-    public function removeArmament(Armament $armament): Game
+    public function removeArmament(Equipment $armament): Game
     {
-        if ($this->getArmaments()->contains($armament)) {
-            $this->armaments->removeElement($armament);
+        if ($this->getEquipments()->contains($armament)) {
+            $this->equipments->removeElement($armament);
         }
 
         return $this;

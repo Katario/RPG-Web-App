@@ -12,15 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'playable_character')]
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Character
+class Character extends Being
 {
     use HasDateTimeTrait;
     use HasNoteTrait;
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
     #[ORM\Column(type: 'string', nullable: true)]
@@ -61,9 +57,9 @@ class Character
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'characters')]
     #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
-    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'character')]
+    #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'character')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private Collection|array $armaments;
+    private Collection|array $equipments;
     #[ORM\JoinTable(name: 'playable_characters_spells')]
     #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
@@ -86,7 +82,7 @@ class Character
     {
         $this->kind = new ArrayCollection();
         $this->characterClass = new ArrayCollection();
-        $this->armaments = new ArrayCollection();
+        $this->equipments = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->skills = new ArrayCollection();
@@ -191,35 +187,35 @@ class Character
         return $this;
     }
 
-    public function getArmaments(): Collection|array
+    public function getEquipments(): Collection|array
     {
-        return $this->armaments;
+        return $this->equipments;
     }
 
-    public function setArmaments(Collection|array $armaments): Character
+    public function setEquipments(Collection|array $equipments): Character
     {
-        $this->armaments = $armaments;
+        $this->equipments = $equipments;
 
         return $this;
     }
 
-    public function addArmament(Armament $armament): Character
+    public function addArmament(Equipment $armament): Character
     {
-        if (!$this->getArmaments()->contains($armament)) {
+        if (!$this->getEquipments()->contains($armament)) {
             $armament->setIsOwned(true);
             $armament->setCharacter($this);
-            $this->armaments->add($armament);
+            $this->equipments->add($armament);
         }
 
         return $this;
     }
 
-    public function removeArmament(Armament $armament): Character
+    public function removeArmament(Equipment $armament): Character
     {
-        if ($this->getArmaments()->contains($armament)) {
+        if ($this->getEquipments()->contains($armament)) {
             $armament->setCharacter(null);
             $armament->setIsOwned(false);
-            $this->armaments->removeElement($armament);
+            $this->equipments->removeElement($armament);
         }
 
         return $this;

@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ArmamentRepository;
+use App\Repository\EquipmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ArmamentRepository::class)]
+#[ORM\Entity(repositoryClass: EquipmentRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Armament
+class Equipment
 {
     use HasDateTimeTrait;
     use HasNoteTrait;
@@ -18,41 +18,57 @@ class Armament
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
+
     #[ORM\Column(type: 'string')]
     private string $name;
+
+    // @TODO: Type it with an enum
     #[ORM\Column(type: 'string')]
     private string $category;
+
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $value;
+    private int $value = 0;
+
     #[ORM\Column(type: 'integer')]
-    private int $maxDurability;
+    private int $currentDurabilityPoints;
+
     #[ORM\Column(type: 'integer')]
-    private int $currentDurability;
+    private int $maxDurabilityPoints;
+
     #[ORM\Column(type: 'text')]
     private string $description = '';
+
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $isOwned = false;
+
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'armaments')]
     private Game $game;
-    #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
-    #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    private ?Monster $monster = null;
-    #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'armaments')]
-    #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    private ?Character $character = null;
-    #[ORM\ManyToOne(targetEntity: NonPlayableCharacter::class, inversedBy: 'armaments')]
-    #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    private ?NonPlayableCharacter $nonPlayableCharacter = null;
-    #[ORM\JoinTable(name: 'armaments_skills')]
-    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id', onDelete: 'cascade')]
+
+//    #[ORM\ManyToOne(targetEntity: Monster::class, inversedBy: 'armaments')]
+//    #[ORM\JoinColumn(onDelete: 'SET NULL')]
+//    private ?Monster $monster = null;
+
+//    #[ORM\ManyToOne(targetEntity: Character::class, inversedBy: 'armaments')]
+//    #[ORM\JoinColumn(onDelete: 'SET NULL')]
+//    private ?Character $character = null;
+
+//    #[ORM\ManyToOne(targetEntity: NonPlayableCharacter::class, inversedBy: 'armaments')]
+//    #[ORM\JoinColumn(onDelete: 'SET NULL')]
+//    private ?NonPlayableCharacter $nonPlayableCharacter = null;
+
+    #[ORM\JoinTable(name: 'equipments_skills')]
+    #[ORM\JoinColumn(name: 'equipment_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'skill_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Skill::class)]
-    private Collection|array $skills;
-    #[ORM\JoinTable(name: 'armaments_spells')]
-    #[ORM\JoinColumn(name: 'armament_id', referencedColumnName: 'id', onDelete: 'cascade')]
+    private Collection $skills;
+
+    #[ORM\JoinTable(name: 'equipments_spells')]
+    #[ORM\JoinColumn(name: 'equipment_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'spell_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: Spell::class)]
-    private Collection|array $spells;
+    private Collection $spells;
+
+    // @TODO: add enchantments
 
     public function __construct()
     {
@@ -70,7 +86,7 @@ class Armament
         return $this->name;
     }
 
-    public function setName(string $name): Armament
+    public function setName(string $name): Equipment
     {
         $this->name = $name;
 
@@ -82,7 +98,7 @@ class Armament
         return $this->category;
     }
 
-    public function setCategory(string $category): Armament
+    public function setCategory(string $category): Equipment
     {
         $this->category = $category;
 
@@ -94,33 +110,33 @@ class Armament
         return $this->value;
     }
 
-    public function setValue(?int $value): Armament
+    public function setValue(?int $value): Equipment
     {
         $this->value = $value;
 
         return $this;
     }
 
-    public function getMaxDurability(): int
+    public function getMaxDurabilityPoints(): int
     {
-        return $this->maxDurability;
+        return $this->maxDurabilityPoints;
     }
 
-    public function setMaxDurability(int $maxDurability): Armament
+    public function setMaxDurabilityPoints(int $maxDurabilityPoints): Equipment
     {
-        $this->maxDurability = $maxDurability;
+        $this->maxDurabilityPoints = $maxDurabilityPoints;
 
         return $this;
     }
 
-    public function getCurrentDurability(): int
+    public function getCurrentDurabilityPoints(): int
     {
-        return $this->currentDurability;
+        return $this->currentDurabilityPoints;
     }
 
-    public function setCurrentDurability(int $currentDurability): Armament
+    public function setCurrentDurabilityPoints(int $currentDurabilityPoints): Equipment
     {
-        $this->currentDurability = $currentDurability;
+        $this->currentDurabilityPoints = $currentDurabilityPoints;
 
         return $this;
     }
@@ -130,7 +146,7 @@ class Armament
         return $this->description;
     }
 
-    public function setDescription(string $description): Armament
+    public function setDescription(string $description): Equipment
     {
         $this->description = $description;
 
@@ -142,7 +158,7 @@ class Armament
         return $this->isOwned;
     }
 
-    public function setIsOwned(bool $isOwned): Armament
+    public function setIsOwned(bool $isOwned): Equipment
     {
         $this->isOwned = $isOwned;
 
@@ -154,14 +170,7 @@ class Armament
         return $this->skills;
     }
 
-    public function setSkills(Collection|array $skills): Armament
-    {
-        $this->skills = $skills;
-
-        return $this;
-    }
-
-    public function addSkill(Skill $skill): Armament
+    public function addSkill(Skill $skill): Equipment
     {
         if (!$this->getSkills()->contains($skill)) {
             $this->skills->add($skill);
@@ -170,7 +179,7 @@ class Armament
         return $this;
     }
 
-    public function removeSkill(Skill $skill): Armament
+    public function removeSkill(Skill $skill): Equipment
     {
         if ($this->getSkills()->contains($skill)) {
             $this->skills->removeElement($skill);
@@ -184,14 +193,7 @@ class Armament
         return $this->spells;
     }
 
-    public function setSpells(Collection|array $spells): Armament
-    {
-        $this->spells = $spells;
-
-        return $this;
-    }
-
-    public function addSpell(Spell $spell): Armament
+    public function addSpell(Spell $spell): Equipment
     {
         if (!$this->getSpells()->contains($spell)) {
             $this->spells->add($spell);
@@ -200,7 +202,7 @@ class Armament
         return $this;
     }
 
-    public function removeSpell(Spell $spell): Armament
+    public function removeSpell(Spell $spell): Equipment
     {
         if ($this->getSpells()->contains($spell)) {
             $this->spells->removeElement($spell);
@@ -214,7 +216,7 @@ class Armament
         return $this->game;
     }
 
-    public function setGame(Game $game): Armament
+    public function setGame(Game $game): Equipment
     {
         $this->game = $game;
 
@@ -226,7 +228,7 @@ class Armament
         return $this->monster;
     }
 
-    public function setMonster(?Monster $monster): Armament
+    public function setMonster(?Monster $monster): Equipment
     {
         $this->monster = $monster;
         if ($this->monster) {
@@ -241,7 +243,7 @@ class Armament
         return $this->character;
     }
 
-    public function setCharacter(?Character $character): Armament
+    public function setCharacter(?Character $character): Equipment
     {
         $this->character = $character;
         if ($this->character) {
@@ -256,7 +258,7 @@ class Armament
         return $this->nonPlayableCharacter;
     }
 
-    public function setNonPlayableCharacter(?NonPlayableCharacter $nonPlayableCharacter): Armament
+    public function setNonPlayableCharacter(?NonPlayableCharacter $nonPlayableCharacter): Equipment
     {
         $this->nonPlayableCharacter = $nonPlayableCharacter;
         if ($this->nonPlayableCharacter) {

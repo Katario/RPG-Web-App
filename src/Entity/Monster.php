@@ -11,15 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MonsterRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Monster
+class Monster extends Being
 {
     use HasDateTimeTrait;
     use HasNoteTrait;
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
     #[ORM\Column(type: 'boolean')]
@@ -44,9 +40,9 @@ class Monster
     private int $currentExhaustPoints;
     #[ORM\Column(type: 'integer')]
     private int $maxExhaustPoints;
-    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'monster')]
+    #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'monster')]
     #[ORM\JoinColumn(nullable: true)]
-    private Collection|array $armaments;
+    private Collection|array $equipments;
 
     #[ORM\JoinTable(name: 'monsters_specie')]
     #[ORM\JoinColumn(name: 'monster_id', referencedColumnName: 'id', unique: true, onDelete: 'cascade')]
@@ -78,7 +74,7 @@ class Monster
         $this->talents = new ArrayCollection();
         $this->spells = new ArrayCollection();
         $this->items = new ArrayCollection();
-        $this->armaments = new ArrayCollection();
+        $this->equipments = new ArrayCollection();
         $this->skills = new ArrayCollection();
     }
 
@@ -148,35 +144,35 @@ class Monster
         return $this;
     }
 
-    public function getArmaments(): Collection|array
+    public function getEquipments(): Collection|array
     {
-        return $this->armaments;
+        return $this->equipments;
     }
 
-    public function setArmaments(Collection|array $armaments): Monster
+    public function setEquipments(Collection|array $equipments): Monster
     {
-        $this->armaments = $armaments;
+        $this->equipments = $equipments;
 
         return $this;
     }
 
-    public function addArmament(Armament $armament): Monster
+    public function addArmament(Equipment $armament): Monster
     {
-        if (!$this->getArmaments()->contains($armament)) {
+        if (!$this->getEquipments()->contains($armament)) {
             $armament->setIsOwned(true);
             $armament->setMonster($this);
-            $this->armaments->add($armament);
+            $this->equipments->add($armament);
         }
 
         return $this;
     }
 
-    public function removeArmament(Armament $armament): Monster
+    public function removeArmament(Equipment $armament): Monster
     {
-        if ($this->getArmaments()->contains($armament)) {
+        if ($this->getEquipments()->contains($armament)) {
             $armament->setMonster(null);
             $armament->setIsOwned(false);
-            $this->armaments->removeElement($armament);
+            $this->equipments->removeElement($armament);
         }
 
         return $this;

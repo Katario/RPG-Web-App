@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Entity;
 
-use App\Entity\Armament;
+use App\Entity\Equipment;
 use App\Entity\Character;
 use App\Entity\Monster;
 use App\Entity\NonPlayableCharacter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(Armament::class)]
-class ArmamentTest extends TestCase
+#[CoversClass(Equipment::class)]
+class EquipmentTest extends TestCase
 {
     public function testReturnFullNameIfOwnerIsAMonster(): void
     {
-        $armament = new Armament();
+        $armament = new Equipment();
 
         $monster = new Monster();
         $monster->setName('Little Goblin');
@@ -28,7 +28,7 @@ class ArmamentTest extends TestCase
 
     public function testReturnFullNameIfOwnerIsACharacter(): void
     {
-        $armament = new Armament();
+        $armament = new Equipment();
 
         $character = new Character();
 
@@ -42,7 +42,7 @@ class ArmamentTest extends TestCase
 
     public function testReturnFullNameIfOwnerIsANonPlayableCharacter(): void
     {
-        $armament = new Armament();
+        $armament = new Equipment();
 
         $nonPlayableCharacter = new NonPlayableCharacter();
 
@@ -56,14 +56,14 @@ class ArmamentTest extends TestCase
 
     public function testReturnFullNameIfNoOwner(): void
     {
-        $armament = new Armament();
+        $armament = new Equipment();
 
         self::assertNull($armament->getOwnerName());
     }
 
     public function testOnlyOneOwnerWhenCharacterIsSet(): void
     {
-        $armament = new Armament();
+        $armament = new Equipment();
         $character = new Character();
         $armament->setCharacter($character);
 
@@ -75,7 +75,7 @@ class ArmamentTest extends TestCase
 
     public function testOnlyOneOwnerWhenNonPlayableCharacterIsSet(): void
     {
-        $armament = new Armament();
+        $armament = new Equipment();
         $nonPlayableCharacter = new NonPlayableCharacter();
         $armament->setNonPlayableCharacter($nonPlayableCharacter);
 
@@ -87,7 +87,7 @@ class ArmamentTest extends TestCase
 
     public function testOnlyOneOwnerWhenMonsterIsSet(): void
     {
-        $armament = new Armament();
+        $armament = new Equipment();
         $monster = new Monster();
         $armament->setMonster($monster);
 

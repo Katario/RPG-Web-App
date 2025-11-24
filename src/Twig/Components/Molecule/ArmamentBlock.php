@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\Molecule;
 
-use App\Entity\Armament;
-use App\Entity\ArmamentTemplate;
+use App\Entity\Equipment;
+use App\Entity\EquipmentTemplate;
 use App\Entity\Game;
-use App\Repository\ArmamentRepository;
-use App\Repository\ArmamentTemplateRepository;
+use App\Repository\EquipmentRepository;
+use App\Repository\EquipmentTemplateRepository;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -25,13 +25,13 @@ class ArmamentBlock
     public string $query = '';
 
     public function __construct(
-        public ArmamentRepository $armamentRepository,
-        public ArmamentTemplateRepository $armamentTemplateRepository,
+        public EquipmentRepository         $armamentRepository,
+        public EquipmentTemplateRepository $armamentTemplateRepository,
     ) {
     }
 
     /**
-     * @return Armament[]
+     * @return Equipment[]
      */
     public function getArmaments(): array
     {
@@ -45,7 +45,7 @@ class ArmamentBlock
     }
 
     /**
-     * @return ArmamentTemplate[]
+     * @return EquipmentTemplate[]
      */
     public function getArmamentTemplates(): array
     {

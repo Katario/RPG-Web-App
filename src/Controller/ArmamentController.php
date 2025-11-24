@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Armament;
+use App\Entity\Equipment;
 use App\Entity\Game;
-use App\Factory\ArmamentFactory;
+use App\Factory\EquipmentFactory;
 use App\FormType\ArmamentType;
-use App\Repository\ArmamentRepository;
-use App\Repository\ArmamentTemplateRepository;
+use App\Repository\EquipmentRepository;
+use App\Repository\EquipmentTemplateRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,10 +25,10 @@ use Twig\Environment;
 class ArmamentController
 {
     public function __construct(
-        public Environment $twig,
+        public Environment                   $twig,
         public readonly FormFactoryInterface $formFactory,
-        private readonly RouterInterface $router,
-        public ArmamentRepository $armamentRepository,
+        private readonly RouterInterface     $router,
+        public EquipmentRepository           $armamentRepository,
     ) {
     }
 
@@ -68,7 +68,7 @@ class ArmamentController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Armament $armament */
+            /** @var Equipment $armament */
             $armament = $form->getData();
 
             $this->armamentRepository->save($armament);
@@ -95,7 +95,7 @@ class ArmamentController
     public function deleteArmament(
         int $id,
     ): Response {
-        /** @var Armament $armament */
+        /** @var Equipment $armament */
         $armament = $this->armamentRepository->find($id);
 
         if (!$armament) {
@@ -116,17 +116,17 @@ class ArmamentController
         methods: ['GET', 'POST']),
     ]
     public function generateArmament(
-        Request $request,
+        Request                                        $request,
         #[MapEntity(mapping: ['gameId' => 'id'])] Game $game,
-        ArmamentFactory $armamentFactory,
-        ArmamentTemplateRepository $armamentTemplateRepository,
+        EquipmentFactory                               $armamentFactory,
+        EquipmentTemplateRepository                    $armamentTemplateRepository,
     ): Response|RedirectResponse {
         if ($request->get('armamentTemplateId')) {
             $armamentTemplate = $armamentTemplateRepository->find($request->get('armamentTemplateId'));
-            $armament = $armamentFactory->createOneFromArmamentTemplate($armamentTemplate);
+            $armament = $armamentFactory->createOneFromEquipmentTemplate($armamentTemplate);
             $armament->setGame($game);
         } else {
-            $armament = new Armament();
+            $armament = new Equipment();
             $armament->setGame($game);
         }
 
@@ -134,7 +134,7 @@ class ArmamentController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Armament $character */
+            /** @var Equipment $character */
             $armament = $form->getData();
 
             $this->armamentRepository->save($armament);

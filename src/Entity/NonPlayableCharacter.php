@@ -9,15 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NonPlayableCharacterRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class NonPlayableCharacter
+class NonPlayableCharacter extends Being
 {
     use HasDateTimeTrait;
     use HasNoteTrait;
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
     #[ORM\Column(type: 'string')]
     private string $name;
     #[ORM\Column(type: 'string', nullable: true)]
@@ -53,7 +49,7 @@ class NonPlayableCharacter
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'nonPlayableCharacters')]
     #[ORM\JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
-    #[ORM\OneToMany(targetEntity: Armament::class, mappedBy: 'nonPlayableCharacter')]
+    #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'nonPlayableCharacter')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Collection|array $armaments;
     #[ORM\JoinTable(name: 'non_playable_characters_spells')]
@@ -145,7 +141,7 @@ class NonPlayableCharacter
         return $this;
     }
 
-    public function addArmament(Armament $armament): NonPlayableCharacter
+    public function addArmament(Equipment $armament): NonPlayableCharacter
     {
         if (!$this->getArmaments()->contains($armament)) {
             $armament->setIsOwned(true);
@@ -156,7 +152,7 @@ class NonPlayableCharacter
         return $this;
     }
 
-    public function removeArmament(Armament $armament): NonPlayableCharacter
+    public function removeArmament(Equipment $armament): NonPlayableCharacter
     {
         if ($this->getArmaments()->contains($armament)) {
             $armament->setNonPlayableCharacter(null);

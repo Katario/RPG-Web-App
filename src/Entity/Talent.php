@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TalentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TalentRepository::class)]
@@ -20,12 +22,20 @@ class Talent extends Encyclopedia
     private string $name;
     #[ORM\Column(type: 'text')]
     private string $description;
-    // @TODO: relation with TalentLevel: a talent have multiple TalentLevel, a TalentLevel have one Talent
+
+    #[ORM\OneToMany(targetEntity: TalentLevel::class, mappedBy: 'talent', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $talentLevels;
+
+    public function __construct()
+    {
+        $this->talentLevels = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function setId(?int $id): Talent
     {
@@ -54,6 +64,31 @@ class Talent extends Encyclopedia
     public function setDescription(string $description): Talent
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TalentLevel>
+     */
+    public function getTalentLevels(): Collection
+    {
+        return $this->talentLevels;
+    }
+
+    public function addTalentLevel(TalentLevel $talentLevel): self
+    {
+        if (!$this->talentLevels->contains($talentLevel)) {
+            $this->talentLevels[] = $talentLevel;
+            $talentLevel->setTalent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTalentLevel(TalentLevel $talentLevel): self
+    {
+        $this->talentLevels->removeElement($talentLevel);
 
         return $this;
     }

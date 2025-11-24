@@ -2,23 +2,23 @@
 
 namespace App\Repository;
 
-use App\Entity\Armament;
-use App\Enum\PossibleOwnerEnum;
+use App\Entity\Equipment;
+use App\Enum\BeingEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Armament>
+ * @extends ServiceEntityRepository<Equipment>
  */
-class ArmamentRepository extends ServiceEntityRepository
+class EquipmentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Armament::class);
+        parent::__construct($registry, Equipment::class);
     }
 
-    /** @return Armament[] */
+    /** @return Equipment[] */
     public function findByGameBySearch(int $gameId, ?string $query, ?int $limit = null, string $orderBy = 'ASC'): array
     {
         $queryBuilder = $this->createQueryBuilder('a');
@@ -39,7 +39,7 @@ class ArmamentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function availableArmamentsQueryBuilder(int $gameId, PossibleOwnerEnum $owner, ?int $ownerId = null): QueryBuilder
+    public function availableArmamentsQueryBuilder(int $gameId, BeingEnum $owner, ?int $ownerId = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -76,13 +76,13 @@ class ArmamentRepository extends ServiceEntityRepository
         ;
     }
 
-    public function delete(Armament $armament): void
+    public function delete(Equipment $armament): void
     {
         $this->getEntityManager()->remove($armament);
         $this->getEntityManager()->flush();
     }
 
-    public function save(Armament $armament): void
+    public function save(Equipment $armament): void
     {
         $this->getEntityManager()->persist($armament);
         $this->getEntityManager()->flush();
